@@ -1,21 +1,30 @@
 ﻿<Solution>
   <Folder Name="/Algorithms/" />
+  <Folder Name="/Algorithms/Compression/" />
+  <Folder Name="/Algorithms/Graphs/" />
   <Folder Name="/Algorithms/Modeling/">
-    <Project Path="Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj" Type="Classic C#" />
-    <Project Path="Algorithms\Modeling\EventDriven.Algorithm\EventDriven.Algorithm.csproj" Type="Classic C#" />
+    <Project Path="Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj" Type="C#" />
+    <Project Path="Algorithms\Modeling\EventDriven.Algorithm\EventDriven.Algorithm.csproj" Type="C#" />
+  </Folder>
+  <Folder Name="/Algorithms/Sorting/">
+    <Project Path="Algorithms/Sorting/Sorting/Sorting.csproj" Type="C#" />
   </Folder>
   <Folder Name="/Examples/" />
   <Folder Name="/Examples/Modeling/">
-    <Project Path="Examples\DeltaT.Example\DeltaT.Example.csproj" Type="Classic C#" />
-    <Project Path="Examples\EventDriven.Example\EventDriven.Example.csproj" Type="Classic C#" />
+    <Project Path="Examples\DeltaT.Example\DeltaT.Example.csproj" Type="C#" />
+    <Project Path="Examples\EventDriven.Example\EventDriven.Example.csproj" Type="C#" />
   </Folder>
   <Folder Name="/Shared/">
-    <Project Path="Shared\Mathematics\Mathematics.csproj" Type="Classic C#" />
-    <Project Path="Shared\Data\Data.csproj" Type="Classic C#" />
-    <Project Path="Shared\Logging\Logging.csproj" Type="Classic C#" />
-    <Project Path="Shared\Structures\Structures.csproj" Type="Classic C#" />
+    <Project Path="Shared\Mathematics\Mathematics.csproj" Type="C#" />
+    <Project Path="Shared\Data\Data.csproj" Type="C#" />
+    <Project Path="Shared\Logging\Logging.csproj" Type="C#" />
+    <Project Path="Shared\Structures\Structures.csproj" Type="C#" />
   </Folder>
-  <Folder Name="/Tests/">
-    <Project Path="Tests\Mathematics.Tests\Mathematics.Tests.csproj" Type="Classic C#" />
+  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/Algorithms/">
+    <Project Path="Tests/Algorithms/Sorting.Tests/Sorting.Tests.csproj" Type="C#" />
+  </Folder>
+  <Folder Name="/Tests/Shared/">
+    <Project Path="Tests\Mathematics.Tests\Mathematics.Tests.csproj" Type="C#" />
   </Folder>
 </Solution>
