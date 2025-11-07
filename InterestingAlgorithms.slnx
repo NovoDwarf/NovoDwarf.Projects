@@ -1,0 +1,21 @@
+﻿<Solution>
+  <Folder Name="/Algorithms/" />
+  <Folder Name="/Algorithms/Modeling/">
+    <Project Path="Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj" Type="Classic C#" />
+    <Project Path="Algorithms\Modeling\EventDriven.Algorithm\EventDriven.Algorithm.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Examples/" />
+  <Folder Name="/Examples/Modeling/">
+    <Project Path="Examples\DeltaT.Example\DeltaT.Example.csproj" Type="Classic C#" />
+    <Project Path="Examples\EventDriven.Example\EventDriven.Example.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Shared\Mathematics\Mathematics.csproj" Type="Classic C#" />
+    <Project Path="Shared\Data\Data.csproj" Type="Classic C#" />
+    <Project Path="Shared\Logging\Logging.csproj" Type="Classic C#" />
+    <Project Path="Shared\Structures\Structures.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests\Mathematics.Tests\Mathematics.Tests.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>

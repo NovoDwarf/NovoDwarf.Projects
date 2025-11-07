@@ -1,0 +1,28 @@
+- name: Домашняя страница
+  href: README.md
+  
+- name: API Reference
+  href: api/
+  
+  homepage: api/index.md
+- name: Категории алгоритмов
+  items:
+    - name: DeltaT - Дискретно-событийное моделирование
+      href: articles/deltat.md
+    - name: Event-Based - Событийно-ориентированные алгоритмы
+      href: articles/event-driven.md
+    - name: Математика - Распределения и статистика
+      href: articles/distributions.md
+    - name: Структуры данных
+      href: articles/data-structures.md
+- name: Руководства
+  items:
+    - name: Быстрый старт
+      href: articles/getting-started.md
+    - name: Узлы моделирования
+      href: articles/nodes.md
+    - name: Метрики
+      href: articles/metrics.md
+- name: Примеры
+  href: articles/examples.md
+

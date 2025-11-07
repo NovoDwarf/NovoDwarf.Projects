@@ -1,0 +1,194 @@
+﻿using Mathematics.Models.Distributions.Basic;
+
+namespace Mathematics.Tests.Models.Distributions.Basic;
+
+[TestFixture]
+public class ExponentialTests
+{ 
+    private const double Tolerance = 1e-10;
+    private const int SampleSize = 10000;
+
+    [Test]
+    public void Constructor_WithPositiveRate_SetsCorrectRate()
+    {
+        const double rate = 2.5;
+        
+        var distribution = new Exponential(rate);
+        
+        Assert.That(distribution.Rates, Is.EqualTo(rate));
+    }
+
+    [Test]
+    public void Constructor_WithZeroRate_ThrowsArgumentException()
+    {
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var exponential = new Exponential(0);
+        });
+    }
+
+    [Test]
+    public void Constructor_WithNegativeRate_ThrowsArgumentException()
+    {
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var exponential = new Exponential(-1.5);
+        });
+    }
+
+    [Test]
+    public void Calculate_WithRateOne_ReturnsNonNegativeValues()
+    {
+        var distribution = new Exponential(1.0);
+        
+        var results = GenerateSamples(distribution, SampleSize);
+        
+        Assert.That(results.All(x => x >= 0), Is.True);
+    }
+
+    [Test]
+    public void Calculate_WithDifferentRates_RespectsRateParameter()
+    {
+        var rates = new[] { 0.5, 1.0, 2.0, 5.0 };
+        
+        foreach (var rate in rates)
+        {
+            var distribution = new Exponential(rate);
+            
+            var mean = GenerateSamples(distribution, SampleSize).Average();
+            
+            var expectedMean = 1.0 / rate;
+            Assert.That(mean, Is.EqualTo(expectedMean).Within(0.1));
+        }
+    }
+
+    [Test]
+    public void GetExpectedValue_WithVariousRates_ReturnsCorrectValue()
+    {
+        var testCases = new[]
+        {
+            (rate: 0.5, expected: 2.0),
+            (rate: 1.0, expected: 1.0),
+            (rate: 2.0, expected: 0.5),
+            (rate: 10.0, expected: 0.1)
+        };
+        
+        foreach (var (rate, expected) in testCases)
+        {
+            var distribution = new Exponential(rate);
+
+            var result = distribution.GetExpectedValue();
+
+            Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
+        }
+    }
+
+    [Test]
+    public void GetVariance_WithVariousRates_ReturnsCorrectValue()
+    {
+        var testCases = new[]
+        {
+            (rate: 0.5, expected: 4.0),    // 1/(0.5²) = 4
+            (rate: 1.0, expected: 1.0),    // 1/(1²) = 1
+            (rate: 2.0, expected: 0.25),   // 1/(2²) = 0.25
+            (rate: 4.0, expected: 0.0625)  // 1/(4²) = 0.0625
+        };
+        
+        foreach (var (rate, expected) in testCases)
+        {
+            var distribution = new Exponential(rate);
+
+            var result = distribution.GetVariance();
+            
+            Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
+        }
+    }
+
+    [Test]
+    public void GetMinValue_Always_ReturnsZero()
+    {
+        var distribution = new Exponential(1.0);
+
+        var result = distribution.GetMinValue();
+
+        Assert.That(result, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void GetMaxValue_Always_ReturnsPositiveInfinity()
+    {
+        var distribution = new Exponential(1.0);
+
+        var result = distribution.GetMaxValue();
+
+        Assert.That(result, Is.EqualTo(double.PositiveInfinity));
+    }
+    
+    [Test]
+    public void Calculate_MultipleCalls_ProducesDifferentValues()
+    {
+        var distribution = new Exponential(1.0);
+        var results = new HashSet<double>();
+
+        for (var i = 0; i < 100; i++) 
+            results.Add(distribution.Calculate());
+
+        Assert.That(results, Has.Count.GreaterThan(50));
+    }
+
+    [Test]
+    public void Calculate_WithHighRate_ProducesSmallValues()
+    {
+        var distribution = new Exponential(1000.0);
+        
+        var results = GenerateSamples(distribution, 1000);
+
+        Assert.That(results.All(x => x < 0.01), Is.True);
+    }
+
+    [Test]
+    public void Calculate_WithLowRate_ProducesLargeValues()
+    {
+        var distribution = new Exponential(0.01);
+
+        var results = GenerateSamples(distribution, 1000);
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(results.All(x => x > 1.0), Is.False);
+            Assert.That(results.Any(x => x > 100.0), Is.True);
+        });
+    }
+
+    [Test]
+    public void Calculate_DistributionShape_ApproximatesExponential()
+    {
+        var distribution = new Exponential(1.0);
+        var histogram = new int[10];
+        
+        for (var i = 0; i < SampleSize; i++)
+        {
+            var value = distribution.Calculate();
+            var bin = (int)Math.Floor(value);
+            if (bin < histogram.Length)
+            {
+                histogram[bin]++;
+            }
+        }
+        
+        for (var i = 1; i < histogram.Length - 1; i++)
+        {
+            Assert.That(histogram[i], Is.LessThan(histogram[i - 1] * 1.5));
+        }
+    }
+
+    private static List<double> GenerateSamples(Exponential distribution, int count)
+    {
+        var results = new List<double>();
+        
+        for (var i = 0; i < count; i++) 
+            results.Add(distribution.Calculate());
+       
+        return results;
+    }
+}

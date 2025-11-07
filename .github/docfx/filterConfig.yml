@@ -1,0 +1,15 @@
+apiRules:
+- include:
+    type: Namespace
+    uidRegex: ^Algorithms\.
+- include:
+    type: Namespace
+    uidRegex: ^Shared\.
+- exclude:
+    type: Member
+    hasAttribute:
+      uid: System.ObsoleteAttribute
+- exclude:
+    type: Type
+    hasAttribute:
+      uid: System.Runtime.CompilerServices.CompilerGeneratedAttribute
