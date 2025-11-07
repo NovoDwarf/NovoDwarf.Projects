@@ -1,21 +1,25 @@
 # Interesting Algorithms
 
-Это собрание разнообразных алгоритмов, программ и всего остального, чей размер слишком мал для того, чтобы выделить это в отдельный репозиторий. Поэтому это собрано здесь. В решении используется чистый **.NET 10**, для реализации тестов - фреймворк **NUnit**.
+[[EN](README.md)|[RU](README_RU.md)]
+
+Это собрание разнообразных алгоритмов, программ и всего остального, чей размер слишком мал для того, чтобы выделить это в отдельный репозиторий. Поэтому это собрано здесь. В решении используется чистый **.NET 10**, для реализации тестов - фреймворк **NUnit**. 
+
+На данный момент тут собраны алгоритмы моделирования, сортировки, поиска, криптографии и др. Я стараюсь самостоятельно реализовывать все этапы алгоритмов, поэтому неизбежно будут появляться ошибки, в т.ч. и в тестах. 
 
 ## Roadmap
 
 ### К репозиторию
 
-- Добавить сайт-документацию к каждому проекту через [DocFX](https://github.com/dotnet/docfx).
-- Настроить CI/CD на [**GitHub Actions**](https://docs.github.com/en/actions).
-- Реализовать бенчмарки с [**BenchmarkDotNet**](https://github.com/dotnet/BenchmarkDotNet).
+- [ ] Добавить сайт-документацию к каждому проекту через [DocFX](https://github.com/dotnet/docfx).
+- [ ] Настроить CI/CD на [**GitHub Actions**](https://docs.github.com/en/actions).
+- [ ] Реализовать бенчмарки с [**BenchmarkDotNet**](https://github.com/dotnet/BenchmarkDotNet).
 
 ### К проекту
 
-- Добавлять другие разнообразные интересные вещи.
-- Написать документацию к коду в виде **DocStrings**.
-- Покрыть тестами более 80% кода.
-- Переписать тесты в более продвинутом виде для [**NUnit**](https://github.com/nunit/nunit) (через атрибуты и другие фичи фреймворка).
+- [ ] Добавлять другие разнообразные интересные вещи.
+- [ ] Написать документацию к коду в виде **DocStrings**.
+- [ ] Покрыть тестами более 80% кода.
+- [ ] Переписать тесты в более продвинутом виде для [**NUnit**](https://github.com/nunit/nunit) (через атрибуты и другие фичи фреймворка).
 
 ## Текущий состав
 
@@ -31,88 +35,88 @@
 ##### Сортировка слиянием
 
 - [x] [**Слиянием**](https://en.wikipedia.org/wiki/Merge_sort) (_Merge sort_) - суть алгоритма в том, что он рекурсивно сортирует половины массива, а затем комбинирует их в один.
-- [ ] [Каскадное слияние](https://en.wikipedia.org/wiki/Cascade_merge_sort) (_Cascade merge sort_) -
-- [ ] [](https://en.wikipedia.org/wiki/Oscillating_merge_sort) (_Oscillating sort_) -
-- [ ] [](https://en.wikipedia.org/wiki/Polyphase_merge_sort) (_Polyphase sort_) -
+- [ ] [**Каскадное слияние**](https://en.wikipedia.org/wiki/Cascade_merge_sort) (_Cascade merge sort_) -
+- [ ] [****](https://en.wikipedia.org/wiki/Oscillating_merge_sort) (_Oscillating sort_) -
+- [ ] [****](https://en.wikipedia.org/wiki/Polyphase_merge_sort) (_Polyphase sort_) -
 
 ##### Сортировка вставками
 
-- [ ] [Вставками](https://en.wikipedia.org/wiki/Insertion_sort) (Insertion sort) - суть алгоритма в том, что элементы входной последовательности просматриваются по одному, и каждый новый поступивший элемент размещается в подходящее место среди ранее упорядоченных элементов.
-- [ ] [Двоичного дерева](https://en.wikipedia.org/wiki/Tree_sort) (Tree sort) - суть алгоритма в том, что на основе исходных данных строится двоичное дерево поиска, в котором последовательно собираются минимальные значения.
-- [ ] [Шелла](https://en.wikipedia.org/wiki/Shellsort) (Shell sort) - суть алгоритма в том, что он является модификацией сортировки вставками, в которой расстояние между сравниваемыми парами значений отлично от 1.
-- [ ] [](https://en.wikipedia.org/wiki/Splaysort) (Splay sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Library_sort) (Library sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Patience_sorting) (Patience sort) -
+- [ ] [**Вставками**](https://en.wikipedia.org/wiki/Insertion_sort) (Insertion sort) - суть алгоритма в том, что элементы входной последовательности просматриваются по одному, и каждый новый поступивший элемент размещается в подходящее место среди ранее упорядоченных элементов.
+- [ ] [**Двоичного дерева**](https://en.wikipedia.org/wiki/Tree_sort) (Tree sort) - суть алгоритма в том, что на основе исходных данных строится двоичное дерево поиска, в котором последовательно собираются минимальные значения.
+- [ ] [**Шелла**](https://en.wikipedia.org/wiki/Shellsort) (Shell sort) - суть алгоритма в том, что он является модификацией сортировки вставками, в которой расстояние между сравниваемыми парами значений отлично от 1.
+- [ ] [****](https://en.wikipedia.org/wiki/Splaysort) (Splay sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Library_sort) (Library sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Patience_sorting) (Patience sort) -
 
 ##### Сортировка выбором
 
-- [ ] [Выбором]() (Selection sort) - суть алгоритма в том, что он делит входной массив на упорядоченную и неупорядоченную части. Затем последовательно переносит в первую часть наименьшие элементы из второй.
-- [ ] [Пирамидой]() (Heapsort) - суть алгоритма в том, что он на основе исходных данных строит двоичную кучу, в которой последовательно собираются минимальные значения.
-- [ ] [Плавная]() (Smoothsort) - суть алгоритма в том, что он является модификацией пирамидальной сортировки, оптимизирующей сортировку частично упорядоченного массива.
-- [ ] [](https://en.wikipedia.org/wiki/Cartesian_tree) (Cartesian tree sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Tournament_sort) (Tournament sort) -
-- [ ] [Циклическая](https://en.wikipedia.org/wiki/Cycle_sort) (Cycle sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Weak_heap) (Weak heap sort) -
+- [ ] [**Выбором**]() (Selection sort) - суть алгоритма в том, что он делит входной массив на упорядоченную и неупорядоченную части. Затем последовательно переносит в первую часть наименьшие элементы из второй.
+- [ ] [**Пирамидой**]() (Heapsort) - суть алгоритма в том, что он на основе исходных данных строит двоичную кучу, в которой последовательно собираются минимальные значения.
+- [ ] [**Плавная**]() (Smoothsort) - суть алгоритма в том, что он является модификацией пирамидальной сортировки, оптимизирующей сортировку частично упорядоченного массива.
+- [ ] [****](https://en.wikipedia.org/wiki/Cartesian_tree) (Cartesian tree sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Tournament_sort) (Tournament sort) -
+- [ ] [**Циклическая**](https://en.wikipedia.org/wiki/Cycle_sort) (Cycle sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Weak_heap) (Weak heap sort) -
 
 ##### Сортировка переставлением
 
-- [ ] [Пузырьком](https://en.wikipedia.org/wiki/Bubble_sort) (Bubble sort) - суть алгоритма в том, что он проходит по массиву, сравнивает последовательные пары элементов и меняет их местами, если они расположены в неправильном порядке.
-- [ ] [Перемешиванием](https://en.wikipedia.org/wiki/Cocktail_shaker_sort) (Cocktail sort) - суть алгоритма в том, что он является двунаправленным, оптимизированным вариантом сортировки пузырьком.
-- [ ] [Гномья](https://en.wikipedia.org/wiki/Gnome_sort) (Gnome sort) - суть алгоритма в том, что он является гибридом сортировок вставками и пузырьком.
-- [ ] [Быстрая](https://en.wikipedia.org/wiki/Quicksort) (Quicksort) - суть алгоритма в том, что выбирается опорный элемент p. Все ключи, меньшие p, перемещаются влево от него, а все ключи, большие либо равные p, вправо. Далее алгоритм рекурсивно применяется к каждой из частей.
-- [ ] [](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort) (Odd-even sort) -
-- [ ] [Расчёской]() (Comb sort) - суть алгоритма в том, что он является модификацией сортировки пузырьком, в которой расстояние между сравниваемыми парами значений отлично от 1.
+- [ ] [**Пузырьком**](https://en.wikipedia.org/wiki/Bubble_sort) (Bubble sort) - суть алгоритма в том, что он проходит по массиву, сравнивает последовательные пары элементов и меняет их местами, если они расположены в неправильном порядке.
+- [ ] [**Перемешиванием**](https://en.wikipedia.org/wiki/Cocktail_shaker_sort) (Cocktail sort) - суть алгоритма в том, что он является двунаправленным, оптимизированным вариантом сортировки пузырьком.
+- [ ] [**Гномья**](https://en.wikipedia.org/wiki/Gnome_sort) (Gnome sort) - суть алгоритма в том, что он является гибридом сортировок вставками и пузырьком.
+- [ ] [**Быстрая**](https://en.wikipedia.org/wiki/Quicksort) (Quicksort) - суть алгоритма в том, что выбирается опорный элемент p. Все ключи, меньшие p, перемещаются влево от него, а все ключи, большие либо равные p, вправо. Далее алгоритм рекурсивно применяется к каждой из частей.
+- [ ] [****](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort) (Odd-even sort) -
+- [ ] [**Расчёской**]() (Comb sort) - суть алгоритма в том, что он является модификацией сортировки пузырьком, в которой расстояние между сравниваемыми парами значений отлично от 1.
 
 ##### Сортировка распределением
 
-- [ ] [](https://en.wikipedia.org/wiki/Bead_sort) (Bead sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Burstsort) (Burstsort) -
-- [ ] [](https://en.wikipedia.org/wiki/Flashsort) (Flashsort) -
-- [ ] [](https://en.wikipedia.org/wiki/Proxmap_sort) (Proxmap sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Pigeonhole_sort) (Pigeonhole sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Interpolation_sort) (Interpolation sort) -
-- [ ] [Поразрядная](https://en.wikipedia.org/wiki/Radix_sort) (Radix sort) - суть алгоритма в том, что массив сортируется согласно с помощью поразрядного сравнения чисел.
-- [ ] [Подсчётом](https://en.wikipedia.org/wiki/Counting_sort) (Counting sort) - суть алгоритма в том, что он подсчитывается количество вхождений каждого целого числа из диапазона ключей в массив. Затем выводится значения всех ненулевых значений.
-- [ ] [Блочная](https://en.wikipedia.org/wiki/Bucket_sort) (Bucket sort) - суть алгоритма в том, что элементы распределяются по блокам согласно диапазону значений, каждый из которых затем рекурсивно сортируется.
+- [ ] [****](https://en.wikipedia.org/wiki/Bead_sort) (Bead sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Burstsort) (Burstsort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Flashsort) (Flashsort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Proxmap_sort) (Proxmap sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Pigeonhole_sort) (Pigeonhole sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Interpolation_sort) (Interpolation sort) -
+- [ ] [**Поразрядная**](https://en.wikipedia.org/wiki/Radix_sort) (Radix sort) - суть алгоритма в том, что массив сортируется согласно с помощью поразрядного сравнения чисел.
+- [ ] [**Подсчётом**](https://en.wikipedia.org/wiki/Counting_sort) (Counting sort) - суть алгоритма в том, что он подсчитывается количество вхождений каждого целого числа из диапазона ключей в массив. Затем выводится значения всех ненулевых значений.
+- [ ] [**Блочная**](https://en.wikipedia.org/wiki/Bucket_sort) (Bucket sort) - суть алгоритма в том, что элементы распределяются по блокам согласно диапазону значений, каждый из которых затем рекурсивно сортируется.
 
 ##### Сортировка конкуренцией
 
-- [ ] [Битонная](https://en.wikipedia.org/wiki/Bitonic_sorter) (Bitonic mergesort) -
-- [ ] [](https://en.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort) (Batcher odd-even mergesort) -
-- [ ] [](https://en.wikipedia.org/wiki/Pairwise_sorting_network) (Pairwise sorting network) -
-- [ ] [Простая](https://en.wikipedia.org/wiki/Samplesort) (Samplesort) -
+- [ ] [**Битонная**](https://en.wikipedia.org/wiki/Bitonic_sorter) (Bitonic mergesort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Batcher_odd%E2%80%93even_mergesort) (Batcher odd-even mergesort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Pairwise_sorting_network) (Pairwise sorting network) -
+- [ ] [**Простая**](https://en.wikipedia.org/wiki/Samplesort) (Samplesort) -
 
 ##### Непрактичные алгоритмы сортировки
 
-- [ ] [Bogosort](https://en.wikipedia.org/wiki/Bogosort) - суть алгоритма в том, что он
-- [ ] [Stalinsort]() - суть алгоритма в том, что он
-- [ ] [Придурковатая]() (Stooge sort) - суть алгоритма в том, что он меняет местами первый и последний элементы массива, если необходимо. Затем делит массив на три части, в каждой из которых запускается рекурсивно.
+- [ ] [**Bogosort**](https://en.wikipedia.org/wiki/Bogosort) - суть алгоритма в том, что он
+- [ ] [**Stalinsort**]() - суть алгоритма в том, что он
+- [ ] [**Придурковатая**]() (Stooge sort) - суть алгоритма в том, что он меняет местами первый и последний элементы массива, если необходимо. Затем делит массив на три части, в каждой из которых запускается рекурсивно.
 
 ##### Гибридная сортировка
 
-- [ ] [](https://en.wikipedia.org/wiki/Block_sort) (Block sort) -
-- [ ] [Timsort](https://en.wikipedia.org/wiki/Timsort) - суть алгоритма в том, что он является гибридом сортировок вставками и слиянием. Основан на предположении, что при решении практических задач входной массив зачастую состоит из отсортированных подмассивов.
-- [ ] [Интроспективная](https://en.wikipedia.org/wiki/Introsort) (Introsort) - суть алгоритма в том, что он является гибридом быстрой и пирамидальной сортировок.
-- [ ] [](https://en.wikipedia.org/wiki/Kirkpatrick%E2%80%93Reisch_sort) (Kirkpatrick-Reisch sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Merge-insertion_sort) (Ford-Johnson sort) -
-- [ ] [](https://en.wikipedia.org/wiki/Powersort) (Powersort) -
-- [ ] [](https://en.wikipedia.org/wiki/Spreadsort) (Spreadsort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Block_sort) (Block sort) -
+- [ ] [**Timsort**](https://en.wikipedia.org/wiki/Timsort) - суть алгоритма в том, что он является гибридом сортировок вставками и слиянием. Основан на предположении, что при решении практических задач входной массив зачастую состоит из отсортированных подмассивов.
+- [ ] [**Интроспективная**](https://en.wikipedia.org/wiki/Introsort) (Introsort) - суть алгоритма в том, что он является гибридом быстрой и пирамидальной сортировок.
+- [ ] [****](https://en.wikipedia.org/wiki/Kirkpatrick%E2%80%93Reisch_sort) (Kirkpatrick-Reisch sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Merge-insertion_sort) (Ford-Johnson sort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Powersort) (Powersort) -
+- [ ] [****](https://en.wikipedia.org/wiki/Spreadsort) (Spreadsort) -
 
 ##### Остальные алгоритмы
 
-- [ ] [Топологическая](https://en.wikipedia.org/wiki/Topological_sorting) (Toposort) -
-- [ ] [Блинная](https://en.wikipedia.org/wiki/Pancake_sorting) (Pancake sort) -
-- [ ] [Спагетти](https://en.wikipedia.org/wiki/Spaghetti_sort) (Spaghetti sort) -
+- [ ] [**Топологическая**](https://en.wikipedia.org/wiki/Topological_sorting) (Toposort) -
+- [ ] [**Блинная**](https://en.wikipedia.org/wiki/Pancake_sorting) (Pancake sort) -
+- [ ] [**Спагетти**](https://en.wikipedia.org/wiki/Spaghetti_sort) (Spaghetti sort) -
 
 #### Алгоритмы сжатия
 
 ##### Lossless
 
-- [ ] [Адаптивное кодирование]() -
-- [ ] [Хаффман]() -
-- [ ] [Шеннон]() -
-- [ ] [Шеннон-Фано]() -
-- [ ] [Шеннон-Фано-Элиас]() -
+- [ ] [**Адаптивное кодирование**]() -
+- [ ] [**Хаффман**]() -
+- [ ] [**Шеннон**]() -
+- [ ] [**Шеннон-Фано**]() -
+- [ ] [**Шеннон-Фано-Элиас**]() -
 
 ##### Lossy
 
@@ -150,9 +154,32 @@
 - [ ] [**RC6**]() -
 - [ ] [**DES**]() -
 
+##### Хеш-функции
+
+- [ ] [**RIPEMD**](https://en.wikipedia.org/wiki/RIPEMD)
+  - [ ] [**RIPEMD-128**]() - использует мерклово-даггеровскую конструкцию с двумя ключевыми особенностями: двойной параллельный конвейер и принцип компенсации.
+  - [ ] [**RIPEMD-160**]() -
+  - [ ] [**RIPEMD-256**]() - увелечение размера хеша, без критичных изменений.
+  - [ ] [**RIPEMD-320**]() - увелечение размера хеша, без критичных изменений.
+- [ ] [**SHA**]()
+  - [ ] [**SHA-1**]() -
+  - [ ] [**SHA-2**]() -
+  - [ ] [**SHA-3**]() -
+- [ ] [**CRC**]() -
+- [ ] [**MD**]()
+  - [ ] [**MD5**]() -
+  - [ ] [**MD2**]() -
+  - [ ] [**MD4**]() -
+
+- [ ] [**bcrypt**]() -
+- [ ] [**scrypt**]() -
+- [ ] [**Argon2**]() -
+- [ ] [**Lyra2**]() -
+- [ ] [**PBKDF2**]() -
+
 #### Алгоритмы поиска
 
-- [ ] [Двоичный]() -
+- [ ] [**Двоичный**]() -
 
 ### Общее
 
@@ -168,3 +195,11 @@
 ### Примеры
 
 К каждому проекту обязательно прилагается проект-пример.
+
+### Благодарности
+
+
+
+### Лицензия
+
+Этот проект распространяется под лицензией MIT. Подробности см. в файле [LICENSE](LICENSE).
