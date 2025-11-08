@@ -10,7 +10,9 @@ public sealed class Queue : QueueBase
 {
 	private readonly Dictionary<Guid, double> _queueEnterTimes = new();
 
-	public Queue(QueueOptions? options = null) : base(options) { }
+	public Queue(QueueOptions? options = null) : base(options)
+	{
+	}
 
 	public override void Process(Request request)
 	{
@@ -29,17 +31,17 @@ public sealed class Queue : QueueBase
 	{
 		Context.Collector.GaugeRecord($"{Id}_Queue_Size", Storage.Count);
 		Context.Collector.ListAdd($"{Id}_Queue_Size_History", Storage.Count);
-		
+
 		if (IsEmpty)
 			return;
 
 		var next = GetAvailableExit();
-		
+
 		if (next == null)
 			return;
-		
+
 		var req = Dequeue();
-		
+
 		if (req != null)
 		{
 			if (_queueEnterTimes.TryGetValue(req.Id, out var enterTime))
@@ -48,7 +50,7 @@ public sealed class Queue : QueueBase
 				Context.Collector.ListAdd($"{Id}_Queue_WaitTime", waitTime);
 				_queueEnterTimes.Remove(req.Id);
 			}
-			
+
 			next.Process(req);
 		}
 	}

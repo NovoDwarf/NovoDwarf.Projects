@@ -8,17 +8,18 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\Structures.xml</DocumentationFile>
+        <DocumentationFile>bin\Debug\Structures.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\Structures.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\Structures.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Data\Data.csproj" />
-      <ProjectReference Include="..\Logging\Logging.csproj" />
-      <ProjectReference Include="..\Mathematics\Mathematics.csproj" />
+        <ProjectReference Include="..\..\Algorithms\Mathematics\Mathematics.csproj" />
+        <ProjectReference Include="..\Data\Data.csproj"/>
+        <ProjectReference Include="..\Logging\Logging.csproj"/>
+        <ProjectReference Include="..\Mathematics\Mathematics.csproj"/>
     </ItemGroup>
 
 </Project>

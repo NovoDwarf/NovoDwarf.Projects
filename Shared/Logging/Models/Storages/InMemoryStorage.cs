@@ -10,7 +10,7 @@ public class InMemoryStorage : IMetricStorage
 	public void Store(IMetricEvent metric)
 	{
 		var key = $"{metric.Type}:{metric.Name}";
-        
+
 		_metrics.AddOrUpdate(
 			key,
 			metric,
@@ -18,7 +18,13 @@ public class InMemoryStorage : IMetricStorage
 		);
 	}
 
-	public IReadOnlyCollection<IMetricEvent> GetAll() => _metrics.Values.ToList();
+	public IReadOnlyCollection<IMetricEvent> GetAll()
+	{
+		return _metrics.Values.ToList();
+	}
 
-	public void Clear() => _metrics.Clear();
+	public void Clear()
+	{
+		_metrics.Clear();
+	}
 }

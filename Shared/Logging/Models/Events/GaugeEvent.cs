@@ -15,12 +15,15 @@ public sealed class GaugeEvent : BaseMetricEvent
 		return this;
 	}
 
-	public override void Reset() => Value = 0;
+	public override void Reset()
+	{
+		Value = 0;
+	}
 
 	public override IMetricEvent MergeWith(IMetricEvent other)
 	{
-		return !CanMergeWith(other) 
-			? this 
+		return !CanMergeWith(other)
+			? this
 			: Set(((GaugeEvent)other).Value);
 	}
 }

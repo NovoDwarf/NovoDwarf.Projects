@@ -4,5 +4,4 @@ namespace Structures.Models.Abstracts.Options;
 
 public class QueueOptions : RouteOptions
 {
-	
 }

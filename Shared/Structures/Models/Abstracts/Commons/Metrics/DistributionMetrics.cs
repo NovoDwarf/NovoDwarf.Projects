@@ -2,5 +2,4 @@
 
 public class DistributionMetrics : RouterMetrics
 {
-	
 }

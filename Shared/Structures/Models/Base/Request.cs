@@ -2,11 +2,13 @@
 
 public class Request
 {
-	private Request() { }
-	
+	private Request()
+	{
+	}
+
 	public Guid Id { get; set; }
 	public Guid SourceId { get; set; }
-	
+
 	public static Request Create(Guid sourceId)
 	{
 		return new Request

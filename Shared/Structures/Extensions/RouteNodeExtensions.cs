@@ -9,9 +9,8 @@ public static class RouteNodeExtensions
 		public RouteNode Connect(RouteNode next)
 		{
 			node.AddOutput(next);
-			
+
 			return next;
 		}
 	}
-
 }

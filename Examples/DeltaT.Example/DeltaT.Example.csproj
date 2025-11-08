@@ -8,9 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj" />
-      <ProjectReference Include="..\..\Shared\Mathematics\Mathematics.csproj" />
-      <ProjectReference Include="..\..\Shared\Structures\Structures.csproj" />
+        <ProjectReference Include="..\..\Algorithms\Mathematics\Mathematics.csproj"/>
+        <ProjectReference Include="..\..\Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj"/>
+        <ProjectReference Include="..\..\Shared\Mathematics\Mathematics.csproj"/>
+        <ProjectReference Include="..\..\Shared\Structures\Structures.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -2,5 +2,4 @@
 
 public class RouterMetrics : StorageMetrics
 {
-	
 }

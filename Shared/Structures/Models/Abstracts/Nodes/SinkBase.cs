@@ -7,6 +7,5 @@ public abstract class SinkBase : RouteNode
 {
 	protected SinkBase(SinkOptions? options = null) : base(options)
 	{
-		
 	}
 }

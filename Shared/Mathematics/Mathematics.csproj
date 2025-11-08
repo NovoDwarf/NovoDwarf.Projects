@@ -8,15 +8,15 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\Mathematics.xml</DocumentationFile>
+        <DocumentationFile>bin\Debug\Mathematics.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\Mathematics.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\Mathematics.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
+      <Folder Include="Utilities\Formulas\" />
     </ItemGroup>
 
 </Project>

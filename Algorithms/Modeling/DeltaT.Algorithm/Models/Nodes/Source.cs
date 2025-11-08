@@ -8,17 +8,19 @@ namespace DeltaT.Algorithm.Models.Nodes;
 [DebuggerDisplay("Generator [{Id}]")]
 public class Source : SourceBase
 {
-	public Source(SourceOptions? options = null) : base(options) { }
-
 	private double _blockStartTime;
 	private double _lastGenerateTime = -1;
+
+	public Source(SourceOptions? options = null) : base(options)
+	{
+	}
 
 	public override void OnContextSet()
 	{
 		base.OnContextSet();
 		NextTime = Distribution.Calculate();
 	}
-	
+
 	public override void Update(double deltaTime)
 	{
 		if (Options.ClosedSystem)
@@ -43,18 +45,15 @@ public class Source : SourceBase
 			var generateTime = Context.CurrentTime - _lastGenerateTime;
 			Context.Collector.ListAdd($"{Id}_Source_GenerationTime", generateTime);
 		}
+
 		_lastGenerateTime = Context.CurrentTime;
 
 		if (next != null)
-		{
 			next.Process(request);
-		}
 		else
-		{
 			Enqueue(request);
-		}
 	}
-	
+
 	private void HandleClosedSystem(double currentTime)
 	{
 		var canGenerate = InFlight < ClosedPopulation;
@@ -86,20 +85,20 @@ public class Source : SourceBase
 
 	private void BlockIfNeeded()
 	{
-		if (IsBlocked) 
+		if (IsBlocked)
 			return;
-		
+
 		IsBlocked = true;
 		_blockStartTime = Context.CurrentTime;
 	}
 
 	private void UnblockIfNeeded()
 	{
-		if (!IsBlocked) 
+		if (!IsBlocked)
 			return;
-		
+
 		IsBlocked = false;
-		
+
 		var blockTime = Context.CurrentTime - _blockStartTime;
 		Context.Collector.ListAdd($"{Id}_Source_BlockTime", blockTime);
 	}

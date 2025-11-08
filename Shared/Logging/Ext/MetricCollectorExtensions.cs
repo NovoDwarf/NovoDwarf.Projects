@@ -10,7 +10,7 @@ public static class MetricCollectorExtensions
 		public void WithConsole()
 		{
 			var sink = new ConsoleSink();
-			
+
 			collector.AddSink(sink);
 		}
 	}

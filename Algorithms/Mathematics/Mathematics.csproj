@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Compressions\Models\" />
+      <Folder Include="Distributions\Models\Directional\" />
+      <Folder Include="Distributions\Models\Mixed\" />
+      <Folder Include="Distributions\Models\Multivariate\Continuous\" />
+      <Folder Include="Functions\Interfaces\" />
+      <Folder Include="Sortings\" />
+      <Folder Include="Statistics\" />
+      <Folder Include="Transforms\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
+    </ItemGroup>
+
+</Project>

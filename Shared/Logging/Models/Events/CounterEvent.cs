@@ -15,7 +15,10 @@ public sealed class CounterEvent : BaseMetricEvent
 		return this;
 	}
 
-	public override void Reset() => Value = 0;
+	public override void Reset()
+	{
+		Value = 0;
+	}
 
 	public override IMetricEvent MergeWith(IMetricEvent other)
 	{

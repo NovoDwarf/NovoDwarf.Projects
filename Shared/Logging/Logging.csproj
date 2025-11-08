@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\Logging.xml</DocumentationFile>
+        <DocumentationFile>bin\Debug\Logging.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\Logging.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\Logging.xml</DocumentationFile>
     </PropertyGroup>
 
 </Project>

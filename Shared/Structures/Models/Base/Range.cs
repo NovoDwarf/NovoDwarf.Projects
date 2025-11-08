@@ -6,7 +6,7 @@ public record Range(double Min, double Max, bool IncludeMin = true, bool Include
 	{
 		var minCheck = IncludeMin ? value >= Min : value > Min;
 		var maxCheck = IncludeMax ? value <= Max : value < Max;
-		
+
 		return minCheck && maxCheck;
 	}
 
@@ -14,7 +14,7 @@ public record Range(double Min, double Max, bool IncludeMin = true, bool Include
 	{
 		var leftBracket = IncludeMin ? "[" : "(";
 		var rightBracket = IncludeMax ? "]" : ")";
-		
+
 		return $"{leftBracket}{Min}, {Max}{rightBracket}";
 	}
 }

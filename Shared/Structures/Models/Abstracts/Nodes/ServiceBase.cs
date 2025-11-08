@@ -7,6 +7,5 @@ public abstract class ServiceBase : DistributionNode
 {
 	protected ServiceBase(ServiceOptions? options = null) : base(options)
 	{
-		
 	}
 }

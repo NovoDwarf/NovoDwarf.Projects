@@ -6,32 +6,34 @@ using Structures.Models.Base;
 namespace Structures.Models.Abstracts.Commons.Nodes;
 
 /// <summary>
-/// Base class for all nodes.
+///     Base class for all nodes.
 /// </summary>
 public abstract class NodeBase : INode
 {
-    private readonly NodeOptions _options;
+	private readonly NodeOptions _options;
 
-    protected NodeBase(NodeOptions? options = null)
-    {
-        _options = options ?? new NodeOptions();
-    }
-    
-    /// <inheritdoc cref="INode.Id"/>
-    public Guid Id { get; } = Guid.NewGuid();
+	protected NodeBase(NodeOptions? options = null)
+	{
+		_options = options ?? new NodeOptions();
+	}
 
-    protected SimulationContext Context { get; set; } = null!;
-    
-    public void SetContext(SimulationContext context)
-    {
-        Context = context;
-        
-        OnContextSet();
-    }
-    
-    public abstract void Process(Request request);
+	protected SimulationContext Context { get; set; } = null!;
 
-    public abstract void Update(double deltaTime);
+	/// <inheritdoc cref="INode.Id" />
+	public Guid Id { get; } = Guid.NewGuid();
 
-    public virtual void OnContextSet() {}
+	public void SetContext(SimulationContext context)
+	{
+		Context = context;
+
+		OnContextSet();
+	}
+
+	public abstract void Process(Request request);
+
+	public abstract void Update(double deltaTime);
+
+	public virtual void OnContextSet()
+	{
+	}
 }

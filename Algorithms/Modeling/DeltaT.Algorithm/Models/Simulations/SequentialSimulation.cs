@@ -6,24 +6,21 @@ namespace DeltaT.Algorithm.Models.Simulations;
 
 public class SequentialSimulation : Simulation
 {
-	public double DeltaTime { get; private set; } = 0.1;
-	
+	public double DeltaTime { get; } = 0.1;
+
 	public override void Simulate()
 	{
 		InitSimulation();
 		InitContext();
-		
+
 		Loop();
-		
+
 		CollectMetrics();
 	}
 
 	private void InitContext()
 	{
-		foreach (var node in Nodes)
-		{
-			node.SetContext(Context);
-		}
+		foreach (var node in Nodes) node.SetContext(Context);
 	}
 
 	private void InitSimulation()
@@ -38,15 +35,12 @@ public class SequentialSimulation : Simulation
 		Collector.GaugeRecord("System_TotalTime", Context.CurrentTime);
 		Collector.Collect();
 	}
-	
+
 	private void Loop()
 	{
 		while (Context.IsRunning)
 		{
-			foreach (var node in Nodes)
-			{
-				node.Update(DeltaTime);
-			}
+			foreach (var node in Nodes) node.Update(DeltaTime);
 
 			Context.Tick(DeltaTime);
 		}

@@ -8,12 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\Logging\Logging.csproj" />
-      <ProjectReference Include="..\..\..\Shared\Structures\Structures.csproj" />
+        <ProjectReference Include="..\..\..\Shared\Logging\Logging.csproj"/>
+        <ProjectReference Include="..\..\..\Shared\Structures\Structures.csproj"/>
+        <ProjectReference Include="..\..\Mathematics\Mathematics.csproj"/>
     </ItemGroup>
 
 </Project>

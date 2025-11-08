@@ -1,4 +1,4 @@
-﻿using Mathematics.Interfaces;
+﻿using Mathematics.Distributions.Interfaces;
 using Structures.Models.Abstracts.Commons.Options;
 
 namespace Structures.Models.Abstracts.Commons.Nodes;
@@ -13,5 +13,5 @@ public abstract class DistributionNode : RouteNode
 	}
 
 	public bool IsBusy { get; protected set; }
-	public IDistribution Distribution => _options.Distribution;
+	public IDistribution<double> Distribution => _options.Distribution;
 }

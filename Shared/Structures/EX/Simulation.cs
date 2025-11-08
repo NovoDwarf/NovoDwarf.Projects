@@ -6,12 +6,12 @@ namespace Structures.EX;
 
 public abstract class Simulation
 {
-	protected readonly Dictionary<Guid, NodeBase> NodesById = new();
 	protected readonly List<NodeBase> Nodes = [];
+	protected readonly Dictionary<Guid, NodeBase> NodesById = new();
 
 	protected MetricCollector Collector { get; set; } = null!;
 	protected SimulationContext Context { get; set; } = null!;
-	
+
 	public void AddNodes(params NodeBase[] nodes)
 	{
 		foreach (var node in nodes)
@@ -30,6 +30,6 @@ public abstract class Simulation
 			//aware.OnRequestCompleted(request, this);
 		}
 	}
-	
+
 	public abstract void Simulate();
 }

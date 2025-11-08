@@ -7,6 +7,5 @@ public abstract class EmptyBase : RouteNode
 {
 	protected EmptyBase(EmptyOptions? options = null) : base(options)
 	{
-		
 	}
 }
