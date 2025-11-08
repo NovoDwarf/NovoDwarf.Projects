@@ -1,0 +1,1 @@
+﻿- [ ] [**Двоичный поиск**](https://en.wikipedia.org/wiki/Binary_search_algorithm) - алгоритм поиска в отсортированном массиве.
