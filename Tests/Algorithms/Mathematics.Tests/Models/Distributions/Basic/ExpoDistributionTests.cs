@@ -9,9 +9,11 @@ public class ExpoDistributionTests
 	private const int SampleSize = 10000;
 
 	[Test]
-	public void Constructor_WithPositiveRate_SetsCorrectRate()
+	[TestCase(2.5)]
+	[TestCase(1.0)]
+	[TestCase(0.5)]
+	public void Constructor_WithPositiveRate_SetsCorrectRate(double rate)
 	{
-		const double rate = 2.5;
 
 		var distribution = new ExpoDistribution(rate);
 
@@ -47,61 +49,47 @@ public class ExpoDistributionTests
 	}
 
 	[Test]
-	public void Calculate_WithDifferentRates_RespectsRateParameter()
+	[TestCase(0.5)]
+	[TestCase(1.0)]
+	[TestCase(2.0)]
+	[TestCase(5.0)]
+	public void Calculate_WithDifferentRates_RespectsRateParameter(double rate)
 	{
-		var rates = new[] { 0.5, 1.0, 2.0, 5.0 };
+		var distribution = new ExpoDistribution(rate);
 
-		foreach (var rate in rates)
-		{
-			var distribution = new ExpoDistribution(rate);
+		var mean = GenerateSamples(distribution, SampleSize).Average();
 
-			var mean = GenerateSamples(distribution, SampleSize).Average();
-
-			var expectedMean = 1.0 / rate;
-			Assert.That(mean, Is.EqualTo(expectedMean).Within(0.1));
-		}
+		var expectedMean = 1.0 / rate;
+		Assert.That(mean, Is.EqualTo(expectedMean).Within(0.1));
+		
 	}
 
 	[Test]
-	public void GetExpectedValue_WithVariousRates_ReturnsCorrectValue()
+	[TestCase(0.5, 2.0)]
+	[TestCase(1.0, 1.0)]
+	[TestCase(2.0, 0.5)]
+	[TestCase(10.0, 0.1)]
+	public void GetExpectedValue_WithVariousRates_ReturnsCorrectValue(double rate, double expected)
 	{
-		var testCases = new[]
-		{
-			(rate: 0.5, expected: 2.0),
-			(rate: 1.0, expected: 1.0),
-			(rate: 2.0, expected: 0.5),
-			(rate: 10.0, expected: 0.1)
-		};
+		var distribution = new ExpoDistribution(rate);
 
-		foreach (var (rate, expected) in testCases)
-		{
-			var distribution = new ExpoDistribution(rate);
-
-			var result = distribution.GetExpectedValue();
-
-			Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
-		}
+		var result = distribution.GetExpectedValue();
+			
+		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
 
 	[Test]
-	public void GetVariance_WithVariousRates_ReturnsCorrectValue()
+	[TestCase(0.5, 4.0)]
+	[TestCase(1.0, 1.0)]
+	[TestCase(2.0, 0.25)]
+	[TestCase(4.0, 0.0625)]
+	public void GetVariance_WithVariousRates_ReturnsCorrectValue(double rate, double expected)
 	{
-		var testCases = new[]
-		{
-			(rate: 0.5, expected: 4.0), // 1/(0.5²) = 4
-			(rate: 1.0, expected: 1.0), // 1/(1²) = 1
-			(rate: 2.0, expected: 0.25), // 1/(2²) = 0.25
-			(rate: 4.0, expected: 0.0625) // 1/(4²) = 0.0625
-		};
+		var distribution = new ExpoDistribution(rate);
 
-		foreach (var (rate, expected) in testCases)
-		{
-			var distribution = new ExpoDistribution(rate);
-
-			var result = distribution.GetVariance();
-
-			Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
-		}
+		var result = distribution.GetVariance();
+			
+		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
 
 	[Test]
@@ -111,7 +99,7 @@ public class ExpoDistributionTests
 
 		var result = distribution.GetMinValue();
 
-		Assert.That(result, Is.EqualTo(0));
+		Assert.That(result, Is.Zero);
 	}
 
 	[Test]
@@ -153,11 +141,11 @@ public class ExpoDistributionTests
 
 		var results = GenerateSamples(distribution, 1000);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(results.All(x => x > 1.0), Is.False);
 			Assert.That(results.Any(x => x > 100.0), Is.True);
-		});
+		}
 	}
 
 	[Test]
@@ -170,7 +158,9 @@ public class ExpoDistributionTests
 		{
 			var value = distribution.Calculate();
 			var bin = (int)Math.Floor(value);
-			if (bin < histogram.Length) histogram[bin]++;
+			
+			if (bin < histogram.Length) 
+				histogram[bin]++;
 		}
 
 		for (var i = 1; i < histogram.Length - 1; i++) Assert.That(histogram[i], Is.LessThan(histogram[i - 1] * 1.5));

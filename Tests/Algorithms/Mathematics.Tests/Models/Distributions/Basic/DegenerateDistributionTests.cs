@@ -7,9 +7,7 @@ namespace Mathematics.Tests.Models.Distributions.Basic;
 public class DegenerateDistributionTests
 {
 	[Test]
-	public void Calculate_WithDeterministicOne_ReturnsOne(
-		[Random(double.MinValue, double.MaxValue, 10)]
-		double constant)
+	public void Calculate_WithDeterministicOne_ReturnsOne([Random(double.MinValue, double.MaxValue, 10)] double constant)
 	{
 		var distribution = new DegenerateDistribution(constant);
 

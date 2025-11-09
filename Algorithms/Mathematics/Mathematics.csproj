@@ -7,6 +7,14 @@
         <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\Mathematics.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\Mathematics.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <Folder Include="Compressions\Models\" />
       <Folder Include="Distributions\Models\Directional\" />

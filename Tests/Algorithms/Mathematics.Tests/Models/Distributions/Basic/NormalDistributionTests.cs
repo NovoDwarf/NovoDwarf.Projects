@@ -18,23 +18,29 @@ public class NormalDistributionTests
 
 		var distribution = new NormalDistribution(mean, stdDev);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(distribution.Mean, Is.EqualTo(mean));
 			Assert.That(distribution.StandardDeviation, Is.EqualTo(stdDev));
-		});
+		}
 	}
 
 	[Test]
 	public void Constructor_WithZeroStandardDeviation_ThrowsArgumentException()
 	{
-		Assert.Throws<ArgumentException>(() => new NormalDistribution(0, 0));
+		Assert.Throws<ArgumentException>(() =>
+		{
+			var distribution = new NormalDistribution(0, 0);
+		});
 	}
 
 	[Test]
 	public void Constructor_WithNegativeStandardDeviation_ThrowsArgumentException()
 	{
-		Assert.Throws<ArgumentException>(() => new NormalDistribution(0, -1.5));
+		Assert.Throws<ArgumentException>(() =>
+		{
+			var distribution = new NormalDistribution(0, -1.5);
+		});
 	}
 
 	[Test]
@@ -46,28 +52,26 @@ public class NormalDistributionTests
 		var sampleMean = samples.Average();
 		var sampleVariance = samples.Variance();
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(sampleMean, Is.EqualTo(0).Within(0.1));
 			Assert.That(sampleVariance, Is.EqualTo(1).Within(0.1));
-		});
+		}
 	}
 
 	[Test]
-	public void Calculate_WithDifferentMeans_ShiftsDistribution()
+	[TestCase(-2.0, 1.0)]
+	[TestCase(0.0, 1.0)]
+	[TestCase(5.0, 1.0)]
+	[TestCase(10.0, 1.0)]
+	public void Calculate_WithDifferentMeans_ShiftsDistribution(double mean, double stdDev)
 	{
-		var means = new[] { -2.0, 0.0, 5.0, 10.0 };
-		const double stdDev = 1.0;
+		var distribution = new NormalDistribution(mean, stdDev);
 
-		foreach (var mean in means)
-		{
-			var distribution = new NormalDistribution(mean, stdDev);
+		var samples = TestsUtils.GenerateSamples(distribution, SampleSize);
+		var sampleMean = samples.Average();
 
-			var samples = TestsUtils.GenerateSamples(distribution, SampleSize);
-			var sampleMean = samples.Average();
-
-			Assert.That(sampleMean, Is.EqualTo(mean).Within(0.1), $"Failed for mean = {mean}");
-		}
+		Assert.That(sampleMean, Is.EqualTo(mean).Within(0.1), $"Failed for mean = {mean}");
 	}
 
 	[Test]
@@ -90,62 +94,39 @@ public class NormalDistributionTests
 	}
 
 	[Test]
-	public void GetExpectedValue_Always_ReturnsMean()
+	[TestCase(-5.0, 1.0)]
+	[TestCase(0.0, 2.0)]
+	[TestCase(10.0, 0.5)]
+	[TestCase(100.0, 10.0)]
+	public void GetExpectedValue_Always_ReturnsMean(double mean, double stdDev)
 	{
-		
-		var testCases = new[]
-		{
-			(mean: -5.0, stdDev: 1.0),
-			(mean: 0.0, stdDev: 2.0),
-			(mean: 10.0, stdDev: 0.5),
-			(mean: 100.0, stdDev: 10.0)
-		};
-
-		foreach (var (mean, stdDev) in testCases)
-		{
-			var distribution = new NormalDistribution(mean, stdDev);
-
+		var distribution = new NormalDistribution(mean, stdDev);
 			
-			var result = distribution.GetExpectedValue();
-
+		var result = distribution.GetExpectedValue();
 			
-			Assert.That(result, Is.EqualTo(mean).Within(Tolerance));
-		}
+		Assert.That(result, Is.EqualTo(mean).Within(Tolerance));
 	}
 
 	[Test]
-	public void GetVariance_Always_ReturnsSquaredStandardDeviation()
+	[TestCase(0.0, 1.0, 1.0)]
+	[TestCase(0.0, 2.0, 4.0)]
+	[TestCase(5.0, 0.5, 0.25)]
+	[TestCase(-2.0, 3.0, 9.0)]
+	public void GetVariance_Always_ReturnsSquaredStandardDeviation(double mean, double stdDev, double expected)
 	{
+		var distribution = new NormalDistribution(mean, stdDev);
 		
-		var testCases = new[]
-		{
-			(mean: 0.0, stdDev: 1.0, expected: 1.0),
-			(mean: 0.0, stdDev: 2.0, expected: 4.0),
-			(mean: 5.0, stdDev: 0.5, expected: 0.25),
-			(mean: -2.0, stdDev: 3.0, expected: 9.0)
-		};
-
-		foreach (var (mean, stdDev, expected) in testCases)
-		{
-			var distribution = new NormalDistribution(mean, stdDev);
-
-			
-			var result = distribution.GetVariance();
-
-			
-			Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
-		}
+		var result = distribution.GetVariance();
+		
+		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
 
 	[Test]
 	public void GetMinValue_Always_ReturnsNegativeInfinity()
 	{
-		
 		var distribution = new NormalDistribution(0, 1);
-
 		
 		var result = distribution.GetMinValue();
-
 		
 		Assert.That(result, Is.EqualTo(double.NegativeInfinity));
 	}
@@ -153,12 +134,9 @@ public class NormalDistributionTests
 	[Test]
 	public void GetMaxValue_Always_ReturnsPositiveInfinity()
 	{
-		
 		var distribution = new NormalDistribution(0, 1);
-
 		
 		var result = distribution.GetMaxValue();
-
 		
 		Assert.That(result, Is.EqualTo(double.PositiveInfinity));
 	}
@@ -166,19 +144,17 @@ public class NormalDistributionTests
 	[Test]
 	public void Calculate_DistributionShape_ApproximatelyNormal()
 	{
-		
 		var distribution = new NormalDistribution(0, 1);
 		var samples = TestsUtils.GenerateSamples(distribution, SampleSize);
-
 		
 		var skewness = samples.Skewness();
 		var kurtosis = samples.Kurtosis();
 
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
 	        Assert.That(skewness, Is.EqualTo(0).Within(0.1));
             Assert.That(kurtosis, Is.EqualTo(0).Within(0.5)); 
-        });
+        }
     }
 
 	[Test]
@@ -191,12 +167,12 @@ public class NormalDistributionTests
 		var within2Std = samples.Count(x => Math.Abs(x) <= 2) / (double)SampleSize;
 		var within3Std = samples.Count(x => Math.Abs(x) <= 3) / (double)SampleSize;
 
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(within1Std, Is.EqualTo(0.6827).Within(0.02));
             Assert.That(within2Std, Is.EqualTo(0.9545).Within(0.02));
             Assert.That(within3Std, Is.EqualTo(0.9973).Within(0.01));
-        });
+        }
     }
 
 	[Test]
@@ -204,9 +180,9 @@ public class NormalDistributionTests
 	{
 		var distribution = new NormalDistribution(0, 1);
 		var results = new HashSet<double>();
-
 		
-		for (var i = 0; i < 100; i++) results.Add(distribution.Calculate());
+		for (var i = 0; i < 100; i++) 
+			results.Add(distribution.Calculate());
 
 		Assert.That(results, Has.Count.GreaterThan(50));
 	}
@@ -234,10 +210,10 @@ public class NormalDistributionTests
 
 		Assert.That(median, Is.EqualTo(0).Within(0.1));
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(q1, Is.EqualTo(-0.6745).Within(0.1));
 			Assert.That(q3, Is.EqualTo(0.6745).Within(0.1));
-		});
+		}
 	}
 }

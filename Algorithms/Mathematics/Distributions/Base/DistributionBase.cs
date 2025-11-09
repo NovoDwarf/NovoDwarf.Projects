@@ -44,4 +44,8 @@ public abstract class DistributionBase : IDistribution<double>
 	/// </summary>
 	[MustOverride]
 	public virtual double GetMaxValue() => double.PositiveInfinity;
+
+	/// <inheritdoc cref="object.ToString()"/>
+	[MustOverride]
+	public override string ToString() => "Distribution Base";
 }

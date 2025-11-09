@@ -3,24 +3,27 @@ using Mathematics.Distributions.Models.Continuous.SemiInfinite;
 
 namespace Mathematics.Distributions.Models.Continuous.Bounded;
 
+/// <summary>
+/// Represents the beta distribution.
+/// </summary>
 public class BetaDistribution : DistributionBase
 {
 	private readonly GammaDistribution _gammaDistributionAlpha;
 	private readonly GammaDistribution _gammaDistributionBeta;
 
-	public BetaDistribution(double alphaParam, double betaParam, double scaleParam)
+	public BetaDistribution(double alpha, double beta, double scale)
 	{
-		AlphaParam = alphaParam;
-		BetaParam = betaParam;
-		ScaleParam = scaleParam;
+		Alpha = alpha;
+		Beta = beta;
+		Scale = scale;
 
-		_gammaDistributionAlpha = new GammaDistribution(AlphaParam, ScaleParam);
-		_gammaDistributionBeta = new GammaDistribution(BetaParam, ScaleParam);
+		_gammaDistributionAlpha = new GammaDistribution(Alpha, Scale);
+		_gammaDistributionBeta = new GammaDistribution(Beta, Scale);
 	}
 
-	public double AlphaParam { get; }
-	public double BetaParam { get; }
-	public double ScaleParam { get; }
+	public double Alpha { get; }
+	public double Beta { get; }
+	public double Scale { get; }
 
 	public override double Calculate()
 	{
@@ -30,29 +33,13 @@ public class BetaDistribution : DistributionBase
 		return y1 / (y1 + y2);
 	}
 
-	public override double GetExpectedValue()
-	{
-		return AlphaParam / (AlphaParam + BetaParam);
-	}
+	public override double GetExpectedValue() => Alpha / (Alpha + Beta);
 
-	public override double GetVariance()
-	{
-		return AlphaParam * BetaParam /
-		       ((AlphaParam + BetaParam) * (AlphaParam + BetaParam) * (AlphaParam + BetaParam + 1));
-	}
+	public override double GetVariance() => Alpha * Beta / ((Alpha + Beta) * (Alpha + Beta) * (Alpha + Beta + 1));
 
-	public override double GetMinValue()
-	{
-		return 0;
-	}
+	public override double GetMinValue() => 0;
 
-	public override double GetMaxValue()
-	{
-		return 1;
-	}
+	public override double GetMaxValue() => 1;
 
-	public override string ToString()
-	{
-		return $"Beta [α = {AlphaParam:F3}, β = {BetaParam:F3}, Scale = {ScaleParam:F3}]";
-	}
+	public override string ToString() => $"Beta [α = {Alpha:F3}, β = {Beta:F3}, Scale = {Scale:F3}]";
 }
