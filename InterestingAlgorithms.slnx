@@ -6,10 +6,20 @@
         <Project Path="Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj" />
         <Project Path="Algorithms\Modeling\EventDriven.Algorithm\EventDriven.Algorithm.csproj" />
     </Folder>
+    <Folder Name="/Analyzers/">
+        <Project Path="Analyzers/Core.Analyzer/Core.Analyzer.csproj" Type="C#" />
+    </Folder>
     <Folder Name="/Examples/" />
-    <Folder Name="/Examples/Modeling/">
-        <Project Path="Examples\DeltaT.Example\DeltaT.Example.csproj" />
-        <Project Path="Examples\EventDriven.Example\EventDriven.Example.csproj" />
+    <Folder Name="/Examples/Algorithms/" />
+    <Folder Name="/Examples/Algorithms/Modeling/">
+        <Project Path="Examples/Algorithms/DeltaT.Example/DeltaT.Example.csproj" Type="C#" />
+        <Project Path="Examples/Algorithms/EventDriven.Example/EventDriven.Example.csproj" Type="C#" />
+    </Folder>
+    <Folder Name="/Examples/Analyzers/">
+        <Project Path="Examples/Analyzers/Core.Analyzer.Example/Core.Analyzer.Example.csproj" Type="C#" />
+    </Folder>
+    <Folder Name="/Examples/SourceGenerators/">
+        <Project Path="Examples/SourceGenerators/Core.SourceGenerators.Example/Core.SourceGenerators.Example.csproj" Type="C#" />
     </Folder>
     <Folder Name="/Shared/">
         <Project Path="Shared/Utilities/Utilities.csproj" />
@@ -17,9 +27,18 @@
         <Project Path="Shared\Logging\Logging.csproj" />
         <Project Path="Shared\Structures\Structures.csproj" />
     </Folder>
+    <Folder Name="/SourceGenerators/">
+        <Project Path="SourceGenerators/Core.SourceGenerators/Core.SourceGenerators.csproj" Type="C#" />
+    </Folder>
     <Folder Name="/Tests/" />
     <Folder Name="/Tests/Algorithms/">
-        <Project Path="Tests\Mathematics.Tests\Mathematics.Tests.csproj" />
+        <Project Path="Tests/Algorithms/Mathematics.Tests/Mathematics.Tests.csproj" Type="C#" />
+    </Folder>
+    <Folder Name="/Tests/Analyzers/">
+        <Project Path="Tests/Analyzers/Core.Analyzer.Tests/Core.Analyzer.Tests.csproj" Type="C#" />
     </Folder>
     <Folder Name="/Tests/Shared/" />
+    <Folder Name="/Tests/SourceGenerators/">
+        <Project Path="Tests/SourceGenerators/Core.SourceGenerators.Tests/Core.SourceGenerators.Tests.csproj" Type="C#" />
+    </Folder>
 </Solution>
