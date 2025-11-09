@@ -27,22 +27,18 @@ public class MergeSortTests
 	}
 
 	[Test]
-	public void Sort_AlreadySortedArray_RemainsSorted()
+	[TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4, 5 })]
+	public void Sort_AlreadySortedArray_RemainsSorted(int[] array, int[] expected)
 	{
-		var array = new[] { 1, 2, 3, 4, 5 };
-		var expected = new[] { 1, 2, 3, 4, 5 };
-
 		_intSorter.Sort(array);
 
 		Assert.That(expected, Is.EqualTo(array));
 	}
 
 	[Test]
-	public void Sort_ReverseSortedArray_BecomesSorted()
+	[TestCase(new[] { 5, 4, 3, 2, 1 }, new[] { 1, 2, 3, 4, 5 })]
+	public void Sort_ReverseSortedArray_BecomesSorted(int[] array, int[] expected)
 	{
-		int[] array = [5, 4, 3, 2, 1];
-		int[] expected = [1, 2, 3, 4, 5];
-
 		_intSorter.Sort(array);
 
 		Assert.That(expected, Is.EqualTo(array));

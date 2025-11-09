@@ -17,17 +17,20 @@ public class ErlangDistributionTests
 
 		var distribution = new ErlangDistribution(shape, rate);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(distribution.Shape, Is.EqualTo(shape));
 			Assert.That(distribution.Rate, Is.EqualTo(rate));
-		});
+		}
 	}
 
 	[Test]
 	public void Constructor_WithZeroShape_ThrowsArgumentException()
 	{
-		Assert.Throws<ArgumentException>(() => new ErlangDistribution(0, 1.0));
+		Assert.Throws<ArgumentException>(() =>
+		{
+			var distribution = new ErlangDistribution(0, 1.0);
+		});
 	}
 
 	[Test]
@@ -71,26 +74,25 @@ public class ErlangDistributionTests
 		var expMean = expResults.Average();
 		const double expectedMean = 1.0 / rate;
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(erlangMean, Is.EqualTo(expectedMean).Within(0.1));
 			Assert.That(expMean, Is.EqualTo(expectedMean).Within(0.1));
-		});
+		}
 	}
 
 	[Test]
-	public void Calculate_WithVariousShapes_ReturnsNonNegativeValues()
+	[TestCase(1)]
+	[TestCase(2)]
+	[TestCase(5)]
+	[TestCase(10)]
+	public void Calculate_WithVariousShapes_ReturnsNonNegativeValues(int shape)
 	{
-		var shapes = new[] { 1, 2, 5, 10 };
+		var distribution = new ErlangDistribution(shape, 1.0);
 
-		foreach (var shape in shapes)
-		{
-			var distribution = new ErlangDistribution(shape, 1.0);
+		var results = TestsUtils.GenerateSamples(distribution, SampleSize);
 
-			var results = TestsUtils.GenerateSamples(distribution, SampleSize);
-
-			Assert.That(results.All(x => x >= 0), Is.True, $"All values should be non-negative for shape {shape}");
-		}
+		Assert.That(results.All(x => x >= 0), Is.True, $"All values should be non-negative for shape {shape}");
 	}
 
 	[Test]
@@ -109,55 +111,41 @@ public class ErlangDistributionTests
 		var variance5 = results5.Variance();
 		var variance10 = results10.Variance();
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(variance5, Is.LessThan(variance1));
 			Assert.That(variance10, Is.LessThan(variance5));
-		});
-	}
-
-	[Test]
-	public void GetExpectedValue_WithVariousParameters_ReturnsCorrectValue()
-	{
-		var testCases = new[]
-		{
-			(shape: 1, rate: 1.0, expected: 1.0),
-			(shape: 2, rate: 1.0, expected: 2.0),
-			(shape: 3, rate: 2.0, expected: 1.5), // 3/2 = 1.5
-			(shape: 5, rate: 0.5, expected: 10.0), // 5/0.5 = 10
-			(shape: 10, rate: 5.0, expected: 2.0) // 10/5 = 2
-		};
-
-		foreach (var (shape, rate, expected) in testCases)
-		{
-			var distribution = new ErlangDistribution(shape, rate);
-
-			var result = distribution.GetExpectedValue();
-
-			Assert.That(result, Is.EqualTo(expected).Within(Tolerance), $"Failed for Shape = {shape}, Rate = {rate}");
 		}
 	}
 
 	[Test]
-	public void GetVariance_WithVariousParameters_ReturnsCorrectValue()
+	[TestCase(1, 1.0, 1.0)]
+	[TestCase(2, 1.0, 2.0)]
+	[TestCase(3, 2.0, 1.5)]
+	[TestCase(5, 0.5, 10.0)]
+	[TestCase(10, 5.0, 2.0)]
+	public void GetExpectedValue_WithVariousParameters_ReturnsCorrectValue(int shape, double rate, double expected)
 	{
-		var testCases = new[]
-		{
-			(shape: 1, rate: 1.0, expected: 1.0), // 1/(1²) = 1
-			(shape: 2, rate: 1.0, expected: 2.0), // 2/(1²) = 2
-			(shape: 3, rate: 2.0, expected: 0.75), // 3/(2²) = 0.75
-			(shape: 5, rate: 0.5, expected: 20.0), // 5/(0.5²) = 20
-			(shape: 10, rate: 5.0, expected: 0.4) // 10/(5²) = 0.4
-		};
+		var distribution = new ErlangDistribution(shape, rate);
 
-		foreach (var (shape, rate, expected) in testCases)
-		{
-			var distribution = new ErlangDistribution(shape, rate);
+		var result = distribution.GetExpectedValue();
 
-			var result = distribution.GetVariance();
+		Assert.That(result, Is.EqualTo(expected).Within(Tolerance), $"Failed for Shape = {shape}, Rate = {rate}");
+	}
 
-			Assert.That(result, Is.EqualTo(expected).Within(Tolerance), $"Failed for shape = {shape}, rate = {rate}");
-		}
+	[Test]
+	[TestCase(1, 1.0, 1.0)]
+	[TestCase(2, 1.0, 2.0)]
+	[TestCase(3, 2.0, 0.75)]
+	[TestCase(5, 0.5, 20.0)]
+	[TestCase(10, 5.0, 0.4)]
+	public void GetVariance_WithVariousParameters_ReturnsCorrectValue(int shape, double rate, double expected)
+	{
+		var distribution = new ErlangDistribution(shape, rate);
+
+		var result = distribution.GetVariance();
+
+		Assert.That(result, Is.EqualTo(expected).Within(Tolerance), $"Failed for shape = {shape}, rate = {rate}");
 	}
 
 	[Test]
@@ -167,7 +155,7 @@ public class ErlangDistributionTests
 
 		var result = distribution.GetMinValue();
 
-		Assert.That(result, Is.EqualTo(0));
+		Assert.That(result, Is.Zero);
 	}
 
 	[Test]
@@ -206,11 +194,11 @@ public class ErlangDistributionTests
 		const double expectedMean = shape / rate;
 		const double expectedVariance = shape / (rate * rate);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(sampleMean, Is.EqualTo(expectedMean).Within(0.1));
 			Assert.That(sampleVariance, Is.EqualTo(expectedVariance).Within(0.1));
-		});
+		}
 	}
 
 	[Test]

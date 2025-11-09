@@ -2,7 +2,7 @@
 
 namespace Mathematics.Tests.Services;
 
-public class TestsUtils
+public static class TestsUtils
 {
 	public static List<double> GenerateSamples(IDistribution<double> distribution, int count)
 	{

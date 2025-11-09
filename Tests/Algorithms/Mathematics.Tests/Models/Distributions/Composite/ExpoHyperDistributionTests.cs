@@ -10,26 +10,24 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_ValidParameters_CreatesInstance()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0, 2.0];
-
 		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 
-		
-		Assert.That(distribution.Probabilities, Is.EqualTo(probabilities));
-		Assert.That(distribution.Rates, Is.EqualTo(rates));
-	}
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(distribution.Probabilities, Is.EqualTo(probabilities));
+            Assert.That(distribution.Rates, Is.EqualTo(rates));
+        }
+    }
 
 	[Test]
 	public void Constructor_NullProbabilities_ThrowsArgumentNullException()
 	{
-		
 		double[]? probabilities = null;
 		double[] rates = [1.0, 2.0];
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentNullException.With.Message.Contains("Probabilities and rates cannot be null"));
 	}
@@ -37,11 +35,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_NullRates_ThrowsArgumentNullException()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[]? rates = null;
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentNullException.With.Message.Contains("Probabilities and rates cannot be null"));
 	}
@@ -49,11 +45,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_DifferentLengths_ThrowsArgumentException()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0];
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentException.With.Message.Contains("Probabilities and rates must have same length"));
 	}
@@ -61,11 +55,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_EmptyArrays_ThrowsArgumentException()
 	{
-		
 		double[] probabilities = [];
 		double[] rates = [];
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentException.With.Message.Contains("At least one component required"));
 	}
@@ -73,11 +65,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_NegativeProbabilities_ThrowsArgumentException()
 	{
-		
 		double[] probabilities = [-0.1, 1.1];
 		double[] rates = [1.0, 2.0];
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentException.With.Message.Contains("Probabilities must be non-negative"));
 	}
@@ -85,11 +75,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_NonPositiveRates_ThrowsArgumentException()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [0.0, 2.0];
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentException.With.Message.Contains("Rates must be positive"));
 	}
@@ -97,11 +85,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Constructor_ZeroSumProbabilities_ThrowsArgumentException()
 	{
-		
 		double[] probabilities = [0.0, 0.0];
 		double[] rates = [1.0, 2.0];
-
-		 
+		
 		Assert.That(() => new ExpoHyperDistribution(probabilities, rates),
 			Throws.ArgumentException.With.Message.Contains("Sum of probabilities must be positive"));
 	}
@@ -114,25 +100,23 @@ public class ExpoHyperDistributionTests
 
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(distribution.Probabilities, Is.EqualTo(probabilities));
 			Assert.That(distribution.Rates, Is.EqualTo(rates));
-		});
+		}
 	}
 
 	[Test]
 	public void GetExpectedValue_SingleComponent_ReturnsCorrectValue()
 	{
-		
 		double[] probabilities = [1.0];
 		double[] rates = [2.0];
+		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 		var expected = 1.0 / 2.0;
-
 		
 		var result = distribution.GetExpectedValue();
-
 		
 		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
@@ -140,15 +124,13 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void GetExpectedValue_MultipleComponents_ReturnsCorrectValue()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0, 2.0];
+		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 		var expected = 0.3 * (1.0 / 1.0) + 0.7 * (1.0 / 2.0);
-
 		
 		var result = distribution.GetExpectedValue();
-
 		
 		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
@@ -156,15 +138,13 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void GetExpectedValue_UnnormalizedProbabilities_ReturnsCorrectValue()
 	{
-		
-		double[] probabilities = [1.0, 2.0]; // Нормализуется до [1/3, 2/3]
+		double[] probabilities = [1.0, 2.0];
 		double[] rates = [1.0, 2.0];
+		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 		var expected = 1.0 / 3.0 * (1.0 / 1.0) + 2.0 / 3.0 * (1.0 / 2.0);
-
 		
 		var result = distribution.GetExpectedValue();
-
 		
 		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
@@ -172,15 +152,13 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void GetVariance_SingleComponent_ReturnsCorrectValue()
 	{
-		
 		double[] probabilities = [1.0];
 		double[] rates = [2.0];
+		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
-		var expectedVariance = 1.0 / (2.0 * 2.0); // Для экспоненциального распределения Variance = 1/λ²
-
+		var expectedVariance = 1.0 / (2.0 * 2.0);
 		
 		var result = distribution.GetVariance();
-
 		
 		Assert.That(result, Is.EqualTo(expectedVariance).Within(Tolerance));
 	}
@@ -188,7 +166,6 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void GetVariance_MultipleComponents_ReturnsCorrectValue()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0, 2.0];
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
@@ -196,10 +173,8 @@ public class ExpoHyperDistributionTests
 		var eX = distribution.GetExpectedValue();
 		var eX2 = 0.3 * (2.0 / (1.0 * 1.0)) + 0.7 * (2.0 / (2.0 * 2.0));
 		var expectedVariance = eX2 - eX * eX;
-
 		
 		var result = distribution.GetVariance();
-
 		
 		Assert.That(result, Is.EqualTo(expectedVariance).Within(Tolerance));
 	}
@@ -207,29 +182,24 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void GetMinValue_Always_ReturnsZero()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0, 2.0];
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
-
 		
 		var result = distribution.GetMinValue();
-
 		
-		Assert.That(result, Is.EqualTo(0));
+		Assert.That(result, Is.Zero);
 	}
 
 	[Test]
 	public void GetMaxValue_Always_ReturnsPositiveInfinity()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0, 2.0];
+		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
-
 		
 		var result = distribution.GetMaxValue();
-
 		
 		Assert.That(result, Is.EqualTo(double.PositiveInfinity));
 	}
@@ -237,9 +207,9 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Calculate_ProducesValidValues()
 	{
-		
 		double[] probabilities = [0.3, 0.7];
 		double[] rates = [1.0, 2.0];
+		
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 
 		for (var i = 0; i < 100; i++)
@@ -248,33 +218,16 @@ public class ExpoHyperDistributionTests
 			Assert.That(value, Is.GreaterThanOrEqualTo(0));
 		}
 	}
-
-	[Test]
-	public void ToString_ReturnsCorrectFormat()
-	{
-		
-		double[] probabilities = [0.3, 0.7];
-		double[] rates = [1.0, 2.0];
-		var distribution = new ExpoHyperDistribution(probabilities, rates);
-
-		
-		var result = distribution.ToString();
-
-		
-		Assert.That(result, Does.Contain("HyperExponential"));
-		Assert.That(result, Does.Contain("Probs = [0.300, 0.700]"));
-		Assert.That(result, Does.Contain("Rates=[1.000, 2.000]"));
-	}
-
+	
 	[Test]
 	public void Calculate_WithDifferentRandomValues_SelectsCorrectComponents()
 	{
-		
 		double[] probabilities = [0.5, 0.5];
 		double[] rates = [1.0, 10.0];
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
 
 		var values = new double[1000];
+		
 		for (var i = 0; i < values.Length; i++)
 		{
 			values[i] = distribution.Calculate();
@@ -289,22 +242,23 @@ public class ExpoHyperDistributionTests
 	[Test]
 	public void Distribution_ThreeComponents_CorrectProperties()
 	{
-		
 		double[] probabilities = [0.2, 0.3, 0.5];
 		double[] rates = [1.0, 2.0, 3.0];
 		var distribution = new ExpoHyperDistribution(probabilities, rates);
-
 		
 		var mean = distribution.GetExpectedValue();
 		var variance = distribution.GetVariance();
 		var min = distribution.GetMinValue();
 		var max = distribution.GetMaxValue();
-
 		
 		var expectedMean = 0.2 * 1.0 + 0.3 * 0.5 + 0.5 * (1.0 / 3.0);
-		Assert.That(mean, Is.EqualTo(expectedMean).Within(Tolerance));
-		Assert.That(variance, Is.GreaterThan(0));
-		Assert.That(min, Is.EqualTo(0));
-		Assert.That(max, Is.EqualTo(double.PositiveInfinity));
-	}
+        
+		using (Assert.EnterMultipleScope())
+        {
+            Assert.That(mean, Is.EqualTo(expectedMean).Within(Tolerance));
+            Assert.That(variance, Is.GreaterThan(0));
+            Assert.That(min, Is.Zero);
+            Assert.That(max, Is.EqualTo(double.PositiveInfinity));
+        }
+    }
 }

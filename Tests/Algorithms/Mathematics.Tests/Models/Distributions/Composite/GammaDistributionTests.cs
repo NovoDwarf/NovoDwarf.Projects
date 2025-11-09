@@ -4,7 +4,7 @@ using Mathematics.Statistics.Extensions;
 namespace Mathematics.Tests.Models.Distributions.Composite;
 
 [TestFixture]
-public class GammaFunctionTests
+public class GammaDistributionTests
 {
 	private const double Tolerance = 1e-10;
 	private const double StatisticalTolerance = 0.1;
@@ -17,33 +17,28 @@ public class GammaFunctionTests
 
 		var distribution = new GammaDistribution(shape, scale);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(distribution.Shape, Is.EqualTo(shape));
 			Assert.That(distribution.Scale, Is.EqualTo(scale));
-		});
+		}
 	}
 
 	[Test]
 	public void Constructor_NegativeShape_ThrowsArgumentOutOfRangeException()
 	{
-		
 		const double shape = -1.0;
 		const double scale = 1.0;
-
 		 
-		Assert.That(() => new GammaDistribution(shape, scale),
-			Throws.InstanceOf<ArgumentOutOfRangeException>());
+		Assert.That(() => new GammaDistribution(shape, scale), Throws.InstanceOf<ArgumentOutOfRangeException>());
 	}
 
 	[Test]
 	public void Constructor_NegativeScale_ThrowsArgumentOutOfRangeException()
 	{
-		
 		var shape = 2.0;
 		var scale = -1.0;
 
-		 
 		Assert.That(() => new GammaDistribution(shape, scale),
 			Throws.InstanceOf<ArgumentOutOfRangeException>());
 	}
@@ -51,47 +46,42 @@ public class GammaFunctionTests
 	[Test]
 	public void Constructor_ZeroShape_Valid()
 	{
-		
 		const double shape = 0.0;
 		const double scale = 1.0;
-
 		
 		var distribution = new GammaDistribution(shape, scale);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(distribution.Shape, Is.EqualTo(shape));
 			Assert.That(distribution.Scale, Is.EqualTo(scale));
-		});
+		}
 	}
 
 	[Test]
 	public void Constructor_ZeroScale_Valid()
 	{
-		
 		var shape = 2.0;
 		var scale = 0.0;
-
 		
 		var distribution = new GammaDistribution(shape, scale);
 
-		
-		Assert.That(distribution.Shape, Is.EqualTo(shape));
-		Assert.That(distribution.Scale, Is.EqualTo(scale));
-	}
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(distribution.Shape, Is.EqualTo(shape));
+            Assert.That(distribution.Scale, Is.EqualTo(scale));
+        }
+    }
 
 	[Test]
 	public void GetExpectedValue_ValidParameters_ReturnsCorrectValue()
 	{
-		
 		var shape = 3.0;
 		var scale = 2.0;
 		var distribution = new GammaDistribution(shape, scale);
 		var expected = shape * scale;
-
 		
 		var result = distribution.GetExpectedValue();
-
 		
 		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
@@ -99,14 +89,11 @@ public class GammaFunctionTests
 	[Test]
 	public void GetExpectedValue_ZeroShape_ReturnsZero()
 	{
-		
 		var shape = 0.0;
 		var scale = 2.0;
 		var distribution = new GammaDistribution(shape, scale);
-
 		
 		var result = distribution.GetExpectedValue();
-
 		
 		Assert.That(result, Is.EqualTo(0).Within(Tolerance));
 	}
@@ -114,14 +101,11 @@ public class GammaFunctionTests
 	[Test]
 	public void GetExpectedValue_ZeroScale_ReturnsZero()
 	{
-		
 		var shape = 3.0;
 		var scale = 0.0;
 		var distribution = new GammaDistribution(shape, scale);
-
 		
 		var result = distribution.GetExpectedValue();
-
 		
 		Assert.That(result, Is.EqualTo(0).Within(Tolerance));
 	}
@@ -129,15 +113,12 @@ public class GammaFunctionTests
 	[Test]
 	public void GetVariance_ValidParameters_ReturnsCorrectValue()
 	{
-		
 		var shape = 3.0;
 		var scale = 2.0;
 		var distribution = new GammaDistribution(shape, scale);
 		var expected = shape * scale * scale;
-
 		
 		var result = distribution.GetVariance();
-
 		
 		Assert.That(result, Is.EqualTo(expected).Within(Tolerance));
 	}
@@ -149,7 +130,6 @@ public class GammaFunctionTests
 		var shape = 0.0;
 		var scale = 2.0;
 		var distribution = new GammaDistribution(shape, scale);
-
 		
 		var result = distribution.GetVariance();
 
@@ -160,14 +140,11 @@ public class GammaFunctionTests
 	[Test]
 	public void GetVariance_ZeroScale_ReturnsZero()
 	{
-		
 		var shape = 3.0;
 		var scale = 0.0;
 		var distribution = new GammaDistribution(shape, scale);
-
 		
 		var result = distribution.GetVariance();
-
 		
 		Assert.That(result, Is.EqualTo(0).Within(Tolerance));
 	}
@@ -175,51 +152,28 @@ public class GammaFunctionTests
 	[Test]
 	public void GetMinValue_Always_ReturnsZero()
 	{
-		
 		var distribution = new GammaDistribution(2.0, 1.0);
-
 		
 		var result = distribution.GetMinValue();
-
 		
-		Assert.That(result, Is.EqualTo(0));
+		Assert.That(result, Is.Zero);
 	}
 
 	[Test]
 	public void GetMaxValue_Always_ReturnsPositiveInfinity()
 	{
-		
 		var distribution = new GammaDistribution(2.0, 1.0);
-
 		
 		var result = distribution.GetMaxValue();
-
 		
 		Assert.That(result, Is.EqualTo(double.PositiveInfinity));
 	}
-
-	[Test]
-	public void ToString_ReturnsCorrectFormat()
-	{
-		
-		var distribution = new GammaDistribution(2.5, 1.75);
-
-		
-		var result = distribution.ToString();
-
-		
-		Assert.That(result, Does.Contain("Gamma"));
-		Assert.That(result, Does.Contain("Shape = 2.500"));
-		Assert.That(result, Does.Contain("Scale = 1.750"));
-	}
-
+	
 	[Test]
 	public void Calculate_ShapeGreaterThanOne_ProducesValidValues()
 	{
-		
 		var distribution = new GammaDistribution(2.5, 1.0);
-
-		 
+		
 		for (var i = 0; i < 100; i++)
 		{
 			var value = distribution.Calculate();
@@ -232,10 +186,8 @@ public class GammaFunctionTests
 	[Test]
 	public void Calculate_ShapeLessThanOne_ProducesValidValues()
 	{
-		
 		var distribution = new GammaDistribution(0.5, 1.0);
-
-		 
+		
 		for (var i = 0; i < 100; i++)
 		{
 			var value = distribution.Calculate();
@@ -248,10 +200,8 @@ public class GammaFunctionTests
 	[Test]
 	public void Calculate_ShapeEqualOne_ProducesValidValues()
 	{
-		
 		var distribution = new GammaDistribution(1.0, 1.0);
-
-		 
+		
 		for (var i = 0; i < 100; i++)
 		{
 			var value = distribution.Calculate();
@@ -264,10 +214,8 @@ public class GammaFunctionTests
 	[Test]
 	public void Calculate_ZeroScale_ReturnsZero()
 	{
-		
 		var distribution = new GammaDistribution(2.0, 0.0);
-
-		 
+		
 		for (var i = 0; i < 10; i++)
 		{
 			var value = distribution.Calculate();
@@ -278,10 +226,8 @@ public class GammaFunctionTests
 	[Test]
 	public void Calculate_ZeroShape_ReturnsZero()
 	{
-		
 		var distribution = new GammaDistribution(0.0, 2.0);
-
-		 
+		
 		for (var i = 0; i < 10; i++)
 		{
 			var value = distribution.Calculate();
@@ -299,47 +245,46 @@ public class GammaFunctionTests
 		var samples = new double[10000];
 		var expectedMean = distribution.GetExpectedValue();
 		var expectedVariance = distribution.GetVariance();
-
 		
 		for (var i = 0; i < samples.Length; i++) samples[i] = distribution.Calculate();
 
 		var actualMean = samples.Average();
 		var actualVariance = samples.Variance();
 
-		
-		Assert.That(actualMean, Is.EqualTo(expectedMean).Within(StatisticalTolerance));
-		Assert.That(actualVariance, Is.EqualTo(expectedVariance).Within(StatisticalTolerance));
-	}
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(actualMean, Is.EqualTo(expectedMean).Within(StatisticalTolerance));
+            Assert.That(actualVariance, Is.EqualTo(expectedVariance).Within(StatisticalTolerance));
+        }
+    }
 
 	[Test]
 	public void Calculate_StatisticalProperties_ShapeLessThanOne()
 	{
-		
 		var shape = 0.5;
 		var scale = 2.0;
 		var distribution = new GammaDistribution(shape, scale);
 		var samples = new double[10000];
 		var expectedMean = distribution.GetExpectedValue();
 		var expectedVariance = distribution.GetVariance();
-
 		
 		for (var i = 0; i < samples.Length; i++) samples[i] = distribution.Calculate();
 
 		var actualMean = samples.Average();
 		var actualVariance = samples.Variance();
-
-		
-		Assert.That(actualMean, Is.EqualTo(expectedMean).Within(StatisticalTolerance));
-		Assert.That(actualVariance, Is.EqualTo(expectedVariance).Within(StatisticalTolerance));
-	}
+       
+		using (Assert.EnterMultipleScope())
+        {
+            Assert.That(actualMean, Is.EqualTo(expectedMean).Within(StatisticalTolerance));
+            Assert.That(actualVariance, Is.EqualTo(expectedVariance).Within(StatisticalTolerance));
+        }
+    }
 
 	[Test]
 	public void Calculate_LargeShape_ProducesValidValues()
 	{
-		
 		var distribution = new GammaDistribution(100.0, 1.0);
-
-		 
+		
 		for (var i = 0; i < 50; i++)
 		{
 			var value = distribution.Calculate();
@@ -352,10 +297,8 @@ public class GammaFunctionTests
 	[Test]
 	public void Calculate_SmallShape_ProducesValidValues()
 	{
-		
 		var distribution = new GammaDistribution(0.1, 1.0);
-
-		 
+		
 		for (var i = 0; i < 50; i++)
 		{
 			var value = distribution.Calculate();

@@ -1,4 +1,5 @@
 ﻿using Mathematics.Distributions.Models.Continuous.SemiInfinite;
+using Mathematics.Tests.Services;
 
 namespace Mathematics.Tests.Models.Distributions.Basic;
 
@@ -43,7 +44,7 @@ public class ExpoDistributionTests
 	{
 		var distribution = new ExpoDistribution(1.0);
 
-		var results = GenerateSamples(distribution, SampleSize);
+		var results = TestsUtils.GenerateSamples(distribution, SampleSize);
 
 		Assert.That(results.All(x => x >= 0), Is.True);
 	}
@@ -57,7 +58,7 @@ public class ExpoDistributionTests
 	{
 		var distribution = new ExpoDistribution(rate);
 
-		var mean = GenerateSamples(distribution, SampleSize).Average();
+		var mean = TestsUtils.GenerateSamples(distribution, SampleSize).Average();
 
 		var expectedMean = 1.0 / rate;
 		Assert.That(mean, Is.EqualTo(expectedMean).Within(0.1));
@@ -129,7 +130,7 @@ public class ExpoDistributionTests
 	{
 		var distribution = new ExpoDistribution(1000.0);
 
-		var results = GenerateSamples(distribution, 1000);
+		var results = TestsUtils.GenerateSamples(distribution, 1000);
 
 		Assert.That(results.All(x => x < 0.01), Is.True);
 	}
@@ -139,7 +140,7 @@ public class ExpoDistributionTests
 	{
 		var distribution = new ExpoDistribution(0.01);
 
-		var results = GenerateSamples(distribution, 1000);
+		var results = TestsUtils.GenerateSamples(distribution, 1000);
 
         using (Assert.EnterMultipleScope())
         {
@@ -164,15 +165,5 @@ public class ExpoDistributionTests
 		}
 
 		for (var i = 1; i < histogram.Length - 1; i++) Assert.That(histogram[i], Is.LessThan(histogram[i - 1] * 1.5));
-	}
-
-	private static List<double> GenerateSamples(ExpoDistribution distribution, int count)
-	{
-		var results = new List<double>();
-
-		for (var i = 0; i < count; i++)
-			results.Add(distribution.Calculate());
-
-		return results;
 	}
 }

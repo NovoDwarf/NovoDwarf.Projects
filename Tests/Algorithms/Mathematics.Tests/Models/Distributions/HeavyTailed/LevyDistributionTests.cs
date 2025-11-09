@@ -5,7 +5,6 @@ namespace Mathematics.Tests.Models.Distributions.HeavyTailed;
 [TestFixture]
 public class LevyDistributionTests
 {
-	private const double Tolerance = 0.001;
 	private const int SampleSize = 100000;
 
 	[Test]
@@ -14,11 +13,11 @@ public class LevyDistributionTests
 	{
 		var levy = new LevyDistribution(location, scale);
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(levy.Location, Is.EqualTo(location));
 			Assert.That(levy.Scale, Is.EqualTo(scale));
-		});
+		}
 	}
 
 	[Test]
@@ -34,11 +33,11 @@ public class LevyDistributionTests
 			results.Add(result);
 		}
 
-		Assert.Multiple(() =>
-		{
+        using (Assert.EnterMultipleScope())
+        {
 			Assert.That(results.All(double.IsFinite), Is.True);
 			Assert.That(results.All(x => x >= levy.Location), Is.True);
-		});
+		}
 	}
 
 	[Test]
@@ -79,13 +78,10 @@ public class LevyDistributionTests
 	[Test]
 	public void GetMinValue_ReturnsLocation()
 	{
-		
 		var location = 3.0;
 		var levy = new LevyDistribution(location, 1);
-
 		
 		var minValue = levy.GetMinValue();
-
 		
 		Assert.That(minValue, Is.EqualTo(location));
 	}
@@ -93,12 +89,9 @@ public class LevyDistributionTests
 	[Test]
 	public void GetMaxValue_ReturnsPositiveInfinity()
 	{
-		
 		var levy = new LevyDistribution(0, 1);
-
 		
 		var maxValue = levy.GetMaxValue();
-
 		
 		Assert.That(maxValue, Is.EqualTo(double.PositiveInfinity));
 	}
@@ -106,10 +99,8 @@ public class LevyDistributionTests
 	[Test]
 	public void StatisticalProperties_HeavyTailedDistribution()
 	{
-		
 		var levy = new LevyDistribution(0, 1);
 		var samples = new double[SampleSize];
-
 		
 		for (var i = 0; i < SampleSize; i++) 
 			samples[i] = levy.Calculate();
@@ -124,12 +115,10 @@ public class LevyDistributionTests
 	[Test]
 	public void ScaleParameter_AffectsSpread()
 	{
-		
 		var levySmallScale = new LevyDistribution(0, 0.5);
 		var levyLargeScale = new LevyDistribution(0, 2.0);
 		var samplesSmall = new double[1000];
 		var samplesLarge = new double[1000];
-
 		
 		for (var i = 0; i < 1000; i++)
 		{
@@ -146,17 +135,18 @@ public class LevyDistributionTests
 	[Test]
 	public void NegativeScale_ThrowsException()
 	{
-		Assert.Throws<ArgumentException>(() => new LevyDistribution(0, -1));
+		Assert.Throws<ArgumentException>(() =>
+		{
+			var levyDistribution = new LevyDistribution(0, -1);
+		});
 	}
 
 	[Test]
 	public void ZeroScale_ProducesConstantAtLocation()
 	{
-		
 		var location = 5.0;
 		var levy = new LevyDistribution(location, 0);
-
-		 
+		
 		for (var i = 0; i < 10; i++)
 		{
 			var result = levy.Calculate();

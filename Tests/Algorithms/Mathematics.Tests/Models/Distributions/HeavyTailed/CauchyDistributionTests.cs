@@ -16,11 +16,11 @@ public class CauchyDistributionTests
 		
 		var cauchy = new CauchyDistribution(location, scale);
 
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(cauchy.Location, Is.EqualTo(location));
             Assert.That(cauchy.Scale, Is.EqualTo(scale));
-        });
+        }
     }
 
 	[Test]
@@ -31,7 +31,7 @@ public class CauchyDistributionTests
 		
 		var cauchy = new CauchyDistribution(location, scale);
 		
-		Assert.That(cauchy.Scale, Is.EqualTo(0.0));
+		Assert.That(cauchy.Scale, Is.Zero);
 	}
 
 	[Test]
@@ -88,34 +88,24 @@ public class CauchyDistributionTests
 	}
 
 	[Test]
-	public void Calculate_WithExtremeValues_ReturnsFiniteResults()
+	[TestCase(0.0, 1000.0)]
+	[TestCase(-1000.0, 0.001)]
+	[TestCase(double.MaxValue / 2, 1.0)]
+	[TestCase(double.MinValue / 2, 1.0)]
+	public void Calculate_WithExtremeValues_ReturnsFiniteResults(double location, double scale)
 	{
-		var testCases = new[]
-		{
-			new { Location = 0.0, Scale = 1000.0 },
-			new { Location = -1000.0, Scale = 0.001 },
-			new { Location = double.MaxValue / 2, Scale = 1.0 },
-			new { Location = double.MinValue / 2, Scale = 1.0 }
-		};
-
-		foreach (var testCase in testCases)
-		{
-			var cauchy = new CauchyDistribution(testCase.Location, testCase.Scale);
+		var cauchy = new CauchyDistribution(location, scale);
 			
-			var result = cauchy.Calculate();
+		var result = cauchy.Calculate();
 			
-			Assert.That(double.IsFinite(result), Is.True,
-				$"Should return finite value for location={testCase.Location}, scale={testCase.Scale}");
-		}
+		Assert.That(double.IsFinite(result), Is.True, $"Should return finite value for location={location}, scale={scale}");
 	}
 
 	[Test]
 	public void Calculate_ValuesFollowCauchyDistribution()
 	{
-		
 		var cauchy = new CauchyDistribution(0, 1);
 		var results = new List<double>();
-
 		
 		for (var i = 0; i < 1000; i++) results.Add(cauchy.Calculate());
 
@@ -123,7 +113,7 @@ public class CauchyDistributionTests
 		var max = results.Max();
 		var range = max - min;
 
-		Assert.That(range, Is.GreaterThan(10)); // Should have wide range
+		Assert.That(range, Is.GreaterThan(10));
 	}
 
 	[Test]
@@ -237,27 +227,17 @@ public class CauchyDistributionTests
 	}
 
 	[Test]
-	public void Calculate_WithLocationAtExtremeValues_WorksCorrectly()
+	[TestCase(double.MaxValue, 1.0)]
+	[TestCase(double.MinValue, 1.0)]
+	[TestCase(double.PositiveInfinity, 1.0)]
+	[TestCase(double.NegativeInfinity, 1.0)]
+	public void Calculate_WithLocationAtExtremeValues_WorksCorrectly(double location, double scale)
 	{
-		var testCases = new[]
-		{
-			new { Location = double.MaxValue, Scale = 1.0 },
-			new { Location = double.MinValue, Scale = 1.0 },
-			new { Location = double.PositiveInfinity, Scale = 1.0 },
-			new { Location = double.NegativeInfinity, Scale = 1.0 }
-		};
-
-		foreach (var testCase in testCases)
-		{
-			if (!double.IsFinite(testCase.Location)) 
-				continue;
+		var cauchy = new CauchyDistribution(location, scale);
 			
-			var cauchy = new CauchyDistribution(testCase.Location, testCase.Scale);
+		var result = cauchy.Calculate();
 			
-			var result = cauchy.Calculate();
-			
-			Assert.That(double.IsFinite(result), Is.True, $"Should handle location={testCase.Location}");
-		}
+		Assert.That(double.IsFinite(result), Is.True, $"Should handle location={location}");
 	}
 
 	[Test]

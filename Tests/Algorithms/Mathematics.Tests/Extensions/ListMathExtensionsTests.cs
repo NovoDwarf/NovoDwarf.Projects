@@ -197,12 +197,9 @@ public class ListMathExtensionsTests
 		[Test]
 		public void Skewness_ConstantValues_ReturnsZero()
 		{
-			
 			List<double> constantValues = [5.0, 5.0, 5.0];
-
 			
 			var result = constantValues.Skewness();
-
 			
 			Assert.That(result, Is.EqualTo(0).Within(Tolerance));
 		}
@@ -210,12 +207,9 @@ public class ListMathExtensionsTests
 		[Test]
 		public void Skewness_SymmetricDistribution_ReturnsZero()
 		{
-			
 			List<double> symmetricData = [1.0, 2.0, 3.0, 4.0, 5.0];
-
 			
 			var result = symmetricData.Skewness();
-
 			
 			Assert.That(result, Is.EqualTo(0).Within(Tolerance));
 		}
@@ -223,12 +217,9 @@ public class ListMathExtensionsTests
 		[Test]
 		public void Skewness_RightSkewed_ReturnsPositiveValue()
 		{
-			
 			List<double> rightSkewed = [1.0, 2.0, 3.0, 4.0, 10.0];
-
 			
 			var result = rightSkewed.Skewness();
-
 			
 			Assert.That(result, Is.GreaterThan(0));
 		}
@@ -236,12 +227,9 @@ public class ListMathExtensionsTests
 		[Test]
 		public void Skewness_LeftSkewed_ReturnsNegativeValue()
 		{
-			
 			List<double> leftSkewed = [1.0, 8.0, 9.0, 10.0, 10.0];
-
 			
 			var result = leftSkewed.Skewness();
-
 			
 			Assert.That(result, Is.LessThan(0));
 		}
@@ -529,13 +517,13 @@ public class ListMathExtensionsTests
 			var skewness = dataset.Skewness();
 			var kurtosis = dataset.Kurtosis();
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(stdDev * stdDev, Is.EqualTo(variance).Within(Tolerance));
                 Assert.That(median, Is.EqualTo(30.0).Within(Tolerance));
                 Assert.That(range, Is.EqualTo(40.0).Within(Tolerance));
                 Assert.That(skewness, Is.EqualTo(0).Within(0.1));
-            });
+            }
         }
 
 		[Test]
@@ -551,13 +539,13 @@ public class ListMathExtensionsTests
 			var median = largeDataset.Median();
 			var range = largeDataset.Range();
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(variance, Is.GreaterThan(0));
                 Assert.That(stdDev, Is.GreaterThan(0));
                 Assert.That(median, Is.InRange(0, 100));
                 Assert.That(range, Is.InRange(0, 100));
-            });
+            }
         }
 	}
 }
