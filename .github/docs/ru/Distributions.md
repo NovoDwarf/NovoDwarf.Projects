@@ -2,14 +2,14 @@
 
 ###### С бесконечным носителем
 
-- [ ] [**Распределение Бенфорда**](https://en.wikipedia.org/wiki/Benford%27s_law) - закон, описывающий распределение первых цифр в реальных наборах данных.
+- [x] [**Распределение Бенфорда**](https://en.wikipedia.org/wiki/Benford%27s_law) - закон, описывающий распределение первых цифр в реальных наборах данных.
 - [x] [**Распределение Бернулли**](https://en.wikipedia.org/wiki/Bernoulli_distribution) - дискретное распределение случайной величины, принимающей два значения.
-- [ ] [**Бета-биномиальное распределение**](https://en.wikipedia.org/wiki/Beta-binomial_distribution) - составное распределение, где параметр биномиального распределения имеет бета-распределение.
+- [x] [**Бета-биномиальное распределение**](https://en.wikipedia.org/wiki/Beta-binomial_distribution) - составное распределение, где параметр биномиального распределения имеет бета-распределение.
 - [x] [**Биномиальное распределение**](https://en.wikipedia.org/wiki/Binomial_distribution) - распределение числа успехов в последовательности независимых испытаний.
 - [ ] [**Категорийное распределение**](https://en.wikipedia.org/wiki/Categorical_distribution) - обобщение распределения Бернулли на multiple outcomes.
 - [x] [**Гипергеометрическое распределение**](https://en.wikipedia.org/wiki/Hypergeometric_distribution) - распределение вероятностей, описывающее количество успехов в выборке без возвращения.
 - [ ] [**Негативное гипергеометрическое распределение**](https://en.wikipedia.org/wiki/Negative_hypergeometric_distribution) - распределение времени ожидания в процессе выборки без возвращения.
-- [ ] [**Распределение Пуассона-бинома**](https://en.wikipedia.org/wiki/Poisson_binomial_distribution) - обобщение биномиального распределения.
+- [x] [**Распределение Пуассона-бинома**](https://en.wikipedia.org/wiki/Poisson_binomial_distribution) - обобщение биномиального распределения.
 - [ ] [**Распределение Радемахера**](https://en.wikipedia.org/wiki/Rademacher_distribution) - дискретное распределение с двумя равновероятными значениями.
 - [x] [**Дискретное равномерное распределение**](https://en.wikipedia.org/wiki/Discrete_uniform_distribution) - распределение, где все значения равновероятны.
 - [ ] [**Soliton**]() -

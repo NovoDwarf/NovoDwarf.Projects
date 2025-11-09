@@ -25,7 +25,7 @@ public static class ListMathExtensions
 
 		public double Skewness()
 		{
-			ArgumentException.ThrowIfNullOrLess(samples, 3);
+			ArgumentOutOfRangeException.ThrowIfEmptyOrLess(samples, 3);
 
 			var mean = samples.Average();
 			var stdDev = samples.StandardDeviation();
@@ -58,7 +58,7 @@ public static class ListMathExtensions
 
 		public double Kurtosis()
 		{
-			ArgumentException.ThrowIfNullOrLess(samples, 4);
+			ArgumentOutOfRangeException.ThrowIfEmptyOrLess(samples, 4);
 
 			var mean = samples.Average();
 			var stdDev = samples.StandardDeviation();
