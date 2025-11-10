@@ -6,27 +6,20 @@ public class GammaFunction
 	{
 		ArgumentOutOfRangeException.ThrowIfLessThan(x, 0);
 
-		if (x == 1.0)
-			return 1.0;
-
-		if (x == 0.5)
-			return Math.Sqrt(Math.PI);
+		switch (x)
+		{
+			case 1.0:
+				return 1.0;
+			case 0.5:
+				return Math.Sqrt(Math.PI);
+		}
 
 		if (Math.Abs(x - Math.Round(x)) < 1e-10 && x < 20)
 			return Factorial((int)x - 1);
 
 		return LanczosGamma(x);
 	}
-
-	public static double LogGamma(double x)
-	{
-		ArgumentOutOfRangeException.ThrowIfLessThan(x, 0);
-
-		return x > 15
-			? StirlingLogGamma(x)
-			: Math.Log(Calculate(x));
-	}
-
+	
 	private static double LanczosGamma(double x)
 	{
 		double[] p =
@@ -56,13 +49,7 @@ public class GammaFunction
 
 		return Math.Sqrt(2 * Math.PI) * Math.Pow(t, x + 0.5) * Math.Exp(-t) * a;
 	}
-
-	private static double StirlingLogGamma(double x)
-	{
-		return 0.5 * Math.Log(2 * Math.PI) - Math.Log(x) +
-			x * (Math.Log(x) - 1) + 1.0 / (12 * x) - 1.0 / (360 * x * x * x);
-	}
-
+	
 	private static double Factorial(int n)
 	{
 		ArgumentOutOfRangeException.ThrowIfLessThan(n, 0);

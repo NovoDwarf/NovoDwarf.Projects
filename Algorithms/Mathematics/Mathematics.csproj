@@ -16,7 +16,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Compressions\Models\" />
+      <Folder Include="Compressions\Models\Lossless\" />
+      <Folder Include="Cryptography\Base\" />
+      <Folder Include="Cryptography\Models\HashFunctions\" />
+      <Folder Include="Cryptography\Models\Monosound\" />
+      <Folder Include="Cryptography\Models\Polyalphabet\" />
+      <Folder Include="Cryptography\Models\Polygramms\" />
       <Folder Include="Distributions\Models\Directional\" />
       <Folder Include="Distributions\Models\Mixed\" />
       <Folder Include="Distributions\Models\Multivariate\Continuous\" />
