@@ -1,5 +1,4 @@
 using Messager.Interfaces.Senders;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using ShaderEditor.Events;
@@ -12,9 +11,7 @@ namespace ShaderEditor.Hosts;
 public sealed class EditorService : IDisposable
 {
 	private readonly CancellationTokenSource _cts = new();
-	
-	private readonly IHostApplicationLifetime _appLifetime;
-	
+
 	private readonly ISender<WindowLoadEvent> _loadSender;
 	private readonly ISender<WindowUpdateEvent> _updateSender;
 	private readonly ISender<WindowRenderEvent> _renderSender;
@@ -27,8 +24,7 @@ public sealed class EditorService : IDisposable
 		ISender<WindowUpdateEvent> updateSender, 
 		ISender<WindowRenderEvent> renderSender, 
 		ISender<WindowCloseEvent> closeSender, 
-		ILogger<EditorService> logger, 
-		IHostApplicationLifetime appLifetime)
+		ILogger<EditorService> logger)
 	{
 		_loadSender = loadSender;
 		_updateSender = updateSender;
@@ -36,7 +32,6 @@ public sealed class EditorService : IDisposable
 		_closeSender = closeSender;
 		
 		_logger = logger;
-		_appLifetime = appLifetime;
 	}
 	
 	private IWindow _window = null!;

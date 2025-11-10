@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿// [NOTE]: [11.11.2025: 1:51]
+// я не знаю какой из вариантов лучше, поэтому оставлю пока этот рабочий костыль.
+// idk which variant is better, so I'll leave this for now.
+
+using Microsoft.Extensions.Hosting;
 using ShaderEditor.Hosts;
 
 namespace ShaderEditor.Backgrounds;
