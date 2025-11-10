@@ -1,4 +1,6 @@
-﻿namespace Data.Attributes;
+﻿using System;
+
+namespace Data.Attributes;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class MustOverrideAttribute : Attribute

@@ -93,7 +93,7 @@ public class StatisticsSink : IMetricSink
 				continue;
 
 			var nodeId = parts[0];
-			var metricType = string.Join("_", parts.Skip(1));
+			var metricType = string.Join('_', parts.Skip(1));
 
 			if (!metricsByNode.ContainsKey(nodeId))
 				metricsByNode[nodeId] = new Dictionary<string, IMetricEvent>();

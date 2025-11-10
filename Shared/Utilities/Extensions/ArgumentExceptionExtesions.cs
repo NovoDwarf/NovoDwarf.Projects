@@ -1,4 +1,7 @@
-﻿namespace Utilities.Extensions;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Utilities.Extensions;
 
 
 public static class ArgumentOutOfRangeExceptionExtensions
