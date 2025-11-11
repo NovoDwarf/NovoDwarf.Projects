@@ -1,12 +1,13 @@
 ﻿using Messager.Entity.Resources;
+using Messager.Extensions;
+using Messager.Interfaces.Core;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
-using Messager.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Brokers;
 
-public class AsyncSimpleBroker<TEvent> : IAsyncSender<TEvent>, IAsyncReceiver<TEvent>, IBrokerInfo
+public class AsyncSimpleBroker<TEvent> : IBroker<TEvent>, IAsyncSender<TEvent>, IAsyncReceiver<TEvent>
 {
 	private readonly List<Func<TEvent, ValueTask>> _handlers = [];
 	private readonly Lock _locker = new();
@@ -16,23 +17,18 @@ public class AsyncSimpleBroker<TEvent> : IAsyncSender<TEvent>, IAsyncReceiver<TE
 	{
 		_logger = logger;
 	}
-
-	public int SubscriberCount
-	{
-		get { lock (_locker) return _handlers.Count; }
-	}
 	
-	public bool IsEmpty()
-	{
-		lock (_locker) return _handlers.Count == 0;
-	}
+	public Guid Id { get; set; } = Guid.NewGuid();
+	
+	public string BrokerType => typeof(SimpleBroker<>).Name;
+	public string EventType => typeof(TEvent).Name;
 
 	public IAsyncDisposable Subscribe(Func<TEvent, ValueTask> handler)
 	{
 		lock (_locker)
 		{
 			_handlers.Add(handler);
-			_logger?.LogDebug("Subscriber added to AsyncSimpleBroker<{EventType}>. Total subscribers: {Count}", typeof(TEvent).Name, _handlers.Count);
+			_logger?.LogSubscriberAdded(BrokerType, EventType, Id);
 		}
 
 		return new AsyncUnsubscriber(() =>
@@ -40,7 +36,7 @@ public class AsyncSimpleBroker<TEvent> : IAsyncSender<TEvent>, IAsyncReceiver<TE
 			lock (_locker)
 			{
 				_handlers.Remove(handler);
-				_logger?.LogDebug("Subscriber removed from AsyncSimpleBroker<{EventType}>. Remaining subscribers: {Count}", typeof(TEvent).Name, _handlers.Count);
+				
 				return ValueTask.CompletedTask;
 			}
 		});

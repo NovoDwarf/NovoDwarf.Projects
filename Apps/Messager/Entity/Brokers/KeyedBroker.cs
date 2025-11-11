@@ -1,13 +1,14 @@
 ﻿using Messager.Core;
 using Messager.Entity.Resources;
+using Messager.Interfaces.Core;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
-using Messager.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Brokers;
 
-public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, TEvent>, IBrokerInfo where TKey : notnull
+public class KeyedBroker<TKey, TEvent> : IBroker<TEvent>, ISender<TKey, TEvent>, IReceiver<TKey, TEvent> 
+	where TKey : notnull
 {
 	private readonly Dictionary<TKey, List<WeakAction<TEvent>>> _handlers = new();
 	private readonly Lock _locker = new();
@@ -17,34 +18,11 @@ public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, 
 	{
 		_logger = logger;
 	}
-
-	public int SubscriberCount
-	{
-		get { lock (_locker) return _handlers.Values.Sum(l => l.Count); }
-	}
 	
-	public string DebugInfo()
-	{
-		lock (_locker)
-		{
-			return $"KeyedBroker<{typeof(TKey).Name}, {typeof(TEvent).Name}>: {SubscriberCount} subscriber(s) across {_handlers.Count} key(s)";
-		}
-	}
+	public Guid Id { get; set; } = Guid.NewGuid();
 	
-	public bool IsEmpty()
-	{
-		lock (_locker)
-		{
-			foreach (var key in _handlers.Keys.ToList())
-			{
-				_handlers[key].RemoveAll(s => !s.IsAlive);
-				
-				if (_handlers[key].Count == 0)
-					_handlers.Remove(key);
-			}
-			return _handlers.Count == 0;
-		}
-	}
+	public string BrokerType => typeof(SimpleBroker<>).Name;
+	public string EventType => typeof(TEvent).Name;
 	
 	public void Send(TKey key, TEvent evt)
 	{
@@ -116,29 +94,5 @@ public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, 
 				}
 			}
 		});
-	}
-
-	public void Unsubscribe(TKey key, Action<TEvent> handler)
-	{
-		lock (_locker)
-		{
-			if (!_handlers.TryGetValue(key, out var list))
-			{
-				_logger?.LogTrace("No subscription list found for key {Key} in KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
-				return;
-			}
-			
-			var removedCount = list.RemoveAll(s => s.Matches(handler) || !s.IsAlive);
-			if (removedCount > 0)
-			{
-				_logger?.LogDebug("Unsubscribed {Count} handler(s) for key {Key} in KeyedBroker<{KeyType}, {EventType}>. Remaining subscribers: {Count}", removedCount, key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
-			}
-			
-			if (list.Count == 0)
-			{
-				_handlers.Remove(key);
-				_logger?.LogDebug("Removed empty key {Key} from KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
-			}
-		}
 	}
 }

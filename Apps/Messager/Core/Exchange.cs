@@ -1,11 +1,10 @@
-﻿using Messager.Entity.Helpers;
-using Messager.Entity.Registers;
+﻿using Messager.Entity.Registers;
 using Messager.Interfaces.Factories;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
 using Microsoft.Extensions.Logging;
 
-namespace Messager.Entity.Exchanges;
+namespace Messager.Core;
 
 public sealed class Exchange : ISimpleBrokerFactory, IKeyedMessageBrokerFactory
 {

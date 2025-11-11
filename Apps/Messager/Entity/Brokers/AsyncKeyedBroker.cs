@@ -1,12 +1,11 @@
 ﻿using Messager.Entity.Resources;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
-using Messager.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Brokers;
 
-public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsyncReceiver<TKey, TEvent>, IBrokerInfo
+public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsyncReceiver<TKey, TEvent>
 	where TKey : notnull
 {
 	private readonly Dictionary<TKey, List<Func<TEvent, ValueTask>>> _handlers = new();
@@ -16,11 +15,6 @@ public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsync
 	public AsyncKeyedBroker(ILogger<AsyncKeyedBroker<TKey, TEvent>>? logger = null)
 	{
 		_logger = logger;
-	}
-
-	public int SubscriberCount
-	{
-		get { lock (_locker) return _handlers.Values.Sum(l => l.Count); }
 	}
 	
 	public bool IsEmpty()

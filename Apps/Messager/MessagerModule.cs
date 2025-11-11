@@ -1,7 +1,7 @@
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Messager.Entity.Exchanges;
+using Messager.Core;
 using Messager.Entity.Receivers;
 using Messager.Entity.Senders;
 using Messager.Interfaces.Factories;

@@ -1,5 +1,5 @@
 ﻿using Messager.Entity.Brokers;
-using Messager.Entity.Helpers;
+using Messager.Helpers;
 using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Registers;

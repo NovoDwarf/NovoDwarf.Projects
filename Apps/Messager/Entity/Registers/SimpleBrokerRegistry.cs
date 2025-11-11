@@ -1,5 +1,5 @@
 ﻿using Messager.Entity.Brokers;
-using Messager.Entity.Helpers;
+using Messager.Helpers;
 using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Registers;
@@ -25,11 +25,7 @@ internal class SimpleBrokerRegistry
 			return RegistryHelper.GetOrCreate(_brokers, typeof(TEvent), () =>
 			{
 				var logger = _loggerFactory?.CreateLogger<SimpleBroker<TEvent>>();
-				var broker = new SimpleBroker<TEvent>(logger);
-
-				_logger?.LogInformation("Broker created: [{EventType}]", typeof(TEvent).Name);
-
-				return broker;
+				return new SimpleBroker<TEvent>(logger);
 			});
 		}
 	}

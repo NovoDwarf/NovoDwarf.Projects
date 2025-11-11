@@ -10,11 +10,6 @@ public sealed class DisposableList : IDisposable
 	{
 		_disposables.AddRange(disposables);
 	}
-	
-	public void Add(IDisposable disposable)
-	{
-		_disposables.Add(disposable);
-	}
 
 	public void Dispose()
 	{
