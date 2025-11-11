@@ -28,13 +28,13 @@ The goal is simple, transparent, and thread-safe event exchange between services
 
 #### Simple
 
-  - **ISender<TEvent>**
-  - **IReceiver<TEvent>**
+- **ISender<TEvent>**
+- **IReceiver<TEvent>**
 
 #### Keyed
 
-  - **ISender<TKey, TEvent>**
-  - **IReceiver<TKey, TEvent>**
+- **ISender<TKey, TEvent>**
+- **IReceiver<TKey, TEvent>**
 
 #### Async Simple
 
@@ -66,7 +66,7 @@ The goal is simple, transparent, and thread-safe event exchange between services
 
 ## Usage
 
-[See](.github/docs/en/Examples.md)
+[Посмотреть](.github/docs/ru/Examples.md)
 
 ## Thanks
 
@@ -74,4 +74,4 @@ The goal is simple, transparent, and thread-safe event exchange between services
 
 ## License
 
-[**Messager.NET**]() is licensed under the [**MIT License**](), see [LICENSE](LICENSE) for more information.
+[**Messager.NET**]() is licensed under the [**MIT License**](), see [LICENSE_RU](LICENSE) for more information.
