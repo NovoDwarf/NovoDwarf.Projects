@@ -8,7 +8,6 @@
     </Folder>
     <Folder Name="/Apps/">
         <Project Path="Apps/FractalVisualizer/FractalVisualizer.csproj" />
-        <Project Path="Apps/Messager/Messager.csproj" Type="C#" />
         <Project Path="Apps/ShaderEditor/ShaderEditor.csproj" />
     </Folder>
     <Folder Name="/Examples/" />
