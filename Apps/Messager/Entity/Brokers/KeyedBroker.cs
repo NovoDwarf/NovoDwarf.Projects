@@ -3,13 +3,20 @@ using Messager.Entity.Resources;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
 using Messager.Interfaces.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Brokers;
 
 public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, TEvent>, IBrokerInfo where TKey : notnull
 {
 	private readonly Dictionary<TKey, List<WeakAction<TEvent>>> _handlers = new();
-	private readonly object _locker = new();
+	private readonly Lock _locker = new();
+	private readonly ILogger<KeyedBroker<TKey, TEvent>>? _logger;
+
+	public KeyedBroker(ILogger<KeyedBroker<TKey, TEvent>>? logger = null)
+	{
+		_logger = logger;
+	}
 
 	public int SubscriberCount
 	{
@@ -43,16 +50,38 @@ public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, 
 	{
 		lock (_locker)
 		{
-			if (!_handlers.TryGetValue(key, out var list)) 
+			if (!_handlers.TryGetValue(key, out var list))
+			{
+				_logger?.LogTrace("No subscribers found for key {Key} in KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
 				return;
+			}
 			
-			list.RemoveAll(s => !s.IsAlive);
+			var removedCount = list.RemoveAll(s => !s.IsAlive);
+			if (removedCount > 0)
+			{
+				_logger?.LogDebug("Removed {Count} dead subscribers for key {Key} in KeyedBroker<{KeyType}, {EventType}>", removedCount, key, typeof(TKey).Name, typeof(TEvent).Name);
+			}
 			
-			foreach (var sub in list.ToList())
-				sub.TryInvoke(evt);
+			var activeHandlers = list.ToList();
+			_logger?.LogTrace("Sending event {EventType} with key {Key} to {Count} subscribers", typeof(TEvent).Name, key, activeHandlers.Count);
+			
+			foreach (var sub in activeHandlers)
+			{
+				try
+				{
+					sub.TryInvoke(evt);
+				}
+				catch (Exception ex)
+				{
+					_logger?.LogError(ex, "Error invoking handler for event {EventType} with key {Key}", typeof(TEvent).Name, key);
+				}
+			}
 
 			if (list.Count == 0)
+			{
 				_handlers.Remove(key);
+				_logger?.LogDebug("Removed empty key {Key} from KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+			}
 		}
 	}
 
@@ -64,8 +93,10 @@ public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, 
 			{
 				list = [];
 				_handlers[key] = list;
+				_logger?.LogDebug("Created new subscription list for key {Key} in KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
 			}
 			list.Add(new WeakAction<TEvent>(handler));
+			_logger?.LogDebug("Subscriber added for key {Key} in KeyedBroker<{KeyType}, {EventType}>. Total subscribers for key: {Count}", key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
 		}
 
 		return new Unsubscriber(() =>
@@ -76,9 +107,13 @@ public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, 
 					return;
 				
 				list.Remove(new WeakAction<TEvent>(handler));
+				_logger?.LogDebug("Subscriber removed for key {Key} in KeyedBroker<{KeyType}, {EventType}>. Remaining subscribers for key: {Count}", key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
 				
 				if (list.Count == 0)
+				{
 					_handlers.Remove(key);
+					_logger?.LogDebug("Removed empty key {Key} from KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+				}
 			}
 		});
 	}
@@ -87,13 +122,23 @@ public class KeyedBroker<TKey, TEvent> : ISender<TKey, TEvent>, IReceiver<TKey, 
 	{
 		lock (_locker)
 		{
-			if (!_handlers.TryGetValue(key, out var list)) 
+			if (!_handlers.TryGetValue(key, out var list))
+			{
+				_logger?.LogTrace("No subscription list found for key {Key} in KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
 				return;
+			}
 			
-			list.RemoveAll(s => s.Matches(handler) || !s.IsAlive);
+			var removedCount = list.RemoveAll(s => s.Matches(handler) || !s.IsAlive);
+			if (removedCount > 0)
+			{
+				_logger?.LogDebug("Unsubscribed {Count} handler(s) for key {Key} in KeyedBroker<{KeyType}, {EventType}>. Remaining subscribers: {Count}", removedCount, key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
+			}
 			
 			if (list.Count == 0)
+			{
 				_handlers.Remove(key);
+				_logger?.LogDebug("Removed empty key {Key} from KeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+			}
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Messager.Entity.Resources;
 
-public class Unsubscriber : IDisposable
+public sealed class Unsubscriber : IDisposable
 {
 	private Action? _unsubscribe;
 

@@ -2,6 +2,7 @@
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
 using Messager.Interfaces.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Brokers;
 
@@ -10,10 +11,16 @@ public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsync
 {
 	private readonly Dictionary<TKey, List<Func<TEvent, ValueTask>>> _handlers = new();
 	private readonly Lock _locker = new();
+	private readonly ILogger<AsyncKeyedBroker<TKey, TEvent>>? _logger;
+
+	public AsyncKeyedBroker(ILogger<AsyncKeyedBroker<TKey, TEvent>>? logger = null)
+	{
+		_logger = logger;
+	}
 
 	public int SubscriberCount
 	{
-		get { lock (_locker) return _handlers.Count; }
+		get { lock (_locker) return _handlers.Values.Sum(l => l.Count); }
 	}
 	
 	public bool IsEmpty()
@@ -29,21 +36,30 @@ public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsync
 			{
 				list = [];
 				_handlers[key] = list;
+				_logger?.LogDebug("Created new subscription list for key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
 			}
 			list.Add(handler);
+			_logger?.LogDebug("Subscriber added for key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>. Total subscribers for key: {Count}", key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
 		}
 
 		return new AsyncUnsubscriber(() =>
 		{
 			lock (_locker)
 			{
-				if (!_handlers.TryGetValue(key, out var list)) 
-					return ValueTask.FromException(new KeyNotFoundException());
+				if (!_handlers.TryGetValue(key, out var list))
+				{
+					_logger?.LogWarning("Attempted to unsubscribe from non-existent key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+					return ValueTask.CompletedTask;
+				}
 				
 				list.Remove(handler);
+				_logger?.LogDebug("Subscriber removed for key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>. Remaining subscribers for key: {Count}", key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
 				
 				if (list.Count == 0)
+				{
 					_handlers.Remove(key);
+					_logger?.LogDebug("Removed empty key {Key} from AsyncKeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+				}
 				
 				return ValueTask.CompletedTask;
 			}
@@ -54,12 +70,23 @@ public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsync
 	{
 		lock (_locker)
 		{
-			if (!_handlers.TryGetValue(key, out var list)) 
+			if (!_handlers.TryGetValue(key, out var list))
+			{
+				_logger?.LogTrace("No subscription list found for key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
 				return;
+			}
 			
-			list.Remove(handler);
+			var removed = list.Remove(handler);
+			if (removed)
+			{
+				_logger?.LogDebug("Unsubscribed handler for key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>. Remaining subscribers: {Count}", key, typeof(TKey).Name, typeof(TEvent).Name, list.Count);
+			}
+			
 			if (list.Count == 0)
+			{
 				_handlers.Remove(key);
+				_logger?.LogDebug("Removed empty key {Key} from AsyncKeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+			}
 		}
 	}
 
@@ -70,7 +97,14 @@ public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsync
 		lock (_locker)
 		{
 			if (_handlers.TryGetValue(key, out var list))
+			{
 				handlersCopy = list.ToList();
+				_logger?.LogTrace("Sending async event {EventType} with key {Key} to {Count} subscribers", typeof(TEvent).Name, key, handlersCopy.Count);
+			}
+			else
+			{
+				_logger?.LogTrace("No subscribers found for key {Key} in AsyncKeyedBroker<{KeyType}, {EventType}>", key, typeof(TKey).Name, typeof(TEvent).Name);
+			}
 		}
 
 		if (handlersCopy == null || handlersCopy.Count == 0)
@@ -78,7 +112,14 @@ public class AsyncKeyedBroker<TKey, TEvent> : IAsyncSender<TKey, TEvent>, IAsync
 
 		foreach (var handler in handlersCopy)
 		{
-			await handler(evt);
+			try
+			{
+				await handler(evt);
+			}
+			catch (Exception ex)
+			{
+				_logger?.LogError(ex, "Error invoking async handler for event {EventType} with key {Key}", typeof(TEvent).Name, key);
+			}
 		}
 	}
 }

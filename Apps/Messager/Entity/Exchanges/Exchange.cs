@@ -3,6 +3,7 @@ using Messager.Entity.Registers;
 using Messager.Interfaces.Factories;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
+using Microsoft.Extensions.Logging;
 
 namespace Messager.Entity.Exchanges;
 
@@ -13,17 +14,13 @@ public sealed class Exchange : ISimpleBrokerFactory, IKeyedMessageBrokerFactory
     private readonly AsyncSimpleBrokerRegistry _asyncSimpleBrokers;
     private readonly AsyncKeyedBrokerRegistry _asyncKeyedBrokers;
     
-    public Exchange()
+    public Exchange(ILoggerFactory? loggerFactory = null)
     {
-        _simpleBrokers = new SimpleBrokerRegistry();
-        _keyedBrokers = new KeyedBrokerRegistry();
-        _asyncSimpleBrokers = new AsyncSimpleBrokerRegistry();
-        _asyncKeyedBrokers = new AsyncKeyedBrokerRegistry();
-        
-        Monitor = new ExchangeMonitor(_simpleBrokers, _keyedBrokers, _asyncSimpleBrokers, _asyncKeyedBrokers);
+        _simpleBrokers = new SimpleBrokerRegistry(loggerFactory);
+        _keyedBrokers = new KeyedBrokerRegistry(loggerFactory);
+        _asyncSimpleBrokers = new AsyncSimpleBrokerRegistry(loggerFactory);
+        _asyncKeyedBrokers = new AsyncKeyedBrokerRegistry(loggerFactory);
     }
-    
-    public ExchangeMonitor Monitor { get; private set; }
     
     public ISender<TEvent> GetSender<TEvent>() => _simpleBrokers.GetOrCreate<TEvent>();
     public IReceiver<TEvent> GetReceiver<TEvent>() => _simpleBrokers.GetOrCreate<TEvent>();

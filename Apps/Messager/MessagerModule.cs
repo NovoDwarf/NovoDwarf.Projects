@@ -7,14 +7,29 @@ using Messager.Entity.Senders;
 using Messager.Interfaces.Factories;
 using Messager.Interfaces.Receivers;
 using Messager.Interfaces.Senders;
+using Microsoft.Extensions.Logging;
 
-namespace Messager.Extensions;
+namespace Messager;
 
 public sealed class MessagerModule : Module
 {
+	private readonly MessagerOptions? _options;
+
+	public MessagerModule(MessagerOptions? options = null)
+	{
+		_options = options ?? new MessagerOptions();
+	}
+
 	protected override void Load(ContainerBuilder builder)
 	{
-		builder.RegisterType<Exchange>()
+		builder.Register(c =>
+			{
+				var factory = _options is { EnableLogging: true } 
+					? c.Resolve<ILoggerFactory>() 
+					: null;
+				
+				return new Exchange(factory);
+			})
 			.As<ISimpleBrokerFactory>()
 			.As<IKeyedMessageBrokerFactory>()
 			.SingleInstance();
@@ -95,4 +110,5 @@ public sealed class MessagerModule : Module
 		}
 	}
 }
+
 

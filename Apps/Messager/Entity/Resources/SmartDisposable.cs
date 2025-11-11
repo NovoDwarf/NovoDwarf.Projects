@@ -4,7 +4,7 @@ public sealed class SmartDisposable : IDisposable
 {
 	private bool _disposed;
 	
-	private IDisposable _disposable;
+	private readonly IDisposable _disposable;
 
 	public SmartDisposable(IDisposable disposable)
 	{

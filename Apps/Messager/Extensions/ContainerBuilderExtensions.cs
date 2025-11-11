@@ -1,20 +1,18 @@
 ﻿using Autofac;
+using Microsoft.Extensions.Logging;
 
 namespace Messager.Extensions;
 
-/// <summary>
-/// Расширения для ContainerBuilder для удобной регистрации Messager модуля
-/// </summary>
 public static class ContainerBuilderExtensions
 {
-	/// <summary>
-	/// Регистрирует Messager систему событий как Autofac Module
-	/// </summary>
-	/// <param name="builder">ContainerBuilder для регистрации</param>
-	/// <returns>ContainerBuilder для цепочки вызовов</returns>
-	public static ContainerBuilder AddEventSystem(this ContainerBuilder builder)
+	public static ContainerBuilder AddEventSystem(this ContainerBuilder builder, Action<MessagerOptions>? configureOptions = null)
 	{
-		builder.RegisterModule<MessagerModule>();
+		var options = new MessagerOptions();
+		
+		configureOptions?.Invoke(options);
+		
+		builder.RegisterModule(new MessagerModule(options));
+		
 		return builder;
 	}
 }
