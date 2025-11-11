@@ -30,7 +30,7 @@ public class SimpleBroker<TEvent> : IBroker<TEvent>, ISender<TEvent>, IReceiver<
 		
 		lock (_locker)
 		{
-			_logger?.LogSendingEvent(BrokerType, EventType, Id, _handlers.Count);
+			// _logger?.LogSendingEvent(BrokerType, EventType, Id, _handlers.Count); TODO: change this
 			
 			foreach (var sub in _handlers)
 			{
