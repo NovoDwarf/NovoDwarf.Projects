@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Messager.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Core;
 using Serilog.Debugging;
@@ -22,14 +23,14 @@ internal static class Program
 	{
 		var builder = Host.CreateApplicationBuilder(args);
 		var provider = new AutofacServiceProviderFactory(Configure);
-    
-		builder.Services.AddSerilog(ConfigureLogger);
-		builder.Services.AddHostedService<EditorBackgroundService>();
 		
 		builder.ConfigureContainer(provider, Register);
 		
+		builder.Services.AddSerilog(ConfigureLogger);
+		builder.Services.AddHostedService<EditorBackgroundService>();
+		
 		using var app = builder.Build();
-    
+
 		await app.RunAsync();
 	}
 
@@ -37,12 +38,15 @@ internal static class Program
 	{
 		const string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] [{Namespace}] [{Method}] {Message:lj}{NewLine}{Exception}";
 
-		var levelSwitcher = new LoggingLevelSwitch();
+		var levelSwitcher = new LoggingLevelSwitch
+		{
+			MinimumLevel = LogEventLevel.Verbose
+		};
 
-		SelfLog.Enable(msg => Debug.WriteLine(msg));
+		SelfLog.Enable(Console.WriteLine);
 
 		configuration
-			.MinimumLevel.Verbose()
+			.MinimumLevel.ControlledBy(levelSwitcher)
 			.MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
 			.Enrich.FromLogContext()
 			.Enrich.WithCallerInfo(        
@@ -57,7 +61,7 @@ internal static class Program
 
 	private static void Register(ContainerBuilder containerBuilder)
 	{
-		containerBuilder.RegisterModule(new MessagerModule());
+		containerBuilder.AddEventSystem(x => x.LogLevel = LogLevel.Debug);
 	}
 
 	private static void Configure(ContainerBuilder containerBuilder)

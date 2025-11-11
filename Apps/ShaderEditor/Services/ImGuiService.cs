@@ -30,21 +30,21 @@ public sealed class ImGuiService : IDisposable
 		_disposableList.Add(load, update, render, close);
 	}
 
-	private GL _gl = null!;
-	private ImGuiController _imGuiController = null!;
+	private GL? _gl;
+	private ImGuiController? _imGuiController;
 	
-	private IInputContext _input = null!;
-	private IWindow _window = null!;
+	private IInputContext? _input;
+	private IWindow? _window;
 	
 	public void Dispose()
 	{
-		_imGuiController.Dispose();
+		_imGuiController?.Dispose();
 		_disposableList.Dispose();
 		
-		_gl = null!;
-		_imGuiController = null!;
-		_input = null!;
-		_window = null!;
+		_gl = null;
+		_imGuiController = null;
+		_input = null;
+		_window = null;
 	}
 
 	private void OnLoad(WindowLoadEvent evt)
@@ -59,8 +59,6 @@ public sealed class ImGuiService : IDisposable
 		{
 			keyboard.KeyDown += OnKeyDown;
 		}
-		
-		_logger.LogInformation("Successfully loaded");
 	}
 	
 	private void OnClose(WindowCloseEvent evt)
@@ -70,16 +68,19 @@ public sealed class ImGuiService : IDisposable
 	
 	private void OnUpdate(WindowUpdateEvent evt)
 	{
-		_imGuiController.Update((float)evt.DeltaTime);
+		_imGuiController?.Update((float)evt.DeltaTime);
 	}
 	
 	private void OnRender(WindowRenderEvent evt)
 	{
-		_imGuiController.Render();
+		_imGuiController?.Render();
 	}
 
 	private void OnKeyDown(IKeyboard keyboard, Key key, int arg3)
 	{
+		if (_window == null)
+			return;
+		
 		if (key == Key.Escape)
 			_window.Close();
 	}

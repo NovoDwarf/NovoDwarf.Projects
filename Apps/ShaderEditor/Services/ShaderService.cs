@@ -1,5 +1,6 @@
 ﻿using Messager.Entity.Resources;
 using Messager.Interfaces.Receivers;
+using Messager.Interfaces.Senders;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using ShaderEditor.Events;
@@ -12,11 +13,15 @@ public sealed class ShaderService : IDisposable
 	private readonly ILogger<ShaderService> _logger;
 	private readonly DisposableList _disposables = new();
 	
+	private ISender<ShaderCompiledEvent> _compileSender;
+	
 	public ShaderService(ILogger<ShaderService> logger, 
 		IReceiver<WindowLoadEvent> loadReceiver,
 		IReceiver<WindowUpdateEvent> updateReceiver,
 		IReceiver<WindowRenderEvent> renderReceiver,
-		IReceiver<WindowCloseEvent> closeReceiver)
+		IReceiver<WindowCloseEvent> closeReceiver,
+		IReceiver<ShaderCompileEvent> compileReceiver,
+		ISender<ShaderCompiledEvent> compileSender)
 	{
 		_logger = logger;
 		
@@ -24,6 +29,7 @@ public sealed class ShaderService : IDisposable
 		var update = updateReceiver.Subscribe(OnUpdate);
 		var render = renderReceiver.Subscribe(OnRender);
 		var close = closeReceiver.Subscribe(OnClose);
+		var compile = compileReceiver.Subscribe(OnCompile);
 		
 		_disposables.Add(load, update, render, close);
 	}
@@ -35,12 +41,12 @@ public sealed class ShaderService : IDisposable
 		_disposables.Dispose();
 	}
 
-	private uint Compile(string shader, ShaderType type)
+	private void OnCompile(ShaderCompileEvent evt)
 	{
-		var shaderId = type switch
+		var shaderId = evt.Type switch
 		{
-			ShaderType.VertexShader => CompileVertex(shader),
-			ShaderType.FragmentShader => CompileFragment(shader),
+			ShaderType.VertexShader => CompileVertex(evt.ShaderContent),
+			ShaderType.FragmentShader => CompileFragment(evt.ShaderContent),
 			
 			_ => throw new ArgumentException("Invalid shader type")
 		};
@@ -50,14 +56,12 @@ public sealed class ShaderService : IDisposable
 		if (!string.IsNullOrWhiteSpace(log))
 			_logger.LogInformation("Compile shader: {Output}", log);
 		
-		return shaderId;
+		_compileSender.Send(new ShaderCompiledEvent(evt.Type, shaderId));
 	}
 	
 	private void OnLoad(WindowLoadEvent evt)
 	{
 		_gl = evt.GL;
-		
-		_logger.LogInformation("Successfully loaded");
 	}
 	
 	private void OnClose(WindowCloseEvent evt)

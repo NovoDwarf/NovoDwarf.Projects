@@ -2,6 +2,7 @@ using Messager.Interfaces.Senders;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using ShaderEditor.Events;
+using ShaderEditor.Services;
 using Silk.NET.Maths;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
@@ -12,6 +13,10 @@ public sealed class EditorService : IDisposable
 {
 	private readonly CancellationTokenSource _cts = new();
 
+	private readonly GLService _glService;
+	private readonly ImGuiService _imGuiService;
+	private readonly ShaderService _shaderService;
+	
 	private readonly ISender<WindowLoadEvent> _loadSender;
 	private readonly ISender<WindowUpdateEvent> _updateSender;
 	private readonly ISender<WindowRenderEvent> _renderSender;
@@ -24,12 +29,20 @@ public sealed class EditorService : IDisposable
 		ISender<WindowUpdateEvent> updateSender, 
 		ISender<WindowRenderEvent> renderSender, 
 		ISender<WindowCloseEvent> closeSender, 
-		ILogger<EditorService> logger)
+		ILogger<EditorService> logger,
+		
+		GLService glService,
+		ImGuiService imGuiService,
+		ShaderService shaderService)
 	{
 		_loadSender = loadSender;
 		_updateSender = updateSender;
 		_renderSender = renderSender;
 		_closeSender = closeSender;
+		
+		_glService = glService;
+		_imGuiService = imGuiService;
+		_shaderService = shaderService;
 		
 		_logger = logger;
 	}
@@ -104,6 +117,7 @@ public sealed class EditorService : IDisposable
 		_gl = _window.CreateOpenGL(); 
 		
 		_loadSender.Send(new WindowLoadEvent(_window, _gl));
+		_logger.LogInformation("Window loaded. Sending [WindowLoadEvent]");
 	}
 
 	private void OnUpdate(double deltaTime)
