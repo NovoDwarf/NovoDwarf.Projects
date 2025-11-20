@@ -1,19 +1,21 @@
 ﻿using Mathematics.Distributions.Base;
+using Mathematics.Randoms.Utilities;
 
-namespace Mathematics.Distributions.Models.Degenerate;
+namespace Mathematics.Distributions.Models.Univariate.Discrete.Finite;
 
-public partial class DegenerateDistribution : Distribution
+public partial class BernoulliDistribution : Distribution
 {
-	public DegenerateDistribution(double constant)
+	public BernoulliDistribution(double probability)
 	{
-		ArgumentOutOfRangeException.ThrowIfNegative(constant);
-		
-		Constant = constant;
+		if (probability is < 0 or > 1)
+			throw new ArgumentOutOfRangeException(nameof(probability), "Probability must be between 0 and 1.");
+
+		Probability = probability;
 	}
 
-	public double Constant { get; }
+	public double Probability { get; }
 
-	public override double Calculate() => Constant;
+	public override double Calculate() => RandomUtils.NextDouble() < Probability ? 1.0 : 0.0;
 	public override double GetProbabilityDensity(double x)
 	{
 		throw new NotImplementedException();
@@ -24,7 +26,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetExpectedValue() => Constant;
+	public override double GetExpectedValue() => Probability;
 	public override double GetMean()
 	{
 		throw new NotImplementedException();
@@ -40,7 +42,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetVariance() => 0;
+	public override double GetVariance() => Probability * (1 - Probability);
 	public override double GetSkewness()
 	{
 		throw new NotImplementedException();
@@ -56,9 +58,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetMinValue() => Constant;
+	public override double GetMinValue() => 0.0;
 
-	public override double GetMaxValue() => Constant;
-
-	public override string ToString() => $"Degenerate [Constant = {Constant:F3}]";
+	public override double GetMaxValue() => 1.0;
 }

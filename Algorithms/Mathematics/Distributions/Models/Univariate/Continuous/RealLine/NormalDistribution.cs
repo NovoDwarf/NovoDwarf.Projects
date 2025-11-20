@@ -1,19 +1,14 @@
 ﻿using Mathematics.Distributions.Base;
+using Mathematics.Randoms.Utilities;
 
-namespace Mathematics.Distributions.Models.Degenerate;
+namespace Mathematics.Distributions.Models.Univariate.Continuous.RealLine;
 
-public partial class DegenerateDistribution : Distribution
+public partial class NormalDistribution(double mean, double stdDev) : Distribution
 {
-	public DegenerateDistribution(double constant)
-	{
-		ArgumentOutOfRangeException.ThrowIfNegative(constant);
-		
-		Constant = constant;
-	}
+	public double Mean { get; } = mean;
+	public double StandardDeviation { get; } = stdDev;
 
-	public double Constant { get; }
-
-	public override double Calculate() => Constant;
+	public override double Calculate() => RandomUtils.NextNormal();
 	public override double GetProbabilityDensity(double x)
 	{
 		throw new NotImplementedException();
@@ -24,7 +19,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetExpectedValue() => Constant;
+	public override double GetExpectedValue() => Mean;
 	public override double GetMean()
 	{
 		throw new NotImplementedException();
@@ -40,7 +35,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetVariance() => 0;
+	public override double GetVariance() => StandardDeviation * StandardDeviation;
 	public override double GetSkewness()
 	{
 		throw new NotImplementedException();
@@ -56,9 +51,9 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetMinValue() => Constant;
+	public override double GetMinValue() => double.NegativeInfinity;
 
-	public override double GetMaxValue() => Constant;
+	public override double GetMaxValue() => double.PositiveInfinity;
 
-	public override string ToString() => $"Degenerate [Constant = {Constant:F3}]";
+	public override string ToString() => $"Normal [Mean = {Mean:F3}, Standard Deviation = {StandardDeviation:F3}]";
 }

@@ -1,19 +1,26 @@
 ﻿using Mathematics.Distributions.Base;
+using Mathematics.Randoms.Utilities;
 
-namespace Mathematics.Distributions.Models.Degenerate;
+namespace Mathematics.Distributions.Models.Univariate.Continuous.SemiInfinite;
 
-public partial class DegenerateDistribution : Distribution
+public partial class ExpoDistribution : Distribution
 {
-	public DegenerateDistribution(double constant)
+	public ExpoDistribution(double rates)
 	{
-		ArgumentOutOfRangeException.ThrowIfNegative(constant);
-		
-		Constant = constant;
+		ArgumentOutOfRangeException.ThrowIfLessThan(rates, 0);
+
+		Rates = rates;
 	}
 
-	public double Constant { get; }
+	public double Rates { get; }
 
-	public override double Calculate() => Constant;
+	public override double Calculate()
+	{
+		var u = RandomUtils.NextDoubleSafe();
+
+		return -Math.Log(u) / Rates;
+	}
+
 	public override double GetProbabilityDensity(double x)
 	{
 		throw new NotImplementedException();
@@ -24,7 +31,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetExpectedValue() => Constant;
+	public override double GetExpectedValue() => 1.0 / Rates;
 	public override double GetMean()
 	{
 		throw new NotImplementedException();
@@ -40,7 +47,7 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetVariance() => 0;
+	public override double GetVariance() => 1.0 / (Rates * Rates);
 	public override double GetSkewness()
 	{
 		throw new NotImplementedException();
@@ -56,9 +63,9 @@ public partial class DegenerateDistribution : Distribution
 		throw new NotImplementedException();
 	}
 
-	public override double GetMinValue() => Constant;
+	public override double GetMinValue() => 0;
 
-	public override double GetMaxValue() => Constant;
+	public override double GetMaxValue() => double.PositiveInfinity;
 
-	public override string ToString() => $"Degenerate [Constant = {Constant:F3}]";
+	public override string ToString() => $"Exponential [Lambda = {Rates:F3}]";
 }

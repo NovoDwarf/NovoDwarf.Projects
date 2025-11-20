@@ -4,7 +4,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>preview</LangVersion>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -25,6 +25,7 @@
       <Folder Include="Distributions\Models\Directional\" />
       <Folder Include="Distributions\Models\Mixed\" />
       <Folder Include="Distributions\Models\Multivariate\Continuous\" />
+      <Folder Include="Distributions\Models\Univariate\" />
       <Folder Include="Functions\Interfaces\" />
       <Folder Include="Sortings\" />
       <Folder Include="Statistics\" />
@@ -32,6 +33,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Apps\Mathematics.SourceGenerators\Mathematics.SourceGenerators.csproj" 
+                        OutputItemType="Analyzer"
+                        ReferenceOutputAssembly="false" />
       <ProjectReference Include="..\..\Shared\Data\Data.csproj" />
       <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
     </ItemGroup>
