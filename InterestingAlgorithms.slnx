@@ -8,6 +8,8 @@
     </Folder>
     <Folder Name="/Apps/">
         <Project Path="Apps/FractalVisualizer/FractalVisualizer.csproj" />
+        <Project Path="Apps/Mathematics.Server/Mathematics.Server.csproj" />
+        <Project Path="Apps/Mathematics.SourceGenerators/Mathematics.SourceGenerators.csproj" />
         <Project Path="Apps/ShaderEditor/ShaderEditor.csproj" />
     </Folder>
     <Folder Name="/Examples/" />
@@ -22,6 +24,7 @@
     <Folder Name="/Examples/SourceGenerators/">
         <Project Path="Examples/SourceGenerators/Core.SourceGenerators.Example/Core.SourceGenerators.Example.csproj" />
     </Folder>
+    <Folder Name="/Projects/" />
     <Folder Name="/Tests/" />
     <Folder Name="/Tests/Algorithms/">
         <Project Path="Tests/Algorithms/Mathematics.Tests/Mathematics.Tests.csproj" />
@@ -34,16 +37,10 @@
         <Project Path="Tests/SourceGenerators/Core.SourceGenerators.Tests/Core.SourceGenerators.Tests.csproj" />
     </Folder>
     <Folder Name="/Utility/" />
-    <Folder Name="/Utility/Analyzers/">
-        <Project Path="Analyzers/Core.Analyzer/Core.Analyzer.csproj" />
-    </Folder>
     <Folder Name="/Utility/Shared/">
         <Project Path="Shared/Utilities/Utilities.csproj" />
         <Project Path="Shared\Data\Data.csproj" />
         <Project Path="Shared\Logging\Logging.csproj" />
         <Project Path="Shared\Structures\Structures.csproj" />
-    </Folder>
-    <Folder Name="/Utility/SourceGenerators/">
-        <Project Path="SourceGenerators/Core.SourceGenerators/Core.SourceGenerators.csproj" />
     </Folder>
 </Solution>
