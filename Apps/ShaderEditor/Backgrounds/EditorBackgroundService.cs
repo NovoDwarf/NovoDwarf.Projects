@@ -3,7 +3,7 @@
 // idk which variant is better, so I'll leave this for now.
 
 using Microsoft.Extensions.Hosting;
-using ShaderEditor.Hosts;
+using ShaderEditor.Services;
 
 namespace ShaderEditor.Backgrounds;
 

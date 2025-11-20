@@ -1,55 +1,47 @@
-using Messager.Interfaces.Senders;
+using Messager.NET.Interfaces.Senders;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using ShaderEditor.Events;
-using ShaderEditor.Services;
+using Silk.NET.Core.Native;
+using Silk.NET.Direct3D.Compilers;
+using Silk.NET.Direct3D11;
+using Silk.NET.DXGI;
 using Silk.NET.Maths;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
 
-namespace ShaderEditor.Hosts;
+namespace ShaderEditor.Services;
 
-public sealed class EditorService : IDisposable
+public sealed class EditorService 
 {
-	private readonly CancellationTokenSource _cts = new();
-
-	private readonly GLService _glService;
-	private readonly ImGuiService _imGuiService;
-	private readonly ShaderService _shaderService;
+	private readonly ILogger<EditorService> _logger;
 	
 	private readonly ISender<WindowLoadEvent> _loadSender;
+	private readonly ISender<WindowResizeEvent> _resizeSender;
 	private readonly ISender<WindowUpdateEvent> _updateSender;
 	private readonly ISender<WindowRenderEvent> _renderSender;
 	private readonly ISender<WindowCloseEvent> _closeSender;
+
+	private readonly CancellationTokenSource _cts = new();
 	
-	private readonly ILogger<EditorService> _logger;
-	
-	public EditorService( 
-		ISender<WindowLoadEvent> loadSender, 
+	public EditorService(
+		ILogger<EditorService> logger,
+		ISender<WindowLoadEvent> loadSender,
+		ISender<WindowResizeEvent> resizeSender,
 		ISender<WindowUpdateEvent> updateSender, 
 		ISender<WindowRenderEvent> renderSender, 
-		ISender<WindowCloseEvent> closeSender, 
-		ILogger<EditorService> logger,
-		
-		GLService glService,
-		ImGuiService imGuiService,
-		ShaderService shaderService)
+		ISender<WindowCloseEvent> closeSender)
 	{
+		_logger = logger;
+		
 		_loadSender = loadSender;
+		_resizeSender = resizeSender;
 		_updateSender = updateSender;
 		_renderSender = renderSender;
 		_closeSender = closeSender;
-		
-		_glService = glService;
-		_imGuiService = imGuiService;
-		_shaderService = shaderService;
-		
-		_logger = logger;
 	}
 	
 	private IWindow _window = null!;
-	private GL _gl = null!;
-
+	
 	private Task? _windowTask;
 	
 	public async Task StartAsync(CancellationToken cancellationToken = default)
@@ -60,17 +52,18 @@ public sealed class EditorService : IDisposable
 			Size = new Vector2D<int>(1280, 800),
 			FramesPerSecond = 0,
 			UpdatesPerSecond = 0,
-			API = new GraphicsAPI(ContextAPI.OpenGL, ContextProfile.Core, ContextFlags.ForwardCompatible, new APIVersion(4, 1)),
+			API = GraphicsAPI.None
 		};
             
 		_window = Window.Create(options);
 
+		_window.FramebufferResize += OnFramebufferResize;
 		_window.Load += OnLoad;
 		_window.Update += OnUpdate;
 		_window.Render += OnRender;
 		_window.Closing += OnClose;
 
-		_windowTask = Task.Run(Run, cancellationToken);
+		_windowTask = Task.Run(RunAsync, cancellationToken);
 		
 		await _windowTask;
 	}
@@ -91,14 +84,8 @@ public sealed class EditorService : IDisposable
 			}
 		}
 	}
-	
-	public void Dispose()
-	{
-		_cts.Dispose();
-		_window?.Dispose();
-	}
 
-	private Task Run()
+	private Task RunAsync()
 	{
 		try
 		{
@@ -112,12 +99,14 @@ public sealed class EditorService : IDisposable
 		return Task.CompletedTask;
 	}
 	
-	private void OnLoad()
+	private void OnFramebufferResize(Vector2D<int> size)
 	{
-		_gl = _window.CreateOpenGL(); 
-		
-		_loadSender.Send(new WindowLoadEvent(_window, _gl));
-		_logger.LogInformation("Window loaded. Sending [WindowLoadEvent]");
+		_resizeSender.Send(new WindowResizeEvent(size));
+	}
+	
+	private unsafe void OnLoad()
+	{
+		_loadSender.Send(new WindowLoadEvent(_window));
 	}
 
 	private void OnUpdate(double deltaTime)

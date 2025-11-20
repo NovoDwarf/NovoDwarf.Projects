@@ -1,15 +1,15 @@
-﻿using Messager.Entity.Resources;
-using Messager.Interfaces.Receivers;
+﻿using ImGuiNET;
+using Messager.NET.Entity.Resources;
+using Messager.NET.Interfaces.Receivers;
 using Microsoft.Extensions.Logging;
 using ShaderEditor.Events;
+using ShaderEditor.UI.Windows;
 using Silk.NET.Input;
-using Silk.NET.OpenGL;
-using Silk.NET.OpenGL.Extensions.ImGui;
 using Silk.NET.Windowing;
 
 namespace ShaderEditor.Services;
 
-public sealed class ImGuiService : IDisposable
+public sealed class ImGuiService
 {
 	private readonly DisposableList _disposableList = new();
 	private readonly ILogger<ImGuiService> _logger;
@@ -18,70 +18,47 @@ public sealed class ImGuiService : IDisposable
 		IReceiver<WindowLoadEvent> loadReceiver,
 		IReceiver<WindowUpdateEvent> updateReceiver,
 		IReceiver<WindowRenderEvent> renderReceiver,
-		IReceiver<WindowCloseEvent> closeReceiver, 
+		IReceiver<GLDisposingEvent> disposingReceiver,
 		ILogger<ImGuiService> logger)
 	{
 		_logger = logger;
-		var load = loadReceiver.Subscribe(OnLoad);
-		var update = updateReceiver.Subscribe(OnUpdate);
-		var render = renderReceiver.Subscribe(OnRender);
-		var close = closeReceiver.Subscribe(OnClose);
 		
-		_disposableList.Add(load, update, render, close);
 	}
 
-	private GL? _gl;
-	private ImGuiController? _imGuiController;
+	//private ImGuiController? _imGuiController;
+	private EditorWindow? _editorWindow;
 	
 	private IInputContext? _input;
 	private IWindow? _window;
-	
-	public void Dispose()
-	{
-		_imGuiController?.Dispose();
-		_disposableList.Dispose();
-		
-		_gl = null;
-		_imGuiController = null;
-		_input = null;
-		_window = null;
-	}
 
+	
 	private void OnLoad(WindowLoadEvent evt)
 	{
-		_gl = evt.GL;
 		_window = evt.Window;
 		_input = evt.Window.CreateInput();
 		
-		_imGuiController = new ImGuiController(_gl, _window, _input);
-
-		foreach (var keyboard in _input.Keyboards)
-		{
-			keyboard.KeyDown += OnKeyDown;
-		}
-	}
-	
-	private void OnClose(WindowCloseEvent evt)
-	{
-		
+		//_imGuiController = new ImGuiController(_gl, _window, _input);
+		_editorWindow = new EditorWindow();
 	}
 	
 	private void OnUpdate(WindowUpdateEvent evt)
 	{
-		_imGuiController?.Update((float)evt.DeltaTime);
+		//_imGuiController?.Update((float)evt.DeltaTime);
 	}
 	
 	private void OnRender(WindowRenderEvent evt)
 	{
-		_imGuiController?.Render();
-	}
-
-	private void OnKeyDown(IKeyboard keyboard, Key key, int arg3)
-	{
-		if (_window == null)
-			return;
+		_editorWindow?.Render();
 		
-		if (key == Key.Escape)
-			_window.Close();
+		ImGui.Render();
+		
+		//_imGuiController?.Render();
+	}
+	
+	private void OnClose(GLDisposingEvent evt)
+	{
+		//_imGuiController?.Dispose();
+		_input?.Dispose();
+		_disposableList.Dispose();
 	}
 }

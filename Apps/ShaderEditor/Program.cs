@@ -1,10 +1,8 @@
-﻿using System.Diagnostics;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Messager.NET.Extensions;
 using Microsoft.Extensions.Hosting;
-using Messager.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Core;
 using Serilog.Debugging;
@@ -12,7 +10,6 @@ using Serilog.Enrichers.CallerInfo;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using ShaderEditor.Backgrounds;
-using ShaderEditor.Hosts;
 using ShaderEditor.Services;
 
 namespace ShaderEditor;
@@ -22,12 +19,16 @@ internal static class Program
 	private static async Task Main(string[] args)
 	{
 		var builder = Host.CreateApplicationBuilder(args);
-		var provider = new AutofacServiceProviderFactory(Configure);
+		var provider = new AutofacServiceProviderFactory();
 		
 		builder.ConfigureContainer(provider, Register);
 		
 		builder.Services.AddSerilog(ConfigureLogger);
 		builder.Services.AddHostedService<EditorBackgroundService>();
+
+		builder.Services.AddActivatedSingleton<DX11Service>();
+		builder.Services.AddActivatedSingleton<ImGuiService>();
+		builder.Services.AddActivatedSingleton<EditorService>();
 		
 		using var app = builder.Build();
 
@@ -61,14 +62,6 @@ internal static class Program
 
 	private static void Register(ContainerBuilder containerBuilder)
 	{
-		containerBuilder.AddEventSystem(x => x.LogLevel = LogLevel.Debug);
-	}
-
-	private static void Configure(ContainerBuilder containerBuilder)
-	{
-		containerBuilder.RegisterType<GLService>().SingleInstance();
-		containerBuilder.RegisterType<ShaderService>().SingleInstance();
-		containerBuilder.RegisterType<ImGuiService>().SingleInstance();
-		containerBuilder.RegisterType<EditorService>().SingleInstance();
+		containerBuilder.AddMessager();
 	}
 }
