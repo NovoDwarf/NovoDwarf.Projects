@@ -1,5 +1,5 @@
 ﻿using Mathematics.Distributions.Interfaces;
-using Mathematics.Distributions.Models.Continuous.SemiInfinite;
+using Mathematics.Distributions.Models.Univariate.Continuous.SemiInfinite;
 
 namespace Structures.Models.Abstracts.Commons.Options;
 

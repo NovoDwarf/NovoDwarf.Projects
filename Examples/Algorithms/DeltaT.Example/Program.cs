@@ -1,6 +1,6 @@
 ﻿using DeltaT.Algorithm.Models.Nodes;
 using DeltaT.Algorithm.Models.Simulations;
-using Mathematics.Distributions.Models.Continuous.SemiInfinite;
+using Mathematics.Distributions.Models.Univariate.Continuous.SemiInfinite;
 using Structures.Extensions;
 using Structures.Models.Abstracts.Options;
 
