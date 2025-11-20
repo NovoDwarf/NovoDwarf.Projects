@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Logging.Interfaces;
+﻿using Logging.Interfaces;
 
 namespace Logging.Models;
 

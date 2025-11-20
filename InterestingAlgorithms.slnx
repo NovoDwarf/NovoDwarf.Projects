@@ -1,33 +1,29 @@
 ﻿<Solution>
-    <Folder Name="/Algorithms/">
-        <Project Path="Algorithms/Mathematics/Mathematics.csproj" />
+    <Folder Name="/Projects/"/>
+    <Folder Name="/Projects/Apps/">
+        <Project Path="Projects/Apps/FractalVisualizer/FractalVisualizer.csproj"/>
+        <Project Path="Projects/Apps/ShaderEditor/ShaderEditor.csproj"/>
     </Folder>
-    <Folder Name="/Algorithms/Modeling/">
-        <Project Path="Algorithms\Modeling\DeltaT.Algorithm\DeltaT.Algorithm.csproj" />
-        <Project Path="Algorithms\Modeling\EventDriven.Algorithm\EventDriven.Algorithm.csproj" />
+    <Folder Name="/Projects/Mathematics/">
+        <Project Path="Projects/Mathematics/Mathematics.Core/Mathematics.Core.csproj"/>
+        <Project Path="Projects/Mathematics/Mathematics.Server/Mathematics.Server.csproj"/>
+        <Project Path="Projects/Mathematics/Mathematics.SourceGenerators/Mathematics.SourceGenerators.csproj"/>
     </Folder>
-    <Folder Name="/Apps/">
-        <Project Path="Apps/FractalVisualizer/FractalVisualizer.csproj" />
-        <Project Path="Apps/Mathematics.Server/Mathematics.Server.csproj" />
-        <Project Path="Apps/Mathematics.SourceGenerators/Mathematics.SourceGenerators.csproj" />
-        <Project Path="Apps/ShaderEditor/ShaderEditor.csproj" />
+    <Folder Name="/Projects/Modeling/">
+        <Project Path="Projects/Modeling/Modeling.DeltaT.Algorithm/Modeling.DeltaT.Algorithm.csproj"/>
+        <Project Path="Projects/Modeling/Modeling.DeltaT.Example/Modeling.DeltaT.Example.csproj"/>
+        <Project Path="Projects/Modeling/Modeling.EventDriven.Algorithm/Modeling.EventDriven.Algorithm.csproj"/>
+        <Project Path="Projects/Modeling/Modeling.EventDriven.Example/Modeling.EventDriven.Example.csproj"/>
+        <Project Path="Shared/Modeling.Core/Modeling.Core.csproj"/>
     </Folder>
-    <Folder Name="/Examples/" />
-    <Folder Name="/Examples/Algorithms/" />
-    <Folder Name="/Examples/Algorithms/Modeling/">
-        <Project Path="Examples/Algorithms/DeltaT.Example/DeltaT.Example.csproj" />
-        <Project Path="Examples/Algorithms/EventDriven.Example/EventDriven.Example.csproj" />
+    <Folder Name="/Tests/"/>
+    <Folder Name="/Tests/Projects/">
+        <Project Path="Tests/Projects/Mathematics.Tests/Mathematics.Tests.csproj"/>
     </Folder>
-    <Folder Name="/Projects/" />
-    <Folder Name="/Tests/" />
-    <Folder Name="/Tests/Algorithms/">
-        <Project Path="Tests/Algorithms/Mathematics.Tests/Mathematics.Tests.csproj" />
-    </Folder>
-    <Folder Name="/Utility/" />
+    <Folder Name="/Utility/"/>
     <Folder Name="/Utility/Shared/">
-        <Project Path="Shared/Utilities/Utilities.csproj" />
-        <Project Path="Shared\Data\Data.csproj" />
-        <Project Path="Shared\Logging\Logging.csproj" />
-        <Project Path="Shared\Structures\Structures.csproj" />
+        <Project Path="Shared/Utilities/Utilities.csproj"/>
+        <Project Path="Shared\Data\Data.csproj"/>
+        <Project Path="Shared\Logging\Logging.csproj"/>
     </Folder>
 </Solution>

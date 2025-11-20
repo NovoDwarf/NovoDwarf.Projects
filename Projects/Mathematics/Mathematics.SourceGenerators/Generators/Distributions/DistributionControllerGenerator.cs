@@ -1,0 +1,145 @@
+﻿using System.Text;
+using Mathematics.SourceGenerators.Utilities;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+
+[Generator]
+public class DistributionControllerGenerator : IIncrementalGenerator
+{
+    public void Initialize(IncrementalGeneratorInitializationContext context)
+    {
+        var distributionClasses = context.CompilationProvider.Select(Selector);
+        context.RegisterSourceOutput(distributionClasses, Execute);
+    }
+
+    private static void Execute(SourceProductionContext context, List<INamedTypeSymbol> distributions)
+    {
+        foreach (var distributionSymbol in distributions)
+        {
+            try
+            {
+                var controllerCode = GenerateController(distributionSymbol);
+                context.AddSource($"{distributionSymbol.Name}Controller.g.cs", SourceText.From(controllerCode, Encoding.UTF8));
+            }
+            catch (Exception ex)
+            {
+                var diagnostic = Diagnostic.Create(
+                    DiagnosticUtils.ErrorGeneratingDistributionController(), 
+                    Location.None, 
+                    distributionSymbol.Name, 
+                    ex.Message
+                );
+                context.ReportDiagnostic(diagnostic);
+            }
+        }
+    }
+
+    private static List<INamedTypeSymbol> Selector(Compilation compilation, CancellationToken cancellationToken)
+    {
+        var distributionTypes = new List<INamedTypeSymbol>();
+
+        foreach (var module in compilation.SourceModule.ReferencedAssemblySymbols.SelectMany(a => a.Modules))
+        {
+            distributionTypes.AddRange(module.GlobalNamespace.GetNamespaceMembers()
+                .SelectMany(GetAllTypes)
+                .Where(GeneratorUtils.IsDistributionSubclass));
+        }
+
+        return distributionTypes;
+    }
+
+    private static IEnumerable<INamedTypeSymbol> GetAllTypes(INamespaceSymbol namespaceSymbol)
+    {
+        foreach (var type in namespaceSymbol.GetTypeMembers())
+        {
+            yield return type;
+        }
+
+        foreach (var nestedNamespace in namespaceSymbol.GetNamespaceMembers())
+        {
+            foreach (var type in GetAllTypes(nestedNamespace))
+            {
+                yield return type;
+            }
+        }
+    }
+
+    private static string GenerateController(INamedTypeSymbol distributionSymbol)
+    {
+        var className = distributionSymbol.Name;
+        var controllerName = $"{className}Controller";
+        var distributionNamespace = distributionSymbol.ContainingNamespace.ToDisplayString();
+        
+        var targetNamespace = "Mathematics.Server.Controllers";
+        var baseNamespace = "Mathematics.Core";
+
+        var distributionName = className.Replace("Distribution", "");
+        var routeName = StringUtils.SplitPascalCase(distributionName);
+
+        var endpoints = new[]
+        {
+            new { Route = "", Method = "Distribute", Action = "Distribute()" },
+            new { Route = "pdf/{x}", Method = "ProbabilityDensity", Action = "ProbabilityDensity(x)" },
+            new { Route = "cdf/{x}", Method = "CumulativeProbability", Action = "CumulativeDistribution(x)" },
+            new { Route = "expected", Method = "Expected", Action = "Expected" },
+            new { Route = "mean", Method = "Mean", Action = "Mean" },
+            new { Route = "median", Method = "Median", Action = "Median" },
+            new { Route = "mode", Method = "Mode", Action = "Mode" },
+            new { Route = "variance", Method = "Variance", Action = "Variance" },
+            new { Route = "skewness", Method = "Skewness", Action = "Skewness" },
+            new { Route = "kurtosis", Method = "Kurtosis", Action = "Kurtosis" },
+            new { Route = "standard-deviation", Method = "StandardDeviation", Action = "StandardDeviation" },
+            new { Route = "min", Method = "Min", Action = "Minimum" },
+            new { Route = "max", Method = "Max", Action = "Maximum" }
+        };
+
+        var endpointsCode = string.Join("\n\n", endpoints.Select(endpoint => 
+            $$"""
+                [HttpPost("{{endpoint.Route}}")]
+                public IActionResult {{endpoint.Method}}([FromBody] CalculationRequest request{{(endpoint.Route.Contains("{x}") ? ", double x" : "")}})
+                {
+                    try
+                    {
+                        var distribution = GetDistribution(request);
+                        var result = distribution.{{endpoint.Action}};
+                        
+                        return Ok(result);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error during process Distribution");
+                        
+                        return BadRequest(ex.Message);
+                    }
+                }
+            """));
+
+        return $$"""
+            // <auto-generated/>
+            using Microsoft.AspNetCore.Mvc;
+            using {{baseNamespace}};
+            using {{distributionNamespace}};
+            
+            namespace {{targetNamespace}};
+            
+            [ApiController]
+            [Route("distributions/{{routeName}}")]
+            public partial class {{controllerName}} : ControllerBase
+            {
+                private readonly ILogger<{{controllerName}}> _logger;
+
+                public {{controllerName}}(ILogger<{{controllerName}}> logger)
+                {
+                    _logger = logger;
+                }
+                
+                {{endpointsCode}}
+            
+                private {{className}} GetDistribution(CalculationRequest request)
+                {
+                    return new {{className}}(request.Params);
+                }
+            }
+            """;
+    }
+}

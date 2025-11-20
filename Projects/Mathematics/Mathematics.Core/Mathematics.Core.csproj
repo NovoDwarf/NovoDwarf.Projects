@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\Mathematics.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\Mathematics.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Compressions\Models\Lossless\" />
+      <Folder Include="Cryptography\Base\" />
+      <Folder Include="Cryptography\Models\HashFunctions\" />
+      <Folder Include="Cryptography\Models\Monosound\" />
+      <Folder Include="Cryptography\Models\Polyalphabet\" />
+      <Folder Include="Cryptography\Models\Polygramms\" />
+      <Folder Include="Distributions\Models\Directional\" />
+      <Folder Include="Distributions\Models\Mixed\" />
+      <Folder Include="Distributions\Models\Multivariate\Continuous\" />
+      <Folder Include="Distributions\Models\Univariate\" />
+      <Folder Include="Functions\Interfaces\" />
+      <Folder Include="Sortings\" />
+      <Folder Include="Statistics\" />
+      <Folder Include="Transforms\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Utilities\Utilities.csproj" />
+      <ProjectReference Include="..\Mathematics.SourceGenerators\Mathematics.SourceGenerators.csproj" OutputItemType="Analyzer"/>
+    </ItemGroup>
+
+</Project>
