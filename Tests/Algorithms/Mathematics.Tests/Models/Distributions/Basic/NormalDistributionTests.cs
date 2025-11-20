@@ -1,4 +1,4 @@
-﻿using Mathematics.Distributions.Models.Continuous.RealLine;
+﻿using Mathematics.Distributions.Models.Univariate.Continuous.RealLine;
 using Mathematics.Statistics.Extensions;
 using Mathematics.Tests.Services;
 

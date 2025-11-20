@@ -1,5 +1,4 @@
 ﻿using Mathematics.Distributions.Models.Degenerate;
-using Mathematics.Distributions.Models.Discrete;
 
 namespace Mathematics.Tests.Models.Distributions.Basic;
 

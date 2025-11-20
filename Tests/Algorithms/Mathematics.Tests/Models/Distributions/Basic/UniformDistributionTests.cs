@@ -1,4 +1,4 @@
-﻿using Mathematics.Distributions.Models.Continuous.Bounded;
+﻿using Mathematics.Distributions.Models.Univariate.Continuous.Bounded;
 using Mathematics.Statistics.Extensions;
 using Mathematics.Tests.Services;
 

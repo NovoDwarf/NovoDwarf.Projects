@@ -18,23 +18,10 @@
         <Project Path="Examples/Algorithms/DeltaT.Example/DeltaT.Example.csproj" />
         <Project Path="Examples/Algorithms/EventDriven.Example/EventDriven.Example.csproj" />
     </Folder>
-    <Folder Name="/Examples/Analyzers/">
-        <Project Path="Examples/Analyzers/Core.Analyzer.Example/Core.Analyzer.Example.csproj" />
-    </Folder>
-    <Folder Name="/Examples/SourceGenerators/">
-        <Project Path="Examples/SourceGenerators/Core.SourceGenerators.Example/Core.SourceGenerators.Example.csproj" />
-    </Folder>
     <Folder Name="/Projects/" />
     <Folder Name="/Tests/" />
     <Folder Name="/Tests/Algorithms/">
         <Project Path="Tests/Algorithms/Mathematics.Tests/Mathematics.Tests.csproj" />
-    </Folder>
-    <Folder Name="/Tests/Analyzers/">
-        <Project Path="Tests/Analyzers/Core.Analyzer.Tests/Core.Analyzer.Tests.csproj" />
-    </Folder>
-    <Folder Name="/Tests/Shared/" />
-    <Folder Name="/Tests/SourceGenerators/">
-        <Project Path="Tests/SourceGenerators/Core.SourceGenerators.Tests/Core.SourceGenerators.Tests.csproj" />
     </Folder>
     <Folder Name="/Utility/" />
     <Folder Name="/Utility/Shared/">

@@ -1,4 +1,4 @@
-﻿using Mathematics.Distributions.Models.Continuous.SemiInfinite;
+﻿using Mathematics.Distributions.Models.Univariate.Continuous.SemiInfinite;
 using Mathematics.Tests.Services;
 
 namespace Mathematics.Tests.Models.Distributions.Basic;
