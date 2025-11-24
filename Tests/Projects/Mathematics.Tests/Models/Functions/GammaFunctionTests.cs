@@ -1,4 +1,4 @@
-﻿using Mathematics.Core.Functions.Models;
+﻿using Mathematics.Functions;
 
 namespace Mathematics.Tests.Models.Functions;
 

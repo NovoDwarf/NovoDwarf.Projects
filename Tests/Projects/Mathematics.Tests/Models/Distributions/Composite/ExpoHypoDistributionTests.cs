@@ -1,4 +1,4 @@
-﻿using Mathematics.Core.Distributions.Models.Univariate.Continuous.SemiInfinite;
+﻿using Mathematics.Distributions.Univariate.Continuous.Semibounded;
 
 namespace Mathematics.Tests.Models.Distributions.Composite;
 

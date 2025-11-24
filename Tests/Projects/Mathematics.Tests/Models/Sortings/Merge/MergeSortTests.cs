@@ -1,4 +1,4 @@
-﻿using Mathematics.Core.Sortings.Models.Merge;
+﻿using Mathematics.Sortings.Merge;
 
 namespace Mathematics.Tests.Models.Sortings.Merge;
 

@@ -1,29 +1,43 @@
 ﻿<Solution>
-    <Folder Name="/Projects/"/>
+    <Folder Name="/Projects/" />
     <Folder Name="/Projects/Apps/">
-        <Project Path="Projects/Apps/FractalVisualizer/FractalVisualizer.csproj"/>
-        <Project Path="Projects/Apps/ShaderEditor/ShaderEditor.csproj"/>
+        <Project Path="Projects/Apps/FractalVisualizer/FractalVisualizer.csproj" />
+        <Project Path="Projects/Apps/ShaderEditor/ShaderEditor.csproj" />
     </Folder>
     <Folder Name="/Projects/Mathematics/">
-        <Project Path="Projects/Mathematics/Mathematics.Core/Mathematics.Core.csproj"/>
-        <Project Path="Projects/Mathematics/Mathematics.Server/Mathematics.Server.csproj"/>
-        <Project Path="Projects/Mathematics/Mathematics.SourceGenerators/Mathematics.SourceGenerators.csproj"/>
+        <Project Path="Projects/Mathematics/Mathematics.Core/Mathematics.Core.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.SourceGenerators/Mathematics.SourceGenerators.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Mathematics/Apps/">
+        <Project Path="Projects/Mathematics/Mathematics.App/Mathematics.App.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Benchmarks/Mathematics.Benchmarks.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Server/Mathematics.Server.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Mathematics/Modules/">
+        <Project Path="Projects/Mathematics/Mathematics.Compression/Mathematics.Compression.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Cryptography/Mathematics.Cryptography.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Distributions/Mathematics.Distributions.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Functions/Mathematics.Functions.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Graphics/Mathematics.Graphics.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Randoms/Mathematics.Randoms.csproj" />
+        <Project Path="Projects/Mathematics/Mathematics.Sortings/Mathematics.Sortings.csproj" />
     </Folder>
     <Folder Name="/Projects/Modeling/">
-        <Project Path="Projects/Modeling/Modeling.DeltaT.Algorithm/Modeling.DeltaT.Algorithm.csproj"/>
-        <Project Path="Projects/Modeling/Modeling.DeltaT.Example/Modeling.DeltaT.Example.csproj"/>
-        <Project Path="Projects/Modeling/Modeling.EventDriven.Algorithm/Modeling.EventDriven.Algorithm.csproj"/>
-        <Project Path="Projects/Modeling/Modeling.EventDriven.Example/Modeling.EventDriven.Example.csproj"/>
-        <Project Path="Shared/Modeling.Core/Modeling.Core.csproj"/>
+        <Project Path="Projects/Modeling/Modeling.DeltaT.Algorithm/Modeling.DeltaT.Algorithm.csproj" />
+        <Project Path="Projects/Modeling/Modeling.DeltaT.Example/Modeling.DeltaT.Example.csproj" />
+        <Project Path="Projects/Modeling/Modeling.EventDriven.Algorithm/Modeling.EventDriven.Algorithm.csproj" />
+        <Project Path="Projects/Modeling/Modeling.EventDriven.Example/Modeling.EventDriven.Example.csproj" />
+        <Project Path="Shared/Modeling.Core/Modeling.Core.csproj" />
     </Folder>
-    <Folder Name="/Tests/"/>
+    <Folder Name="/Tests/" />
     <Folder Name="/Tests/Projects/">
-        <Project Path="Tests/Projects/Mathematics.Tests/Mathematics.Tests.csproj"/>
+        <Project Path="Tests/Projects/Mathematics.Tests/Mathematics.Tests.csproj" />
     </Folder>
-    <Folder Name="/Utility/"/>
+    <Folder Name="/Utility/" />
     <Folder Name="/Utility/Shared/">
-        <Project Path="Shared/Utilities/Utilities.csproj"/>
-        <Project Path="Shared\Data\Data.csproj"/>
-        <Project Path="Shared\Logging\Logging.csproj"/>
+        <Project Path="Shared/NovoUtils.Web/NovoUtils.Web.csproj" />
+        <Project Path="Shared/Utilities/Utilities.csproj" />
+        <Project Path="Shared\Data\Data.csproj" />
+        <Project Path="Shared\Logging\Logging.csproj" />
     </Folder>
 </Solution>

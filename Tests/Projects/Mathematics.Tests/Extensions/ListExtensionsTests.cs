@@ -1,9 +1,9 @@
-﻿using Mathematics.Core.Statistics.Extensions;
+﻿using Mathematics.Core.Extensions;
 
 namespace Mathematics.Tests.Extensions;
 
 [TestFixture]
-public class ListMathExtensionsTests
+public class ListExtensionsTests
 {
 	private const double Tolerance = 1e-10;
 

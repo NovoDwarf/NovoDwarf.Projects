@@ -1,4 +1,5 @@
-﻿using Mathematics.Core.Geometry.Models;
+﻿
+using Mathematics.Geometry;
 
 namespace Mathematics.Tests.Models.Geometry;
 

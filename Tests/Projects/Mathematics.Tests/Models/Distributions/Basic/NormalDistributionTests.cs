@@ -1,5 +1,5 @@
-﻿using Mathematics.Core.Distributions.Models.Univariate.Continuous.RealLine;
-using Mathematics.Core.Statistics.Extensions;
+﻿using Mathematics.Core.Extensions;
+using Mathematics.Distributions.Univariate.Continuous.Unbounded;
 using Mathematics.Tests.Services;
 
 namespace Mathematics.Tests.Models.Distributions.Basic;

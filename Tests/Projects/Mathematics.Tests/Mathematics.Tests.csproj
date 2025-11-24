@@ -29,6 +29,10 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\Algorithms\Mathematics\Mathematics.csproj"/>
         <ProjectReference Include="..\..\..\Projects\Mathematics\Mathematics.Core\Mathematics.Core.csproj"/>
+        <ProjectReference Include="..\..\..\Projects\Mathematics\Mathematics.Cryptography\Mathematics.Cryptography.csproj" />
+        <ProjectReference Include="..\..\..\Projects\Mathematics\Mathematics.Distributions\Mathematics.Distributions.csproj" />
+        <ProjectReference Include="..\..\..\Projects\Mathematics\Mathematics.Graphics\Mathematics.Graphics.csproj" />
+        <ProjectReference Include="..\..\..\Projects\Mathematics\Mathematics.Sortings\Mathematics.Sortings.csproj" />
         <ProjectReference Include="..\..\..\Shared\Utilities\Utilities.csproj"/>
     </ItemGroup>
 

@@ -1,10 +1,10 @@
-﻿using Mathematics.Core.Distributions.Interfaces;
+﻿using Mathematics.Core.Base;
 
 namespace Mathematics.Tests.Services;
 
 public static class TestsUtils
 {
-	public static List<double> GenerateSamples(IDistribution<double> distribution, int count)
+	public static List<double> GenerateSamples(Distribution distribution, int count)
 	{
 		var results = new List<double>();
 

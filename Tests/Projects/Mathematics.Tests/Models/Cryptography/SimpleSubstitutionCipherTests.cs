@@ -1,4 +1,5 @@
-﻿using Mathematics.Core.Cryptography.Models.Monoalphabet;
+﻿
+using Mathematics.Cryptography.Monoalphabet;
 
 namespace Mathematics.Tests.Models.Cryptography;
 

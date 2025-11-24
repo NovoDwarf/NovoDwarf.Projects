@@ -1,5 +1,5 @@
-﻿using Mathematics.Core.Distributions.Models.Univariate.Continuous.SemiInfinite;
-using Mathematics.Core.Functions.Models;
+﻿using Mathematics.Distributions.Univariate.Continuous.Semibounded;
+using Mathematics.Functions;
 
 namespace Mathematics.Tests.Models.Distributions.Derived;
 
