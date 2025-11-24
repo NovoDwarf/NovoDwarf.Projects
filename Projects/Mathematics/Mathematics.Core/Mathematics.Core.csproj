@@ -16,25 +16,36 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Compressions\Models\Lossless\" />
-      <Folder Include="Cryptography\Base\" />
-      <Folder Include="Cryptography\Models\HashFunctions\" />
-      <Folder Include="Cryptography\Models\Monosound\" />
-      <Folder Include="Cryptography\Models\Polyalphabet\" />
-      <Folder Include="Cryptography\Models\Polygramms\" />
-      <Folder Include="Distributions\Models\Directional\" />
-      <Folder Include="Distributions\Models\Mixed\" />
-      <Folder Include="Distributions\Models\Multivariate\Continuous\" />
-      <Folder Include="Distributions\Models\Univariate\" />
-      <Folder Include="Functions\Interfaces\" />
-      <Folder Include="Sortings\" />
-      <Folder Include="Statistics\" />
-      <Folder Include="Transforms\" />
+      <ProjectReference Include="..\..\..\Shared\Utilities\Utilities.csproj" />
+      <ProjectReference Include="..\Mathematics.SourceGenerators\Mathematics.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\Utilities\Utilities.csproj" />
-      <ProjectReference Include="..\Mathematics.SourceGenerators\Mathematics.SourceGenerators.csproj" OutputItemType="Analyzer"/>
+      <EmbeddedResource Update="Resources\Distributions.Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Distribution.Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Functions.Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Functions.Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Distributions.Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Distributions.Resources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Functions.Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Functions.Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
     </ItemGroup>
 
 </Project>
