@@ -1,8 +1,10 @@
-﻿using Mathematics.Core.Distributions.Models.Univariate.Continuous.SemiInfinite;
+﻿
+using Mathematics.Distributions.Univariate.Continuous.Semibounded;
 using Modeling.Core.Extensions;
 using Modeling.Core.Models.Abstracts.Options;
 using Modeling.DeltaT.Algorithm.Models.Nodes;
 using Modeling.DeltaT.Algorithm.Models.Simulations;
+
 
 namespace Modeling.DeltaT.Example;
 
