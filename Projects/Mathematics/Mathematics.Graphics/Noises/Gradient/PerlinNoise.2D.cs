@@ -12,6 +12,9 @@ public partial class PerlinNoise : INoise2D<float>
 	/// <returns>Return the noise value at the specified point</returns>
 	public float Make(float x, float y)
 	{
+		float z = 0;
+		ApplyInput(ref x, ref y, ref z);
+
 		var X = (int)Math.Floor(x) & (Size - 1);
 		var Y = (int)Math.Floor(y) & (Size - 1);
 
@@ -26,16 +29,20 @@ public partial class PerlinNoise : INoise2D<float>
 		var ab = _permutation[_permutation[X]     + Y + 1];
 		var bb = _permutation[_permutation[X + 1] + Y + 1];
 
-		return Lerp(v,
-			Lerp(u,
-				Grad2D(aa, x,     y),
-				Grad2D(ba, x - 1, y)),
-			Lerp(u,
-				Grad2D(ab, x,     y - 1),
-				Grad2D(bb, x - 1, y - 1)));
+		var value =
+			Lerp(v,
+				Lerp(u,
+					Grad(aa, x,     y),
+					Grad(ba, x - 1, y)),
+				Lerp(u,
+					Grad(ab, x,     y - 1),
+					Grad(bb, x - 1, y - 1)));
+
+		return ApplyOutput(value);
 	}
 
-	private static float Grad2D(int hash, float x, float y)
+
+	private static float Grad(int hash, float x, float y)
 	{
 		var h = hash & 3;
 		return h switch

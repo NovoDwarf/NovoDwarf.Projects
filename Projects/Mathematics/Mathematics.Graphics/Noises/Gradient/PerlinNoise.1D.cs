@@ -11,6 +11,9 @@ public partial class PerlinNoise : INoise1D<float>
 	/// <returns>Return the noise value at the specified point</returns>
 	public float Make(float x)
 	{
+		float y = 0, z = 0;
+		ApplyInput(ref x, ref y, ref z);
+
 		var floor = (int)Math.Floor(x) & (Size - 1);
 		x -= (float)Math.Floor(x);
 
@@ -19,25 +22,12 @@ public partial class PerlinNoise : INoise1D<float>
 		var a = _permutation[floor];
 		var b = _permutation[floor + 1];
 
-		return Lerp(u, Grad1D(a, x), Grad1D(b, x - 1));
+		var value = Lerp(u, Grad(a, x), Grad(b, x - 1));
+
+		return ApplyOutput(value);
 	}
 	
-	/// <summary>
-	/// Generates a 1D Perlin noise value for an array of x coordinates.
-	/// </summary>
-	/// <param name="x">Array of x coordinates</param>
-	/// <returns>Array of noise values</returns>
-	public float[] Make(float[] x)
-	{
-		var result = new float[x.Length];
-		
-		for (var i = 0; i < x.Length; i++)
-			result[i] = Make(x[i]);
-		
-		return result;
-	}
-	
-	private static float Grad1D(int hash, float x)
+	private static float Grad(int hash, float x)
 	{
 		var h = hash & 15;
 		var g = 1f + (h & 7);

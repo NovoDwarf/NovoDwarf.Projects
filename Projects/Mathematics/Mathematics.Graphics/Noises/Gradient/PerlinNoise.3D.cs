@@ -6,6 +6,8 @@ public partial class PerlinNoise : INoise3D<float>
 {
 	public float Make(float x, float y, float z)
 	{
+		ApplyInput(ref x, ref y, ref z);
+
 		var X = (int)Math.Floor(x) & (Size - 1);
 		var Y = (int)Math.Floor(y) & (Size - 1);
 		var Z = (int)Math.Floor(z) & (Size - 1);
@@ -25,30 +27,23 @@ public partial class PerlinNoise : INoise3D<float>
 		var ba = _permutation.Hash(b) + Z;
 		var bb = _permutation.Hash(b + 1) + Z;
 
-		return Lerp(w, 
-			Lerp(v,
-				Lerp(u, Grad(_permutation[aa], x,     y,     z),
-					Grad(_permutation[ba], x - 1, y,     z)),
-				Lerp(u, Grad(_permutation[ab], x,     y - 1, z),
-					Grad(_permutation[bb], x - 1, y - 1, z))),
-			Lerp(v,
-				Lerp(u, Grad(_permutation[aa + 1], x,     y,     z - 1),
-					Grad(_permutation[ba + 1], x - 1, y,     z - 1)),
-				Lerp(u, Grad(_permutation[ab + 1], x,     y - 1, z - 1),
-					Grad(_permutation[bb + 1], x - 1, y - 1, z - 1))));
+		var value =
+			Lerp(w,
+				Lerp(v,
+					Lerp(u, Grad(_permutation[aa], x,     y,     z),
+                        Grad(_permutation[ba], x - 1, y,     z)),
+					Lerp(u, Grad(_permutation[ab], x,     y - 1, z),
+                        Grad(_permutation[bb], x - 1, y - 1, z))),
+				Lerp(v,
+					Lerp(u, Grad(_permutation[aa + 1], x,     y,     z - 1),
+                        Grad(_permutation[ba + 1], x - 1, y,     z - 1)),
+					Lerp(u, Grad(_permutation[ab + 1], x,     y - 1, z - 1),
+                        Grad(_permutation[bb + 1], x - 1, y - 1, z - 1))));
+
+		return ApplyOutput(value);
 	}
 	
-	public float[] Make(float[] x, float[] y, float[] z)
-	{
-		var result = new float[x.Length];
-		
-		for (var i = 0; i < x.Length; i++)
-			result[i] = Make(x[i], y[i], z[i]);
-		
-		return result;
-	}
-	
-	private float Grad(int hash, float x, float y, float z)
+	private static float Grad(int hash, float x, float y, float z)
 	{
 		var h = hash & 15;
 		var u = h < 8 ? x : y;

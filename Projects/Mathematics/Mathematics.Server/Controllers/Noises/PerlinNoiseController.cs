@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Drawing.Imaging;
-using System.Numerics;
-using Mathematics.Core.Extensions.Noises;
+﻿using Mathematics.Core.Extensions.Noises;
 using Mathematics.Graphics.Noises.Gradient;
+using Mathematics.Server.Base.Requests;
 using Microsoft.AspNetCore.Mvc;
-using NovoUtils.Web;
-using Scalar.AspNetCore;
 
 namespace Mathematics.Server.Controllers.Noises;
 
@@ -18,53 +14,40 @@ namespace Mathematics.Server.Controllers.Noises;
 public class PerlinNoiseController : ControllerBase
 {
     private readonly ILogger<PerlinNoiseController> _logger;
+    private readonly IImageEncoder _encoder;
+    private readonly IColorMapper _colors;
 
-    public PerlinNoiseController(ILogger<PerlinNoiseController> logger) => _logger = logger;
-    
-    /// <summary>
-    /// Generates a Perlin noise image as PNG.
-    /// </summary>
-    /// <param name="width">Width of the generated image in pixels (range: 1 - 4096)</param>
-    /// <param name="height">Height of the generated image in pixels (range: 1 - 4096)</param>
-    /// <returns>Returns a PNG image of the Perlin noise</returns>
-    [HttpGet("")]
-    [Stability(Stability.Stable)]
-    [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK, contentType: "image/png")]
-    public IActionResult Generate(
-        [FromQuery, Range(1, 4096)] int width = 256,
-        [FromQuery, Range(1, 4096)] int height = 256)
+    public PerlinNoiseController(
+	    IImageEncoder encoder,
+	    IColorMapper colors, 
+	    ILogger<PerlinNoiseController> logger)
     {
-            var noise = new PerlinNoise();
-            var pixels = noise.Make(new Vector2(width, height));
-            var bitmap = noise.ToHeatmapBitmap(pixels);
-            
-            using var stream = new MemoryStream();
-            bitmap.Save(stream, ImageFormat.Png);
-
-            var bytes = stream.ToArray();
-            
-            return File(bytes, "image/png");
+	    _encoder = encoder;
+	    _colors = colors;
+	    _logger = logger;
     }
     
     /// <summary>
-    /// Generates a Perlin noise image as PNG.
+    /// Generates a Perlin noise image
     /// </summary>
-    /// <param name="size">Size of the generated image in pixels (range: 1 - 4096)</param>
+    /// <param name="request">Request for the Perlin noise generation</param>
+    /// <param name="options">Options for the Perlin noise generation</param>
     /// <returns>Returns a PNG image of the Perlin noise</returns>
-    [HttpGet("")]
-    [Stability(Stability.Stable)]
-    [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK, contentType: "image/png")]
-    public IActionResult Generate(Vector2 size)
+    [HttpPost("")]
+    [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
+    public IActionResult Generate(
+	    [FromBody] PerlinNoiseRequest? request = null)
     {
-	    var noise = new PerlinNoise();
-	    var pixels = noise.Make(size);
-	    var bitmap = noise.ToHeatmapBitmap(pixels);
-            
-	    using var stream = new MemoryStream();
-	    bitmap.Save(stream, ImageFormat.Png);
+	    request ??= new PerlinNoiseRequest();
+	
+	    var noise = new PerlinNoise(request.Options);
+	    var pixels = noise.Make(request.Size);
 
-	    var bytes = stream.ToArray();
-            
-	    return File(bytes, "image/png");
+	    var bitmap = pixels.ToBitmap(_colors, request.ColorScheme);
+
+	    var bytes = _encoder.Encode(bitmap, request.Format);
+	    var mime = _encoder.GetMimeType(request.Format);
+
+	    return File(bytes, mime);
     }
 }
