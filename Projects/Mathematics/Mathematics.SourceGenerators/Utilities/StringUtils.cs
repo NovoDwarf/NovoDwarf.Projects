@@ -4,7 +4,7 @@ namespace Mathematics.SourceGenerators.Utilities;
 
 public class StringUtils
 {
-	public static string SplitPascalCase(string input)
+	public static string ToSnakeCase(string input)
 	{
 		if (string.IsNullOrEmpty(input))
 			return string.Empty;
@@ -23,7 +23,7 @@ public class StringUtils
 		}
 
 		if (currentWord.Length > 0)
-			words.Add(currentWord.ToString());
+			words.Add(currentWord.ToString().ToLower());
 
 		return string.Join("_", words.ToArray());
 	}

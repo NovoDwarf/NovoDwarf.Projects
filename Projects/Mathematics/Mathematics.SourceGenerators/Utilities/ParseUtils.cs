@@ -4,23 +4,31 @@ namespace Mathematics.SourceGenerators.Utilities;
 
 public static class ParseUtils
 {
-	public static string Parse(string valueAccess, string typeName, ITypeSymbol? parameterType = null)
+	public static string GenerateDouble(string paramName) 
+		=> GenerateAssignment(paramName, "double", "double.TryParse({0}Str, out var {0}Value) ? {0}Value : default");
+
+	public static string GenerateDoubleArray(string paramName) 
+		=> GenerateAssignment(paramName, "double[]", "{0}Str.Split(',').Select(s => double.Parse(s.Trim())).ToArray()");
+
+	public static string GenerateNullableDoubleArray(string paramName) 
+		=> GenerateAssignment(paramName, "double[]?", "{0}Str?.Split(',').Where(s => !string.IsNullOrWhiteSpace(s)).Select(s => double.Parse(s.Trim())).ToArray()");
+    
+	public static string GenerateInt(string paramName)
+		=> GenerateAssignment(paramName, "int", "int.TryParse({0}Str, out var {0}Value) ? {0}Value : default");
+
+	public static string GenerateGeneric(string paramName, string paramType) 
+		=> GenerateAssignment(paramName, paramType, "({1})Convert.ChangeType({0}Str, typeof({1}))");
+    
+	private static string GenerateAssignment(string paramName, string paramType, string parseExpression)
 	{
-		return typeName switch
-		{
-			"string" => valueAccess,
-			"int" or "System.Int32" => $"int.Parse({valueAccess})",
-			"long" or "System.Int64" => $"long.Parse({valueAccess})",
-			"double" or "System.Double" => $"double.Parse({valueAccess}, System.Globalization.CultureInfo.InvariantCulture)",
-			"float" or "System.Single" => $"float.Parse({valueAccess}, System.Globalization.CultureInfo.InvariantCulture)",
-			"bool" or "System.Boolean" => $"bool.Parse({valueAccess})",
-			"decimal" or "System.Decimal" => $"decimal.Parse({valueAccess}, System.Globalization.CultureInfo.InvariantCulture)",
-			"DateTime" or "System.DateTime" => $"System.DateTime.Parse({valueAccess}, System.Globalization.CultureInfo.InvariantCulture)",
-			"Guid" or "System.Guid" => $"System.Guid.Parse({valueAccess})",
-			"double[]" => $"System.Array.ConvertAll({valueAccess}.Split(','), double.Parse)",
-			_ when parameterType?.TypeKind == TypeKind.Enum => 
-				$"({typeName})System.Enum.Parse(typeof({typeName}), {valueAccess})",
-			_ => $"({typeName}){valueAccess}"
-		};
+		var finalParseExpression = string.Format(parseExpression, paramName, paramType);
+        
+		return $$"""
+		             if (request.Params.TryGetValue("{{paramName}}", out var {{paramName}}Str))
+		             {
+		                 {{paramName}} = {{finalParseExpression}};
+		                 hasParams = true;
+		             }
+		         """;
 	}
 }

@@ -49,7 +49,7 @@ public class PropertiesGenerator : IIncrementalGenerator
 			{
 				var sourceCode = GenerateProperties(classSymbol);
 				
-				context.AddSource($"{classSymbol.Name}.g.cs", sourceCode);
+				context.AddSource($"{classSymbol.Name}_Properties.g.cs", sourceCode);
 			}
 			catch (Exception ex)
 			{
@@ -74,10 +74,10 @@ public class PropertiesGenerator : IIncrementalGenerator
 		         {
 		             public partial class {{className}}
 		             {
-		                 private static readonly string _distributionName = "{{distributionName}}";
+		                 private static readonly string _name = "{{distributionName}}";
 		                 
-		                 public override string Name => _distributionName + "_name";
-		                 public override string Description => _distributionName + "_desc";
+		                 public override string Name => _name + "_name";
+		                 public override string Description => _name + "_desc";
 		             }
 		         }
 		         """;

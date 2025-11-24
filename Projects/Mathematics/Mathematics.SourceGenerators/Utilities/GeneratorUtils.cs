@@ -16,6 +16,12 @@ public class GeneratorUtils
 			.ToLowerInvariant();
 	}
 	
+	internal static bool HasValidSuffix(string className)
+	{
+		return ClassSuffixes.Any(suffix =>
+			className.EndsWith(suffix) && className.Length > suffix.Length);
+	}
+	
 	internal static bool IsDistributionSubclass(INamedTypeSymbol? classSymbol) => IsSubclass(classSymbol, "Distribution");
 	
 	internal static bool IsEntitySubclass(INamedTypeSymbol? classSymbol) => IsSubclass(classSymbol, "Entity");
@@ -36,11 +42,5 @@ public class GeneratorUtils
 		}
 
 		return false;
-	}
-	
-	internal static bool HasValidSuffix(string className)
-	{
-		return ClassSuffixes.Any(suffix =>
-			className.EndsWith(suffix) && className.Length > suffix.Length);
 	}
 }

@@ -3,6 +3,8 @@ using Mathematics.SourceGenerators.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
+namespace Mathematics.SourceGenerators.Generators.Distributions;
+
 [Generator]
 public class DistributionControllerGenerator : IIncrementalGenerator
 {
@@ -19,7 +21,7 @@ public class DistributionControllerGenerator : IIncrementalGenerator
             try
             {
                 var controllerCode = GenerateController(distributionSymbol);
-                context.AddSource($"{distributionSymbol.Name}Controller.g.cs", SourceText.From(controllerCode, Encoding.UTF8));
+                context.AddSource($"{distributionSymbol.Name}_Controller.g.cs", SourceText.From(controllerCode, Encoding.UTF8));
             }
             catch (Exception ex)
             {
@@ -69,77 +71,150 @@ public class DistributionControllerGenerator : IIncrementalGenerator
         var className = distributionSymbol.Name;
         var controllerName = $"{className}Controller";
         var distributionNamespace = distributionSymbol.ContainingNamespace.ToDisplayString();
-        
-        var targetNamespace = "Mathematics.Server.Controllers";
-        var baseNamespace = "Mathematics.Core";
 
         var distributionName = className.Replace("Distribution", "");
-        var routeName = StringUtils.SplitPascalCase(distributionName);
+        var routeName = StringUtils.ToSnakeCase(distributionName);
+
+        var constructors = distributionSymbol.Constructors;
+        var parameterizedConstructor = constructors.FirstOrDefault(c => 
+            c.Parameters.Length > 0 && !c.Parameters.Any(p => p.Type.SpecialType == SpecialType.System_String));
+        
+        var getDistributionMethod = GenerateGetDistributionMethod(className, parameterizedConstructor);
 
         var endpoints = new[]
         {
-            new { Route = "", Method = "Distribute", Action = "Distribute()" },
-            new { Route = "pdf/{x}", Method = "ProbabilityDensity", Action = "ProbabilityDensity(x)" },
-            new { Route = "cdf/{x}", Method = "CumulativeProbability", Action = "CumulativeDistribution(x)" },
-            new { Route = "expected", Method = "Expected", Action = "Expected" },
-            new { Route = "mean", Method = "Mean", Action = "Mean" },
-            new { Route = "median", Method = "Median", Action = "Median" },
-            new { Route = "mode", Method = "Mode", Action = "Mode" },
-            new { Route = "variance", Method = "Variance", Action = "Variance" },
-            new { Route = "skewness", Method = "Skewness", Action = "Skewness" },
-            new { Route = "kurtosis", Method = "Kurtosis", Action = "Kurtosis" },
-            new { Route = "standard-deviation", Method = "StandardDeviation", Action = "StandardDeviation" },
-            new { Route = "min", Method = "Min", Action = "Minimum" },
-            new { Route = "max", Method = "Max", Action = "Maximum" }
+            new { Route = "", Method = "Distribute", Action = "Distribute()", Summary = "Generate distribution", EndpointName = $"{distributionName} Generate Distribution" },
+            new { Route = "pdf/{x}", Method = "ProbabilityDensity", Action = "ProbabilityDensity(x)", Summary = "Calculate probability density function", EndpointName = $"{distributionName} Probability Density" },
+            new { Route = "cdf/{x}", Method = "CumulativeDistribution", Action = "CumulativeDistribution(x)", Summary = "Calculate cumulative distribution function", EndpointName = $"{distributionName} Cumulative Distribution" },
+            new { Route = "expected", Method = "Expected", Action = "Expected", Summary = "Get expected value", EndpointName = $"{distributionName} Expected Value" },
+            new { Route = "mean", Method = "Mean", Action = "Mean", Summary = "Get mean value", EndpointName = $"{distributionName} Mean" },
+            new { Route = "variance", Method = "Variance", Action = "Variance", Summary = "Get variance", EndpointName = $"{distributionName} Variance" },
+            new { Route = "standard-deviation", Method = "StandardDeviation", Action = "StandardDeviation", Summary = "Get standard deviation", EndpointName = $"{distributionName} Standard Deviation" }
         };
 
         var endpointsCode = string.Join("\n\n", endpoints.Select(endpoint => 
             $$"""
-                [HttpPost("{{endpoint.Route}}")]
-                public IActionResult {{endpoint.Method}}([FromBody] CalculationRequest request{{(endpoint.Route.Contains("{x}") ? ", double x" : "")}})
-                {
-                    try
-                    {
-                        var distribution = GetDistribution(request);
-                        var result = distribution.{{endpoint.Action}};
-                        
-                        return Ok(result);
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "Error during process Distribution");
-                        
-                        return BadRequest(ex.Message);
-                    }
-                }
-            """));
+                  /// <summary>
+                  /// {{endpoint.Summary}}
+                  /// </summary>
+                  /// <response code="200">Returns calculation result</response>
+                  /// <response code="400">Invalid parameters provided</response>
+                  [HttpPost("{{endpoint.Route}}")]
+                  [Produces("application/json")]
+                  [ProducesResponseType(typeof(double), 200)]
+                  [ProducesResponseType(typeof(ProblemDetails), 400)]
+                  [EndpointName("{{endpoint.EndpointName}}")]
+                  public IActionResult {{endpoint.Method}}([FromBody] CalculationRequest request{{(endpoint.Route.Contains("{x}") ? ", double x" : "")}})
+                  {
+                      try
+                      {
+                          var distribution = GetDistribution(request);
+                          var result = distribution.{{endpoint.Action}};
+                          
+                          return Ok(result);
+                      }
+                      catch (Exception ex)
+                      {
+                          _logger.LogError(ex, "Error in {{endpoint.Method}}");
+                          
+                          return BadRequest(ex.Message);
+                      }
+                  }
+              """));
 
         return $$"""
-            // <auto-generated/>
-            using Microsoft.AspNetCore.Mvc;
-            using {{baseNamespace}};
-            using {{distributionNamespace}};
-            
-            namespace {{targetNamespace}};
-            
-            [ApiController]
-            [Route("distributions/{{routeName}}")]
-            public partial class {{controllerName}} : ControllerBase
-            {
-                private readonly ILogger<{{controllerName}}> _logger;
+                 // <auto-generated/>
+                 using Microsoft.AspNetCore.Mvc;
+                 using Mathematics.Server.Base;
+                 using Mathematics.Core;
+                 using {{distributionNamespace}};
 
-                public {{controllerName}}(ILogger<{{controllerName}}> logger)
-                {
-                    _logger = logger;
-                }
-                
-                {{endpointsCode}}
+                 namespace Mathematics.Server.Controllers;
+
+                 /// <summary>
+                 /// {{distributionName}} distribution operations
+                 /// </summary>
+                 [ApiController]
+                 [Route("distributions/{{routeName}}")]
+                 [Produces("application/json")]
+                 [EndpointGroupName("{{distributionName}} Distribution")]
+                 public class {{controllerName}} : ControllerBase
+                 {
+                     private readonly ILogger<{{controllerName}}> _logger;
+
+                     /// <summary>
+                     /// {{distributionName}} distribution operations
+                     /// </summary>
+                     public {{controllerName}}(ILogger<{{controllerName}}> logger) => _logger = logger;
+                     
+                     {{endpointsCode}}
+
+                     {{getDistributionMethod}}
+                 }
+                 """;
+    }
+    
+    private static string GenerateGetDistributionMethod(string className, IMethodSymbol? parameterizedConstructor)
+    {
+        if (parameterizedConstructor == null)
+        {
+            return $$"""
+                         private {{className}} GetDistribution(CalculationRequest request)
+                         {
+                             return new {{className}}();
+                         }
+                     """;
+        }
+
+        var parameterAssignments = new List<string>();
+        var constructorParameters = parameterizedConstructor.Parameters;
+
+        foreach (var parameter in constructorParameters)
+        {
+            var paramName = parameter.Name;
+            var paramType = parameter.Type.ToDisplayString();
             
-                private {{className}} GetDistribution(CalculationRequest request)
-                {
-                    return new {{className}}(request.Params);
-                }
+            switch (paramType)
+            {
+                case "double":
+                    parameterAssignments.Add(ParseUtils.GenerateDouble(paramName));
+                    break;
+                case "double[]" or "System.Double[]":
+                    parameterAssignments.Add(ParseUtils.GenerateDoubleArray(paramName));
+                    break;
+                case "double[]?":
+                    parameterAssignments.Add(ParseUtils.GenerateNullableDoubleArray(paramName));
+                    break;
+                case "int":
+                    parameterAssignments.Add(ParseUtils.GenerateInt(paramName));
+                    break;
+                default:
+                    parameterAssignments.Add(ParseUtils.GenerateGeneric(paramName, paramType));
+                    break;
             }
-            """;
+        }
+
+        var parameterDeclarations = string.Join(";\n", constructorParameters.Select(p => 
+            $"{p.Type.ToDisplayString()} {p.Name} = default"));
+
+        var parameterNames = string.Join(", ", constructorParameters.Select(p => p.Name));
+
+        return $$"""
+                     private {{className}} GetDistribution(CalculationRequest request)
+                     {
+                         if (request.Params == null || request.Params.Count == 0)
+                             return new {{className}}();
+                      
+                         {{parameterDeclarations}};
+                         
+                         bool hasParams = false;
+                         
+                         {{string.Join("\n  ", parameterAssignments)}}
+
+                         if (hasParams)
+                             return new {{className}}({{parameterNames}});
+                         return new {{className}}();
+                     }
+                 """;
     }
 }
