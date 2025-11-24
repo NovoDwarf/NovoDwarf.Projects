@@ -1,6 +1,6 @@
 @Mathematics.Server_HostAddress = http://localhost:5203
 
-GET {{Mathematics.Server_HostAddress}}//
+POST {{Mathematics.Server_HostAddress}}//distributions/degenerate
 Accept: application/json
 
 ###

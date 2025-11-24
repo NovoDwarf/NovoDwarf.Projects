@@ -1,4 +1,4 @@
-﻿namespace Mathematics.Server.Controllers;
+﻿namespace Mathematics.Server.Base;
 
 public class CalculationRequest
 {
