@@ -7,4 +7,12 @@
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Modeling.Core\Modeling.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Messager.NET" Version="1.0.0" />
+    </ItemGroup>
+
 </Project>

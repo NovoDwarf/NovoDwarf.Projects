@@ -1,12 +1,21 @@
-﻿using Modeling.Core.EX;
+﻿using Messager.NET.Interfaces.Senders;
+using Modeling.Core.EX;
 using Modeling.DeltaT.Algorithm.Sinks;
+using Modeling.EventDriven.Algorithm.Models.Nodes;
 using Modeling.Logging.Models;
 
-namespace Modeling.DeltaT.Algorithm.Models.Simulations;
+namespace Modeling.EventDriven.Algorithm.Models.Simulations;
 
-public class SequentialSimulation : Simulation
+public class EventDrivenSimulation : Simulation
 {
 	public double DeltaTime { get; } = 0.1;
+
+	private readonly ISender<OnUpdateEvent> _tickSender;
+
+	public EventDrivenSimulation(ISender<OnUpdateEvent> tickSender)
+	{
+		_tickSender = tickSender;
+	}
 
 	public override void Simulate()
 	{
@@ -40,7 +49,7 @@ public class SequentialSimulation : Simulation
 	{
 		while (Context.IsRunning)
 		{
-			foreach (var node in Nodes) node.Update(DeltaTime);
+			_tickSender.Send(new OnUpdateEvent { DeltaTime = DeltaTime });
 
 			Context.Tick(DeltaTime);
 		}

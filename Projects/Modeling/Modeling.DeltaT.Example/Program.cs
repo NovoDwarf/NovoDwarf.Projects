@@ -8,7 +8,7 @@ using Modeling.DeltaT.Algorithm.Models.Simulations;
 
 namespace Modeling.DeltaT.Example;
 
-public static class Program
+internal static class Program
 {
 	public static void Main(string[] args)
 	{
@@ -17,16 +17,16 @@ public static class Program
 
 	private static void StartConsoleSim()
 	{
-		var g1 = new Source(new SourceOptions { Distribution = new ExpoDistribution(5) });
-		var g2 = new Source(new SourceOptions { Distribution = new ExpoDistribution(5) });
-		var g3 = new Source(new SourceOptions { Distribution = new ExpoDistribution(5) });
-		var g4 = new Source(new SourceOptions { Distribution = new ExpoDistribution(5) });
+		var g1 = new Source(new SourceOptions { Distribution = new ExpoDistribution() });
+		var g2 = new Source(new SourceOptions { Distribution = new ExpoDistribution() });
+		var g3 = new Source(new SourceOptions { Distribution = new ExpoDistribution() });
+		var g4 = new Source(new SourceOptions { Distribution = new ExpoDistribution() });
 
 		var q1 = new Queue();
 		var q2 = new Queue();
 
-		var u1 = new Service(new ServiceOptions { Distribution = new ExpoDistribution(5) });
-		var u2 = new Service(new ServiceOptions { Distribution = new ExpoDistribution(5) });
+		var u1 = new Service(new ServiceOptions { Distribution = new ExpoDistribution() });
+		var u2 = new Service(new ServiceOptions { Distribution = new ExpoDistribution() });
 
 		var s1 = new Sink();
 
