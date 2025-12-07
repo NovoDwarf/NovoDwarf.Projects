@@ -1,4 +1,5 @@
 ﻿using Mathematics.Core.Base;
+using Mathematics.Core.Base.Entities;
 
 namespace Mathematics.Tests.Services;
 
