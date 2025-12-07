@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ButtonCalculate" xml:space="preserve">
+        <value>Calculate</value>
+    </data>
+    <data name="LabelValue" xml:space="preserve">
+        <value>Value</value>
+    </data>
+    <data name="LabelResults" xml:space="preserve">
+        <value>Result</value>
+    </data>
+    <data name="LabelVariance" xml:space="preserve">
+        <value>Variance</value>
+    </data>
+    <data name="LabelMode" xml:space="preserve">
+        <value>Mode</value>
+    </data>
+    <data name="LabelMinimum" xml:space="preserve">
+        <value>Minimum</value>
+    </data>
+    <data name="LabelMaximum" xml:space="preserve">
+        <value>Maximum</value>
+    </data>
+    <data name="LabelExpected" xml:space="preserve">
+        <value>Expected</value>
+    </data>
+    <data name="LabelMean" xml:space="preserve">
+        <value>Mean</value>
+    </data>
+    <data name="LabelStandardDeviation" xml:space="preserve">
+        <value>StandardDeviation</value>
+    </data>
+    <data name="LabelSkewness" xml:space="preserve">
+        <value>Skewness</value>
+    </data>
+    <data name="LabelKurtosis" xml:space="preserve">
+        <value>Kurtosis</value>
+    </data>
+    <data name="LabelMedian" xml:space="preserve">
+        <value>Median</value>
+    </data>
+    <data name="ButtonOpen" xml:space="preserve">
+        <value>Open</value>
+    </data>
+    <data name="TitleHome" xml:space="preserve">
+        <value>Home</value>
+    </data>
+    <data name="AppTitle" xml:space="preserve">
+        <value>Math Organizer</value>
+    </data>
+</root>
