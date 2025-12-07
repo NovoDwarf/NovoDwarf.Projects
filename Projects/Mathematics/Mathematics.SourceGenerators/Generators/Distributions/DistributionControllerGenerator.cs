@@ -5,8 +5,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Mathematics.SourceGenerators.Generators.Distributions;
 
-[Generator]
-public class DistributionControllerGenerator : IIncrementalGenerator
+public class DistributionControllerGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {

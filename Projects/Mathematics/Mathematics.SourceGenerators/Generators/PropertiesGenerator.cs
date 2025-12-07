@@ -63,7 +63,7 @@ public class PropertiesGenerator : IIncrementalGenerator
 	private static string GenerateProperties(INamedTypeSymbol classSymbol)
 	{
 		var className = classSymbol.Name;
-		var distributionName = GeneratorUtils.GetCleanName(className);
+		var cleanName = GeneratorUtils.GetCleanName(className);
 		var namespaceName = classSymbol.ContainingNamespace.ToDisplayString();
 
 		return $$"""
@@ -74,10 +74,10 @@ public class PropertiesGenerator : IIncrementalGenerator
 		         {
 		             public partial class {{className}}
 		             {
-		                 private static readonly string _name = "{{distributionName}}";
+		                 private static readonly string _name = "{{cleanName}}";
 		                 
-		                 public override string Name => _name + "_name";
-		                 public override string Description => _name + "_desc";
+		                 public override string Name => _name + "Name";
+		                 public override string Description => _name + "Desc";
 		             }
 		         }
 		         """;

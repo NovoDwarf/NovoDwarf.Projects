@@ -11,9 +11,7 @@ public class GeneratorUtils
 	
 	internal static string GetCleanName(string name)
 	{
-		return ClassSuffixes
-			.Aggregate(name, (current, suffix) => current.Replace(suffix, string.Empty))
-			.ToLowerInvariant();
+		return ClassSuffixes.Aggregate(name, (current, suffix) => current.Replace(suffix, string.Empty));
 	}
 	
 	internal static bool HasValidSuffix(string className)
