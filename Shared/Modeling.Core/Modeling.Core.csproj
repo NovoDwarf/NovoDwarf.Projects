@@ -15,7 +15,7 @@
         <ProjectReference Include="..\..\Projects\Mathematics\Mathematics.Core\Mathematics.Core.csproj"/>
         <ProjectReference Include="..\..\Projects\Mathematics\Mathematics.Distributions\Mathematics.Distributions.csproj" />
         <ProjectReference Include="..\Data\Data.csproj"/>
-        <ProjectReference Include="..\Logging\Logging.csproj"/>
+        <ProjectReference Include="..\Modeling.Logging\Modeling.Logging.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Logging.Models;
+﻿using Modeling.Logging.Models;
 
 namespace Modeling.Core.EX;
 

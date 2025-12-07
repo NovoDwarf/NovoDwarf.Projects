@@ -1,4 +1,5 @@
 ﻿using Mathematics.Core.Base;
+using Mathematics.Core.Base.Entities;
 using Modeling.Core.Models.Abstracts.Commons.Options;
 
 namespace Modeling.Core.Models.Abstracts.Commons.Nodes;

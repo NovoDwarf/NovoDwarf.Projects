@@ -1,7 +1,7 @@
-﻿using Logging.Interfaces;
-using Logging.Models;
+﻿using Modeling.Logging.Interfaces;
+using Modeling.Logging.Models;
 
-namespace Logging.Sinks;
+namespace Modeling.Logging.Sinks;
 
 public class ConsoleSink : IMetricSink
 {

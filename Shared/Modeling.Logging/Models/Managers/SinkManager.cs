@@ -1,6 +1,6 @@
-﻿using Logging.Interfaces;
+﻿using Modeling.Logging.Interfaces;
 
-namespace Logging.Models.Managers;
+namespace Modeling.Logging.Models.Managers;
 
 public class SinkManager
 {

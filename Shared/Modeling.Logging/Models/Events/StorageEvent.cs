@@ -1,14 +1,14 @@
-﻿using Logging.Interfaces;
-using Logging.Models.Base;
+﻿using Modeling.Logging.Interfaces;
+using Modeling.Logging.Models.Base;
 
-namespace Logging.Models.Events;
+namespace Modeling.Logging.Models.Events;
 
-public sealed class CounterEvent : BaseMetricEvent
+public class StorageEvent : BaseMetricEvent
 {
-	public override string Type => "counter";
+	public override string Type => "storage";
 	public double Value { get; private set; }
 
-	public CounterEvent Increment(double value = 1)
+	public StorageEvent Increment(double value = 1)
 	{
 		Value += value;
 		UpdateTimestamp();

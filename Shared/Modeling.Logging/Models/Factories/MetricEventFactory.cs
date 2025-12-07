@@ -1,6 +1,6 @@
-﻿using Logging.Models.Events;
+﻿using Modeling.Logging.Models.Events;
 
-namespace Logging.Models.Factories;
+namespace Modeling.Logging.Models.Factories;
 
 public static class MetricEventFactory
 {

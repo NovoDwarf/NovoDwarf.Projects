@@ -1,7 +1,7 @@
 using System.Text;
-using Logging.Interfaces;
-using Logging.Models;
-using Logging.Models.Events;
+using Modeling.Logging.Interfaces;
+using Modeling.Logging.Models;
+using Modeling.Logging.Models.Events;
 
 namespace Modeling.DeltaT.Algorithm.Sinks;
 

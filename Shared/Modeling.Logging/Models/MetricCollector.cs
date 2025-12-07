@@ -1,9 +1,9 @@
-﻿using Logging.Interfaces;
-using Logging.Models.Factories;
-using Logging.Models.Managers;
-using Logging.Models.Storages;
+﻿using Modeling.Logging.Interfaces;
+using Modeling.Logging.Models.Factories;
+using Modeling.Logging.Models.Managers;
+using Modeling.Logging.Models.Storages;
 
-namespace Logging.Models;
+namespace Modeling.Logging.Models;
 
 public sealed class MetricCollector
 {

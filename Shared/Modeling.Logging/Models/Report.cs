@@ -1,6 +1,6 @@
-﻿using Logging.Interfaces;
+﻿using Modeling.Logging.Interfaces;
 
-namespace Logging.Models;
+namespace Modeling.Logging.Models;
 
 public class Report
 {
@@ -13,9 +13,9 @@ public class Report
 }
 
 /*using System.Text;
-using Logging.Utilities;
+using Modeling.Logging.Utilities;
 
-namespace Logging.Models;
+namespace Modeling.Logging.Models;
 
 public class Report
 {

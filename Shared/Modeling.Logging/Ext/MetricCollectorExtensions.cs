@@ -1,7 +1,7 @@
-﻿using Logging.Models;
-using Logging.Sinks;
+﻿using Modeling.Logging.Models;
+using Modeling.Logging.Sinks;
 
-namespace Logging.Ext;
+namespace Modeling.Logging.Ext;
 
 public static class MetricCollectorExtensions
 {

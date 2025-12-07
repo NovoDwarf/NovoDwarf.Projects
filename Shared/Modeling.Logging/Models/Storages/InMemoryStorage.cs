@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
-using Logging.Interfaces;
+using Modeling.Logging.Interfaces;
 
-namespace Logging.Models.Storages;
+namespace Modeling.Logging.Models.Storages;
 
 public class InMemoryStorage : IMetricStorage
 {

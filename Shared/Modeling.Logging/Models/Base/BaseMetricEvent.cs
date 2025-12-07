@@ -1,6 +1,6 @@
-﻿using Logging.Interfaces;
+﻿using Modeling.Logging.Interfaces;
 
-namespace Logging.Models.Base;
+namespace Modeling.Logging.Models.Base;
 
 public abstract class BaseMetricEvent : IMetricEvent
 {

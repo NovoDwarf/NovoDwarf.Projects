@@ -1,4 +1,4 @@
-﻿namespace Logging.Interfaces;
+﻿namespace Modeling.Logging.Interfaces;
 
 public interface IMetricStorage
 {

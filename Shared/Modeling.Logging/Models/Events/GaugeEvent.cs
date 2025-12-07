@@ -1,7 +1,7 @@
-﻿using Logging.Interfaces;
-using Logging.Models.Base;
+﻿using Modeling.Logging.Interfaces;
+using Modeling.Logging.Models.Base;
 
-namespace Logging.Models.Events;
+namespace Modeling.Logging.Models.Events;
 
 public sealed class GaugeEvent : BaseMetricEvent
 {

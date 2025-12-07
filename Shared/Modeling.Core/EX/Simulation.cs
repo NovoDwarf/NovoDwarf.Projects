@@ -1,4 +1,4 @@
-﻿using Logging.Models;
+﻿using Modeling.Logging.Models;
 using Modeling.Core.Models.Abstracts.Commons.Nodes;
 using Modeling.Core.Models.Base;
 
