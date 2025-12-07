@@ -1,4 +1,5 @@
-﻿using Mathematics.Core.Enums.Cryptography;
+﻿using Mathematics.Core.Base.Entities;
+using Mathematics.Core.Enums.Cryptography;
 
 namespace Mathematics.Core.Base;
 
@@ -16,8 +17,6 @@ public abstract class Sorting<T> : Entity
 		_timeComplexityType = timeComplexityType;
 		_cryptoAlgorithmType = cryptoAlgorithmType;
 	}
-	
-	public override string Category => "sorting_category";
 	
 	public string SpaceComplexity => GetSpaceComplexity();
 	public string TimeComplexity => GetTimeComplexity();

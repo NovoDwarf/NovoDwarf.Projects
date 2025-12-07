@@ -1,20 +1,14 @@
+using Mathematics.App.Maui.Models;
 using Mathematics.Core.Enums;
+using Mathematics.Core.Extensions;
 
-namespace Mathematics.Core.Base;
+namespace Mathematics.Core.Base.Entities;
 
 /// <summary>
-///     Base class for all distributions.
+/// Base class for all distributions.
 /// </summary>
 public abstract class Distribution : Entity
 {
-	public virtual string Name => "_name";
-	public virtual string Description => "_desc";
-
-	public override string Category => "distribution_category";
-	
-	public virtual DistributionCategory DistributionCategory => DistributionCategory.None;
-	public virtual DistributionSubCategory DistributionSubCategory => DistributionSubCategory.None;
-
 	/// <summary>
 	/// Returns the expected value of the distribution
 	/// </summary>
@@ -70,7 +64,7 @@ public abstract class Distribution : Entity
 	/// </summary>
 	/// <returns>Random value</returns>
 	public abstract double Distribute();
-
+	
 	/// <summary>
 	/// Returns the quantile of the distribution
 	/// </summary>
@@ -91,4 +85,6 @@ public abstract class Distribution : Entity
 	/// <param name="x"></param>
 	/// <returns></returns>
 	public abstract double CumulativeDistribution(double x);
+
+	protected abstract void Validate();
 }
