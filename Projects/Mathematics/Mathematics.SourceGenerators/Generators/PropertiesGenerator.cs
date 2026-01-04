@@ -76,8 +76,8 @@ public class PropertiesGenerator : IIncrementalGenerator
 		             {
 		                 private static readonly string _name = "{{cleanName}}";
 		                 
-		                 public override string Name => _name + "Name";
-		                 public override string Description => _name + "Desc";
+		                 public override string Name => _name + "_Name";
+		                 public override string Description => _name + "_Desc";
 		             }
 		         }
 		         """;
