@@ -1,4 +1,5 @@
 ﻿using Mathematics.Core.Base;
+using Mathematics.Core.Base.Entities;
 using Mathematics.Core.Interfaces;
 
 namespace Mathematics.Cryptography.Monoalphabet;
