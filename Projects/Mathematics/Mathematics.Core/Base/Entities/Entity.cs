@@ -9,8 +9,6 @@ public abstract class Entity
 	
 	public virtual string Name => "Name";
 	public virtual string Description => "Desc";
-	
-	public abstract string[] Path { get; }
-	
+
 	public virtual void Set(params object[] parameters) { }
 }

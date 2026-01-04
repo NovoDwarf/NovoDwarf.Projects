@@ -1,7 +1,3 @@
-using Mathematics.App.Maui.Models;
-using Mathematics.Core.Enums;
-using Mathematics.Core.Extensions;
-
 namespace Mathematics.Core.Base.Entities;
 
 /// <summary>
@@ -58,6 +54,11 @@ public abstract class Distribution : Entity
 	/// Returns the maximum value
 	/// </summary>
 	public abstract double Maximum { get; }
+	
+	/// <summary>
+	/// Returns the support of distribution
+	/// </summary>
+	//public abstract Range Support { get; }
 	
 	/// <summary>
 	/// Returns a random value from the distribution
