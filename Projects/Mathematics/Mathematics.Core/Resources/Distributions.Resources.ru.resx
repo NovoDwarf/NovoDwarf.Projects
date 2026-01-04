@@ -11,7 +11,181 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="DegenerateName" xml:space="preserve">
-        <value>Вырожденное распределение</value>
+    <data name="Degenerate_Name" xml:space="preserve">
+        <value>Вырожденное</value>
+    </data>
+    <data name="Beta_Name" xml:space="preserve">
+        <value>Бета</value>
+    </data>
+    <data name="Triangular_Name" xml:space="preserve">
+        <value>Треугольное</value>
+    </data>
+    <data name="Uniform_Name" xml:space="preserve">
+        <value>Равномерное</value>
+    </data>
+    <data name="Pareto_Name" xml:space="preserve">
+        <value>Парето</value>
+    </data>
+    <data name="Gamma_Name" xml:space="preserve">
+        <value>Гамма</value>
+    </data>
+    <data name="Levy_Name" xml:space="preserve">
+        <value>Леви</value>
+    </data>
+    <data name="NormalLog_Name" xml:space="preserve">
+        <value>Нормальное логарифмическое</value>
+    </data>
+    <data name="NormalTruncated_Name" xml:space="preserve">
+        <value>Нормальное усеченное</value>
+    </data>
+    <data name="Weibull_Name" xml:space="preserve">
+        <value>Вейбулла</value>
+    </data>
+    <data name="Expo_Name" xml:space="preserve">
+        <value>Экспоненциальное (показательное)</value>
+    </data>
+    <data name="ExpoHypo_Name" xml:space="preserve">
+        <value>Гипоэкспоненциальное</value>
+    </data>
+    <data name="ExpoHyper_Name" xml:space="preserve">
+        <value>Гиперэкспоненциальное</value>
+    </data>
+    <data name="Erlang_Name" xml:space="preserve">
+        <value>Эрланга</value>
+    </data>
+    <data name="Cauchy_Name" xml:space="preserve">
+        <value>Коши</value>
+    </data>
+    <data name="Laplace_Name" xml:space="preserve">
+        <value>Лапласа</value>
+    </data>
+    <data name="Normal_Name" xml:space="preserve">
+        <value>Нормальное (Гауссово)</value>
+    </data>
+    <data name="BinomialPoisson_Name" xml:space="preserve">
+        <value>Биномиальное Пуассона</value>
+    </data>
+    <data name="Binomial_Name" xml:space="preserve">
+        <value>Биномиальное</value>
+    </data>
+    <data name="BinomialBeta_Name" xml:space="preserve">
+        <value>Биномиальное Бета</value>
+    </data>
+    <data name="Benford_Name" xml:space="preserve">
+        <value>Бенфорда</value>
+    </data>
+    <data name="Bernoulli_Name" xml:space="preserve">
+        <value>Бернулли</value>
+    </data>
+    <data name="UniformDiscrete_Name" xml:space="preserve">
+        <value>Равномерное дискретное</value>
+    </data>
+    <data name="Geometric_Name" xml:space="preserve">
+        <value>Геометрическое</value>
+    </data>
+    <data name="Degenerate_Desc" xml:space="preserve">
+        <value>Распределение вероятностей случайной величины, которая принимает только одно значение с вероятностью 1</value>
+    </data>
+    <data name="GeometricHyper_Name" xml:space="preserve">
+        <value>Гипер геометрическое</value>
+    </data>
+    <data name="Erlang_Desc" xml:space="preserve">
+        <value>Непрерывное распределение вероятностей, описывающее время до наступления k-го события в пуассоновском процессе (потоке событий с постоянной интенсивностью). Оно является частным случаем гамма-распределения, где параметр формы k (число событий) является целым положительным числом</value>
+    </data>
+    <data name="Cauchy_Desc" xml:space="preserve">
+        <value>Непрерывное распределение с "тяжёлыми хвостами", которое не имеет математического ожидания и дисперсии. Оно часто возникает как отношение двух независимых стандартных нормальных случайных величин</value>
+    </data>
+    <data name="Beta_Desc" xml:space="preserve">
+        <value>Непрерывное распределение, заданное на интервале от 0 до 1. Оно часто используется для моделирования случайных величин, представляющих собой доли или вероятности, и является сопряжённым априорным распределением для биномиального распределения в байесовской статистике</value>
+    </data>
+    <data name="Gamma_Desc" xml:space="preserve">
+        <value>Непрерывное распределение, обобщающее экспоненциальное распределение и распределение Эрланга. Оно описывает время до наступления заданного количества событий в пуассоновском процессе или сумму независимых экспоненциально распределённых величин</value>
+    </data>
+    <data name="Expo_Desc" xml:space="preserve">
+        <value>Непрерывное распределение, моделирующее время между событиями в пуассоновском процессе (процессе с постоянной интенсивностью). Обладает свойством отсутствия памяти: вероятность события в будущем не зависит от прошедшего времени</value>
+    </data>
+    <data name="ExpoHypo_Desc" xml:space="preserve">
+        <value>Распределение времени обслуживания в системе, состоящей из нескольких последовательных этапов, каждый с собственным экспоненциальным распределением. Моделирует процессы, где общее время является суммой нескольких независимых экспоненциально распределённых случайных величин с разными параметрами</value>
+    </data>
+    <data name="ExpoHyper_Desc" xml:space="preserve">
+        <value>Распределение, возникающее при ветвлении процесса: система выбирает один из нескольких параллельных экспоненциальных путей с определённой вероятностью. Является смесью экспоненциальных распределений и моделирует процессы с большей вариабельностью, чем экспоненциальное</value>
+    </data>
+    <data name="Weibull_Desc" xml:space="preserve">
+        <value>Универсальное распределение для моделирования времени до отказа. Имеет параметр формы, который позволяет описывать различные типы отказов: ранние (параметр &lt; 1), случайные (параметр = 1, совпадает с экспоненциальным), и износные (параметр &gt; 1)</value>
+    </data>
+    <data name="Triangular_Desc" xml:space="preserve">
+        <value>Непрерывное распределение на конечном интервале, плотность вероятности которого графически представляет собой треугольник. Задаётся минимальным, максимальным и наиболее вероятным значением (модой). Используется в ситуациях с ограниченными данными, когда известны только границы и наилучшая оценка</value>
+    </data>
+    <data name="Laplace_Desc" xml:space="preserve">
+        <value>Распределение с острым пиком в центре (в точке моды) и более «тяжёлыми», чем у нормального, хвостами. Его плотность убывает по экспоненциальному закону с обеих сторон от центра. Часто используется для моделирования данных с резкими пиками</value>
+    </data>
+    <data name="Levy_Desc" xml:space="preserve">
+        <value>Специальный случай устойчивого распределения с бесконечной дисперсией и «тяжёлыми хвостами». Его плотность вероятности выражается через специальные функции, а распределение сумм независимых одинаково распределённых случайных величин такого вида сохраняет свою форму</value>
+    </data>
+    <data name="NormalLog_Desc" xml:space="preserve">
+        <value>Распределение случайной величины, логарифм которой подчиняется нормальному закону. Всегда положительно, имеет правую асимметрию и часто моделирует величины, являющиеся произведением многих независимых положительных факторов (например, доходы, размеры)</value>
+    </data>
+    <data name="NormalTruncated_Desc" xml:space="preserve">
+        <value>Нормальное распределение, ограниченное определённым интервалом (слева, справа или с двух сторон). Вероятность за пределами интервала обнуляется, а оставшаяся часть масштабируется</value>
+    </data>
+    <data name="Normal_Desc" xml:space="preserve">
+        <value>Фундаментальное распределение в статистике, имеющее симметричную колоколообразную форму. Полностью определяется двумя параметрами: средним значением (центр) и стандартным отклонением (ширина). Появляется во многих природных процессах благодаря центральной предельной теореме</value>
+    </data>
+    <data name="Pareto_Desc" xml:space="preserve">
+        <value>Распределение, описывающее явления по принципу «80/20», где большая часть эффекта обусловлена малой долей причин. Имеет «тяжёлый хвост» — вероятность экстремально больших значений убывает по степенному закону, а не экспоненциально</value>
+    </data>
+    <data name="UniformDiscrete_Desc" xml:space="preserve">
+        <value>Распределение, где конечное число значений (часто целочисленных) имеет одинаковую вероятность. Классический пример — честный игральный кубик, где каждая грань выпадает с вероятностью 1/6</value>
+    </data>
+    <data name="Uniform_Desc" xml:space="preserve">
+        <value>Распределение, где вероятность попадания в любой интервал фиксированной длины внутри конечного отрезка одинакова. Все значения из этого отрезка равновероятны</value>
+    </data>
+    <data name="Benford_Desc" xml:space="preserve">
+        <value>Эмпирический закон, описывающий вероятность появления определённых цифр на первой позиции в реальных наборах числовых данных (таких как площади стран, котировки акций, физические константы). Меньшие цифры (особенно 1) встречаются значительно чаще, чем большие</value>
+    </data>
+    <data name="Bernoulli_Desc" xml:space="preserve">
+        <value>Дискретное распределение случайной величины, принимающей только два значения (обычно 1 — «успех» и 0 — «неудача») в результате одного испытания. Полностью задаётся одной вероятностью успеха</value>
+    </data>
+    <data name="BinomialBeta_Desc" xml:space="preserve">
+        <value>Дискретное распределение, возникающее в результате испытаний Бернулли, где вероятность успеха сама является случайной величиной, подчиняющейся бета-распределению. Это распределение Бернулли со случайной, меняющейся от эксперимента к эксперименту вероятностью</value>
+    </data>
+    <data name="Binomial_Desc" xml:space="preserve">
+        <value>Дискретное распределение числа «успехов» в фиксированном количестве независимых испытаний Бернулли с постоянной вероятностью успеха в каждом испытании</value>
+    </data>
+    <data name="Geometric_Desc" xml:space="preserve">
+        <value>Дискретное распределение числа испытаний Бернулли до первого «успеха» (включая успешное испытание). Имеет свойство отсутствия памяти: вероятность успеха на следующем шаге не зависит от количества предыдущих неудач</value>
+    </data>
+    <data name="GeometricHyper_Desc" xml:space="preserve">
+        <value>Дискретное распределение числа «успехов» при выборке без возвращения из конечной совокупности, содержащей два типа объектов (например, «бракованные» и «годные»). В отличие от биномиального, вероятность меняется от испытания к испытанию</value>
+    </data>
+    <data name="StudentsT_Name" xml:space="preserve">
+        <value>Стюдента (T-распределение)</value>
+    </data>
+    <data name="StudentsT_Desc" xml:space="preserve">
+        <value>Непрерывное распределение, используемое при оценке математического ожидания нормально распределённой генеральной совокупности при малом объёме выборки и неизвестной дисперсии. По форме похоже на нормальное, но имеет более тяжёлые хвосты, которые становятся легче с ростом числа степеней свободы</value>
+    </data>
+    <data name="Finite_Category_Name" xml:space="preserve">
+        <value>Конечные</value>
+    </data>
+    <data name="Infinite_Category_Name" xml:space="preserve">
+        <value>Бесконечные</value>
+    </data>
+    <data name="Unbounded_Category_Name" xml:space="preserve">
+        <value>Неограниченные</value>
+    </data>
+    <data name="Bounded_Category_Name" xml:space="preserve">
+        <value>Ограниченные</value>
+    </data>
+    <data name="Degenerate_Category_Name" xml:space="preserve">
+        <value>Вырожденные</value>
+    </data>
+    <data name="Continious_Category_Name" xml:space="preserve">
+        <value>Непрерывные</value>
+    </data>
+    <data name="Semibounded_Category_Name" xml:space="preserve">
+        <value>Полуограниченные</value>
+    </data>
+    <data name="Univariate_Category_Name" xml:space="preserve">
+        <value>Одномерные</value>
     </data>
 </root>

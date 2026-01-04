@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ScaleParamName" xml:space="preserve">
+        <value>Scale</value>
+    </data>
+    <data name="ShapeParamName" xml:space="preserve">
+        <value>Shape</value>
+    </data>
+    <data name="TrialsParamName" xml:space="preserve">
+        <value>Trials</value>
+    </data>
+    <data name="ProbabilityParamName" xml:space="preserve">
+        <value>Probability</value>
+    </data>
+    <data name="MinimumParamName" xml:space="preserve">
+        <value>Minimum</value>
+    </data>
+    <data name="MaximumParamName" xml:space="preserve">
+        <value>Maximum</value>
+    </data>
+    <data name="StandardDeviationParamName" xml:space="preserve">
+        <value>Standard Deviation</value>
+    </data>
+    <data name="SuccessParamName" xml:space="preserve">
+        <value>Success</value>
+    </data>
+    <data name="AlphaParamName" xml:space="preserve">
+        <value>Alpha</value>
+    </data>
+    <data name="BetaParamName" xml:space="preserve">
+        <value>Beta</value>
+    </data>
+    <data name="MeanParamName" xml:space="preserve">
+        <value>Mean</value>
+    </data>
+    <data name="LocationParamName" xml:space="preserve">
+        <value>Location</value>
+    </data>
+    <data name="RatesParamName" xml:space="preserve">
+        <value>Rates</value>
+    </data>
+    <data name="ProbabilitiesParamName" xml:space="preserve">
+        <value>Probabilities</value>
+    </data>
+    <data name="RateParamName" xml:space="preserve">
+        <value>Rate</value>
+    </data>
+    <data name="ModeParamName" xml:space="preserve">
+        <value>Mode</value>
+    </data>
+    <data name="ConstantParamName" xml:space="preserve">
+        <value>Constant</value>
+    </data>
+</root>
