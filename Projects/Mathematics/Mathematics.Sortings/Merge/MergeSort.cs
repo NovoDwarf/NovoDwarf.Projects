@@ -1,4 +1,5 @@
 ﻿using Mathematics.Core.Base;
+using Mathematics.Core.Base.Entities;
 using Mathematics.Core.Enums.Cryptography;
 
 namespace Mathematics.Sortings.Merge;
@@ -6,10 +7,7 @@ namespace Mathematics.Sortings.Merge;
 public class MergeSort<T> : Sorting<T>
 	where T : IComparable<T>
 {
-	public MergeSort() : base(SpaceComplexityType.Linear, TimeComplexityType.Linearithmic, CryptoAlgorithmType.ComparisonSort)
-	{ }
-
-	public override void Sort(T[] array)
+	public override void Sort(in T[] array)
 	{
 		if (array is not { Length: > 1 })
 			throw new ArgumentException("Array must have at least two elements");
@@ -19,7 +17,7 @@ public class MergeSort<T> : Sorting<T>
 		Sort(array, temp, 0, array.Length - 1);
 	}
 
-	private static void Sort(T[] array, T[] temp, int left, int right)
+	private void Sort(T[] array, T[] temp, int left, int right)
 	{
 		if (left >= right)
 			return;
@@ -31,7 +29,7 @@ public class MergeSort<T> : Sorting<T>
 		Merge(array, temp, left, middle, right);
 	}
 
-	private static void Merge(T[] array, T[] temp, int left, int middle, int right)
+	private void Merge(T[] array, T[] temp, int left, int middle, int right)
 	{
 		var leftIndex = left;
 		var rightIndex = middle + 1;
@@ -68,5 +66,7 @@ public class MergeSort<T> : Sorting<T>
 		}
 
 		for (var i = left; i <= right; i++) array[i] = temp[i];
+		
+		OnStep?.Invoke(array);
 	}
 }
