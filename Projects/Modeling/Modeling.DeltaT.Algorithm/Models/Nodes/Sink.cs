@@ -15,6 +15,5 @@ public class Sink : SinkBase
 	public override void Process(Request request)
 	{
 		Context.Collector.CounterIncrement($"{Id}_Sink_Completed");
-		//sim.CompleteRequest(request);
 	}
 }

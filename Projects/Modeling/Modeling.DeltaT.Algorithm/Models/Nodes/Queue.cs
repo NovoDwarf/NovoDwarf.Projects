@@ -10,9 +10,7 @@ public sealed class Queue : QueueBase
 {
 	private readonly Dictionary<Guid, double> _queueEnterTimes = new();
 
-	public Queue(QueueOptions? options = null) : base(options)
-	{
-	}
+	public Queue(QueueOptions? options = null) : base(options) { }
 
 	public override void Process(Request request)
 	{
@@ -42,16 +40,16 @@ public sealed class Queue : QueueBase
 
 		var req = Dequeue();
 
-		if (req != null)
+		if (req == null) 
+			return;
+		
+		if (_queueEnterTimes.TryGetValue(req.Id, out var enterTime))
 		{
-			if (_queueEnterTimes.TryGetValue(req.Id, out var enterTime))
-			{
-				var waitTime = Context.CurrentTime - enterTime;
-				Context.Collector.ListAdd($"{Id}_Queue_WaitTime", waitTime);
-				_queueEnterTimes.Remove(req.Id);
-			}
-
-			next.Process(req);
+			var waitTime = Context.CurrentTime - enterTime;
+			Context.Collector.ListAdd($"{Id}_Queue_WaitTime", waitTime);
+			_queueEnterTimes.Remove(req.Id);
 		}
+
+		next.Process(req);
 	}
 }

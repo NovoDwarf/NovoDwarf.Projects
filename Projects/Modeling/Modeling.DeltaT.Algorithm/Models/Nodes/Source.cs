@@ -39,7 +39,6 @@ public class Source : SourceBase
 		if (Options.ClosedSystem)
 			InFlight++;
 
-		// Отслеживаем время генерации (только если это не первая генерация)
 		if (_lastGenerateTime >= 0)
 		{
 			var generateTime = Context.CurrentTime - _lastGenerateTime;

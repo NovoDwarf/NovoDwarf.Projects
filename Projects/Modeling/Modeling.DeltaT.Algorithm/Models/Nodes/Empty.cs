@@ -5,7 +5,5 @@ namespace Modeling.DeltaT.Algorithm.Models.Nodes;
 
 public sealed class Empty : EmptyBase
 {
-	public Empty(EmptyOptions? options = null) : base(options)
-	{
-	}
+	public Empty(EmptyOptions? options = null) : base(options) { }
 }

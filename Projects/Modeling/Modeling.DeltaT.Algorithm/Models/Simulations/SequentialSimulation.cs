@@ -40,7 +40,8 @@ public class SequentialSimulation : Simulation
 	{
 		while (Context.IsRunning)
 		{
-			foreach (var node in Nodes) node.Update(DeltaTime);
+			foreach (var node in Nodes) 
+				node.Update(DeltaTime);
 
 			Context.Tick(DeltaTime);
 		}

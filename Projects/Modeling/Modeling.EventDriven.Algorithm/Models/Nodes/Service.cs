@@ -1,126 +1,51 @@
-﻿using System.Diagnostics;
-using Messager.NET.Interfaces.Receivers;
-using Messager.NET.Interfaces.Senders;
+using System.Diagnostics;
+using Modeling.Core.EX;
 using Modeling.Core.Models.Abstracts.Nodes;
 using Modeling.Core.Models.Abstracts.Options;
 using Modeling.Core.Models.Base;
+using Modeling.EventDriven.Algorithm.Models.Simulations;
 
 namespace Modeling.EventDriven.Algorithm.Models.Nodes;
 
 [DebuggerDisplay("Service [{Id}]")]
-public sealed class Service : ServiceBase, IDisposable
+public sealed class Service : ServiceBase
 {
+	private readonly EventCollector _collector;
+	private readonly Dictionary<Guid, double> _arrivalTimes = new();
+
 	private double _busyStart;
 	private Request? _current;
 	private double _serviceEnd;
 	private double _serviceStart;
-	
-	private readonly ISender<OnUpdateEvent> _tickSender;
-	private readonly ISender<OnProcessEvent> _processSender;
-	private readonly IReceiver<OnUpdateEvent> _tickReceiver;
-	private readonly IReceiver<OnProcessEvent> _processReceiver;
-	
-	private IDisposable? _tickSubscription;
-	private IDisposable? _processSubscription;
 
-	public Service(ServiceOptions? options = null, 
-		ISender<OnUpdateEvent>? tickSender = null,
-		ISender<OnProcessEvent>? processSender = null,
-		IReceiver<OnUpdateEvent>? tickReceiver = null,
-		IReceiver<OnProcessEvent>? processReceiver = null) 
+	public Service(EventCollector collector, ServiceOptions? options = null)
 		: base(options)
 	{
-		_tickSender = tickSender ?? throw new ArgumentNullException(nameof(tickSender));
-		_processSender = processSender ?? throw new ArgumentNullException(nameof(processSender));
-		_tickReceiver = tickReceiver ?? throw new ArgumentNullException(nameof(tickReceiver));
-		_processReceiver = processReceiver ?? throw new ArgumentNullException(nameof(processReceiver));
+		_collector = collector;
+	}
+
+	public override void Process(Request request)
+	{
+		Enqueue(request);
 		
-		SubscribeToEvents();
+		_arrivalTimes[request.Id] = Context.CurrentTime;
+		
+		Context.Collector.GaugeRecord($"{Id}_Service_Queue_Size", Storage.Count);
+		Context.Collector.ListAdd($"{Id}_Service_Queue_Size_History", Storage.Count);
+
+		TryStartService();
 	}
 
-	private void SubscribeToEvents()
+	public override void Update(double deltaTime) { }
+
+	private void TryStartService()
 	{
-		_tickSubscription = _tickReceiver.Subscribe(OnTick);
-		_processSubscription = _processReceiver.Subscribe(OnProcess);
-	}
-
-	private void OnTick(OnUpdateEvent evt)
-	{
-		if (IsServiceComplete())
-			CompleteService();
-
-		if (CanStartNewService())
-			StartService();
-
-		if (IsBusy)
-			Context.Collector.GaugeRecord($"{Id}_Service_IsBusy", 1);
-		else
-			Context.Collector.GaugeRecord($"{Id}_Service_IsBusy", 0);
-	}
-
-	private void OnProcess(OnProcessEvent evt)
-	{
-		// Обработка входящих запросов, если необходимо
-		// Например, можно добавить логику обработки входящих ProcessEvent'ов
-	}
-
-	private bool IsServiceComplete()
-	{
-		return _current != null && Context.CurrentTime >= _serviceEnd;
-	}
-
-	private bool CanStartNewService()
-	{
-		return _current == null && Storage.Count > 0;
-	}
-
-	private double DoService()
-	{
-		return Math.Max(0, Distribution.Distribute());
-	}
-
-	private void CompleteService()
-	{
-		var serviceDuration = Context.CurrentTime - _serviceStart;
-
 		if (_current != null)
-		{
-			//_current.ServiceTime += serviceDuration;
-			Context.Collector.CounterIncrement($"{Id}_Service_Completed");
-			Context.Collector.ListAdd($"{Id}_Service_Duration", serviceDuration);
-
-			EndBusyPeriod(Context.CurrentTime);
-
-			var next = GetAvailableExit();
-
-			if (next == null)
-				return;
-
-			// Отправляем событие обработки вместо прямого вызова
-			var processEvent = new OnProcessEvent 
-			{ 
-				Request = _current,
-				NodeId = Id,
-				Timestamp = Context.CurrentTime
-			};
-			_processSender.Send(processEvent);
-		}
-
-		_current = null;
-	}
-
-	private void EndBusyPeriod(double currentTime)
-	{
-		if (!IsBusy)
 			return;
 
-		var busyTime = currentTime - _busyStart;
-		Context.Collector.ListAdd($"{Id}_Service_BusyTime", busyTime);
-		IsBusy = false;
-	}
+		if (IsEmpty)
+			return;
 
-	private void StartService()
-	{
 		_current = Dequeue();
 
 		_serviceStart = Context.CurrentTime;
@@ -129,32 +54,58 @@ public sealed class Service : ServiceBase, IDisposable
 		_busyStart = Context.CurrentTime;
 		IsBusy = true;
 
-		var startEvent = new OnProcessEvent 
-		{ 
-			Request = _current,
-			NodeId = Id,
-			Timestamp = Context.CurrentTime,
-		};
-		_processSender.Send(startEvent);
+		if (_current != null && _arrivalTimes.TryGetValue(_current.Id, out var enterTime))
+		{
+			var waitTime = Context.CurrentTime - enterTime;
+			Context.Collector.ListAdd($"{Id}_Service_WaitTime", waitTime);
+			_arrivalTimes.Remove(_current.Id);
+		}
+
+		_collector.Enqueue(new SimulationEvent(_serviceEnd, (ctx, collector) => CompleteService(ctx)));
+
+		Context.Collector.GaugeRecord($"{Id}_Service_IsBusy", 1);
 	}
 
-	public void Dispose()
+	private double DoService()
 	{
-		_tickSubscription?.Dispose();
-		_processSubscription?.Dispose();
+		return Math.Max(0, Distribution.Distribute());
 	}
-}
 
-// Примеры классов событий (должны быть определены в вашем проекте)
-public class OnUpdateEvent
-{
-	public double Timestamp { get; set; }
-	public double DeltaTime { get; set; }
-}
+	private void CompleteService(SimulationContext ctx)
+	{
+		ctx.CurrentTime = _serviceEnd;
 
-public class OnProcessEvent
-{
-	public Request? Request { get; set; }
-	public Guid NodeId { get; set; }
-	public double Timestamp { get; set; }
+		var serviceDuration = ctx.CurrentTime - _serviceStart;
+
+		if (_current != null)
+		{
+			ctx.Collector.CounterIncrement($"{Id}_Service_Completed");
+			ctx.Collector.ListAdd($"{Id}_Service_Duration", serviceDuration);
+
+			EndBusyPeriod(ctx.CurrentTime);
+
+			var next = GetAvailableExit();
+			var finished = _current;
+			_current = null;
+
+			if (next != null && finished != null)
+				next.Process(finished);
+		}
+
+		TryStartService();
+
+		foreach (var input in Inputs.OfType<Queue>())
+			input.TrySendNext();
+	}
+
+	private void EndBusyPeriod(double currentTime)
+	{
+		if (!IsBusy)
+			return;
+
+		var busyTime = currentTime - _busyStart;
+		
+		Context.Collector.ListAdd($"{Id}_Service_BusyTime", busyTime);
+		IsBusy = false;
+	}
 }

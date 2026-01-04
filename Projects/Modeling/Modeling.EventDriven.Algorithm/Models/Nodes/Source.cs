@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Modeling.Core.Models.Abstracts.Nodes;
 using Modeling.Core.Models.Abstracts.Options;
 using Modeling.Core.Models.Base;
@@ -22,17 +22,6 @@ public class Source : SourceBase
 		NextTime = Distribution.Distribute();
 	}
 	
-	public void OnProcess(OnProcessEvent evt)
-	{
-		if (evt.Request != null) 
-			Process(evt.Request);
-	}
-	
-	public void OnUpdate(OnUpdateEvent evt)
-	{
-		Update(evt.DeltaTime);
-	}
-
 	public override void Update(double deltaTime)
 	{
 		if (Options.ClosedSystem)
@@ -43,6 +32,12 @@ public class Source : SourceBase
 
 	public override void Generate()
 	{
+		if (Options.ClosedSystem && InFlight >= ClosedPopulation)
+		{
+			BlockIfNeeded();
+			return;
+		}
+
 		var request = Request.Create(Id);
 		var next = GetAvailableExit();
 
@@ -51,7 +46,6 @@ public class Source : SourceBase
 		if (Options.ClosedSystem)
 			InFlight++;
 
-		// Отслеживаем время генерации (только если это не первая генерация)
 		if (_lastGenerateTime >= 0)
 		{
 			var generateTime = Context.CurrentTime - _lastGenerateTime;
@@ -78,6 +72,7 @@ public class Source : SourceBase
 		else
 		{
 			BlockIfNeeded();
+			NextTime = currentTime + Distribution.Distribute();
 		}
 	}
 
@@ -113,5 +108,7 @@ public class Source : SourceBase
 
 		var blockTime = Context.CurrentTime - _blockStartTime;
 		Context.Collector.ListAdd($"{Id}_Source_BlockTime", blockTime);
+
+		NextTime = Context.CurrentTime + Distribution.Distribute();
 	}
 }

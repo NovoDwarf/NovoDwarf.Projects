@@ -26,10 +26,7 @@ public sealed class Service : ServiceBase
 		if (CanStartNewService())
 			StartService();
 
-		if (IsBusy)
-			Context.Collector.GaugeRecord($"{Id}_Service_IsBusy", 1);
-		else
-			Context.Collector.GaugeRecord($"{Id}_Service_IsBusy", 0);
+		Context.Collector.GaugeRecord($"{Id}_Service_IsBusy", IsBusy ? 1 : 0);
 	}
 
 	private bool IsServiceComplete()
@@ -53,7 +50,6 @@ public sealed class Service : ServiceBase
 
 		if (_current != null)
 		{
-			//_current.ServiceTime += serviceDuration;
 			Context.Collector.CounterIncrement($"{Id}_Service_Completed");
 			Context.Collector.ListAdd($"{Id}_Service_Duration", serviceDuration);
 
