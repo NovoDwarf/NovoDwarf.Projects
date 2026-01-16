@@ -6,8 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Mathematics.Core\Mathematics.Core.csproj" />
-    </ItemGroup>
-
 </Project>
