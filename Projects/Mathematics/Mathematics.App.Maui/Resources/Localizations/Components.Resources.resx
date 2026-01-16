@@ -18,52 +18,247 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ButtonCalculate" xml:space="preserve">
+    <data name="Button_Calculate" xml:space="preserve">
         <value>Calculate</value>
     </data>
-    <data name="LabelValue" xml:space="preserve">
+    <data name="Label_Value" xml:space="preserve">
         <value>Value</value>
     </data>
-    <data name="LabelResults" xml:space="preserve">
+    <data name="Label_Results" xml:space="preserve">
         <value>Result</value>
     </data>
-    <data name="LabelVariance" xml:space="preserve">
+    <data name="Label_Variance" xml:space="preserve">
         <value>Variance</value>
     </data>
-    <data name="LabelMode" xml:space="preserve">
+    <data name="Label_Mode" xml:space="preserve">
         <value>Mode</value>
     </data>
-    <data name="LabelMinimum" xml:space="preserve">
+    <data name="Label_Minimum" xml:space="preserve">
         <value>Minimum</value>
     </data>
-    <data name="LabelMaximum" xml:space="preserve">
+    <data name="Label_Maximum" xml:space="preserve">
         <value>Maximum</value>
     </data>
-    <data name="LabelExpected" xml:space="preserve">
+    <data name="Label_Expected" xml:space="preserve">
         <value>Expected</value>
     </data>
-    <data name="LabelMean" xml:space="preserve">
+    <data name="Label_Mean" xml:space="preserve">
         <value>Mean</value>
     </data>
-    <data name="LabelStandardDeviation" xml:space="preserve">
+    <data name="Label_StandardDeviation" xml:space="preserve">
         <value>StandardDeviation</value>
     </data>
-    <data name="LabelSkewness" xml:space="preserve">
+    <data name="Label_Skewness" xml:space="preserve">
         <value>Skewness</value>
     </data>
-    <data name="LabelKurtosis" xml:space="preserve">
+    <data name="Label_Kurtosis" xml:space="preserve">
         <value>Kurtosis</value>
     </data>
-    <data name="LabelMedian" xml:space="preserve">
+    <data name="Label_Median" xml:space="preserve">
         <value>Median</value>
     </data>
-    <data name="ButtonOpen" xml:space="preserve">
+    <data name="Button_Open" xml:space="preserve">
         <value>Open</value>
     </data>
-    <data name="TitleHome" xml:space="preserve">
+    <data name="Title_Home" xml:space="preserve">
         <value>Home</value>
     </data>
-    <data name="AppTitle" xml:space="preserve">
+    <data name="Title_App" xml:space="preserve">
         <value>Math Organizer</value>
+    </data>
+    <data name="Title_Distributions" xml:space="preserve">
+        <value>Distributions</value>
+    </data>
+    <data name="Title_About" xml:space="preserve">
+        <value>About</value>
+    </data>
+    <data name="Title_Settings" xml:space="preserve">
+        <value>Settings</value>
+    </data>
+    <data name="Title_Modules" xml:space="preserve">
+        <value>Modules</value>
+    </data>
+    <data name="Title_Compressions" xml:space="preserve">
+        <value>Compressions</value>
+    </data>
+    <data name="Title_Cryptography" xml:space="preserve">
+        <value>Cryptography</value>
+    </data>
+    <data name="Title_Numerical" xml:space="preserve">
+        <value>Functions</value>
+    </data>
+    <data name="Title_Graphics" xml:space="preserve">
+        <value>Graphics</value>
+    </data>
+    <data name="Title_Randoms" xml:space="preserve">
+        <value>Randoms</value>
+    </data>
+    <data name="Title_Sortings" xml:space="preserve">
+        <value>Sortings</value>
+    </data>
+    <data name="Placeholder_InputValue" xml:space="preserve">
+        <value>Input value</value>
+    </data>
+    <data name="Title_Accelerometer" xml:space="preserve">
+        <value>Accelerometer</value>
+    </data>
+    <data name="Title_Barometer" xml:space="preserve">
+        <value>Barometer</value>
+    </data>
+    <data name="Title_Calculator" xml:space="preserve">
+        <value>Calculator</value>
+    </data>
+    <data name="Title_Compass" xml:space="preserve">
+        <value>Compass</value>
+    </data>
+    <data name="Title_Converter" xml:space="preserve">
+        <value>Converter</value>
+    </data>
+    <data name="Title_Flashlight" xml:space="preserve">
+        <value>Flashlight</value>
+    </data>
+    <data name="Title_Level" xml:space="preserve">
+        <value>Level</value>
+    </data>
+    <data name="Title_Speedometer" xml:space="preserve">
+        <value>Speedometer</value>
+    </data>
+    <data name="Title_Stopwatch" xml:space="preserve">
+        <value>Stopwatch</value>
+    </data>
+    <data name="Title_Timer" xml:space="preserve">
+        <value>Timer</value>
+    </data>
+    <data name="Button_Start" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="Button_Stop" xml:space="preserve">
+        <value>Stop</value>
+    </data>
+    <data name="Button_Reset" xml:space="preserve">
+        <value>Reset</value>
+    </data>
+    <data name="Title_Utilities" xml:space="preserve">
+        <value>Utilities</value>
+    </data>
+    <data name="Desc_Distributions" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Graphics" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Randoms" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Cryptography" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Utilities" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Sortings" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Numerical" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Desc_Compressions" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Title_Sensors" xml:space="preserve">
+        <value>Sensors</value>
+    </data>
+    <data name="Title_Organizers" xml:space="preserve">
+        <value>Organizers</value>
+    </data>
+    <data name="Title_Tools" xml:space="preserve">
+        <value>Tools</value>
+    </data>
+    <data name="Title_CashCalculator" xml:space="preserve">
+        <value>Cash Calculator</value>
+    </data>
+    <data name="Title_Mirror" xml:space="preserve">
+        <value>Mirror</value>
+    </data>
+    <data name="Title_Ruler" xml:space="preserve">
+        <value>Ruler</value>
+    </data>
+    <data name="Title_CodeGenerator" xml:space="preserve">
+        <value>QR Generator</value>
+    </data>
+    <data name="Title_CodeScaner" xml:space="preserve">
+        <value>QR Scanner</value>
+    </data>
+    <data name="Title_Todo" xml:space="preserve">
+        <value>Todo</value>
+    </data>
+    <data name="Button_Lap" xml:space="preserve">
+        <value>Lap</value>
+    </data>
+    <data name="Title_Debug" xml:space="preserve">
+        <value>Debug</value>
+    </data>
+    <data name="Title_ColorPicker" xml:space="preserve">
+        <value>Color Picker</value>
+    </data>
+    <data name="Title_HttpTester" xml:space="preserve">
+        <value>HTTP Tester</value>
+    </data>
+    <data name="Title_RegexTester" xml:space="preserve">
+        <value>Regex Tester</value>
+    </data>
+    <data name="Title_SoundGenerator" xml:space="preserve">
+        <value>Sound Generator</value>
+    </data>
+    <data name="Title_Synth" xml:space="preserve">
+        <value>Synth</value>
+    </data>
+    <data name="Title_Calendar" xml:space="preserve">
+        <value>Calendar</value>
+    </data>
+    <data name="Title_WorldClock" xml:space="preserve">
+        <value>World Clock</value>
+    </data>
+    <data name="Title_DeviceInfo" xml:space="preserve">
+        <value>Device Info</value>
+    </data>
+    <data name="Title_Gyroscope" xml:space="preserve">
+        <value>Gyroscope</value>
+    </data>
+    <data name="Title_Magnetometer" xml:space="preserve">
+        <value>Magnetometer</value>
+    </data>
+    <data name="Title_Orientation" xml:space="preserve">
+        <value>Orientation</value>
+    </data>
+    <data name="Title_Soundmeter" xml:space="preserve">
+        <value>Soundmeter</value>
+    </data>
+    <data name="Button_Switch" xml:space="preserve">
+        <value>Switch</value>
+    </data>
+    <data name="Button_Refresh" xml:space="preserve">
+        <value>Refresh</value>
+    </data>
+    <data name="Label_Theme" xml:space="preserve">
+        <value>Theme</value>
+    </data>
+    <data name="Label_Visual" xml:space="preserve">
+        <value>Visual</value>
+    </data>
+    <data name="Label_Language" xml:space="preserve">
+        <value>Language</value>
+    </data>
+    <data name="Label_General" xml:space="preserve">
+        <value>General</value>
+    </data>
+    <data name="Title_Games" xml:space="preserve">
+        <value>Games</value>
+    </data>
+    <data name="Title_AppShell" xml:space="preserve">
+        <value>Shell</value>
+    </data>
+    <data name="Desc_Modules" xml:space="preserve">
+        <value />
     </data>
 </root>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:Mathematics.App.Maui.Resources.Localizations"
+             xmlns:pages="clr-namespace:Mathematics.App.Maui.UI.ViewModels.Pages"
+             xmlns:sv="clr-namespace:AiForms.Settings;assembly=SettingsView"
+             x:Class="Mathematics.App.Maui.UI.Views.Pages.SettingsPage"
+             x:DataType="pages:SettingsViewModel"
+             Title="{x:Static loc:Components_Resources.Title_Settings}">
+    <ContentPage.Content>
+        <ScrollView>
+            <sv:SettingsView HasUnevenRows="true"  ShowArrowIndicatorForAndroid="True">
+                
+                <sv:Section Title="{x:Static loc:Components_Resources.Label_General}"> <!-- General -->
+                    <sv:CommandCell 
+                        IconSource="appicon.png" 
+                        IconSize="60,60" 
+                        IconRadius="30"
+                        Title="Кирилл Стародуб" 
+                        Description="kirillstarodub310@gmail.com"
+                        KeepSelectedUntilBack="true" />
+                    
+                    <sv:PickerCell
+                        Title="{x:Static loc:Components_Resources.Label_Language}"
+                        ItemsSource="{Binding AvailableLocales}"
+                        SelectedItem="{Binding SelectedLocale}"
+                        MaxSelectedNumber="1"
+                        SelectionMode="Single"
+                        UsePickToClose="true"
+                        SelectedCommand="{Binding SetLocaleCommand}" />
+                </sv:Section>
+  
+                <sv:Section Title="{x:Static loc:Components_Resources.Label_Visual}"> <!-- Visual -->
+                    
+                    <sv:PickerCell
+                        Title="{x:Static loc:Components_Resources.Label_Theme}"
+                        ItemsSource="{Binding AvailableThemes}"
+                        SelectedItem="{Binding SelectedTheme}"
+                        MaxSelectedNumber="1"
+                        SelectionMode="Single"
+                        UsePickToClose="true"
+                        SelectedCommand="{Binding SetThemeCommand}" />
+                    
+                    <sv:PickerCell
+                        Title="Цветовая гамма"
+                        TitleColor="{DynamicResource PrimaryTextColor}"
+                        ValueTextColor="{DynamicResource SecondaryTextColor}" />
+                </sv:Section>
+
+            </sv:SettingsView>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

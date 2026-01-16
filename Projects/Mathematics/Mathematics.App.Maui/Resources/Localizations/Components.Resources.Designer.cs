@@ -38,7 +38,7 @@ namespace Mathematics.App.Maui.Resources.Localizations {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mathematics.App.Maui.Resources.Localizations.Components.Resources", typeof(Components_Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mathematics.App.Resources.Localizations.Components.Resources", typeof(Components_Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,135 +62,729 @@ namespace Mathematics.App.Maui.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Calculate.
         /// </summary>
-        internal static string ButtonCalculate {
+        internal static string Button_Calculate {
             get {
-                return ResourceManager.GetString("ButtonCalculate", resourceCulture);
+                return ResourceManager.GetString("Button_Calculate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lap.
+        /// </summary>
+        internal static string Button_Lap {
+            get {
+                return ResourceManager.GetString("Button_Lap", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string ButtonOpen {
+        internal static string Button_Open {
             get {
-                return ResourceManager.GetString("ButtonOpen", resourceCulture);
+                return ResourceManager.GetString("Button_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string Button_Refresh {
+            get {
+                return ResourceManager.GetString("Button_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string Button_Reset {
+            get {
+                return ResourceManager.GetString("Button_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Button_Start {
+            get {
+                return ResourceManager.GetString("Button_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        internal static string Button_Stop {
+            get {
+                return ResourceManager.GetString("Button_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch.
+        /// </summary>
+        internal static string Button_Switch {
+            get {
+                return ResourceManager.GetString("Button_Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Compressions {
+            get {
+                return ResourceManager.GetString("Desc_Compressions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Cryptography {
+            get {
+                return ResourceManager.GetString("Desc_Cryptography", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Distributions {
+            get {
+                return ResourceManager.GetString("Desc_Distributions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Graphics {
+            get {
+                return ResourceManager.GetString("Desc_Graphics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Modules {
+            get {
+                return ResourceManager.GetString("Desc_Modules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Numerical {
+            get {
+                return ResourceManager.GetString("Desc_Numerical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Randoms {
+            get {
+                return ResourceManager.GetString("Desc_Randoms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Sortings {
+            get {
+                return ResourceManager.GetString("Desc_Sortings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Desc_Utilities {
+            get {
+                return ResourceManager.GetString("Desc_Utilities", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Expected.
         /// </summary>
-        internal static string LabelExpected {
+        internal static string Label_Expected {
             get {
-                return ResourceManager.GetString("LabelExpected", resourceCulture);
+                return ResourceManager.GetString("Label_Expected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        internal static string Label_General {
+            get {
+                return ResourceManager.GetString("Label_General", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Kurtosis.
         /// </summary>
-        internal static string LabelKurtosis {
+        internal static string Label_Kurtosis {
             get {
-                return ResourceManager.GetString("LabelKurtosis", resourceCulture);
+                return ResourceManager.GetString("Label_Kurtosis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string Label_Language {
+            get {
+                return ResourceManager.GetString("Label_Language", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Maximum.
         /// </summary>
-        internal static string LabelMaximum {
+        internal static string Label_Maximum {
             get {
-                return ResourceManager.GetString("LabelMaximum", resourceCulture);
+                return ResourceManager.GetString("Label_Maximum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mean.
         /// </summary>
-        internal static string LabelMean {
+        internal static string Label_Mean {
             get {
-                return ResourceManager.GetString("LabelMean", resourceCulture);
+                return ResourceManager.GetString("Label_Mean", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Median.
         /// </summary>
-        internal static string LabelMedian {
+        internal static string Label_Median {
             get {
-                return ResourceManager.GetString("LabelMedian", resourceCulture);
+                return ResourceManager.GetString("Label_Median", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Minimum.
         /// </summary>
-        internal static string LabelMinimum {
+        internal static string Label_Minimum {
             get {
-                return ResourceManager.GetString("LabelMinimum", resourceCulture);
+                return ResourceManager.GetString("Label_Minimum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mode.
         /// </summary>
-        internal static string LabelMode {
+        internal static string Label_Mode {
             get {
-                return ResourceManager.GetString("LabelMode", resourceCulture);
+                return ResourceManager.GetString("Label_Mode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Result.
         /// </summary>
-        internal static string LabelResults {
+        internal static string Label_Results {
             get {
-                return ResourceManager.GetString("LabelResults", resourceCulture);
+                return ResourceManager.GetString("Label_Results", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Skewness.
         /// </summary>
-        internal static string LabelSkewness {
+        internal static string Label_Skewness {
             get {
-                return ResourceManager.GetString("LabelSkewness", resourceCulture);
+                return ResourceManager.GetString("Label_Skewness", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to StandardDeviation.
         /// </summary>
-        internal static string LabelStandardDeviation {
+        internal static string Label_StandardDeviation {
             get {
-                return ResourceManager.GetString("LabelStandardDeviation", resourceCulture);
+                return ResourceManager.GetString("Label_StandardDeviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        internal static string Label_Theme {
+            get {
+                return ResourceManager.GetString("Label_Theme", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
-        internal static string LabelValue {
+        internal static string Label_Value {
             get {
-                return ResourceManager.GetString("LabelValue", resourceCulture);
+                return ResourceManager.GetString("Label_Value", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Variance.
         /// </summary>
-        internal static string LabelVariance {
+        internal static string Label_Variance {
             get {
-                return ResourceManager.GetString("LabelVariance", resourceCulture);
+                return ResourceManager.GetString("Label_Variance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visual.
+        /// </summary>
+        internal static string Label_Visual {
+            get {
+                return ResourceManager.GetString("Label_Visual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input value.
+        /// </summary>
+        internal static string Placeholder_InputValue {
+            get {
+                return ResourceManager.GetString("Placeholder_InputValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string Title_About {
+            get {
+                return ResourceManager.GetString("Title_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accelerometer.
+        /// </summary>
+        internal static string Title_Accelerometer {
+            get {
+                return ResourceManager.GetString("Title_Accelerometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Math Organizer.
+        /// </summary>
+        internal static string Title_App {
+            get {
+                return ResourceManager.GetString("Title_App", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shell.
+        /// </summary>
+        internal static string Title_AppShell {
+            get {
+                return ResourceManager.GetString("Title_AppShell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barometer.
+        /// </summary>
+        internal static string Title_Barometer {
+            get {
+                return ResourceManager.GetString("Title_Barometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculator.
+        /// </summary>
+        internal static string Title_Calculator {
+            get {
+                return ResourceManager.GetString("Title_Calculator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calendar.
+        /// </summary>
+        internal static string Title_Calendar {
+            get {
+                return ResourceManager.GetString("Title_Calendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Calculator.
+        /// </summary>
+        internal static string Title_CashCalculator {
+            get {
+                return ResourceManager.GetString("Title_CashCalculator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QR Generator.
+        /// </summary>
+        internal static string Title_CodeGenerator {
+            get {
+                return ResourceManager.GetString("Title_CodeGenerator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QR Scanner.
+        /// </summary>
+        internal static string Title_CodeScaner {
+            get {
+                return ResourceManager.GetString("Title_CodeScaner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color Picker.
+        /// </summary>
+        internal static string Title_ColorPicker {
+            get {
+                return ResourceManager.GetString("Title_ColorPicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compass.
+        /// </summary>
+        internal static string Title_Compass {
+            get {
+                return ResourceManager.GetString("Title_Compass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compressions.
+        /// </summary>
+        internal static string Title_Compressions {
+            get {
+                return ResourceManager.GetString("Title_Compressions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converter.
+        /// </summary>
+        internal static string Title_Converter {
+            get {
+                return ResourceManager.GetString("Title_Converter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cryptography.
+        /// </summary>
+        internal static string Title_Cryptography {
+            get {
+                return ResourceManager.GetString("Title_Cryptography", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        internal static string Title_Debug {
+            get {
+                return ResourceManager.GetString("Title_Debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device Info.
+        /// </summary>
+        internal static string Title_DeviceInfo {
+            get {
+                return ResourceManager.GetString("Title_DeviceInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distributions.
+        /// </summary>
+        internal static string Title_Distributions {
+            get {
+                return ResourceManager.GetString("Title_Distributions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashlight.
+        /// </summary>
+        internal static string Title_Flashlight {
+            get {
+                return ResourceManager.GetString("Title_Flashlight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Games.
+        /// </summary>
+        internal static string Title_Games {
+            get {
+                return ResourceManager.GetString("Title_Games", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graphics.
+        /// </summary>
+        internal static string Title_Graphics {
+            get {
+                return ResourceManager.GetString("Title_Graphics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gyroscope.
+        /// </summary>
+        internal static string Title_Gyroscope {
+            get {
+                return ResourceManager.GetString("Title_Gyroscope", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
-        internal static string TitleHome {
+        internal static string Title_Home {
             get {
-                return ResourceManager.GetString("TitleHome", resourceCulture);
+                return ResourceManager.GetString("Title_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTTP Tester.
+        /// </summary>
+        internal static string Title_HttpTester {
+            get {
+                return ResourceManager.GetString("Title_HttpTester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        internal static string Title_Level {
+            get {
+                return ResourceManager.GetString("Title_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Magnetometer.
+        /// </summary>
+        internal static string Title_Magnetometer {
+            get {
+                return ResourceManager.GetString("Title_Magnetometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mirror.
+        /// </summary>
+        internal static string Title_Mirror {
+            get {
+                return ResourceManager.GetString("Title_Mirror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modules.
+        /// </summary>
+        internal static string Title_Modules {
+            get {
+                return ResourceManager.GetString("Title_Modules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Functions.
+        /// </summary>
+        internal static string Title_Numerical {
+            get {
+                return ResourceManager.GetString("Title_Numerical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organizers.
+        /// </summary>
+        internal static string Title_Organizers {
+            get {
+                return ResourceManager.GetString("Title_Organizers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orientation.
+        /// </summary>
+        internal static string Title_Orientation {
+            get {
+                return ResourceManager.GetString("Title_Orientation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randoms.
+        /// </summary>
+        internal static string Title_Randoms {
+            get {
+                return ResourceManager.GetString("Title_Randoms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regex Tester.
+        /// </summary>
+        internal static string Title_RegexTester {
+            get {
+                return ResourceManager.GetString("Title_RegexTester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ruler.
+        /// </summary>
+        internal static string Title_Ruler {
+            get {
+                return ResourceManager.GetString("Title_Ruler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensors.
+        /// </summary>
+        internal static string Title_Sensors {
+            get {
+                return ResourceManager.GetString("Title_Sensors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Title_Settings {
+            get {
+                return ResourceManager.GetString("Title_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sortings.
+        /// </summary>
+        internal static string Title_Sortings {
+            get {
+                return ResourceManager.GetString("Title_Sortings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound Generator.
+        /// </summary>
+        internal static string Title_SoundGenerator {
+            get {
+                return ResourceManager.GetString("Title_SoundGenerator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soundmeter.
+        /// </summary>
+        internal static string Title_Soundmeter {
+            get {
+                return ResourceManager.GetString("Title_Soundmeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speedometer.
+        /// </summary>
+        internal static string Title_Speedometer {
+            get {
+                return ResourceManager.GetString("Title_Speedometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopwatch.
+        /// </summary>
+        internal static string Title_Stopwatch {
+            get {
+                return ResourceManager.GetString("Title_Stopwatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synth.
+        /// </summary>
+        internal static string Title_Synth {
+            get {
+                return ResourceManager.GetString("Title_Synth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer.
+        /// </summary>
+        internal static string Title_Timer {
+            get {
+                return ResourceManager.GetString("Title_Timer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Todo.
+        /// </summary>
+        internal static string Title_Todo {
+            get {
+                return ResourceManager.GetString("Title_Todo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        internal static string Title_Tools {
+            get {
+                return ResourceManager.GetString("Title_Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utilities.
+        /// </summary>
+        internal static string Title_Utilities {
+            get {
+                return ResourceManager.GetString("Title_Utilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to World Clock.
+        /// </summary>
+        internal static string Title_WorldClock {
+            get {
+                return ResourceManager.GetString("Title_WorldClock", resourceCulture);
             }
         }
     }

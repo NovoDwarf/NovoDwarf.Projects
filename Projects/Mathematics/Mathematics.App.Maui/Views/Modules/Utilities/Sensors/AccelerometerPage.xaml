@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:vm="clr-namespace:Mathematics.App.Maui.UI.ViewModels.Utilities"
+    xmlns:skiaSharpView="using:LiveChartsCore.SkiaSharpView"
+    xmlns:local="using:Mathematics.App.Maui.Systems.Application.Constants"
+    xmlns:loc="clr-namespace:Mathematics.App.Maui.Resources.Localizations"
+    x:Class="Mathematics.App.Maui.UI.Views.Utilities.AccelerometerPage"
+    x:DataType="vm:AccelerometerViewModel"
+    Title="{x:Static loc:Components_Resources.Title_Accelerometer}">
+    
+    <ContentPage.Content>
+        <ScrollView Margin="4">
+            <VerticalStackLayout Padding="20" Spacing="16">
+                <!-- Header -->
+                <Border Padding="12" BackgroundColor="{DynamicResource SecondaryColor}">
+                    <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                        <Label Text="Акселерометр" FontSize="18" FontAttributes="Bold"/>
+                        <Label Text="{Binding Status}" 
+                               FontSize="14"
+                               TextColor="{Binding StatusColor}"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Current Values -->
+                <Border Padding="16" StrokeThickness="1" Stroke="{DynamicResource Gray300}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="{Binding Magnitude, StringFormat='{0:F3} g'}" 
+                               FontSize="16" FontAttributes="Bold" 
+                               HorizontalOptions="Center"/>
+                        
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                            <!-- Axis X -->
+                            <Border Padding="8" BackgroundColor="{DynamicResource SurfaceColor}">
+                                <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                                    <Label Text="X" FontSize="12" TextColor="Gray"/>
+                                    <Label Text="{Binding X, StringFormat='{0:F3}'}" 
+                                           FontSize="24" FontAttributes="Bold"
+                                           TextColor="{Binding XColor}"/>
+                                    <ProgressBar Progress="{Binding XNormalized}" 
+                                                 ProgressColor="{Binding XColor}"
+                                                 HeightRequest="4"/>
+                                </VerticalStackLayout>
+                            </Border>
+                            
+                            <!-- Axis Y -->
+                            <Border Grid.Column="1" Padding="8" BackgroundColor="{DynamicResource SurfaceColor}">
+                                <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                                    <Label Text="Y" FontSize="12" TextColor="Gray"/>
+                                    <Label Text="{Binding Y, StringFormat='{0:F3}'}" 
+                                           FontSize="24" FontAttributes="Bold"
+                                           TextColor="{Binding YColor}"/>
+                                    <ProgressBar Progress="{Binding YNormalized}" 
+                                                 ProgressColor="{Binding YColor}"
+                                                 HeightRequest="4"/>
+                                </VerticalStackLayout>
+                            </Border>
+                            
+                            <!-- Axis Z -->
+                            <Border Grid.Column="2" Padding="8" BackgroundColor="{DynamicResource SurfaceColor}">
+                                <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                                    <Label Text="Z" FontSize="12" TextColor="Gray"/>
+                                    <Label Text="{Binding Z, StringFormat='{0:F3}'}" 
+                                           FontSize="24" FontAttributes="Bold"
+                                           TextColor="{Binding ZColor}"/>
+                                    <ProgressBar Progress="{Binding ZNormalized}" 
+                                                 ProgressColor="{Binding ZColor}"
+                                                 HeightRequest="4"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                        
+                        <!-- G (Gravity) -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,8">
+                            <Border Padding="12">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Модуль вектора" FontSize="12" TextColor="Gray"/>
+                                    <Label Text="{Binding Magnitude, StringFormat='{0:F3} м/с²'}" 
+                                           FontSize="18" FontAttributes="Bold"/>
+                                    <Label Text="{Binding MagnitudeDescription}" 
+                                           FontSize="12" TextColor="Gray"/>
+                                </VerticalStackLayout>
+                            </Border>
+                            
+                            <Border Grid.Column="1" Padding="12">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Гравитация" FontSize="12" TextColor="Gray"/>
+                                    <!--
+                                        <Label Text="{Binding Gravity, StringFormat='{0:F3} g'}"
+                                               FontSize="18" FontAttributes="Bold" /> 
+                                    -->
+                                    <Label Text="{Binding Orientation}" 
+                                           FontSize="12" TextColor="Gray"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Charts -->
+                <Border Padding="12" StrokeThickness="1" Stroke="{DynamicResource Gray300}">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Динамика изменений (последние 60 с)" 
+                               FontSize="16" FontAttributes="Bold"/>
+                        
+                        <!-- Axis X-->
+                        <VerticalStackLayout Spacing="4">
+                            <HorizontalStackLayout>
+                                <Label Text="Ось X" FontSize="14"/>
+                                <Label Text="{Binding XStats}" FontSize="12" TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                            <lvc:CartesianChart
+                                HeightRequest="100"
+                                Series="{Binding XSeries}"
+                                TooltipTextSize="10">
+                                
+                                <lvc:CartesianChart.YAxes>
+                                    <skiaSharpView:Axis
+                                        MinLimit="-2"
+                                        MaxLimit="2"
+                                        TextSize="10"
+                                        Labeler="{x:Static local:AxisLabelers.Value}" />
+                                </lvc:CartesianChart.YAxes>
+                                <lvc:CartesianChart.XAxes>
+                                    <skiaSharpView:Axis
+                                        MinLimit="0"
+                                        MaxLimit="60"
+                                        TextSize="10"
+                                        Labeler="{x:Static local:AxisLabelers.Time}" />
+                                </lvc:CartesianChart.XAxes>
+                            </lvc:CartesianChart>
+                        </VerticalStackLayout>
+                        
+                        <!-- Axis Y-->
+                        <VerticalStackLayout Spacing="4">
+                            <HorizontalStackLayout>
+                                <Label Text="Ось Y" FontSize="14"/>
+                                <Label Text="{Binding YStats}" FontSize="12" TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                            <lvc:CartesianChart
+                                HeightRequest="100"
+                                Series="{Binding YSeries}"
+                                TooltipTextSize="10">
+                                
+                                <lvc:CartesianChart.YAxes>
+                                    <skiaSharpView:Axis
+                                        MinLimit="-2"
+                                        MaxLimit="2"
+                                        TextSize="10"
+                                        Labeler="{x:Static local:AxisLabelers.Value}" />
+                                </lvc:CartesianChart.YAxes>
+                                <lvc:CartesianChart.XAxes>
+                                    <skiaSharpView:Axis
+                                        MinLimit="0"
+                                        MaxLimit="60"
+                                        TextSize="10"
+                                        Labeler="{x:Static local:AxisLabelers.Time}" />
+                                </lvc:CartesianChart.XAxes>
+                            </lvc:CartesianChart>
+                        </VerticalStackLayout>
+                        
+                        <!-- Axis Z -->
+                        <VerticalStackLayout Spacing="4">
+                            <HorizontalStackLayout>
+                                <Label Text="Ось Z" FontSize="14"/>
+                                <Label Text="{Binding ZStats}" FontSize="12" TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                            <lvc:CartesianChart
+                                HeightRequest="100"
+                                Series="{Binding ZSeries}"
+                                TooltipTextSize="10">
+                                
+                                <lvc:CartesianChart.YAxes>
+                                    <skiaSharpView:Axis
+                                        MinLimit="-2"
+                                        MaxLimit="2"
+                                        TextSize="10"
+                                        Labeler="{x:Static local:AxisLabelers.Value}" />
+                                </lvc:CartesianChart.YAxes>
+                                <lvc:CartesianChart.XAxes>
+                                    <skiaSharpView:Axis
+                                        MinLimit="0"
+                                        MaxLimit="60"
+                                        TextSize="10"
+                                        Labeler="{x:Static local:AxisLabelers.Time}" />
+                                </lvc:CartesianChart.XAxes>
+                            </lvc:CartesianChart>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Статистика и контроль -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Button Text="{Binding ButtonText}" 
+                            Command="{Binding ToggleCommand}"
+                            BackgroundColor="{Binding ButtonColor}"/>
+                    
+                    <Button Grid.Column="1" 
+                            Text="Сброс данных" 
+                            Command="{Binding ResetCommand}"
+                            BackgroundColor="{DynamicResource Gray200}"/>
+                </Grid>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+

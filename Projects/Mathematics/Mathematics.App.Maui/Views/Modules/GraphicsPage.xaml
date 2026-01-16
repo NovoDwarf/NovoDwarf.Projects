@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:graphics="clr-namespace:Mathematics.App.Maui.UI.Views.Graphics"
+             xmlns:loc="clr-namespace:Mathematics.App.Maui.Resources.Localizations"
+             xmlns:drawings="clr-namespace:Mathematics.App.Maui.UI.Views.Graphics.Drawings"
+             xmlns:fractals="clr-namespace:Mathematics.App.Maui.UI.Views.Graphics.Fractals"
+             xmlns:common="clr-namespace:Mathematics.App.Views.Common"
+             x:Class="Mathematics.App.Maui.UI.Views.Pages.Algorithms.GraphicsPage">
+    <ContentPage.Content>
+         <ScrollView Margin="4">
+	         <VerticalStackLayout Padding="16" Spacing="12">
+		         <Border StrokeShape="RoundRectangle 12" Padding="16">
+			         <VerticalStackLayout Spacing="10">
+				         <Label Text="{x:Static loc:Components_Resources.Title_Modules}" 
+				                FontSize="24" 
+				                FontAttributes="Bold" 
+				                HorizontalOptions="Center"/>
+                
+				         <Label Text="{x:Static loc:Components_Resources.Desc_Modules}" 
+				                FontSize="14" 
+				                HorizontalOptions="Center"/>
+			         </VerticalStackLayout>
+		         </Border>
+		         
+		         <common:PreviewTableView 
+			         Icon="{DynamicResource Distributions}"
+			         Title="Вычерчивание отрезков" 
+			         Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+			         View="{Type graphics:LineDrawPage }" />
+                
+                <common:PreviewTableView 
+	                Icon="{DynamicResource Distributions}"
+	                Title="Вычерчивание окружности" 
+	                Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+	                View="{Type graphics:CirclesDrawPage }" />
+                
+                <common:PreviewTableView 
+	                Icon="{DynamicResource Distributions}"
+	                Title="Заполнение области" 
+	                Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+	                View="{Type graphics:FillDrawPage }" />
+                
+                <common:PreviewTableView 
+	                Icon="{DynamicResource Distributions}"
+	                Title="Отсечение геометрии" 
+	                Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+	                View="{Type drawings:TruncationDrawPage }" />
+                
+                <common:PreviewTableView 
+	                Icon="{DynamicResource Distributions}"
+	                Title="Шумы" 
+	                Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+	                View="{Type graphics:NoisesPage }" />
+                
+                <common:PreviewTableView 
+	                Icon="{DynamicResource Distributions}"
+	                Title="Фракталы" 
+	                Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+	                View="{Type graphics:FractalPage }" />
+                
+                <common:PreviewTableView 
+	                Icon="{DynamicResource Distributions}"
+	                Title="Кривая Коха" 
+	                Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+	                View="{Type fractals:KochCurvePage }" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

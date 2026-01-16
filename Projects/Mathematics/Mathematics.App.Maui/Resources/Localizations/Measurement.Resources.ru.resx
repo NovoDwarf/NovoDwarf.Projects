@@ -1,0 +1,275 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Measurement_Length" xml:space="preserve">
+        <value>Длина</value>
+    </data>
+    <data name="Measurement_Mass" xml:space="preserve">
+        <value>Масса</value>
+    </data>
+    <data name="Measurement_Temperature" xml:space="preserve">
+        <value>Температура</value>
+    </data>
+    <data name="Measurement_Time" xml:space="preserve">
+        <value>Время</value>
+    </data>
+    <data name="Measurement_Speed" xml:space="preserve">
+        <value>Скорость</value>
+    </data>
+    <data name="Measurement_LuminousIntensity" xml:space="preserve">
+        <value>Интенсивность светового потока</value>
+    </data>
+    <data name="Measurement_Force" xml:space="preserve">
+        <value>Сила</value>
+    </data>
+    <data name="Measurement_Current" xml:space="preserve">
+        <value>Сила тока</value>
+    </data>
+    <data name="Measurement_Amount" xml:space="preserve">
+        <value>Количество вещества</value>
+    </data>
+    <data name="Measurement_Acceleration" xml:space="preserve">
+        <value>Ускорение</value>
+    </data>
+    <data name="MeasurementSystem_SI" xml:space="preserve">
+        <value>СИ (Система Интернациональная)</value>
+    </data>
+    <data name="Unit_Ampere" xml:space="preserve">
+        <value>Ампер</value>
+    </data>
+    <data name="Unit_Meter" xml:space="preserve">
+        <value>Метр</value>
+    </data>
+    <data name="Unit_Second" xml:space="preserve">
+        <value>Секунда</value>
+    </data>
+    <data name="MeasurementSystem_Astronomical" xml:space="preserve">
+        <value>Астрономическая</value>
+    </data>
+    <data name="MeasurementSystem_Imperial" xml:space="preserve">
+        <value>Система мер ВБ (Имперская)</value>
+    </data>
+    <data name="MeasurementSystem_Planck" xml:space="preserve">
+        <value>Планковская</value>
+    </data>
+    <data name="Unit_Mole" xml:space="preserve">
+        <value>Моль</value>
+    </data>
+    <data name="Unit_Newton" xml:space="preserve">
+        <value>Ньютон</value>
+    </data>
+    <data name="Unit_MeterPerSecond" xml:space="preserve">
+        <value>Метр в секунду</value>
+    </data>
+    <data name="Unit_MeterPerSecondSquared" xml:space="preserve">
+        <value>Метр в секунду в квадрате</value>
+    </data>
+    <data name="Unit_Candela" xml:space="preserve">
+        <value>Кандела</value>
+    </data>
+    <data name="Unit_Celsius" xml:space="preserve">
+        <value>Цельсий</value>
+    </data>
+    <data name="Unit_Fahrenheit" xml:space="preserve">
+        <value>Фаренгейт</value>
+    </data>
+    <data name="Unit_Kelvin" xml:space="preserve">
+        <value>Кельвин</value>
+    </data>
+    <data name="Prefix_Deca" xml:space="preserve">
+        <value>дека</value>
+    </data>
+    <data name="Prefix_Giga" xml:space="preserve">
+        <value>гига</value>
+    </data>
+    <data name="Prefix_Hecto" xml:space="preserve">
+        <value>гекто</value>
+    </data>
+    <data name="Prefix_Kilo" xml:space="preserve">
+        <value>кило</value>
+    </data>
+    <data name="Prefix_Mega" xml:space="preserve">
+        <value>мега</value>
+    </data>
+    <data name="Prefix_Peta" xml:space="preserve">
+        <value>пета</value>
+    </data>
+    <data name="Prefix_Tera" xml:space="preserve">
+        <value>тера</value>
+    </data>
+    <data name="Prefix_Yotta" xml:space="preserve">
+        <value>йотта</value>
+    </data>
+    <data name="Prefix_Zetta" xml:space="preserve">
+        <value>зетта</value>
+    </data>
+    <data name="Prefix_Exa" xml:space="preserve">
+        <value>экса</value>
+    </data>
+    <data name="Prefix_Deci" xml:space="preserve">
+        <value>деци</value>
+    </data>
+    <data name="Prefix_Centi" xml:space="preserve">
+        <value>санти</value>
+    </data>
+    <data name="Prefix_Milli" xml:space="preserve">
+        <value>милли</value>
+    </data>
+    <data name="Prefix_Micro" xml:space="preserve">
+        <value>микро</value>
+    </data>
+    <data name="Prefix_Nano" xml:space="preserve">
+        <value>нано</value>
+    </data>
+    <data name="Prefix_Zepto" xml:space="preserve">
+        <value>зепто</value>
+    </data>
+    <data name="Prefix_Yocto" xml:space="preserve">
+        <value>йокто</value>
+    </data>
+    <data name="Prefix_Pico" xml:space="preserve">
+        <value>пико</value>
+    </data>
+    <data name="Prefix_Femto" xml:space="preserve">
+        <value>фемто</value>
+    </data>
+    <data name="Prefix_Atto" xml:space="preserve">
+        <value>атто</value>
+    </data>
+    <data name="Unit_Gram" xml:space="preserve">
+        <value>Грамм</value>
+    </data>
+    <data name="Prefix_Quecto" xml:space="preserve">
+        <value>квекто</value>
+    </data>
+    <data name="Prefix_Quetta" xml:space="preserve">
+        <value>куета</value>
+    </data>
+    <data name="Prefix_Ronna" xml:space="preserve">
+        <value>ронна</value>
+    </data>
+    <data name="Prefix_Ronto" xml:space="preserve">
+        <value>ронто</value>
+    </data>
+    <data name="Measurement_Pressure" xml:space="preserve">
+        <value>Давление</value>
+    </data>
+    <data name="Measurement_Energy" xml:space="preserve">
+        <value>Энергия</value>
+    </data>
+    <data name="Measurement_Volume" xml:space="preserve">
+        <value>Объем</value>
+    </data>
+    <data name="Measurement_Frequency" xml:space="preserve">
+        <value>Частота</value>
+    </data>
+    <data name="MeasurementSystem_Natural" xml:space="preserve">
+        <value>Естественная</value>
+    </data>
+    <data name="Unit_Foot" xml:space="preserve">
+        <value>Фут</value>
+    </data>
+    <data name="Unit_Inch" xml:space="preserve">
+        <value>Дюйм</value>
+    </data>
+    <data name="Unit_Mile" xml:space="preserve">
+        <value>Миля</value>
+    </data>
+    <data name="Unit_NauticalMile" xml:space="preserve">
+        <value>Морская миля</value>
+    </data>
+    <data name="Unit_Pound" xml:space="preserve">
+        <value>Фунт</value>
+    </data>
+    <data name="Unit_Yard" xml:space="preserve">
+        <value>Ярд</value>
+    </data>
+    <data name="Unit_Atmosphere" xml:space="preserve">
+        <value>Атмосфера</value>
+    </data>
+    <data name="Unit_Bar" xml:space="preserve">
+        <value>Бар</value>
+    </data>
+    <data name="Unit_Calorie" xml:space="preserve">
+        <value>Калории</value>
+    </data>
+    <data name="Unit_Day" xml:space="preserve">
+        <value>День</value>
+    </data>
+    <data name="Unit_Gallon" xml:space="preserve">
+        <value>Галлон</value>
+    </data>
+    <data name="Unit_Hertz" xml:space="preserve">
+        <value>Герц</value>
+    </data>
+    <data name="Unit_Hour" xml:space="preserve">
+        <value>Час</value>
+    </data>
+    <data name="Unit_Joule" xml:space="preserve">
+        <value>Джоуль</value>
+    </data>
+    <data name="Unit_KilometerPerHour" xml:space="preserve">
+        <value>Километр в час</value>
+    </data>
+    <data name="Unit_KilowattHour" xml:space="preserve">
+        <value>Киловатт в час</value>
+    </data>
+    <data name="Unit_Liter" xml:space="preserve">
+        <value>Литр</value>
+    </data>
+    <data name="Unit_MilePerHour" xml:space="preserve">
+        <value>Миль в час</value>
+    </data>
+    <data name="Unit_MillimeterOfMercury" xml:space="preserve">
+        <value>Миллиметры ртутного столба</value>
+    </data>
+    <data name="Unit_Minute" xml:space="preserve">
+        <value>Минуты</value>
+    </data>
+    <data name="Unit_Pascal" xml:space="preserve">
+        <value>Паскаль</value>
+    </data>
+    <data name="Unit_RevolutionsPerMinute" xml:space="preserve">
+        <value>Оборотов в минуту</value>
+    </data>
+    <data name="Unit_Knot" xml:space="preserve">
+        <value>Узлы</value>
+    </data>
+    <data name="Unit_Ounce" xml:space="preserve">
+        <value>Унция</value>
+    </data>
+    <data name="Unit_Slug" xml:space="preserve">
+        <value>Слаг</value>
+    </data>
+    <data name="Unit_PoundForce" xml:space="preserve">
+        <value>Фунт-сила</value>
+    </data>
+    <data name="Unit_PSI" xml:space="preserve">
+        <value>Фунт на квадратный дюйм</value>
+    </data>
+    <data name="Unit_Quart" xml:space="preserve">
+        <value>Кварт</value>
+    </data>
+    <data name="Unit_Dyne" xml:space="preserve">
+        <value>Дина</value>
+    </data>
+    <data name="MeasurementSystem_MKS" xml:space="preserve">
+        <value>Метр-Килограмм-Секунда</value>
+    </data>
+    <data name="MeasurementSystem_CGS" xml:space="preserve">
+        <value>Сантиметр-Грамм-Секунда</value>
+    </data>
+    <data name="MeasurementSystem_USCustomary" xml:space="preserve">
+        <value>Система мер США</value>
+    </data>
+</root>

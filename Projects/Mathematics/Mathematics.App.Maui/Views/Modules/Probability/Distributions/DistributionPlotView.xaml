@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maui="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:components="clr-namespace:Mathematics.App.Maui.Resources.Localizations"
+             x:Class="Mathematics.App.Maui.UI.Views.Distributions.DistributionPlotView">
+    <VerticalStackLayout Spacing="12">
+
+        <VerticalStackLayout>
+            <Label Text="Плотность вероятности"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <maui:CartesianChart 
+                HeightRequest="300"
+                ZoomMode="Both"
+                Series="{Binding PDFSeries}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="Функция распределения"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <maui:CartesianChart 
+                HeightRequest="300"
+                ZoomMode="Both"
+                Series="{Binding CDFSeries}" />
+        </VerticalStackLayout>
+
+        <Grid ColumnDefinitions="*, *">
+            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                <Label>Начало</Label>
+                <Label>Конец</Label>
+                <Label>Шаг</Label>
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Entry Text="{Binding Start}" />
+                <Entry Text="{Binding End}" />
+                <Entry Text="{Binding Step}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Button 
+            Text="{x:Static components:Components_Resources.Button_Calculate}"
+            Command="{Binding PlotCommand}" />
+    </VerticalStackLayout>
+</ContentView>

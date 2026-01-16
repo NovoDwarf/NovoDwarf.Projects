@@ -1,0 +1,35 @@
+﻿[
+  {
+    "id": "SI",
+    "displayName": "MeasurementSystem_SI"
+  },
+  {
+    "id": "CGS",
+    "displayName": "MeasurementSystem_CGS"
+  },
+  {
+    "id": "Imperial",
+    "displayName": "MeasurementSystem_Imperial"
+  },
+  {
+    "id": "USCustomary",
+    "displayName": "MeasurementSystem_USCustomary"
+  },
+  {
+    "id": "MKS",
+    "displayName": "MeasurementSystem_MKS"
+  },
+  {
+    "id": "Natural",
+    "displayName": "MeasurementSystem_Natural"
+  },
+  {
+    "id": "Planck",
+    "displayName": "MeasurementSystem_Planck"
+  },
+  {
+    "id": "Astronomical",
+    "displayName": "MeasurementSystem_Astronomical"
+  }
+]
+

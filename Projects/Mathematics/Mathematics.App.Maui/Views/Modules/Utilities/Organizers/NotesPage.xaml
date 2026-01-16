@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:entities="clr-namespace:Mathematics.App.Maui.Models.Entities"
+             xmlns:utilities1="clr-namespace:Mathematics.App.Maui.UI.ViewModels.Utilities"
+             x:Class="Mathematics.App.Maui.UI.Views.Utilities.NotesPage" x:DataType="utilities1:NotesViewModel">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <!-- Ввод новой заметки -->
+            <Entry Placeholder="Заголовок" Text="{Binding NewNoteTitle}" />
+            <Editor Placeholder="Содержание" Text="{Binding NewNoteContent}" AutoSize="TextChanges" HeightRequest="80"/>
+            <Button Text="Добавить заметку" Command="{Binding AddNoteCommand}" />
+
+            <!-- Список заметок -->
+            <CollectionView ItemsSource="{Binding Notes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="entities:NoteItem">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Удалить" BackgroundColor="Red"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type utilities1:NotesViewModel}}, Path=RemoveNoteCommand}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame HasShadow="True" Padding="10" Margin="2" BackgroundColor="#EEE">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Content}" LineBreakMode="WordWrap"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

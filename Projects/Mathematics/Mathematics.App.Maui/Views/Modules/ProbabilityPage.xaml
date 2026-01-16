@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="using:Mathematics.App.Maui.UI.Views.Common"
+             xmlns:loc="using:Mathematics.App.Maui.Resources.Localizations"
+             xmlns:algorithms="clr-namespace:Mathematics.App.Maui.UI.ViewModels.Algorithms"
+             x:Class="Mathematics.App.Views.ProbabilityPage" 
+             x:DataType="algorithms:DistributionsViewModel"
+             Title="{x:Static loc:Components_Resources.Title_Distributions}">
+    <ContentPage.Content>
+        <ScrollView Margin="4">
+            <VerticalStackLayout Spacing="12" Padding="16">
+	            <Border StrokeShape="RoundRectangle 12" Padding="16">
+		            <VerticalStackLayout Spacing="10">
+			            <Label Text="{x:Static loc:Components_Resources.Title_Modules}" 
+			                   FontSize="24" 
+			                   FontAttributes="Bold" 
+			                   HorizontalOptions="Center"/>
+                
+			            <Label Text="{x:Static loc:Components_Resources.Desc_Modules}" 
+			                   FontSize="14" 
+			                   HorizontalOptions="Center"/>
+		            </VerticalStackLayout>
+	            </Border>
+	            
+	            <Border StrokeShape="RoundRectangle 12" Padding="16">
+		            <CollectionView ItemsSource="{Binding DistributionGroups}">
+			            <CollectionView.ItemTemplate>
+				            <DataTemplate x:DataType="common:TreeNodeViewModel">
+					            <common:TreeNodeView />
+				            </DataTemplate>
+			            </CollectionView.ItemTemplate>
+		            </CollectionView>
+	            </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

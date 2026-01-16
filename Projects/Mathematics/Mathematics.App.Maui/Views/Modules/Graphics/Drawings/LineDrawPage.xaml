@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<drawings:DrawPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:canvas="clr-namespace:Mathematics.App.Maui.UI.Graphics"
+             xmlns:drawings="clr-namespace:Mathematics.App.Maui.UI.Views.Graphics.Drawings"
+             x:Class="Mathematics.App.Maui.UI.Views.Graphics.LineDrawPage">
+	<drawings:DrawPageBase.Content>
+		<VerticalStackLayout Spacing="10">
+			<!-- Алгоритм -->
+			<Label Text="Алгоритм отрисовки" FontAttributes="Bold"/>
+			<Picker x:Name="AlgorithmPicker" Title="Выберите алгоритм">
+				<Picker.Items>
+					<x:String>Простейший пошаговый</x:String>
+					<x:String>DDA</x:String>
+					<x:String>Целочисленный Брезенхем</x:String>
+					<x:String>Общий Брезенхем</x:String>
+					<x:String>Ву</x:String>
+				</Picker.Items>
+			</Picker>
+
+			<Button Text="Начать рисование" Clicked="OnDrawLineClicked"/>
+
+			<!-- Canvas с жестами -->
+			<canvas:GridCanvas x:Name="GridCanvas"
+			                   HeightRequest="800"
+			                   WidthRequest="800"
+			                   PixelScale="30">
+				<canvas:GridCanvas.GestureRecognizers>
+					<PinchGestureRecognizer PinchUpdated="OnPinchUpdated"/>
+					<PanGestureRecognizer PanUpdated="OnPanUpdated"/>
+					<TapGestureRecognizer Tapped="OnCanvasTapped"/>
+				</canvas:GridCanvas.GestureRecognizers>
+			</canvas:GridCanvas>
+		</VerticalStackLayout>
+	</drawings:DrawPageBase.Content>
+</drawings:DrawPageBase>

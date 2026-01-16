@@ -1,141 +1,63 @@
-﻿using CommunityToolkit.Maui;
+﻿using AiForms.Settings;
+using Camera.MAUI;
+using CommunityToolkit.Maui;
 using LiveChartsCore.SkiaSharpView.Maui;
-using LocalizationResourceManager.Maui;
-using Mathematics.App.Maui.Factories;
-using Mathematics.App.Maui.Models;
-using Mathematics.App.Maui.Resources.Localizations;
-using Mathematics.App.Maui.Services;
-using Mathematics.App.Maui.UI.ViewModels;
-using Mathematics.App.Maui.UI.ViewModels.Common;
-using Mathematics.App.Maui.UI.Views.Common;
-using Mathematics.App.Maui.UI.Views.Pages;
-using Mathematics.Core.Resources;
-using SkiaSharp.Views.Maui.Controls.Hosting; 
+using Mathematics.App.Maui.Systems.Application.Extensions;
+using Mathematics.App.Maui.Systems.Measurements.Services;
 using MemoryToolkit.Maui;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Debugging;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
+using Plugin.Maui.Audio;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using ZXing.Net.Maui.Controls;
 
-namespace Mathematics.App.Maui;
-
-public static class MauiExtensions 
-{
-	public static MauiAppBuilder RegisterFactories(this MauiAppBuilder builder)
-	{
-		builder.Logging.AddDebug();
-		builder.Services.AddSerilog(ConfigureLogger, false, true);
-		
-		builder.UseLocalizationResourceManager(settings =>
-            {
-                settings.AddResource(Components_Resources.ResourceManager);
-                settings.AddResource(Base_Resources.ResourceManager);
-				settings.AddResource(Distributions_Resources.ResourceManager);
-				settings.AddResource(Functions_Resources.ResourceManager);
-				settings.SupportNameWithDots();
-                settings.RestoreLatestCulture(true);
-                settings.SuppressTextNotFoundException();
-            });
-		
-		builder.Services.AddSingleton<DistributionPageFactory>();
-		builder.Services.AddSingleton<DistributionPreViewModelFactory>();
-		builder.Services.AddSingleton<IPageFactory, PageFactory>();
-		
-		builder.Services.AddSingleton<NavigationService>();
-
-		return builder;
-	}
-	
-	public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
-	{
-		builder.Services.AddTransient<PreviewViewModel>();
-		builder.Services.AddSingleton<DistributionsViewModel>();
-		
-		return builder;
-	}
-	
-	public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
-	{
-		builder.Services.AddTransient<PreviewView>();
-
-		return builder;
-	}
-
-	public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
-	{
-		builder.Services.AddSingleton<AboutPage>();
-		builder.Services.AddSingleton<SettingsPage>();
-		builder.Services.AddSingleton<AlgorithmsPage>();
-		
-		builder.Services.AddSingleton<DistributionsPage>();
-		builder.Services.AddSingleton<CompressionsPage>();
-		builder.Services.AddSingleton<CryptographyPage>();
-		builder.Services.AddSingleton<FunctionsPage>();
-		builder.Services.AddSingleton<GraphicsPage>();
-		builder.Services.AddSingleton<RandomsPage>();
-		builder.Services.AddSingleton<SortingsPage>();
-		
-		return builder;
-	}
-
-	public static MauiAppBuilder ConfigureExceptions(this MauiAppBuilder builder)
-	{
-		GlobalExceptionHandler.UnhandledException += GlobalExceptionHandler_UnhandledException;
-
-		return builder;
-
-		void GlobalExceptionHandler_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-		{
-			var exception = e.ExceptionObject as Exception;
-			using var services = builder.Services.BuildServiceProvider();
-			var logger = services.GetRequiredService<ILogger<Page>>();
-			
-			logger.LogError(exception, "Произошла непредвиденная ошибка");
-		}
-	}
-	
-	private static void ConfigureLogger(LoggerConfiguration configuration)
-	{
-		const string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] [{Namespace}] [{Method}] {Message:lj}{NewLine}{Exception}";
-		
-		SelfLog.Enable(Console.WriteLine);
-		
-		configuration
-			.MinimumLevel.Verbose()
-			.MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
-			.Enrich.FromLogContext()
-			.WriteTo.Debug(outputTemplate: outputTemplate)
-			.WriteTo.Console(outputTemplate: outputTemplate, theme: AnsiConsoleTheme.Code);
-	}
-}
+namespace Mathematics.App;
 
 public static class MauiProgram
 {
-    public static MauiApp CreateMauiApp()
+	public static IServiceProvider Provider { get; private set; } = null!;
+
+	public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
 
         builder
-	        .UseSkiaSharp() 
+	        .AddAudio()
+	        .UseSkiaSharp()
 	        .UseLiveCharts()
-	        .UseMauiApp<App>()
+	        .UseMauiApp<Maui.App>()
+	        .UseBarcodeReader()
+	        .UseMauiCameraView()
+	        .UseSettingsView(true)
 	        .UseMauiCommunityToolkit(ConfigureToolkit)
 	        .UseLeakDetection()
 	        .ConfigureExceptions()
 	        .ConfigureFonts(ConfigureFonts);
-        
+
+        var registry = MeasurementLoader.LoadFromRawAsync().Result;
+
+        builder.Services.AddSingleton(registry);
+
         builder
-	        .RegisterFactories()
+	        .RegisterServices()
 	        .RegisterViewModels()
+	        .RegisterViewsWithViewModel()
 	        .RegisterPages()
 	        .RegisterViews();
-        
-        return builder.Build();
+
+        var app = builder.Build();
+
+        StartupServices(app);
+
+        return app;
     }
-    
+
+	private static void StartupServices(MauiApp app)
+	{
+		Provider = app.Services;
+	}
+
     private static void ConfigureToolkit(Options toolkit)
     {
+
     }
 
     private static void ConfigureFonts(IFontCollection fonts)

@@ -1,0 +1,393 @@
+﻿[
+  {
+    "id": "m",
+    "displayName": "Unit_Meter",
+    "quantityId": "length",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "inch",
+    "displayName": "Unit_Inch",
+    "quantityId": "length",
+    "systemId": "Imperial",
+    "factor": 0.0254,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "ft",
+    "displayName": "Unit_Foot",
+    "quantityId": "length",
+    "systemId": "Imperial",
+    "factor": 0.3048,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "yd",
+    "displayName": "Unit_Yard",
+    "quantityId": "length",
+    "systemId": "Imperial",
+    "factor": 0.9144,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "mile",
+    "displayName": "Unit_Mile",
+    "quantityId": "length",
+    "systemId": "Imperial",
+    "factor": 1609.344,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "nmi",
+    "displayName": "Unit_NauticalMile",
+    "quantityId": "length",
+    "systemId": "Imperial",
+    "factor": 1852,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  
+  {
+    "id": "kg",
+    "displayName": "Unit_Gram",
+    "quantityId": "mass",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "lb",
+    "displayName": "Unit_Pound",
+    "quantityId": "mass",
+    "systemId": "Imperial",
+    "factor": 0.45359237,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "oz",
+    "displayName": "Unit_Ounce",
+    "quantityId": "mass",
+    "systemId": "Imperial",
+    "factor": 0.028349523125,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "slug",
+    "displayName": "Unit_Slug",
+    "quantityId": "mass",
+    "systemId": "Imperial",
+    "factor": 14.59390294,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  
+  {
+    "id": "s",
+    "displayName": "Unit_Second",
+    "quantityId": "time",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "min",
+    "displayName": "Unit_Minute",
+    "quantityId": "time",
+    "systemId": "SI",
+    "factor": 60,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "h",
+    "displayName": "Unit_Hour",
+    "quantityId": "time",
+    "systemId": "SI",
+    "factor": 3600,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "day",
+    "displayName": "Unit_Day",
+    "quantityId": "time",
+    "systemId": "SI",
+    "factor": 86400,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  
+  {
+    "id": "A",
+    "displayName": "Unit_Ampere",
+    "quantityId": "current",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  
+  {
+    "id": "mol",
+    "displayName": "Unit_Mole",
+    "quantityId": "amount",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  
+  {
+    "id": "cd",
+    "displayName": "Unit_Candela",
+    "quantityId": "luminous_intensity",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  
+  {
+    "id": "K",
+    "displayName": "Unit_Kelvin",
+    "quantityId": "temperature",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "C",
+    "displayName": "Unit_Celsius",
+    "quantityId": "temperature",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 273.15,
+    "allowPrefixes": false
+  },
+  {
+    "id": "F",
+    "displayName": "Unit_Fahrenheit",
+    "quantityId": "temperature",
+    "systemId": "SI",
+    "factor": 0.5555555555556,
+    "offset": 255.3722222222,
+    "allowPrefixes": false
+  },
+  
+  {
+    "id": "m/s",
+    "displayName": "Unit_MeterPerSecond",
+    "quantityId": "speed",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "km/h",
+    "displayName": "Unit_KilometerPerHour",
+    "quantityId": "speed",
+    "systemId": "SI",
+    "factor": 0.2777777777778,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "mph",
+    "displayName": "Unit_MilePerHour",
+    "quantityId": "speed",
+    "systemId": "Imperial",
+    "factor": 0.44704,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "knot",
+    "displayName": "Unit_Knot",
+    "quantityId": "speed",
+    "systemId": "Imperial",
+    "factor": 0.5144444444,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  
+  {
+    "id": "m/s2",
+    "displayName": "Unit_MeterPerSecondSquared",
+    "quantityId": "acceleration",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  
+  {
+    "id": "N",
+    "displayName": "Unit_Newton",
+    "quantityId": "force",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "lbf",
+    "displayName": "Unit_PoundForce",
+    "quantityId": "force",
+    "systemId": "Imperial",
+    "factor": 4.4482216153,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "dyn",
+    "displayName": "Unit_Dyne",
+    "quantityId": "force",
+    "systemId": "CGS",
+    "factor": 0.00001,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+
+  {
+    "id": "J",
+    "displayName": "Unit_Joule",
+    "quantityId": "energy",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "cal",
+    "displayName": "Unit_Calorie",
+    "quantityId": "energy",
+    "systemId": "CGS",
+    "factor": 4.184,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "kWh",
+    "displayName": "Unit_KilowattHour",
+    "quantityId": "energy",
+    "systemId": "SI",
+    "factor": 3600000,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+
+  {
+    "id": "Pa",
+    "displayName": "Unit_Pascal",
+    "quantityId": "pressure",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "bar",
+    "displayName": "Unit_Bar",
+    "quantityId": "pressure",
+    "systemId": "SI",
+    "factor": 100000,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "atm",
+    "displayName": "Unit_Atmosphere",
+    "quantityId": "pressure",
+    "systemId": "SI",
+    "factor": 101325,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "psi",
+    "displayName": "Unit_PSI",
+    "quantityId": "pressure",
+    "systemId": "Imperial",
+    "factor": 6894.757293,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "mmHg",
+    "displayName": "Unit_MillimeterOfMercury",
+    "quantityId": "pressure",
+    "systemId": "SI",
+    "factor": 133.322387415,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+
+  {
+    "id": "m3",
+    "displayName": "Unit_CubicMeter",
+    "quantityId": "volume",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "L",
+    "displayName": "Unit_Liter",
+    "quantityId": "volume",
+    "systemId": "SI",
+    "factor": 0.001,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "gal",
+    "displayName": "Unit_Gallon",
+    "quantityId": "volume",
+    "systemId": "USCustomary",
+    "factor": 0.003785411784,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+  {
+    "id": "qt",
+    "displayName": "Unit_Quart",
+    "quantityId": "volume",
+    "systemId": "USCustomary",
+    "factor": 0.000946352946,
+    "offset": 0,
+    "allowPrefixes": false
+  },
+
+  {
+    "id": "Hz",
+    "displayName": "Unit_Hertz",
+    "quantityId": "frequency",
+    "systemId": "SI",
+    "factor": 1,
+    "offset": 0,
+    "allowPrefixes": true
+  },
+  {
+    "id": "rpm",
+    "displayName": "Unit_RevolutionsPerMinute",
+    "quantityId": "frequency",
+    "systemId": "SI",
+    "factor": 0.0166666666667,
+    "offset": 0,
+    "allowPrefixes": false
+  }
+]

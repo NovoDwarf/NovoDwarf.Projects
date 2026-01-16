@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Mathematics.App.Maui.AppShell"
+
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Mathematics.App.Maui"
-    xmlns:base="using:Mathematics.App.Maui.Base"
     xmlns:pages="clr-namespace:Mathematics.App.Maui.UI.Views.Pages"
-    xmlns:localizations="using:Mathematics.App.Maui.Resources.Localizations"
-    Title="Math Organizer" x:DataType="base:ShellViewModel">
+    xmlns:loc="using:Mathematics.App.Maui.Resources.Localizations"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:base="clr-namespace:Mathematics.App.Maui.UI.Base"
+    xmlns:views="clr-namespace:Mathematics.App.Views"
+    Title="{x:Static loc:Components_Resources.Title_AppShell}" 
+    x:Class="Mathematics.App.AppShell"
+    x:DataType="base:ShellViewModel" >
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="Main" />
+        Title="{x:Static loc:Components_Resources.Title_Home}"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="Main"
+        Icon="{toolkit:AppThemeResource Key=Home}"/>
     
     <ShellContent
-        Title="Algorithms"
-        ContentTemplate="{DataTemplate pages:AlgorithmsPage}"
-        Route="Algorithms" />
+        Title="{x:Static loc:Components_Resources.Title_Modules}"
+        ContentTemplate="{DataTemplate views:ModulesPage}"
+        Route="Modules"
+        Icon="{toolkit:AppThemeResource Key=Algorithms}" />
     
     <ShellContent 
-        Title="Settings"
+        Title="{x:Static loc:Components_Resources.Title_Settings}"
         ContentTemplate="{DataTemplate pages:SettingsPage}"
-        Route="Settings"/>
+        Route="Settings"
+        Icon="{toolkit:AppThemeResource Key=Settings}" />
     
     <ShellContent 
-        Title="About"
-        ContentTemplate="{DataTemplate pages:AboutPage}"
-        Route="About"/>
+        Title="{x:Static loc:Components_Resources.Title_Debug}"
+        ContentTemplate="{DataTemplate pages:DebugPage}"
+        Route="Debug"
+        Icon="{toolkit:AppThemeResource Key=Debug}" />
     
-    <Shell.FlyoutFooter>
-        <VerticalStackLayout>
-            <Label Text="APP TIT" />
-            <HorizontalStackLayout>
-                <Label Text="Version: 1.0.0" />
-                <Label Text="{Binding Date}" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </Shell.FlyoutFooter>
+    <ShellContent 
+        Title="{x:Static loc:Components_Resources.Title_About}"
+        ContentTemplate="{DataTemplate pages:AboutPage}"
+        Route="About"
+        Icon="{toolkit:AppThemeResource Key=About}" />
 </Shell>
