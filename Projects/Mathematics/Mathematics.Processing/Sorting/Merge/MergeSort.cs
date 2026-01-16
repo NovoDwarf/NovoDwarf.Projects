@@ -1,8 +1,6 @@
-﻿using Mathematics.Core.Base;
-using Mathematics.Core.Base.Entities;
-using Mathematics.Core.Enums.Cryptography;
+﻿using Mathematics.Core.Base.Entities;
 
-namespace Mathematics.Sortings.Merge;
+namespace Mathematics.Processing.Sorting.Merge;
 
 public class MergeSort<T> : Sorting<T>
 	where T : IComparable<T>
