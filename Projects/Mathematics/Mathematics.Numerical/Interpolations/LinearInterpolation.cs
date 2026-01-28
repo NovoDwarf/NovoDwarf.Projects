@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Runtime.CompilerServices;
 
-namespace Mathematics.Functions.Interpolations;
+namespace Mathematics.Numerical.Interpolations;
 
 public static class LinearInterpolation
 {

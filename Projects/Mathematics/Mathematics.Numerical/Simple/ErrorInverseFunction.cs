@@ -1,12 +1,12 @@
-﻿namespace Mathematics.Functions;
+﻿namespace Mathematics.Numerical.Simple;
 
-public static class InverseErrorFunction
+public static class ErrorInverseFunction
 {
 	private const double A = 0.147;
 	
 	public static double Calculate(double y)
 	{
-		if (y <= -1.0 || y >= 1.0)
+		if (y is <= -1.0 or >= 1.0)
 			throw new ArgumentOutOfRangeException(nameof(y), "y must be in range (-1, 1)");
 
 		var sign = y < 0 ? -1 : 1;

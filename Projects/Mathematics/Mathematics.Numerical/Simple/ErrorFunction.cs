@@ -1,8 +1,5 @@
-﻿namespace Mathematics.Functions;
+﻿namespace Mathematics.Numerical.Simple;
 
-/// <summary>
-/// 
-/// </summary>
 public static class ErrorFunction
 {
 	// Abramowitz and Stegun. Handbook of Mathematical Functions

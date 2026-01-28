@@ -1,6 +1,6 @@
-﻿namespace Mathematics.Functions;
+﻿namespace Mathematics.Numerical.Simple;
 
-public static class ComplementaryErrorFunction
+public static class ErrorComplementaryFunction
 {
 	public static double Calculate(double x)
 	{

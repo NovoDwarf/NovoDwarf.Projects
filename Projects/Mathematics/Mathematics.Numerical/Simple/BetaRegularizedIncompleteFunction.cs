@@ -1,6 +1,6 @@
-﻿namespace Mathematics.Functions;
+﻿namespace Mathematics.Numerical.Simple;
 
-public class RegularizedIncompleteBetaFunction
+public class BetaRegularizedIncompleteFunction
 {
 	public static double Calculate(double x, double a, double b)
 	{

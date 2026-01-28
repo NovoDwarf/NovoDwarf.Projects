@@ -1,4 +1,4 @@
-﻿namespace Mathematics.Functions;
+﻿namespace Mathematics.Numerical.Simple;
 
 public class FactorialFunction
 {
