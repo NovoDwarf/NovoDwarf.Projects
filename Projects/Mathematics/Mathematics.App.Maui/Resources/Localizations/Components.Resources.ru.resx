@@ -236,4 +236,10 @@
     <data name="Title_AppShell" xml:space="preserve">
         <value>Навигация</value>
     </data>
+    <data name="Title_Probability" xml:space="preserve">
+        <value>Теория вероятностей</value>
+    </data>
+    <data name="Title_Proccessing" xml:space="preserve">
+        <value>Обработка данных</value>
+    </data>
 </root>

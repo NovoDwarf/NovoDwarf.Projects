@@ -261,4 +261,10 @@
     <data name="Desc_Modules" xml:space="preserve">
         <value />
     </data>
+    <data name="Title_Probability" xml:space="preserve">
+        <value>Probability Theory</value>
+    </data>
+    <data name="Title_Proccessing" xml:space="preserve">
+        <value>Data Proccessing</value>
+    </data>
 </root>

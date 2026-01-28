@@ -645,6 +645,24 @@ namespace Mathematics.App.Maui.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Probability Theory.
+        /// </summary>
+        internal static string Title_Probability {
+            get {
+                return ResourceManager.GetString("Title_Probability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Proccessing.
+        /// </summary>
+        internal static string Title_Proccessing {
+            get {
+                return ResourceManager.GetString("Title_Proccessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Randoms.
         /// </summary>
         internal static string Title_Randoms {
