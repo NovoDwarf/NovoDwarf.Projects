@@ -5,8 +5,11 @@ public sealed class CategoriesAttribute : Attribute
 {
 	public IReadOnlyList<string> Path { get; }
 
-	public CategoriesAttribute(params string[] path)
+	public CategoriesAttribute(params string[] paths)
 	{
-		Path = path;
+		Path = paths
+			.Where(p => !string.IsNullOrEmpty(p))
+			.Select(p => $"Category_{p}_Name")
+			.ToArray();
 	}
 }

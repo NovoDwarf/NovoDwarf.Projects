@@ -6,8 +6,8 @@ public class EntityParameterAttribute : Attribute
 	public EntityParameterAttribute(Type type, string name) 
 	{
 		Type = type;
-		NameKey = $"{name}ParamName";
-		DescKey = $"{name}ParamDesc";
+		NameKey = $"Param_{name}_Name";
+		DescKey = $"Param_{name}_Desc";
 	}
 
 	public Type Type { get; private set; }

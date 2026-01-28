@@ -39,8 +39,8 @@ public static class StatsUtils
 		ArgumentException.ThrowIfNullOrEmpty(samples);
 
 		var sorted = samples.OrderBy(x => x).ToList();
-		var min = sorted.First();
-		var max = sorted.Last();
+		var min = sorted[0];
+		var max = sorted[^1];
 		var median = sorted.Median();
 
 		var lowerHalf = sorted.Take(sorted.Count / 2).ToList();

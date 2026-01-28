@@ -18,55 +18,55 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ScaleParamName" xml:space="preserve">
+    <data name="Scale" xml:space="preserve">
         <value>Scale</value>
     </data>
-    <data name="ShapeParamName" xml:space="preserve">
+    <data name="Shape" xml:space="preserve">
         <value>Shape</value>
     </data>
-    <data name="TrialsParamName" xml:space="preserve">
+    <data name="Trials" xml:space="preserve">
         <value>Trials</value>
     </data>
-    <data name="ProbabilityParamName" xml:space="preserve">
+    <data name="Probability" xml:space="preserve">
         <value>Probability</value>
     </data>
-    <data name="MinimumParamName" xml:space="preserve">
+    <data name="Minimum" xml:space="preserve">
         <value>Minimum</value>
     </data>
-    <data name="MaximumParamName" xml:space="preserve">
+    <data name="Maximum" xml:space="preserve">
         <value>Maximum</value>
     </data>
-    <data name="StandardDeviationParamName" xml:space="preserve">
+    <data name="StandardDeviation" xml:space="preserve">
         <value>Standard Deviation</value>
     </data>
-    <data name="SuccessParamName" xml:space="preserve">
+    <data name="Success" xml:space="preserve">
         <value>Success</value>
     </data>
-    <data name="AlphaParamName" xml:space="preserve">
+    <data name="Alpha" xml:space="preserve">
         <value>Alpha</value>
     </data>
-    <data name="BetaParamName" xml:space="preserve">
+    <data name="Beta" xml:space="preserve">
         <value>Beta</value>
     </data>
-    <data name="MeanParamName" xml:space="preserve">
+    <data name="Mean" xml:space="preserve">
         <value>Mean</value>
     </data>
-    <data name="LocationParamName" xml:space="preserve">
+    <data name="Location" xml:space="preserve">
         <value>Location</value>
     </data>
-    <data name="RatesParamName" xml:space="preserve">
+    <data name="Rates" xml:space="preserve">
         <value>Rates</value>
     </data>
-    <data name="ProbabilitiesParamName" xml:space="preserve">
+    <data name="Probabilities" xml:space="preserve">
         <value>Probabilities</value>
     </data>
-    <data name="RateParamName" xml:space="preserve">
+    <data name="Rate" xml:space="preserve">
         <value>Rate</value>
     </data>
-    <data name="ModeParamName" xml:space="preserve">
+    <data name="Mode" xml:space="preserve">
         <value>Mode</value>
     </data>
-    <data name="ConstantParamName" xml:space="preserve">
+    <data name="Constant" xml:space="preserve">
         <value>Constant</value>
     </data>
 </root>

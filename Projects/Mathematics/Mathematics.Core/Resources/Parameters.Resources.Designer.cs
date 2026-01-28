@@ -62,153 +62,153 @@ namespace Mathematics.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Alpha.
         /// </summary>
-        public static string AlphaParamName {
+        public static string Alpha {
             get {
-                return ResourceManager.GetString("AlphaParamName", resourceCulture);
+                return ResourceManager.GetString("Alpha", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Beta.
         /// </summary>
-        public static string BetaParamName {
+        public static string Beta {
             get {
-                return ResourceManager.GetString("BetaParamName", resourceCulture);
+                return ResourceManager.GetString("Beta", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Constant.
         /// </summary>
-        public static string ConstantParamName {
+        public static string Constant {
             get {
-                return ResourceManager.GetString("ConstantParamName", resourceCulture);
+                return ResourceManager.GetString("Constant", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Location.
         /// </summary>
-        public static string LocationParamName {
+        public static string Location {
             get {
-                return ResourceManager.GetString("LocationParamName", resourceCulture);
+                return ResourceManager.GetString("Location", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Maximum.
         /// </summary>
-        public static string MaximumParamName {
+        public static string Maximum {
             get {
-                return ResourceManager.GetString("MaximumParamName", resourceCulture);
+                return ResourceManager.GetString("Maximum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mean.
         /// </summary>
-        public static string MeanParamName {
+        public static string Mean {
             get {
-                return ResourceManager.GetString("MeanParamName", resourceCulture);
+                return ResourceManager.GetString("Mean", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Minimum.
         /// </summary>
-        public static string MinimumParamName {
+        public static string Minimum {
             get {
-                return ResourceManager.GetString("MinimumParamName", resourceCulture);
+                return ResourceManager.GetString("Minimum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mode.
         /// </summary>
-        public static string ModeParamName {
+        public static string Mode {
             get {
-                return ResourceManager.GetString("ModeParamName", resourceCulture);
+                return ResourceManager.GetString("Mode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Probabilities.
         /// </summary>
-        public static string ProbabilitiesParamName {
+        public static string Probabilities {
             get {
-                return ResourceManager.GetString("ProbabilitiesParamName", resourceCulture);
+                return ResourceManager.GetString("Probabilities", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Probability.
         /// </summary>
-        public static string ProbabilityParamName {
+        public static string Probability {
             get {
-                return ResourceManager.GetString("ProbabilityParamName", resourceCulture);
+                return ResourceManager.GetString("Probability", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Rate.
         /// </summary>
-        public static string RateParamName {
+        public static string Rate {
             get {
-                return ResourceManager.GetString("RateParamName", resourceCulture);
+                return ResourceManager.GetString("Rate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Rates.
         /// </summary>
-        public static string RatesParamName {
+        public static string Rates {
             get {
-                return ResourceManager.GetString("RatesParamName", resourceCulture);
+                return ResourceManager.GetString("Rates", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Scale.
         /// </summary>
-        public static string ScaleParamName {
+        public static string Scale {
             get {
-                return ResourceManager.GetString("ScaleParamName", resourceCulture);
+                return ResourceManager.GetString("Scale", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Shape.
         /// </summary>
-        public static string ShapeParamName {
+        public static string Shape {
             get {
-                return ResourceManager.GetString("ShapeParamName", resourceCulture);
+                return ResourceManager.GetString("Shape", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Standard Deviation.
         /// </summary>
-        public static string StandardDeviationParamName {
+        public static string StandardDeviation {
             get {
-                return ResourceManager.GetString("StandardDeviationParamName", resourceCulture);
+                return ResourceManager.GetString("StandardDeviation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
-        public static string SuccessParamName {
+        public static string Success {
             get {
-                return ResourceManager.GetString("SuccessParamName", resourceCulture);
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Trials.
         /// </summary>
-        public static string TrialsParamName {
+        public static string Trials {
             get {
-                return ResourceManager.GetString("TrialsParamName", resourceCulture);
+                return ResourceManager.GetString("Trials", resourceCulture);
             }
         }
     }

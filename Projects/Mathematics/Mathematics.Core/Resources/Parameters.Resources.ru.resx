@@ -11,55 +11,55 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ShapeParamName" xml:space="preserve">
+    <data name="Shape" xml:space="preserve">
         <value>Форма</value>
     </data>
-    <data name="ScaleParamName" xml:space="preserve">
+    <data name="Scale" xml:space="preserve">
         <value>Масштаб</value>
     </data>
-    <data name="TrialsParamName" xml:space="preserve">
+    <data name="Trials" xml:space="preserve">
         <value>Попытки</value>
     </data>
-    <data name="ProbabilityParamName" xml:space="preserve">
+    <data name="Probability" xml:space="preserve">
         <value>Вероятность</value>
     </data>
-    <data name="StandardDeviationParamName" xml:space="preserve">
+    <data name="StandardDeviation" xml:space="preserve">
         <value>Стандартное отклонение</value>
     </data>
-    <data name="MaximumParamName" xml:space="preserve">
+    <data name="Maximum" xml:space="preserve">
         <value>Максимум</value>
     </data>
-    <data name="MinimumParamName" xml:space="preserve">
+    <data name="Minimum" xml:space="preserve">
         <value>Минимум</value>
     </data>
-    <data name="AlphaParamName" xml:space="preserve">
+    <data name="Alpha" xml:space="preserve">
         <value>Альфа</value>
     </data>
-    <data name="BetaParamName" xml:space="preserve">
+    <data name="Beta" xml:space="preserve">
         <value>Бета</value>
     </data>
-    <data name="MeanParamName" xml:space="preserve">
+    <data name="Mean" xml:space="preserve">
         <value>Среднее</value>
     </data>
-    <data name="LocationParamName" xml:space="preserve">
+    <data name="Location" xml:space="preserve">
         <value>Положение</value>
     </data>
-    <data name="RatesParamName" xml:space="preserve">
+    <data name="Rates" xml:space="preserve">
         <value>Оценки</value>
     </data>
-    <data name="ProbabilitiesParamName" xml:space="preserve">
+    <data name="Probabilities" xml:space="preserve">
         <value>Вероятности</value>
     </data>
-    <data name="RateParamName" xml:space="preserve">
+    <data name="Rate" xml:space="preserve">
         <value>Оценка</value>
     </data>
-    <data name="ModeParamName" xml:space="preserve">
+    <data name="Mode" xml:space="preserve">
         <value>Мода</value>
     </data>
-    <data name="SuccessParamName" xml:space="preserve">
+    <data name="Success" xml:space="preserve">
         <value>Успех</value>
     </data>
-    <data name="ConstantParamName" xml:space="preserve">
+    <data name="Constant" xml:space="preserve">
         <value>Константа</value>
     </data>
 </root>

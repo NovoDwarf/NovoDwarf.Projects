@@ -1,6 +1,6 @@
-﻿namespace Mathematics.Core.Enums;
+﻿namespace Mathematics.Core.Enums.Distributions;
 
-public enum DistributionSubCategory
+public enum DistributionSubType
 {
 	None,
 

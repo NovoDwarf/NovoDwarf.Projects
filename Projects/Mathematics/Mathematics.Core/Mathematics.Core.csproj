@@ -21,31 +21,49 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Distributions.Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
+      <EmbeddedResource Update="Resources\Probability.Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Distribution.Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Functions.Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
+      <EmbeddedResource Update="Resources\Numerical.Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Functions.Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Base.Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Base.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Parameters.Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Parameters.Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\Distributions.Resources.Designer.cs">
+      <Compile Update="Resources\Probability.Resources.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>Distributions.Resources.resx</DependentUpon>
+        <DependentUpon>Probability.Resources.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\Functions.Resources.Designer.cs">
+      <Compile Update="Resources\Numerical.Resources.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>Functions.Resources.resx</DependentUpon>
+        <DependentUpon>Numerical.Resources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Base.Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Base.Resources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Parameters.Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Parameters.Resources.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+      <PackageReference Include="System.Drawing.Common" Version="10.0.1" />
     </ItemGroup>
 
 </Project>

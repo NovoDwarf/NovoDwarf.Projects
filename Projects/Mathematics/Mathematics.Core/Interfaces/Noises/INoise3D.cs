@@ -1,6 +1,6 @@
-﻿namespace Mathematics.Core.Interfaces;
+﻿namespace Mathematics.Core.Interfaces.Noises;
 
-public interface INoise3D<T>
+public interface INoise3D
 {
-	public T Make(T x, T y, T z);
+	public float Make(float x, float y, float z);
 }

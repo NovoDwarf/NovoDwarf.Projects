@@ -1,6 +1,11 @@
-﻿namespace Mathematics.Core.Interfaces;
+﻿namespace Mathematics.Core.Interfaces.Noises;
 
-public interface INoise2D<T>
+public interface INoise2D
 {
-	public T Make(T x, T y);
+	public float Make(float x, float y);
+}
+
+public interface INoise4D
+{
+	public float Make(float x, float y, float z, float w);
 }

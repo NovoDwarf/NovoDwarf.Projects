@@ -1,4 +1,4 @@
-﻿namespace Mathematics.Server.Controllers.Noises;
+﻿namespace Mathematics.Core.Enums.Drawing;
 
 public enum ColorSchemeType
 {
