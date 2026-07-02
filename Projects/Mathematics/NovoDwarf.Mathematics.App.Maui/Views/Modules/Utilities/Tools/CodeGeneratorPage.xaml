@@ -1,0 +1,27 @@
+﻿
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tools1="using:NovoDwarf.Mathematics.App.ViewModels.Utilities.Tools"
+             x:Class="NovoDwarf.Mathematics.App.Views.Modules.Utilities.Tools.CodeGeneratorPage" 
+             x:DataType="tools1:CodeGeneratorViewModel">
+    
+	<ScrollView>
+		<VerticalStackLayout Spacing="20" Padding="20">
+
+			<Label Text="Выберите тип кода:" FontAttributes="Bold"/>
+			<Picker ItemsSource="{Binding CodeTypes}" 
+			        SelectedItem="{Binding SelectedCodeType}"/>
+
+			<Label Text="Введите данные:" FontAttributes="Bold"/>
+			<Entry Text="{Binding InputText}" Placeholder="Введите текст/ссылку/номер"/>
+
+			<Button Text="Сгенерировать" Command="{Binding GenerateCommand}"/>
+
+			<Frame BorderColor="Gray" Padding="10" HasShadow="True" CornerRadius="10">
+				<Image Source="{Binding GeneratedImage}" HeightRequest="250" WidthRequest="250"/>
+			</Frame>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentView>

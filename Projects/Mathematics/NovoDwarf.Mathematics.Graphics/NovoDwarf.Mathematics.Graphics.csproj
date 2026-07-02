@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>NovoDwarf</Authors>
+        <RootNamespace>Mathematics.Graphics</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Fractals\Algebraic\" />
+      <Folder Include="Fractals\Stochastic\" />
+      <Folder Include="Noises\Hybrid\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NovoDwarf.Mathematics.Core\NovoDwarf.Mathematics.Core.csproj" />
+    </ItemGroup>
+
+</Project>

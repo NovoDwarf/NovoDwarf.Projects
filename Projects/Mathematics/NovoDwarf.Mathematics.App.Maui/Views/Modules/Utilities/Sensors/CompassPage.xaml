@@ -1,0 +1,37 @@
+﻿
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sensors="using:NovoDwarf.Mathematics.App.ViewModels.Utilities.Sensors"
+             xmlns:localizations="using:NovoDwarf.Mathematics.App.Resources.Localizations"
+             x:Class="NovoDwarf.Mathematics.App.Views.Modules.Utilities.Sensors.CompassPage"
+             x:DataType="sensors:CompassViewModel"
+             Title="{x:Static localizations:Components_Resources.Title_Compass}">
+
+    <ContentPage.Content>
+        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+            
+            <Frame WidthRequest="250" HeightRequest="250" CornerRadius="125" BorderColor="Gray" BackgroundColor="White">
+                <Grid>
+                    
+                    <Label Text="N" FontSize="18" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,5,0,0"/>
+                    <Label Text="S" FontSize="18" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,5"/>
+                    <Label Text="E" FontSize="18" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,5,0"/>
+                    <Label Text="W" FontSize="18" HorizontalOptions="Start" VerticalOptions="Center" Margin="5,0,0,0"/>
+
+                    <BoxView x:Name="Arrow"
+                             WidthRequest="4"
+                             HeightRequest="100"
+                             Color="Red"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             AnchorY="0.9"
+                             Rotation="{Binding Heading}" />
+                </Grid>
+            </Frame>
+
+            <Label Text="{Binding HeadingText}" FontSize="24" VerticalOptions="End" HorizontalOptions="Center" Margin="0,10,0,0"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

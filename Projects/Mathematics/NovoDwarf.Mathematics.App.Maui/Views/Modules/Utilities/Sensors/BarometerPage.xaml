@@ -1,0 +1,39 @@
+﻿<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:sensors="using:NovoDwarf.Mathematics.App.ViewModels.Utilities.Sensors"
+    xmlns:localizations="using:NovoDwarf.Mathematics.App.Resources.Localizations"
+    x:Class="NovoDwarf.Mathematics.App.Views.Modules.Utilities.Sensors.BarometerPage"
+    x:DataType="sensors:BarometerViewModel"
+    Title="{x:Static localizations:Components_Resources.Title_Barometer}">
+
+    <VerticalStackLayout Padding="24" Spacing="16">
+
+        <!-- Values -->
+        <Label
+            Text="{Binding Pressure, StringFormat='{}{0} кПа'}"
+            FontSize="42"
+            HorizontalOptions="Center"/>
+
+        <Label
+            Text="{Binding Altitude, StringFormat='Высота: {0} м'}"
+            FontSize="18"
+            HorizontalOptions="Center"/>
+
+        <Label
+            Text="{Binding Trend}"
+            FontSize="16"
+            HorizontalOptions="Center"/>
+
+        <!-- Chart -->
+        <lvc:CartesianChart HeightRequest="160" Series="{Binding PressureSeries}" />
+
+        <!-- Controls -->
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+            <Button Text="{x:Static localizations:Components_Resources.Button_Start}" Command="{Binding ToggleCommand}" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
+

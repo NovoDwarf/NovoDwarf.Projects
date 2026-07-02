@@ -1,0 +1,108 @@
+﻿
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sensors1="using:NovoDwarf.Mathematics.App.ViewModels.Utilities.Sensors"
+    xmlns:dtOs="using:NovoDwarf.Mathematics.App.Systems.Sensors.DTOs"
+    x:Class="NovoDwarf.Mathematics.App.Views.Modules.Utilities.Sensors.FlashlightPage"
+    x:DataType="sensors1:FlashlightViewModel">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="Auto,*"
+          Padding="16">
+        
+        <Button Grid.Row="0"
+                Grid.ColumnSpan="2"
+                HeightRequest="140"
+                WidthRequest="140"
+                CornerRadius="70"
+                FontSize="18"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Command="{Binding ToggleFlashlightCommand}"
+                Text="{Binding ToggleButtonText}"
+                BackgroundColor="{Binding ToggleButtonColor}"
+                TextColor="White"/>
+        
+        <CollectionView Grid.Row="1"
+                        Grid.Column="0"
+                        WidthRequest="110"
+                        ItemsSource="{Binding FlashlightModes}"
+                        SelectedItem="{Binding Selected}"
+                        SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="dtOs:FlashlightData">
+                    <Button Text="{Binding Name}"  
+                            Command="{Binding 
+                                Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                Path=BindingContext.SelectModeCommand}"
+                            CommandParameter="{Binding }"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Border Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Padding="16"
+                IsVisible="{Binding HasModeSettings}">
+            <VerticalStackLayout Spacing="16">
+                
+                <VerticalStackLayout IsVisible="{Binding IsStrobeMode}">
+                    <Label Text="Скорость строба"/>
+                    <Slider Minimum="100"
+                            Maximum="1000"
+                            Value="{Binding StrobeSpeed}"/>
+                    <Label Text="{Binding StrobeSpeed, StringFormat='{0} мс'}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout IsVisible="{Binding IsScreenLightMode}">
+                    <Label Text="Цвет экрана"/>
+
+                    <CollectionView ItemsSource="{Binding AvailableColors}"
+                                    SelectedItem="{Binding ScreenLightColor}"
+                                    SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                               ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="{x:Null}">
+                                <Border WidthRequest="36"
+                                        HeightRequest="36"
+                                        BackgroundColor="{Binding .}"
+                                        Stroke="Black">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18"/>
+                                    </Border.StrokeShape>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Яркость"/>
+                    <Slider Minimum="0.1"
+                            Maximum="1"
+                            Value="{Binding ScreenBrightness}"/>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Border>
+        
+        <BoxView Grid.RowSpan="3"
+                 Grid.ColumnSpan="2"
+                 IsVisible="{Binding IsScreenLightActive}"
+                 BackgroundColor="{Binding ScreenLightColor}"
+                 Opacity="{Binding ScreenBrightness}"/>
+
+    </Grid>
+</ContentPage>
+

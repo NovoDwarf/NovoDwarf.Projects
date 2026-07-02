@@ -1,0 +1,27 @@
+﻿
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:NovoDwarf.Mathematics.App.Resources.Localizations"
+             x:Class="NovoDwarf.Mathematics.App.Views.Modules.CryptographyPage">
+    <ContentPage.Content>
+	    <ScrollView Margin="4">
+		    <VerticalStackLayout Padding="16" Spacing="12">
+			    <Border StrokeShape="RoundRectangle 12" Padding="16">
+				    <VerticalStackLayout Spacing="10">
+					    <Label Text="{x:Static loc:Components_Resources.Title_Cryptography}" 
+					           FontSize="24" 
+					           FontAttributes="Bold" 
+					           HorizontalOptions="Center"/>
+                
+					    <Label Text="{x:Static loc:Components_Resources.Desc_Modules}" 
+					           FontSize="14" 
+					           HorizontalOptions="Center"/>
+				    </VerticalStackLayout>
+			    </Border>
+			    
+			    
+		    </VerticalStackLayout>
+	    </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

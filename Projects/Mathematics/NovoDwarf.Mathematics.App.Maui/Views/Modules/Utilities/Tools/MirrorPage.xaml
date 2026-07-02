@@ -1,0 +1,11 @@
+﻿
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             xmlns:utilities="clr-namespace:NovoDwarf.Mathematics.App.ViewModels.Utilities.Tools"
+             x:Class="NovoDwarf.Mathematics.App.Views.Modules.Utilities.Tools.MirrorPage" x:DataType="utilities:MirrorViewModel">
+    <ContentPage.Content>
+		  <cv:CameraView x:Name="CameraView" WidthRequest="800" HeightRequest="800"/>
+    </ContentPage.Content>
+</ContentPage>

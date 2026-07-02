@@ -1,0 +1,40 @@
+﻿<ContentPage
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:common="using:NovoDwarf.Mathematics.App.Views.Common"
+	xmlns:localizations="using:NovoDwarf.Mathematics.App.Resources.Localizations"
+	xmlns:probability="using:NovoDwarf.Mathematics.App.ViewModels.Probability"
+	x:Class="NovoDwarf.Mathematics.App.Views.Modules.ProbabilityPage" 
+	x:DataType="probability:DistributionsViewModel"
+	Title="{x:Static localizations:Components_Resources.Title_Distributions}">
+   
+	<ContentPage.Content>
+        <ScrollView Margin="4">
+            <VerticalStackLayout Spacing="12" Padding="16">
+	            <Border StrokeShape="RoundRectangle 12" Padding="16">
+		            <VerticalStackLayout Spacing="10">
+			            <Label Text="{x:Static localizations:Components_Resources.Title_Probability}" 
+			                   FontSize="24" 
+			                   FontAttributes="Bold" 
+			                   HorizontalOptions="Center"/>
+                
+			            <Label Text="{x:Static localizations:Components_Resources.Desc_Modules}" 
+			                   FontSize="14" 
+			                   HorizontalOptions="Center"/>
+		            </VerticalStackLayout>
+	            </Border>
+	            
+	            <Border StrokeShape="RoundRectangle 12" Padding="16">
+		            <CollectionView ItemsSource="{Binding DistributionGroups}">
+			            <CollectionView.ItemTemplate>
+				            <DataTemplate x:DataType="common:TreeNodeViewModel">
+					            <common:TreeNodeView />
+				            </DataTemplate>
+			            </CollectionView.ItemTemplate>
+		            </CollectionView>
+	            </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

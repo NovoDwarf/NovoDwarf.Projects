@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Mathematics.Processing</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Search\" />
+      <Folder Include="Sorting\" />
+      <Folder Include="Transformation\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NovoDwarf.Mathematics.Core\NovoDwarf.Mathematics.Core.csproj" />
+    </ItemGroup>
+
+</Project>

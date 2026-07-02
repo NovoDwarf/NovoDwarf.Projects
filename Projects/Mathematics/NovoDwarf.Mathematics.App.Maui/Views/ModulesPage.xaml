@@ -1,0 +1,69 @@
+﻿<ContentPage 
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:common1="using:NovoDwarf.Mathematics.App.Views.Common"
+	xmlns:modules1="using:NovoDwarf.Mathematics.App.Views.Modules"
+	xmlns:loc="clr-namespace:NovoDwarf.Mathematics.App.Resources.Localizations"
+	x:Class="NovoDwarf.Mathematics.App.Views.ModulesPage"
+	Title="{x:Static loc:Components_Resources.Title_Modules}">
+    
+	<ContentPage.Content>
+        <ScrollView Margin="4">
+            <VerticalStackLayout Padding="16" Spacing="12">
+	            <Border StrokeShape="RoundRectangle 12" Padding="16">
+		            <VerticalStackLayout Spacing="10">
+			            <Label Text="{x:Static loc:Components_Resources.Title_Modules}" 
+			                   FontSize="24" 
+			                   FontAttributes="Bold" 
+			                   HorizontalOptions="Center"/>
+                
+			            <Label Text="{x:Static loc:Components_Resources.Desc_Modules}" 
+			                   FontSize="14" 
+			                   HorizontalOptions="Center"/>
+                
+		            </VerticalStackLayout>
+	            </Border>
+	            
+	            <common1:PreviewTableView
+		            Title="{x:Static loc:Components_Resources.Title_Distributions}" 
+		            Description="{x:Static loc:Components_Resources.Desc_Distributions}" 
+		            View="{x:Type modules1:ProbabilityPage }" />
+                
+                <common1:PreviewTableView
+	                Title="{Static loc:Components_Resources.Title_Compressions}" 
+	                Description="{Static loc:Components_Resources.Desc_Compressions}" 
+	                View="{Type modules1:CompressionsPage }" />
+                
+                <common1:PreviewTableView
+	                Title="{x:Static loc:Components_Resources.Title_Cryptography}" 
+	                Description="{x:Static loc:Components_Resources.Desc_Cryptography}" 
+	                View="{x:Type modules1:CryptographyPage }" />
+                
+                <common1:PreviewTableView
+	                Title="{x:Static loc:Components_Resources.Title_Numerical}"
+	                Description="{x:Static loc:Components_Resources.Desc_Numerical}" 
+	                View="{x:Type modules1:NumericalPage }" />
+                
+                <common1:PreviewTableView 
+	                Title="{x:Static loc:Components_Resources.Title_Graphics}"
+	                Description="{x:Static loc:Components_Resources.Desc_Graphics}" 
+	                View="{x:Type modules1:GraphicsPage }" />
+                
+                <common1:PreviewTableView 
+	                Title="{x:Static loc:Components_Resources.Title_Sortings}"
+	                Description="{x:Static loc:Components_Resources.Desc_Sortings}" 
+	                View="{x:Type modules1:ProccessingPage }" />
+                
+                <common1:PreviewTableView
+	                Title="{x:Static loc:Components_Resources.Title_Utilities}"
+	                Description="{x:Static loc:Components_Resources.Desc_Utilities}" 
+	                View="{x:Type modules1:UtilityPage }" />
+                
+                <common1:PreviewTableView
+	                Title="Games"
+	                Description="{x:Static loc:Components_Resources.Desc_Utilities}" 
+	                View="{x:Type modules1:GamesPage }" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
