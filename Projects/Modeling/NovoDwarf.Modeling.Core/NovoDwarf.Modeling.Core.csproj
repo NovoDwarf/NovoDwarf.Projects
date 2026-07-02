@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Structures.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\NovoDwarf.Primitives\NovoDwarf.Primitives.csproj" />
+        <ProjectReference Include="..\..\Mathematics\NovoDwarf.Mathematics.Core\NovoDwarf.Mathematics.Core.csproj" />
+        <ProjectReference Include="..\..\Mathematics\NovoDwarf.Mathematics.Probability\NovoDwarf.Mathematics.Probability.csproj" />
+        <ProjectReference Include="..\NovoDwarf.Modeling.Logging\NovoDwarf.Modeling.Logging.csproj" />
+    </ItemGroup>
+
+</Project>

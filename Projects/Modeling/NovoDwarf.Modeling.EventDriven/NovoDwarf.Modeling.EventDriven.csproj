@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <RootNamespace>NovoDwarf.Modeling.EventDriven</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Modeling.Core\Modeling.Core.csproj" />
+      <ProjectReference Include="..\..\..\Shared\NovoDwarf.Primitives\NovoDwarf.Primitives.csproj" />
+      <ProjectReference Include="..\..\Mathematics\NovoDwarf.Mathematics.Core\NovoDwarf.Mathematics.Core.csproj" />
+      <ProjectReference Include="..\NovoDwarf.Modeling.Core\NovoDwarf.Modeling.Core.csproj" />
+      <ProjectReference Include="..\NovoDwarf.Modeling.Logging\NovoDwarf.Modeling.Logging.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Messager.NET" Version="1.0.0" />
+    </ItemGroup>
+
+</Project>
