@@ -1,4 +1,4 @@
-namespace Grekov;
+namespace Grekov.Core;
 
 public readonly record struct DefId : IParsable<DefId>
 {

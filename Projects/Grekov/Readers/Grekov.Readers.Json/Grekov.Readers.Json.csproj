@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\NovoDwarf.FS\NovoDwarf.FS.csproj" />
+        <ProjectReference Include="..\..\..\..\Shared\NovoDwarf.FS\NovoDwarf.FS.csproj" />
         <ProjectReference Include="..\..\Grekov.Core\Grekov.Core.csproj" />
         <ProjectReference Include="..\..\Grekov.Definitions\Grekov.Definitions.csproj" />
     </ItemGroup>

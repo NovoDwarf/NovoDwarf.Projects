@@ -5,4 +5,25 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Def.cs" />
+        <Compile Remove="DefId.cs" />
+        <Compile Remove="Attributes\*.cs" />
+        <Compile Remove="Enums\*.cs" />
+        <Compile Remove="IO\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="11.0.0-preview.3.26207.106" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\NovoDwarf.FS\NovoDwarf.FS.csproj" />
+        <ProjectReference Include="..\Grekov.Core\Grekov.Core.csproj" />
+        <ProjectReference Include="..\Grekov.Packaging\Grekov.Packaging.csproj" />
+        <ProjectReference Include="..\Grekov.Definitions\Grekov.Definitions.csproj" />
+        <ProjectReference Include="..\Grekov.Localizations\Grekov.Localizations.csproj" />
+        <ProjectReference Include="..\Grekov.Assemblies\Grekov.Assemblies.csproj" />
+    </ItemGroup>
 </Project>

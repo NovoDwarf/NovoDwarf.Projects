@@ -1,3 +1,4 @@
+using Grekov.Assemblies.Defaults;
 using Grekov.Assemblies.Interfaces;
 using Grekov.Assemblies.Services;
 using Grekov.Packaging.Interfaces;
@@ -9,9 +10,9 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection AddGrekovAssemblies(this IServiceCollection services)
 	{
-		services.AddSingleton<IPackageAssemblyPathResolver, DefaultPackageAssemblyPathResolver>();
-		services.AddSingleton<IPackageContextFactory, DefaultPackageContextFactory>();
-		services.AddSingleton<PackageAssemblyLocator>();
+		services.AddSingleton<IPackagePathResolver, DefaultPathResolver>();
+		services.AddSingleton<IPackageContextFactory, DefaultContextFactory>();
+		services.AddSingleton<AssemblyLocator>();
 		services.AddSingleton<EntrypointResolver>();
 		services.AddSingleton<EntrypointActivator>();
 		services.AddSingleton<AssemblyService>();

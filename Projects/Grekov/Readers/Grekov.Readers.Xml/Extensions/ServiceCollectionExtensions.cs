@@ -8,6 +8,6 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection Xml(this IServiceCollection services)
 	{
-		return services.AddSingleton<IDefinitionFormatReader, DefinitionXmlReader>();
+		return services.AddSingleton<IDefFormatReader, DefXmlReader>();
 	}
 }

@@ -1,5 +1,7 @@
 using Grekov.Extensions;
 using Grekov.Localizations;
+using Grekov.Localizations.Entities;
+using Grekov.Localizations.Interfaces;
 using Grekov.Packaging.Interfaces;
 using Grekov.Readers.Json.Extensions;
 using Grekov.Readers.Xml.Extensions;
@@ -46,9 +48,7 @@ public static class Program
 
 		var services = new ServiceCollection();
 
-		services.AddSingleton<IGameVersionProvider, ExampleGameVersionProvider>();
 		services.AddSingleton<IPackageLoadOrderStore, ExampleLoadOrderStore>();
-		services.AddSingleton<IPackageFingerprintProvider, ExampleFingerprintProvider>();
 		services.AddSingleton<IPackageCatalog>(_ => new ExamplePackageCatalog(samplePackageRoot));
 		services.AddSingleton<ILocalizationRuntime, ExampleLocalizationRuntime>();
 
@@ -69,5 +69,50 @@ public static class Program
 		foreach (var translation in localization.Translations)
 		foreach (var key in translation.GetKeys())
 			Console.WriteLine($"{translation.Locale}: {key} = {translation.Messages[key]}");
+	}
+}
+
+internal sealed class ExampleLoadOrderStore : IPackageLoadOrderStore
+{
+	public IReadOnlyDictionary<string, bool> LoadEnabledOverrides()
+	{
+		return new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+	}
+}
+
+internal sealed class ExamplePackageCatalog : IPackageCatalog
+{
+	private readonly string _packageRoot;
+
+	public ExamplePackageCatalog(string packageRoot)
+	{
+		_packageRoot = packageRoot;
+	}
+
+	public IEnumerable<string> GetPackageRoots()
+	{
+		yield return _packageRoot;
+	}
+}
+
+internal sealed class ExampleLocalizationRuntime : ILocalizationRuntime
+{
+	private readonly Dictionary<string, Translation> _translations = new(StringComparer.OrdinalIgnoreCase);
+
+	public IEnumerable<Translation> Translations => _translations.Values;
+
+	public void Apply(string locale, string key, string value)
+	{
+		if (!_translations.TryGetValue(locale, out var translation))
+		{
+			translation = new Translation(locale);
+			_translations[locale] = translation;
+		}
+
+		translation.Messages[key] = value;
+	}
+
+	public void RemovePackage(string packageId)
+	{
 	}
 }

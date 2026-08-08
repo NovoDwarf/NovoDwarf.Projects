@@ -8,7 +8,7 @@ public static class ServiceCollectionExtensions
 {
 	public static IServiceCollection Json(this IServiceCollection services)
 	{
-		return services.AddSingleton<IDefinitionFormatReader, DefinitionJsonReader>();
+		return services.AddSingleton<IDefFormatReader, DefJsonReader>();
 	}
 
 	public static IServiceCollection AddGrekovJsonDefinitions(this IServiceCollection services)

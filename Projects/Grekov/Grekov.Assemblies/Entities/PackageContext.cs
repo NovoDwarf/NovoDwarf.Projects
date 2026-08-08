@@ -4,14 +4,17 @@ namespace Grekov.Assemblies.Entities;
 
 public sealed class PackageContext : IPackageContext
 {
-	public PackageContext(string packageId, string rootPath, IServiceProvider services)
+	public PackageContext(string packageId, string root, IServiceProvider services)
 	{
 		PackageId = packageId;
-		RootPath = rootPath;
+		Root = root;
 		Services = services;
 	}
 
 	public string PackageId { get; }
-	public string RootPath { get; }
+	public string Root { get; }
+	
 	public IServiceProvider Services { get; }
 }
+
+

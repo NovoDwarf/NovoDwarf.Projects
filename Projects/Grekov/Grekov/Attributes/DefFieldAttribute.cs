@@ -1,6 +1,6 @@
-using Grekov.Enums;
+using Grekov.Core.Enums;
 
-namespace Grekov.Attributes;
+namespace Grekov.Core.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class DefFieldAttribute : Attribute

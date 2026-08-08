@@ -1,7 +1,7 @@
 using Grekov.Core;
 using Grekov.Core.Attributes;
 
-namespace Grekov.Localizations;
+namespace Grekov.Localizations.Entities;
 
 [DefType("LocalizedString")]
 public sealed class LocalizedStringDef : Def

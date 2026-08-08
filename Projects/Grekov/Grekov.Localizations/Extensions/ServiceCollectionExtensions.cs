@@ -1,4 +1,5 @@
 using Grekov.Packaging.Interfaces;
+using Grekov.Localizations.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Grekov.Localizations.Extensions;

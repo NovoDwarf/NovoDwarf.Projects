@@ -12,7 +12,7 @@ public static class ServiceCollectionExtensions
 		services.AddSingleton<DefIndex>();
 		services.AddSingleton<DefScanner>();
 		services.AddSingleton<DefService>();
-		services.AddSingleton<IDefinitionCatalog>(static provider => provider.GetRequiredService<DefService>());
+		services.AddSingleton<IDefCatalog>(static provider => provider.GetRequiredService<DefService>());
 		services.AddSingleton<IPackageContentLoader>(static provider => provider.GetRequiredService<DefService>());
 
 		return services;

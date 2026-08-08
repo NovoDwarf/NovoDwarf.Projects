@@ -5,5 +5,5 @@ namespace Grekov.Assemblies.Interfaces;
 
 public interface IPackageContextFactory
 {
-	IPackageContext Create(PackageInstance package);
+	public IPackageContext Create(PackageInstance package);
 }
