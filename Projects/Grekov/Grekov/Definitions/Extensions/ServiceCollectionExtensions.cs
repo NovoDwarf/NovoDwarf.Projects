@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddGrekovDefinitions(this IServiceCollection services)
 	{
 		services.AddSingleton<DefIndex>();
+		services.AddSingleton<DefReaderRegistry>();
 		services.AddSingleton<DefScanner>();
 		services.AddSingleton<DefService>();
 		services.AddSingleton<IDefCatalog>(static provider => provider.GetRequiredService<DefService>());

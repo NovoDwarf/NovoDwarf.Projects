@@ -11,8 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Grekov.Core\Grekov.Core.csproj" />
-        <ProjectReference Include="..\..\Grekov.Definitions\Grekov.Definitions.csproj" />
+      <ProjectReference Include="..\..\Grekov\Grekov.csproj" />
     </ItemGroup>
 
 </Project>

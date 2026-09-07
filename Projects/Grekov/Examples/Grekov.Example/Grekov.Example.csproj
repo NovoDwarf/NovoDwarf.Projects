@@ -15,8 +15,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Grekov\Grekov.csproj" />
-        <ProjectReference Include="..\..\Grekov.Localizations\Grekov.Localizations.csproj" />
-        <ProjectReference Include="..\..\Grekov.Packaging\Grekov.Packaging.csproj" />
         <ProjectReference Include="..\..\Readers\Grekov.Readers.Json\Grekov.Readers.Json.csproj" />
         <ProjectReference Include="..\..\Readers\Grekov.Readers.Xml\Grekov.Readers.Xml.csproj" />
     </ItemGroup>

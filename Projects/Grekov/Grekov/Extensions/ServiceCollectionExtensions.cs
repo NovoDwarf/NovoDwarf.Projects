@@ -23,14 +23,4 @@ public static class ServiceCollectionExtensions
 
 		return services;
 	}
-
-	public static IServiceCollection AddReader(this IServiceCollection services)
-	{
-		return services;
-	}
-
-	public static IServiceCollection AddReaders(this IServiceCollection services)
-	{
-		return services.AddReader();
-	}
 }

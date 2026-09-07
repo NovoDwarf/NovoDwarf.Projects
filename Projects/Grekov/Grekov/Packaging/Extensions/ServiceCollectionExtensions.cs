@@ -28,9 +28,4 @@ public static class ServiceCollectionExtensions
 			.AddSingleton<PackageService>()
 			.AddSingleton<IPackageRuntime>(static provider => provider.GetRequiredService<PackageService>());
 	}
-
-	internal static IServiceCollection AddPackaging(this IServiceCollection services)
-	{
-		return services.AddGrekovPackaging();
-	}
 }

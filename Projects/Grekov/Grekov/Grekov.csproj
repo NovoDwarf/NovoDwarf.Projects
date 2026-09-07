@@ -20,10 +20,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\Shared\NovoDwarf.FS\NovoDwarf.FS.csproj" />
-        <ProjectReference Include="..\Grekov.Core\Grekov.Core.csproj" />
-        <ProjectReference Include="..\Grekov.Packaging\Grekov.Packaging.csproj" />
-        <ProjectReference Include="..\Grekov.Definitions\Grekov.Definitions.csproj" />
-        <ProjectReference Include="..\Grekov.Localizations\Grekov.Localizations.csproj" />
-        <ProjectReference Include="..\Grekov.Assemblies\Grekov.Assemblies.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Assemblies\" />
+      <Folder Include="Definitions\" />
+      <Folder Include="Localizations\" />
+      <Folder Include="Packaging\" />
     </ItemGroup>
 </Project>
