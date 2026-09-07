@@ -78,16 +78,16 @@ public readonly record struct Float2
 
 	public static Float2 operator -(Float2 value) => new(-value.X, -value.Y);
 
-	public static Float2 operator *(Float2 value, float Point) => new(value.X * Point, value.Y * Point);
+	public static Float2 operator *(Float2 value, float point) => new(value.X * point, value.Y * point);
 
-	public static Float2 operator *(float Point, Float2 value) => value * Point;
+	public static Float2 operator *(float point, Float2 value) => value * point;
 
-	public static Float2 operator /(Float2 value, float Point)
+	public static Float2 operator /(Float2 value, float point)
 	{
-		if (MathF.Abs(Point) <= NormalizationEpsilon)
+		if (MathF.Abs(point) <= NormalizationEpsilon)
 			throw new DivideByZeroException("Cannot divide Float2 by zero or near-zero Point.");
 
-		return new Float2(value.X / Point, value.Y / Point);
+		return new Float2(value.X / point, value.Y / point);
 	}
 	
 	public bool Equals(Float2 other)
