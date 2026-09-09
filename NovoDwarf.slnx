@@ -4,12 +4,17 @@
         <Project Path="Projects/Godot/NovoDwarf.Godot.Slang/NovoDwarf.Godot.Slang.csproj" />
     </Folder>
     <Folder Name="/Projects/Grekov/">
-        <Project Path="Projects/Grekov/Aegis.Packaging.Assemblies/Aegis.Packaging.Assemblies.csproj" />
-        <Project Path="Projects/Grekov/Aegis.Packaging.Core/Aegis.Packaging.Core.csproj" />
-        <Project Path="Projects/Grekov/Aegis.Packaging.Definitions/Aegis.Packaging.Definitions.csproj" />
-        <Project Path="Projects/Grekov/Aegis.Packaging.Localizations/Aegis.Packaging.Localizations.csproj" />
-        <Project Path="Projects/Grekov/Aegis.Packaging/Aegis.Packaging.csproj" />
         <Project Path="Projects/Grekov/Grekov/Grekov.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Grekov/Examples/">
+        <Project Path="Projects/Grekov/Examples/Grekov.Example/Grekov.Example.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Grekov/Readers/">
+        <Project Path="Projects/Grekov/Readers/Grekov.Readers.Json/Grekov.Readers.Json.csproj" />
+        <Project Path="Projects/Grekov/Readers/Grekov.Readers.Xml/Grekov.Readers.Xml.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Komissar/">
+        <Project Path="Projects/Komissar/Komissar/Komissar.csproj" />
     </Folder>
     <Folder Name="/Projects/Mathematics/" />
     <Folder Name="/Projects/Mathematics/Apps/">
@@ -41,17 +46,32 @@
         <Project Path="Projects/Modeling/NovoDwarf.Modeling.EventDriven/NovoDwarf.Modeling.EventDriven.csproj" />
         <Project Path="Projects/Modeling/NovoDwarf.Modeling.Logging/NovoDwarf.Modeling.Logging.csproj" />
     </Folder>
-    <Folder Name="/Projects/ProCed.NET/" />
-    <Folder Name="/Projects/ProCed.NET/Nodes/">
-        <Project Path="Projects/ProCed.NET/ProCed.NET.Nodes.Objects/ProCed.NET.Nodes.Objects.csproj" />
-        <Project Path="Projects/ProCed.NET/ProCed.NET.Nodes.Spatial/ProCed.NET.Nodes.Spatial.csproj" />
-        <Project Path="Projects/ProCed.NET/ProCed.NET.Nodes.Terrain/ProCed.NET.Nodes.Terrain.csproj" />
-    </Folder>
     <Folder Name="/Projects/Procedural.NET/">
         <Project Path="Projects/Procedural.NET/Procedural.NET.Core/Procedural.NET.Core.csproj" />
-        <Project Path="Projects/Procedural.NET/Procedural.NET.Nodes/Procedural.NET.Nodes.csproj" />
         <Project Path="Projects/Procedural.NET/Procedural.NET.Storage/Procedural.NET.Storage.csproj" />
         <Project Path="Projects/Procedural.NET/Procedural.NET/Procedural.NET.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Procedural.NET/Apps/">
+        <Project Path="Projects/Procedural.NET/Procedural.NET.Designer/Procedural.NET.Designer.csproj" />
+    </Folder>
+    <Folder Name="/Projects/Procedural.NET/Nodes/">
+        <Project Path="Projects/Procedural.NET/Procedural.NET.Nodes.Spatial/Procedural.NET.Nodes.Spatial.csproj" />
+        <Project Path="Projects/Procedural.NET/Procedural.NET.Nodes.Terrain/Procedural.NET.Nodes.Terrain.csproj" />
+        <Project Path="Projects/Procedural.NET/Procedural.NET.Nodes/Procedural.NET.Nodes.csproj" />
+    </Folder>
+    <Folder Name="/Projects/SultanDynasty/">
+        <Project Path="Projects/SultanDynasty/SultanDynasty.Avalonia/SultanDynasty.Avalonia.csproj" />
+    </Folder>
+    <Folder Name="/Projects/SultanDynasty/Core/">
+        <Project Path="Projects/SultanDynasty/SultanDynasty.Components/SultanDynasty.Components.csproj" />
+        <Project Path="Projects/SultanDynasty/SultanDynasty.Core/SultanDynasty.Core.csproj" />
+        <Project Path="Projects/SultanDynasty/SultanDynasty.Definitions/SultanDynasty.Definitions.csproj" />
+        <Project Path="Projects/SultanDynasty/SultanDynasty.Sim/SultanDynasty.Sim.csproj" />
+    </Folder>
+    <Folder Name="/Projects/VirtualEconomic/">
+        <Project Path="Projects/VirtualEconomic/VirtualEconomic.CLI/VirtualEconomic.CLI.csproj" />
+        <Project Path="Projects/VirtualEconomic/VirtualEconomic.MonoGame/VirtualEconomic.MonoGame.csproj" />
+        <Project Path="Projects/VirtualEconomic/VirtualEconomic/VirtualEconomic.csproj" />
     </Folder>
     <Folder Name="/Utility/" />
     <Folder Name="/Utility/Shared/">

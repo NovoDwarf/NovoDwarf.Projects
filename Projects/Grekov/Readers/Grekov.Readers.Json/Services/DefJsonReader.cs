@@ -30,7 +30,9 @@ public sealed class DefJsonReader : IDefFormatReader
 		.GetSetMethod(nonPublic: true);
 
 	private readonly IFileSystemService _fileSystem;
+	
 	private readonly Dictionary<Type, DefTypeMetadata> _metadataByType = [];
+	
 	private Dictionary<string, Type> _namedTypes;
 
 	public DefJsonReader(IFileSystemService fileSystem)
@@ -49,6 +51,7 @@ public sealed class DefJsonReader : IDefFormatReader
 	public IReadOnlyList<Def> ReadDefs(DefReadContext context)
 	{
 		var text = _fileSystem.ReadAllText(context.ResourcePath);
+		
 		if (string.IsNullOrWhiteSpace(text))
 			throw new InvalidOperationException($"Definition json is empty: '{context.ResourcePath}'.");
 
@@ -56,7 +59,9 @@ public sealed class DefJsonReader : IDefFormatReader
 		           throw new InvalidOperationException($"Definition json has no root: '{context.ResourcePath}'.");
 
 		var result = new List<Def>();
+		
 		ReadDefinitions(context, root, result);
+		
 		return result;
 	}
 
@@ -100,6 +105,7 @@ public sealed class DefJsonReader : IDefFormatReader
 	private void ReadArray(DefReadContext context, JsonArray array, List<Def> result)
 	{
 		var index = 0;
+		
 		foreach (var item in array)
 		{
 			if (item is not JsonObject obj)
@@ -189,8 +195,7 @@ public sealed class DefJsonReader : IDefFormatReader
 	{
 		foreach (var field in metadata.Fields)
 		{
-			var node = field.Attribute.Kind == DefFieldKind.Reference &&
-			           string.Equals(field.FieldName, "ref", StringComparison.OrdinalIgnoreCase)
+			var node = field.Attribute.Kind == DefFieldKind.Reference && string.Equals(field.FieldName, "ref", StringComparison.OrdinalIgnoreCase)
 				? obj
 				: GetProperty(obj, field.FieldName);
 
@@ -299,8 +304,7 @@ public sealed class DefJsonReader : IDefFormatReader
 		if (fallbackType is { IsAbstract: false, IsInterface: false })
 			return fallbackType;
 
-		var typeName = GetTypeName(obj) ??
-		               throw new InvalidOperationException($"Polymorphic JSON object in '{resourcePath}' has no type marker.");
+		var typeName = GetTypeName(obj) ?? throw new InvalidOperationException($"Polymorphic JSON object in '{resourcePath}' has no type marker.");
 
 		return ResolveType(typeName, fallbackType, resourcePath);
 	}
@@ -308,10 +312,7 @@ public sealed class DefJsonReader : IDefFormatReader
 	private Type ResolveType(string name, Type expectedBaseType, string resourcePath)
 	{
 		if (!_namedTypes.TryGetValue(name, out var type) || !expectedBaseType.IsAssignableFrom(type))
-		{
-			throw new InvalidOperationException(
-				$"Unknown definition type '{name}' assignable to '{expectedBaseType.FullName}' in '{resourcePath}'.");
-		}
+			throw new InvalidOperationException($"Unknown definition type '{name}' assignable to '{expectedBaseType.FullName}' in '{resourcePath}'.");
 
 		return type;
 	}
@@ -356,8 +357,7 @@ public sealed class DefJsonReader : IDefFormatReader
 
 	private static Func<object> BuildFactory(Type type)
 	{
-		return () => Activator.CreateInstance(type)
-		             ?? throw new InvalidOperationException($"Failed to instantiate '{type.FullName}'.");
+		return () => Activator.CreateInstance(type) ?? throw new InvalidOperationException($"Failed to instantiate '{type.FullName}'.");
 	}
 
 	private static object ReadScalar(string? rawValue, Type targetType, string memberName, string ownerTypeName, string resourcePath)
@@ -443,9 +443,7 @@ public sealed class DefJsonReader : IDefFormatReader
 		var lines = conflicts.Select(static group =>
 			$"Alias '{group.Key}' is declared by: {string.Join(", ", group.Select(x => x.Type.FullName).Distinct())}");
 
-		throw new InvalidOperationException(
-			"Duplicate json type aliases detected:" + Environment.NewLine +
-			string.Join(Environment.NewLine, lines));
+		throw new InvalidOperationException("Duplicate json type aliases detected:" + Environment.NewLine + string.Join(Environment.NewLine, lines));
 
 	}
 
@@ -457,6 +455,7 @@ public sealed class DefJsonReader : IDefFormatReader
 			yield return type.Name[..^"Def".Length];
 
 		var alias = type.GetCustomAttribute<DefTypeAttribute>(inherit: false)?.ElementName;
+		
 		if (!string.IsNullOrWhiteSpace(alias))
 			yield return alias;
 	}
@@ -481,6 +480,7 @@ public sealed class DefJsonReader : IDefFormatReader
 		if (obj.Count == 1)
 		{
 			var pair = obj.First();
+			
 			if (pair.Value is JsonObject value && _namedTypes.ContainsKey(pair.Key))
 			{
 				typeName = pair.Key;
@@ -499,6 +499,7 @@ public sealed class DefJsonReader : IDefFormatReader
 		foreach (var property in TypeProperties)
 		{
 			var value = GetScalar(GetProperty(obj, property));
+			
 			if (!string.IsNullOrWhiteSpace(value))
 				return value;
 		}
@@ -544,7 +545,7 @@ public sealed class DefJsonReader : IDefFormatReader
 		var enumerable = propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
 			? propertyType
 			: propertyType.GetInterfaces()
-				.FirstOrDefault(static type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+			              .FirstOrDefault(static type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
 		if (enumerable == null)
 			return false;
@@ -569,23 +570,17 @@ public sealed class DefJsonReader : IDefFormatReader
 		{
 			var genericDef = propertyType.GetGenericTypeDefinition();
 			
-			if (genericDef == typeof(IEnumerable<>) || genericDef == typeof(IReadOnlyCollection<>) ||
-			    genericDef == typeof(IReadOnlyList<>) || genericDef == typeof(ICollection<>) ||
-			    genericDef == typeof(IList<>))
-			{
+			if (genericDef == typeof(IEnumerable<>) || genericDef == typeof(IReadOnlyCollection<>) || genericDef == typeof(IReadOnlyList<>) || genericDef == typeof(ICollection<>) || genericDef == typeof(IList<>))
 				return buffer;
-			}
 		}
 
-		var collection = Activator.CreateInstance(propertyType)
-		                 ?? throw new InvalidOperationException(
-			                 $"Failed to instantiate collection type '{propertyType.FullName}' in '{resourcePath}'.");
+		var collection = Activator.CreateInstance(propertyType) ?? throw new InvalidOperationException($"Failed to instantiate collection type '{propertyType.FullName}' in '{resourcePath}'.");
 
 		var addMethod = collection.GetType().GetMethod("Add", [itemType]);
+		
 		if (addMethod == null)
 		{
-			throw new InvalidOperationException(
-				$"Collection type '{propertyType.FullName}' does not expose Add({itemType.Name}) in '{resourcePath}'.");
+			throw new InvalidOperationException($"Collection type '{propertyType.FullName}' does not expose Add({itemType.Name}) in '{resourcePath}'.");
 		}
 
 		foreach (var item in buffer)
@@ -597,21 +592,13 @@ public sealed class DefJsonReader : IDefFormatReader
 	private static bool IsScalarType(Type type)
 	{
 		var target = Nullable.GetUnderlyingType(type) ?? type;
-		return target.IsPrimitive ||
-		       target.IsEnum ||
-		       target == typeof(string) ||
-		       target == typeof(decimal) ||
-		       target == typeof(DefId);
+		
+		return target.IsPrimitive || target.IsEnum || target == typeof(string) || target == typeof(decimal) || target == typeof(DefId);
 	}
 
 	private sealed record DefTypeMetadata(Type Type, Func<object> Factory, IReadOnlyList<FieldMetadata> Fields);
 
-	private sealed record FieldMetadata(
-		PropertyInfo Property,
-		Type PropertyType,
-		DefFieldAttribute Attribute,
-		string FieldName,
-		Action<object, object?> Setter);
+	private sealed record FieldMetadata(PropertyInfo Property, Type PropertyType, DefFieldAttribute Attribute, string FieldName, Action<object, object?> Setter);
 
 	private sealed class PendingValue
 	{
@@ -619,6 +606,7 @@ public sealed class DefJsonReader : IDefFormatReader
 
 		private PendingValue()
 		{
+			
 		}
 	}
 }

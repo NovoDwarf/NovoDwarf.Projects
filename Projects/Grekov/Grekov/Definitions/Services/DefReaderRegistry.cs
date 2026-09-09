@@ -19,6 +19,7 @@ internal sealed class DefReaderRegistry
 		foreach (var extension in reader.Extensions)
 		{
 			var normalized = NormalizeExtension(extension);
+			
 			if (!_readersByExtension.TryAdd(normalized, reader))
 				throw new InvalidOperationException($"Definition reader for extension [{normalized}] is already registered.");
 		}

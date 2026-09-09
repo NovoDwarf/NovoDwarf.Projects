@@ -54,7 +54,6 @@ public static class Program
 
 		services
 			.AddGrekov()
-			.AddReader()
 			.Json()
 			.Xml();
 

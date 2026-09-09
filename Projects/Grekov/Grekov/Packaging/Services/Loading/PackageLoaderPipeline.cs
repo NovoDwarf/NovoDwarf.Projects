@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Grekov.Packaging.Constants;
 using Grekov.Packaging.Entities;
 using Grekov.Packaging.Enums;
 using Grekov.Packaging.Extensions;
@@ -16,10 +15,12 @@ internal sealed class PackageLoaderPipeline
 
 	public PackageLoaderPipeline(IEnumerable<IPackageContentLoader> contentLoaders, ILogger<PackageLoaderPipeline> logger)
 	{
-		_contentLoaders = contentLoaders
-			.OrderBy(static loader => loader.Stage)
-			.ThenBy(static loader => loader.Order)
-			.ToArray();
+		_contentLoaders =
+		[
+			.. contentLoaders
+			   .OrderBy(static loader => loader.Stage)
+			   .ThenBy(static loader => loader.Order)
+		];
 		
 		_logger = logger;
 	}
@@ -65,6 +66,7 @@ internal sealed class PackageLoaderPipeline
 				});
 
 				loader.UnloadPackage(package.Id);
+				
 				_logger.PackageLoaderUnloaded(loader.GetType().Name, package.Id, loader.Stage.ToString());
 			}
 
@@ -93,8 +95,10 @@ internal sealed class PackageLoaderPipeline
 				try
 				{
 					_logger.PackageLoaderStarted(loader.GetType().Name, package.Id, loader.Stage.ToString());
+					
 					loader.LoadPackage(new PackageLoadContext(package, packageConflicts));
 					loaderStopwatch.Stop();
+					
 					_logger.PackageLoaderCompleted(loader.GetType().Name, package.Id, loader.Stage.ToString(), loaderStopwatch.ElapsedMilliseconds);
 				}
 				catch (Exception ex)

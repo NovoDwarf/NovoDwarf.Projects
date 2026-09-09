@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/ Apps/">
+    <Project Path="Sources/SmartHome.Maui/SmartHome.Maui.csproj" />
+  </Folder>
+  <Folder Name="/Integrations/">
+    <Project Path="Sources/SmartHome.HomeAssistant/SmartHome.HomeAssistant.csproj" />
+    <Project Path="Sources/SmartHome.MAX/SmartHome.MAX.csproj" />
+    <Project Path="Sources/SmartHome.Telegram/SmartHome.Telegram.csproj" />
+    <Project Path="Sources/SmartHome.VK/SmartHome.VK.csproj" />
+  </Folder>
+  <Project Path="Sources/SmartHome.Core/SmartHome.Core.csproj" />
+  <Project Path="Sources/SmartHome.Host/SmartHome.Host.csproj" />
+  <Project Path="Sources/SmartHome.Shared/SmartHome.Shared.csproj" />
+</Solution>

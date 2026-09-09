@@ -26,6 +26,7 @@ internal sealed class PackageLoadOrderBuilder
 			(p, issue) => p.Issues.Add(issue));
 
 		_logger.PackageLoadOrderBuilt(candidates.Count, ordered.Count);
+		
 		return ordered;
 	}
 }

@@ -15,6 +15,7 @@ public sealed class DefXmlReader : IDefFormatReader
 
 	public void RefreshTypeMap()
 	{
+		
 	}
 
 	public IReadOnlyList<Def> ReadDefs(DefReadContext context)

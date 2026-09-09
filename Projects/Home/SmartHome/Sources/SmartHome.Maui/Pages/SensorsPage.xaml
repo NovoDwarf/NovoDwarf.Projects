@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SmartHome.Maui.ViewModels"
+             xmlns:models="clr-namespace:SmartHome.Maui.Models"
+             x:Class="SmartHome.Maui.Pages.SensorsPage"
+             x:DataType="vm:SensorsViewModel"
+             Title="📡 Сенсоры">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Search bar -->
+        <SearchBar Grid.Row="0"
+                   Placeholder="Фильтр по названию, комнате, типу…"
+                   Text="{Binding Filter}"
+                   Margin="8,4"/>
+
+        <RefreshView Grid.Row="1"
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <ScrollView>
+                <VerticalStackLayout Spacing="0" Padding="8">
+
+                    <!-- ── Numeric sensors ─────────────────────────────────── -->
+                    <Label Text="Сенсоры"
+                           FontSize="16" FontAttributes="Bold"
+                           Margin="4,8,4,4"
+                           IsVisible="{Binding Sensors.Count, Converter={StaticResource NotNullConverter}}"/>
+
+                    <CollectionView ItemsSource="{Binding Sensors}"
+                                    EmptyView="Нет сенсоров">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:SensorState">
+                                <Frame Margin="0,2" Padding="12" CornerRadius="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                            <Label Text="{Binding DisplayName}"
+                                                   FontSize="14" FontAttributes="Bold"/>
+                                            <Label FontSize="11" TextColor="Gray">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding AreaName}"/>
+                                                        <Span Text=" · "/>
+                                                        <Span Text="{Binding DeviceClass, TargetNullValue='sensor'}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding DisplayValue}"
+                                               FontSize="16" FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="End"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- ── Binary sensors ─────────────────────────────────── -->
+                    <Label Text="Бинарные сенсоры"
+                           FontSize="16" FontAttributes="Bold"
+                           Margin="4,16,4,4"
+                           IsVisible="{Binding BinarySensors.Count, Converter={StaticResource NotNullConverter}}"/>
+
+                    <CollectionView ItemsSource="{Binding BinarySensors}"
+                                    EmptyView="Нет бинарных сенсоров">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:BinarySensorState">
+                                <Frame Margin="0,2" Padding="12" CornerRadius="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                            <Label Text="{Binding DisplayName}"
+                                                   FontSize="14" FontAttributes="Bold"/>
+                                            <Label FontSize="11" TextColor="Gray">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding AreaName}"/>
+                                                        <Span Text=" · "/>
+                                                        <Span Text="{Binding DeviceClass, TargetNullValue='binary_sensor'}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <BoxView Grid.Column="1"
+                                                 WidthRequest="14" HeightRequest="14"
+                                                 CornerRadius="7"
+                                                 VerticalOptions="Center"
+                                                 Color="{Binding IsOn, Converter={StaticResource BoolToColorConverter}}"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </RefreshView>
+
+        <Label Grid.Row="2"
+               Text="{Binding StatusMessage}"
+               TextColor="Red" Margin="8,4"
+               IsVisible="{Binding StatusMessage, Converter={StaticResource StringNotEmptyConverter}}"/>
+
+    </Grid>
+
+</ContentPage>

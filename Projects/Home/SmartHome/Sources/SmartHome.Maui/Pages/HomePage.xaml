@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SmartHome.Maui.ViewModels"
+             x:Class="SmartHome.Maui.Pages.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Title="🏠 SmartHome">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <Label Text="🏠 SmartHome"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <RefreshView Command="{Binding RefreshCommand}"
+                         IsRefreshing="{Binding IsRefreshing}">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="12" ColumnSpacing="12">
+
+                    <!-- Lights card -->
+                    <Frame Grid.Row="0" Grid.Column="0" Padding="16" CornerRadius="12" BackgroundColor="#FFF9C4">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="💡" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding LightsSummary}" FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Свет" FontSize="11" TextColor="Gray" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Humidifiers card -->
+                    <Frame Grid.Row="0" Grid.Column="1" Padding="16" CornerRadius="12" BackgroundColor="#E3F2FD">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="💧" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding HumidifiersSummary}" FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Климат" FontSize="11" TextColor="Gray" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Media card -->
+                    <Frame Grid.Row="1" Grid.Column="0" Padding="16" CornerRadius="12" BackgroundColor="#F3E5F5">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="🎵" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding MediaSummary}" FontSize="13" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Медиа" FontSize="11" TextColor="Gray" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Status -->
+                    <Frame Grid.Row="1" Grid.Column="1" Padding="16" CornerRadius="12" BackgroundColor="#E8F5E9">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="✅" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="Онлайн" FontSize="13" HorizontalOptions="Center"/>
+                            <Label Text="Система" FontSize="11" TextColor="Gray" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </Grid>
+            </RefreshView>
+
+            <Label Text="{Binding StatusMessage}" TextColor="Red" IsVisible="{Binding StatusMessage, Converter={x:StaticResource StringNotEmptyConverter}}"/>
+
+            <!-- Navigation -->
+            <Label Text="Управление" FontSize="18" FontAttributes="Bold" Margin="0,8,0,0"/>
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                <Button Grid.Row="0" Grid.Column="0" Text="💡 Свет"       Clicked="OnLightsClicked"/>
+                <Button Grid.Row="0" Grid.Column="1" Text="💧 Климат"     Clicked="OnHumidifiersClicked"/>
+                <Button Grid.Row="1" Grid.Column="0" Text="🎵 Медиа"      Clicked="OnMediaClicked"/>
+                <Button Grid.Row="1" Grid.Column="1" Text="☕ Чайники"    Clicked="OnKettlesClicked"/>
+                <Button Grid.Row="2" Grid.Column="0" Text="⚡ Сценарии"   Clicked="OnScenesClicked"/>
+                <Button Grid.Row="2" Grid.Column="1" Text="❤️ Здоровье"   Clicked="OnHealthClicked"/>
+                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                        Text="⚙️ Настройки" Clicked="OnSettingsClicked"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

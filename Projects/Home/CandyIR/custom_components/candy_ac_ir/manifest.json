@@ -1,0 +1,11 @@
+{
+  "domain": "candy_ac_ir",
+  "name": "Candy AC IR (SLZB)",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/NovoDwarf/candy-ac-ir",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "local_push"
+}

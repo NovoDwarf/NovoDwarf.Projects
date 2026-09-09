@@ -1,7 +1,7 @@
 using Grekov.Core;
 using Grekov.Definitions.Entities;
 using Grekov.Definitions.Interfaces;
-using Grekov.Packaging.Constants;
+using Grekov.Packaging;
 using Grekov.Packaging.Entities;
 using Grekov.Packaging.Interfaces;
 

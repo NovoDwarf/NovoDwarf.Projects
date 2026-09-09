@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <InterceptorsNamespaces>$(InterceptorsNamespaces);Microsoft.Extensions.Logging.AutoLoggerMessage</InterceptorsNamespaces>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="VkNet" Version="1.79.0-alpha-138" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="11.0.0-preview.4.26230.115" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="11.0.0-preview.4.26230.115" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SmartHome.Core\SmartHome.Core.csproj" />
+        <ProjectReference Include="..\SmartHome.HomeAssistant\SmartHome.HomeAssistant.csproj" />
+        <ProjectReference Include="..\SmartHome.Shared\SmartHome.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

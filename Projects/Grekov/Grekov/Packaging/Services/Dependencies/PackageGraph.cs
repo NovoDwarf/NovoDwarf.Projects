@@ -17,7 +17,7 @@ internal static class PackageGraph
 		foreach (var package in packages)
 			Visit(package, packageSet, resolvePackage, addIssue, states, ordered);
 
-		return ordered.Where(static package => !package.HasErrors).ToArray();
+		return [.. ordered.Where(static package => !package.HasErrors)];
 	}
 
 	private static void Visit(
@@ -41,6 +41,7 @@ internal static class PackageGraph
 		foreach (var dependency in package.Dependencies.Where(static dependency => dependency.Required))
 		{
 			var dependencyPackage = packageSet.GetValueOrDefault(dependency.PackageId) ?? resolvePackage(dependency.PackageId);
+			
 			if (dependencyPackage == null)
 			{
 				addIssue(package, PackageIssues.MissingDependencyIssue(dependency.PackageId));

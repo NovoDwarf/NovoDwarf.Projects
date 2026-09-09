@@ -11,10 +11,7 @@ public readonly record struct DefId : IParsable<DefId>
 
 	public bool IsEmpty => string.IsNullOrEmpty(Value);
 
-	public override string ToString()
-	{
-		return Value ?? string.Empty;
-	}
+	public override string ToString() => Value ?? string.Empty;
 
 	public static DefId Parse(string raw)
 	{
@@ -37,15 +34,9 @@ public readonly record struct DefId : IParsable<DefId>
 		return true;
 	}
 
-	public static DefId Parse(string s, IFormatProvider? provider)
-	{
-		return Parse(s);
-	}
+	public static DefId Parse(string s, IFormatProvider? provider) => Parse(s);
 
-	public static bool TryParse(string? s, IFormatProvider? provider, out DefId result)
-	{
-		return TryParse(s, out result);
-	}
+	public static bool TryParse(string? s, IFormatProvider? provider, out DefId result) => TryParse(s, out result);
 
 	private static bool IsValidChar(char c)
 	{

@@ -6,8 +6,10 @@ namespace Grekov.Packaging.Services.Discovery;
 
 internal sealed class PackageDiscover
 {
-	private const string ManifestFileName = "grekov.package.json";
-
+	private const string ManifestFileName = "grekov.json";
+	
+	private static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web);
+	
 	public IReadOnlyList<PackageInstance> Discover(IPackageCatalog catalog, IReadOnlyDictionary<string, bool> enabledOverrides)
 	{
 		var packages = new List<PackageInstance>();
@@ -30,6 +32,7 @@ internal sealed class PackageDiscover
 	private static PackageManifest ReadManifest(string root)
 	{
 		var manifestPath = Path.Combine(root, ManifestFileName);
+		
 		if (!File.Exists(manifestPath))
 		{
 			return new PackageManifest
@@ -38,8 +41,7 @@ internal sealed class PackageDiscover
 			};
 		}
 
-		var manifest = JsonSerializer.Deserialize<PackageManifest>(File.ReadAllText(manifestPath), new JsonSerializerOptions(JsonSerializerDefaults.Web))
-		               ?? new PackageManifest();
+		var manifest = JsonSerializer.Deserialize<PackageManifest>(File.ReadAllText(manifestPath), Options) ?? new PackageManifest();
 
 		if (string.IsNullOrWhiteSpace(manifest.Id))
 			manifest.Id = Path.GetFileName(root.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));

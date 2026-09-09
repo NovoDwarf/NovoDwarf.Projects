@@ -26,6 +26,5 @@
       <Folder Include="Assemblies\" />
       <Folder Include="Definitions\" />
       <Folder Include="Localizations\" />
-      <Folder Include="Packaging\" />
     </ItemGroup>
 </Project>

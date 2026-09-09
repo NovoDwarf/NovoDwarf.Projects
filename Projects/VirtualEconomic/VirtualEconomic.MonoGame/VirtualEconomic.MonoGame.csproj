@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net11.0-windows</TargetFramework>
+        <RollForward>Major</RollForward>
+        <PublishReadyToRun>false</PublishReadyToRun>
+        <TieredCompilation>false</TieredCompilation>
+        <UseWindowsForms>true</UseWindowsForms>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <ApplicationIcon>Icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Gum.MonoGame" Version="2026.9.6.1-preview.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-rc.1.26425.128" />
+        <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.5.1" />
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.5.1" />
+        <PackageReference Include="Scrutor" Version="7.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\Grekov\Grekov\Grekov.csproj" />
+      <ProjectReference Include="..\..\Grekov\Readers\Grekov.Readers.Json\Grekov.Readers.Json.csproj" />
+      <ProjectReference Include="..\..\Komissar\Komissar\Komissar.csproj" />
+      <ProjectReference Include="..\VirtualEconomic\VirtualEconomic.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Content\Packages\Core\" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Class1.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="11.0.0-preview.4.26230.115" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="*" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SmartHome.Core\SmartHome.Core.csproj" />
+        <ProjectReference Include="..\SmartHome.Shared\SmartHome.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

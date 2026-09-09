@@ -8,6 +8,7 @@ internal sealed class DiscoveryWorkflow
 {
 	private readonly IPackageCatalog _catalog;
 	private readonly IPackageLoadOrderStore _loadOrderStore;
+	
 	private readonly PackageDiscover _discover;
 	private readonly PackageValidator _validator;
 
@@ -26,7 +27,9 @@ internal sealed class DiscoveryWorkflow
 	public PackageDiscoveryResult Discover()
 	{
 		var packages = _discover.Discover(_catalog, _loadOrderStore.LoadEnabledOverrides());
+		
 		_validator.Validate(packages);
+		
 		return new PackageDiscoveryResult(packages);
 	}
 }

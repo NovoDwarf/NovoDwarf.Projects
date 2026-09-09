@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net11.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>SultanDynasty.Simulation</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Grekov\Grekov\Grekov.csproj" />
+      <ProjectReference Include="..\..\Komissar\Komissar\Komissar.csproj" />
+      <ProjectReference Include="..\SultanDynasty.Components\SultanDynasty.Components.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Friflo.Engine.ECS" Version="4.0.0-preview.2" />
+      <PackageReference Include="Scrutor" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Generators\Services\" />
+    </ItemGroup>
+
+</Project>

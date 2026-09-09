@@ -1,0 +1,41 @@
+{
+  "defs": [
+    {
+      "type": "EthnicityDef",
+      "id": "ethnicity/rumelian",
+      "name": "Rumelian",
+      "femaleNames": [ "Aylin", "Leyla", "Meryem", "Rana" ],
+      "maleNames": [ "Selim", "Kemal", "Orhan", "Murad" ],
+      "familyNames": [ "Hatun", "Sari", "Demir" ]
+    },
+    {
+      "type": "EthnicityDef",
+      "id": "ethnicity/persian",
+      "name": "Persian",
+      "femaleNames": [ "Shirin", "Pari", "Nargis", "Darya" ],
+      "maleNames": [ "Farid", "Cem", "Rostam", "Arman" ],
+      "familyNames": [ "Nuri", "Ravan", "Azadi" ]
+    },
+    {
+      "type": "ReligionDef",
+      "id": "religion/sunni",
+      "name": "Sunni"
+    },
+    {
+      "type": "ReligionDef",
+      "id": "religion/shia",
+      "name": "Shia"
+    },
+    {
+      "type": "DynastyDef",
+      "id": "dynasty/osman",
+      "name": "House Osman",
+      "familyName": "Osman"
+    },
+    {
+      "type": "DynastyDef",
+      "id": "dynasty/none",
+      "name": "Common Lineage"
+    }
+  ]
+}

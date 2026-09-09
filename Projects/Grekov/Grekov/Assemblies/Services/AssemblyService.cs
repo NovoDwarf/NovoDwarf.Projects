@@ -1,4 +1,4 @@
-using Grekov.Packaging.Constants;
+using Grekov.Packaging;
 using Grekov.Packaging.Entities;
 using Grekov.Packaging.Interfaces;
 

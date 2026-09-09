@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Recurse \"F:\\\\programming\\\\SmartHome\\\\Sources\" -Filter \"*.csproj\")",
+      "Bash(Select-Object FullName)",
+      "Bash(dotnet build *)",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\kiril\\\\.nuget\\\\packages\\\\vknet' -ErrorAction SilentlyContinue | Select-Object Name\")"
+    ]
+  }
+}

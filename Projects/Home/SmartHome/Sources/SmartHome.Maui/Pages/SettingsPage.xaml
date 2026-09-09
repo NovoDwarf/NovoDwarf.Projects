@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SmartHome.Maui.ViewModels"
+             x:Class="SmartHome.Maui.Pages.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="Настройки">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <Label Text="🔧 Подключение к серверу"
+                   FontSize="18" FontAttributes="Bold" Margin="0,8,0,0"/>
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="URL сервера" FontSize="13" TextColor="{AppThemeBinding Light=#666, Dark=#999}"/>
+                <Entry Placeholder="https://myserver.example.com"
+                       Text="{Binding ServerUrl}"
+                       Keyboard="Url"
+                       ClearButtonVisibility="WhileEditing"/>
+                <Label Text="Пример: https://home.example.com (без слеша в конце)"
+                       FontSize="11" TextColor="{AppThemeBinding Light=#999, Dark=#666}"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="API-ключ (X-Api-Key)" FontSize="13" TextColor="{AppThemeBinding Light=#666, Dark=#999}"/>
+                <Entry Placeholder="секретный ключ из конфига"
+                       Text="{Binding ApiKey}"
+                       IsPassword="True"
+                       ClearButtonVisibility="WhileEditing"/>
+                <Label Text="Должен совпадать с HealthApi:ApiKey в appsettings.json"
+                       FontSize="11" TextColor="{AppThemeBinding Light=#999, Dark=#666}"/>
+            </VerticalStackLayout>
+
+            <!-- Status -->
+            <Label Text="{Binding StatusMessage}"
+                   IsVisible="{Binding StatusMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   HorizontalTextAlignment="Center"
+                   FontSize="14"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                               HorizontalOptions="Center"/>
+
+            <Button Text="💾 Сохранить"
+                    Command="{Binding SaveCommand}"/>
+
+            <Button Text="🔗 Проверить подключение"
+                    Command="{Binding TestConnectionCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InvertBoolConverter}}"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light=#512BD4, Dark=#AC99EA}"
+                    BorderColor="{AppThemeBinding Light=#512BD4, Dark=#AC99EA}"
+                    BorderWidth="1"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

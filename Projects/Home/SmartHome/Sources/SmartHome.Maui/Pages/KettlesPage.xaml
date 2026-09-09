@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SmartHome.Maui.ViewModels"
+             xmlns:models="clr-namespace:SmartHome.Maui.Models"
+             x:Class="SmartHome.Maui.Pages.KettlesPage"
+             x:DataType="vm:KettlesViewModel"
+             Title="☕ Чайники">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <RefreshView Grid.Row="0"
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Kettles}"
+                            EmptyView="Нет доступных чайников">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:KettleState">
+                        <Frame Margin="8,4" Padding="12" CornerRadius="10">
+                            <VerticalStackLayout Spacing="8">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding DisplayName}" FontSize="16" FontAttributes="Bold"/>
+                                        <Label Text="{Binding AreaName}" FontSize="12" TextColor="Gray"/>
+                                        <Label Text="{Binding CurrentTemperature, StringFormat='Температура: {0}°C'}"
+                                               FontSize="12" TextColor="Gray"
+                                               IsVisible="{Binding CurrentTemperature, Converter={x:StaticResource NotNullConverter}}"/>
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="1"
+                                            Clicked="OnToggleClicked"
+                                            CommandParameter="{Binding}"
+                                            BackgroundColor="{Binding IsOn, Converter={x:StaticResource BoolToColorConverter}}"
+                                            TextColor="White"
+                                            CornerRadius="8"
+                                            Padding="12,6">
+                                        <Button.Text>
+                                            <Binding Path="IsOn">
+                                                <Binding.Converter>
+                                                    <x:StaticResource Key="KettleToggleConverter"/>
+                                                </Binding.Converter>
+                                            </Binding>
+                                        </Button.Text>
+                                    </Button>
+                                </Grid>
+
+                                <VerticalStackLayout IsVisible="{Binding IsOn}" Spacing="4">
+                                    <Label Text="Установить температуру:" FontSize="12" TextColor="Gray"/>
+                                    <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="4">
+                                        <Button Grid.Column="0" Text="60°" Clicked="OnTemp60Clicked" CommandParameter="{Binding EntityId}"
+                                                FontSize="12" Padding="4,4" CornerRadius="6"/>
+                                        <Button Grid.Column="1" Text="70°" Clicked="OnTemp70Clicked" CommandParameter="{Binding EntityId}"
+                                                FontSize="12" Padding="4,4" CornerRadius="6"/>
+                                        <Button Grid.Column="2" Text="80°" Clicked="OnTemp80Clicked" CommandParameter="{Binding EntityId}"
+                                                FontSize="12" Padding="4,4" CornerRadius="6"/>
+                                        <Button Grid.Column="3" Text="90°" Clicked="OnTemp90Clicked" CommandParameter="{Binding EntityId}"
+                                                FontSize="12" Padding="4,4" CornerRadius="6"/>
+                                        <Button Grid.Column="4" Text="100°" Clicked="OnTemp100Clicked" CommandParameter="{Binding EntityId}"
+                                                FontSize="12" Padding="4,4" CornerRadius="6"/>
+                                    </Grid>
+                                </VerticalStackLayout>
+
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <Label Grid.Row="1"
+               Text="{Binding StatusMessage}"
+               TextColor="Red"
+               Margin="8,4"
+               IsVisible="{Binding StatusMessage, Converter={x:StaticResource StringNotEmptyConverter}}"/>
+
+    </Grid>
+
+</ContentPage>

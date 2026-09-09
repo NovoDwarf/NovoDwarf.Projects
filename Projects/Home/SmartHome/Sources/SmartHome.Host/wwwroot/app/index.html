@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>SmartHome</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:        var(--tg-theme-bg-color,           #ffffff);
+            --bg2:       var(--tg-theme-secondary-bg-color, #f1f1f1);
+            --text:      var(--tg-theme-text-color,         #000000);
+            --hint:      var(--tg-theme-hint-color,         #707579);
+            --accent:    var(--tg-theme-button-color,       #2481cc);
+            --accent-fg: var(--tg-theme-button-text-color,  #ffffff);
+            --link:      var(--tg-theme-link-color,         #2481cc);
+            --radius:    14px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg2);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── Header ── */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--bg);
+            padding: 14px 16px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid color-mix(in srgb, var(--hint) 20%, transparent);
+        }
+        .header h1 { font-size: 20px; font-weight: 700; }
+        .refresh-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 22px;
+            line-height: 1;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: opacity .15s;
+        }
+        .refresh-btn:active { opacity: .5; }
+        .refresh-btn.spinning { animation: spin .7s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Section ── */
+        .section-title {
+            padding: 14px 16px 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--hint);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+        .card-list {
+            background: var(--bg);
+            border-radius: var(--radius);
+            margin: 0 12px 16px;
+            overflow: hidden;
+        }
+
+        /* ── Light card ── */
+        .card {
+            padding: 14px 16px;
+        }
+        .card + .card {
+            border-top: 1px solid color-mix(in srgb, var(--hint) 15%, transparent);
+        }
+        .card-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .light-icon {
+            font-size: 26px;
+            width: 36px;
+            text-align: center;
+            flex-shrink: 0;
+            transition: filter .3s;
+        }
+        .light-icon.off { filter: grayscale(1) opacity(.5); }
+        .light-meta { flex: 1; min-width: 0; }
+        .light-name {
+            font-size: 16px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .light-id {
+            font-size: 12px;
+            color: var(--hint);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ── Toggle switch ── */
+        .switch { position: relative; width: 50px; height: 28px; flex-shrink: 0; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .track {
+            position: absolute;
+            inset: 0;
+            background: color-mix(in srgb, var(--hint) 40%, transparent);
+            border-radius: 28px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .track::after {
+            content: "";
+            position: absolute;
+            width: 22px; height: 22px;
+            left: 3px; top: 3px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px #0004;
+            transition: transform .2s;
+        }
+        .switch input:checked + .track { background: var(--accent); }
+        .switch input:checked + .track::after { transform: translateX(22px); }
+
+        /* ── Brightness slider ── */
+        .brightness-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .bri-icon { font-size: 16px; flex-shrink: 0; opacity: .6; }
+        .bri-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: color-mix(in srgb, var(--accent) 30%, var(--bg2));
+            outline: none;
+            cursor: pointer;
+        }
+        .bri-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 1px 4px #0003;
+        }
+        .bri-pct {
+            font-size: 13px;
+            color: var(--hint);
+            width: 36px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        /* ── States ── */
+        #loading, #error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: 16px;
+            color: var(--hint);
+        }
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid color-mix(in srgb, var(--accent) 25%, transparent);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        .retry-btn {
+            padding: 10px 24px;
+            background: var(--accent);
+            color: var(--accent-fg);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .empty { padding: 40px 16px; text-align: center; color: var(--hint); }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>💡 Освещение</h1>
+    <button class="refresh-btn" id="refreshBtn" onclick="reload()" title="Обновить">↻</button>
+</div>
+
+<div id="loading"><div class="spinner"></div><span>Загрузка...</span></div>
+<div id="error" style="display:none">
+    <span>Не удалось загрузить данные</span>
+    <button class="retry-btn" onclick="reload()">Повторить</button>
+</div>
+<div id="content" style="display:none"></div>
+
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    const INIT_DATA = tg.initData;
+
+    // ── API helpers ───────────────────────────────────────────────────────────
+
+    async function api(path, method = 'GET', body = null) {
+        const opts = {
+            method,
+            headers: { 'X-Telegram-Init-Data': INIT_DATA }
+        };
+        if (body !== null) {
+            opts.headers['Content-Type'] = 'application/json';
+            opts.body = JSON.stringify(body);
+        }
+        const r = await fetch(path, opts);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return method === 'GET' ? r.json() : null;
+    }
+
+    // ── Actions ───────────────────────────────────────────────────────────────
+
+    async function toggleLight(entityId, isOn) {
+        const action = isOn ? 'off' : 'on';
+        await api(`/api/mini-app/lights/${encodeURIComponent(entityId)}/${action}`, 'POST');
+        await renderLights();
+    }
+
+    // Debounce brightness changes to avoid flooding HA
+    const briTimers = {};
+    function onBrightnessInput(entityId, value, pctEl) {
+        pctEl.textContent = Math.round(value / 255 * 100) + '%';
+        clearTimeout(briTimers[entityId]);
+        briTimers[entityId] = setTimeout(async () => {
+            await api(`/api/mini-app/lights/${encodeURIComponent(entityId)}/brightness`,
+                      'POST', { brightness: parseInt(value) });
+        }, 400);
+    }
+
+    // ── Rendering ─────────────────────────────────────────────────────────────
+
+    function renderCard(light) {
+        const isOn = light.state === 'on';
+        const bri  = light.brightness ?? 255;
+        const pct  = Math.round(bri / 255 * 100);
+        const id   = light.entityId.replace(/'/g, "\\'");
+
+        const briRow = (isOn && light.brightness != null) ? `
+            <div class="brightness-row">
+                <span class="bri-icon">☀</span>
+                <input type="range" min="1" max="255" value="${bri}" class="bri-slider"
+                       id="bri-${CSS.escape(light.entityId)}"
+                       oninput="onBrightnessInput('${id}', this.value, document.getElementById('pct-${CSS.escape(light.entityId)}'))">
+                <span class="bri-pct" id="pct-${CSS.escape(light.entityId)}">${pct}%</span>
+            </div>` : '';
+
+        return `
+            <div class="card">
+                <div class="card-row">
+                    <span class="light-icon ${isOn ? '' : 'off'}">💡</span>
+                    <div class="light-meta">
+                        <div class="light-name">${escHtml(light.friendlyName ?? light.entityId)}</div>
+                        <div class="light-id">${escHtml(light.entityId)}</div>
+                    </div>
+                    <label class="switch" onclick="event.preventDefault(); toggleLight('${id}', ${isOn})">
+                        <input type="checkbox" ${isOn ? 'checked' : ''} readonly>
+                        <span class="track"></span>
+                    </label>
+                </div>
+                ${briRow}
+            </div>`;
+    }
+
+    async function renderLights() {
+        const lights = await api('/api/mini-app/lights');
+        const content = document.getElementById('content');
+
+        if (lights.length === 0) {
+            content.innerHTML = '<div class="empty">Устройства освещения не найдены</div>';
+            return;
+        }
+
+        const on  = lights.filter(l => l.state === 'on');
+        const off = lights.filter(l => l.state !== 'on');
+
+        let html = '';
+        if (on.length) {
+            html += `<div class="section-title">Включены (${on.length})</div>
+                     <div class="card-list">${on.map(renderCard).join('')}</div>`;
+        }
+        if (off.length) {
+            html += `<div class="section-title">Выключены (${off.length})</div>
+                     <div class="card-list">${off.map(renderCard).join('')}</div>`;
+        }
+        content.innerHTML = html;
+    }
+
+    // ── Init & refresh ────────────────────────────────────────────────────────
+
+    function show(id) {
+        ['loading','error','content'].forEach(x =>
+            document.getElementById(x).style.display = x === id ? (id === 'content' ? 'block' : 'flex') : 'none');
+    }
+
+    async function reload() {
+        const btn = document.getElementById('refreshBtn');
+        btn.classList.add('spinning');
+        show('loading');
+        try {
+            await renderLights();
+            show('content');
+        } catch {
+            show('error');
+        } finally {
+            btn.classList.remove('spinning');
+        }
+    }
+
+    function escHtml(s) {
+        return String(s)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    reload();
+</script>
+</body>
+</html>

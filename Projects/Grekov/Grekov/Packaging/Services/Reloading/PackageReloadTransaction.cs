@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Grekov.Packaging.Constants;
 using Grekov.Packaging.Entities;
 using Grekov.Packaging.Extensions;
 using Grekov.Packaging.Services.Conflicts;
@@ -53,7 +52,9 @@ internal sealed class PackageReloadTransaction
 			_loaderPipeline.CommitTransaction();
 
 			reloadStopwatch.Stop();
+			
 			_logger.PackageReloadCommitted(reloadStopwatch.ElapsedMilliseconds);
+			
 			return true;
 		}
 		catch (Exception ex)

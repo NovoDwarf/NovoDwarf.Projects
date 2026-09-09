@@ -1,0 +1,232 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SultanDynasty.Avalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="780"
+        x:Class="SultanDynasty.Avalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Sultan Dynasty">
+
+	<Window.Styles>
+		<Style Selector="TextBlock.section-title">
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Margin" Value="0,0,0,8"/>
+		</Style>
+		<Style Selector="TextBlock.caption">
+			<Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+			<Setter Property="FontSize" Value="12"/>
+		</Style>
+		<Style Selector="Border.panel">
+			<Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Padding" Value="14"/>
+			<Setter Property="CornerRadius" Value="6"/>
+		</Style>
+		<Style Selector="Button.token">
+			<Setter Property="Width" Value="34"/>
+			<Setter Property="Height" Value="34"/>
+			<Setter Property="CornerRadius" Value="17"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="FontSize" Value="11"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid RowDefinitions="Auto,*" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+		<Border BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="0,0,0,1" Padding="16,12">
+			<Grid ColumnDefinitions="*,Auto">
+				<StackPanel Spacing="2">
+					<TextBlock Text="Sultan Dynasty" FontSize="20" FontWeight="SemiBold"/>
+					<TextBlock Text="{Binding CurrentTime}" Classes="caption"/>
+				</StackPanel>
+				<StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+					<Button Content="Start" Command="{Binding StartCommand}"/>
+					<Button Content="Stop" Command="{Binding StopCommand}"/>
+					<Button Content="Step" Command="{Binding StepCommand}"/>
+					<Button Content="Generate resident" Command="{Binding GenerateCharacterCommand}"/>
+				</StackPanel>
+			</Grid>
+		</Border>
+
+		<Grid Grid.Row="1" ColumnDefinitions="240,*,360">
+			<Border Padding="16" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="0,0,1,0">
+				<StackPanel Spacing="16">
+					<StackPanel Spacing="4">
+						<TextBlock Text="World layer" Classes="section-title"/>
+						<TextBlock Text="State"/>
+						<TextBlock Text="Istanbul" Classes="caption"/>
+						<TextBlock Text="{Binding CurrentLevel}" FontWeight="SemiBold"/>
+					</StackPanel>
+
+					<Border Classes="panel">
+						<StackPanel Spacing="8">
+							<TextBlock Text="Simulation" Classes="section-title"/>
+							<Grid ColumnDefinitions="95,*">
+								<TextBlock Text="Status" Classes="caption"/>
+								<TextBlock Grid.Column="1" Text="{Binding Status}"/>
+								<TextBlock Grid.Row="1" Text="Residents" Classes="caption"/>
+								<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CharacterCount}"/>
+								<TextBlock Grid.Row="2" Text="Location" Classes="caption"/>
+								<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SultanLocation}" TextWrapping="Wrap"/>
+							</Grid>
+						</StackPanel>
+					</Border>
+
+					<Border Classes="panel">
+						<StackPanel Spacing="8">
+							<TextBlock Text="Perception" Classes="section-title"/>
+							<TextBlock Text="{Binding VisionSummary}" TextWrapping="Wrap"/>
+							<TextBlock Text="Visible rooms show exact tokens. Adjacent rooms give sound hints. Distant rooms are unknown." Classes="caption" TextWrapping="Wrap"/>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+			</Border>
+
+			<Grid Grid.Column="1" RowDefinitions="Auto,*" Margin="18">
+				<StackPanel Spacing="4">
+					<TextBlock Text="Harem map" FontSize="24" FontWeight="SemiBold"/>
+					<TextBlock Text="Click a room to move the sultan. Click a visible token to inspect a resident." Classes="caption"/>
+				</StackPanel>
+
+				<ItemsControl Grid.Row="1" ItemsSource="{Binding Rooms}" Margin="0,16,0,0">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<UniformGrid Rows="3" Columns="3"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate x:DataType="vm:RoomViewModel">
+							<Border Classes="panel" Margin="6" MinHeight="150">
+								<Grid RowDefinitions="Auto,Auto,*,Auto">
+									<Grid ColumnDefinitions="*,Auto">
+										<StackPanel Spacing="2">
+											<TextBlock Text="{Binding Name}" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap"/>
+											<TextBlock Text="{Binding Zone}" Classes="caption"/>
+										</StackPanel>
+										<Button Grid.Column="1"
+										        Content="Move"
+										        Command="{Binding MoveCommand}"
+										        CommandParameter="{Binding}"/>
+									</Grid>
+
+									<Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="0,10,0,8">
+										<TextBlock Text="{Binding VisibilityText}" FontWeight="SemiBold"/>
+										<TextBlock Grid.Column="1" Text="{Binding SultanMarker}" Classes="caption"/>
+									</Grid>
+
+									<StackPanel Grid.Row="2" Spacing="8">
+										<TextBlock Text="{Binding PopulationText}" Classes="caption" TextWrapping="Wrap"/>
+										<ItemsControl ItemsSource="{Binding Tokens}">
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<WrapPanel/>
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate x:DataType="vm:CharacterTokenViewModel">
+													<Button Classes="token"
+													        Content="{Binding Initials}"
+													        ToolTip.Tip="{Binding Tooltip}"
+													        Command="{Binding SelectCommand}"
+													        CommandParameter="{Binding}"
+													        Margin="0,0,6,6"/>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</StackPanel>
+
+									<TextBlock Grid.Row="3" Text="{Binding OverflowText}" HorizontalAlignment="Right" FontWeight="SemiBold"/>
+								</Grid>
+							</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</Grid>
+
+			<Border Grid.Column="2" Padding="16" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="1,0,0,0">
+				<ScrollViewer>
+					<StackPanel Spacing="16">
+						<Border Classes="panel">
+							<StackPanel Spacing="8">
+								<TextBlock Text="{Binding CharacterName}" FontSize="22" FontWeight="SemiBold" TextWrapping="Wrap"/>
+								<TextBlock Text="{Binding CharacterSubtitle}" TextWrapping="Wrap" Classes="caption"/>
+								<Separator/>
+								<TextBlock Text="{Binding CultureLine}" TextWrapping="Wrap"/>
+								<TextBlock Text="{Binding BodyLine}" TextWrapping="Wrap" Classes="caption"/>
+								<TextBlock Text="{Binding StateLine}" TextWrapping="Wrap" Classes="caption"/>
+							</StackPanel>
+						</Border>
+
+						<Border Classes="panel">
+							<StackPanel>
+								<TextBlock Text="Identity" Classes="section-title"/>
+								<ItemsControl ItemsSource="{Binding IdentityDetails}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate x:DataType="vm:DetailItemViewModel">
+											<Grid ColumnDefinitions="120,*" Margin="0,0,0,8">
+												<TextBlock Text="{Binding Name}" Classes="caption"/>
+												<TextBlock Grid.Column="1" Text="{Binding Value}" TextWrapping="Wrap"/>
+											</Grid>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</StackPanel>
+						</Border>
+
+						<Border Classes="panel">
+							<StackPanel>
+								<TextBlock Text="Current state" Classes="section-title"/>
+								<ItemsControl ItemsSource="{Binding StateMetrics}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate x:DataType="vm:MetricItemViewModel">
+											<Grid ColumnDefinitions="88,*,42" Margin="0,0,0,8">
+												<TextBlock Text="{Binding Name}" Classes="caption"/>
+												<ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Value}" Height="8"/>
+												<TextBlock Grid.Column="2" Text="{Binding ValueText}" HorizontalAlignment="Right"/>
+											</Grid>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</StackPanel>
+						</Border>
+
+						<Border Classes="panel">
+							<StackPanel>
+								<TextBlock Text="Body" Classes="section-title"/>
+								<ItemsControl ItemsSource="{Binding BodyDetails}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate x:DataType="vm:DetailItemViewModel">
+											<Grid ColumnDefinitions="120,*" Margin="0,0,0,8">
+												<TextBlock Text="{Binding Name}" Classes="caption"/>
+												<TextBlock Grid.Column="1" Text="{Binding Value}" TextWrapping="Wrap"/>
+											</Grid>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</StackPanel>
+						</Border>
+
+						<Border Classes="panel">
+							<StackPanel>
+								<TextBlock Text="Traits" Classes="section-title"/>
+								<ItemsControl ItemsSource="{Binding Traits}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate x:DataType="vm:TagItemViewModel">
+											<Grid ColumnDefinitions="*,Auto" Margin="0,0,0,6">
+												<TextBlock Text="{Binding Name}"/>
+												<TextBlock Grid.Column="1" Text="{Binding Value}" Classes="caption"/>
+											</Grid>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</StackPanel>
+						</Border>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+		</Grid>
+	</Grid>
+</Window>

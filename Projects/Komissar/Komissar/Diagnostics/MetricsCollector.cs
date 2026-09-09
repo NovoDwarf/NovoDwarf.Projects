@@ -1,9 +1,10 @@
 using System.Diagnostics.Metrics;
-using Komissar.Core.Interfaces;
+using Komissar.Diagnostics.Interfaces;
+using Komissar.Diagnostics.Metrics;
 
 namespace Komissar.Diagnostics;
 
-public sealed class MetricsCollector<TState> : ISimulationObserver<TState>, IDisposable
+public sealed class MetricsCollector<TState> : ISimObserver<TState>, IDisposable
 {
     private readonly Lock _sync = new();
     private readonly Meter _meter = new("Komissar.Simulation");
