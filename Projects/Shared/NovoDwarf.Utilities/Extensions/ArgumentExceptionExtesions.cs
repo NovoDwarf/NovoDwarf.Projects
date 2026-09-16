@@ -1,4 +1,7 @@
-﻿namespace NovoDwarf.Utilities.Extensions;
+﻿using System;
+using System.Collections.Generic;
+
+namespace NovoDwarf.Utilities.Extensions;
 
 public static class ArgumentExceptionExtesions
 {
