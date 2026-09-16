@@ -1,3 +1,5 @@
+using System;
+
 namespace NovoDwarf.Godot.Slang.Exceptions;
 
 public sealed class SlangException : Exception

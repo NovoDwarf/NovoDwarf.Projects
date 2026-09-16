@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Godot;
 
 namespace NovoDwarf.Godot.Slang.Utils;
