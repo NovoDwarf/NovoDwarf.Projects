@@ -3,9 +3,5 @@
     <PropertyGroup>
         <TargetFrameworks>$(ProjectTargetFrameworks)</TargetFrameworks>
     </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="GodotSharp" Version="4.8.0-dev.6" />
-    </ItemGroup>
-
+    
 </Project>
