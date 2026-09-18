@@ -8,10 +8,10 @@ public readonly partial record struct Int2
 	{
 		var fromX = fromIndex % width;
 		var fromY = fromIndex / width;
-		
+
 		var toX = toIndex % width;
 		var toY = toIndex / width;
-		
+
 		return new Int2(Math.Sign(toX - fromX), Math.Sign(toY - fromY));
 	}
 
