@@ -17,15 +17,40 @@
 
     <PropertyGroup Condition="'$(IsPackable)' != 'false'">
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>$(ProjectVersion)</Version>
-        <AssemblyVersion>$(ProjectAssemblyVersion)</AssemblyVersion>
-        <FileVersion>$(ProjectAssemblyVersion)</FileVersion>
         <Authors>$(ProjectAuthors)</Authors>
         <Copyright>$(ProjectCopyright)</Copyright>
         <PackageProjectUrl>$(ProjectRepositoryUrl)</PackageProjectUrl>
         <RepositoryUrl>$(ProjectRepositoryUrl)</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(MSBuildProjectName)' == 'NovoDwarf.FS'">
+        <Version>1.0.1</Version>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <FileVersion>1.0.1.0</FileVersion>
+        <Description>Basic file system methods.</Description>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(MSBuildProjectName)' == 'NovoDwarf.Primitives'">
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <Description>Basic primitives for projects.</Description>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(MSBuildProjectName)' == 'NovoDwarf.Utilities'">
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <Description>Utilities for projects.</Description>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(MSBuildProjectName)' == 'NovoDwarf.Godot.Slang'">
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <Description>C# + Godot + Slang integration.</Description>
     </PropertyGroup>
     
 </Project>
