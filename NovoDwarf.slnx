@@ -6,7 +6,6 @@
     </Folder>
     <Folder Name="/Sources/Shared/">
         <Project Path="Projects/Shared/NovoDwarf.FS/NovoDwarf.FS.csproj" />
-        <Project Path="Projects/Shared/NovoDwarf.Primitives/NovoDwarf.Primitives.csproj" />
         <Project Path="Projects/Shared/NovoDwarf.Utilities/NovoDwarf.Utilities.csproj" />
     </Folder>
     <Folder Name="/Tests/" />
