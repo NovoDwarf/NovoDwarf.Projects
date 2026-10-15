@@ -1,22 +1,38 @@
 namespace NovoDwarf.FS.Files.Interfaces;
 
+/// <summary>Opens owned streams and text readers or writers. The caller must dispose them.</summary>
 public interface IFileStreamer
 {
-	public StreamWriter AppendText(string path);
+    /// <inheritdoc cref="File.AppendText(string)" />
+    public TextWriter AppendText(string path);
 
-	public FileStream Open(string path, FileMode mode);
+    /// <summary>Opens an owned stream with the specified file mode and access options.</summary>
+    public FileSystemStream Open(string path, FileMode mode);
 
-	public FileStream Open(string path, FileMode mode, FileAccess access);
+    /// <summary>Opens an owned stream with the specified file mode and access options.</summary>
+    public FileSystemStream Open(string path, FileMode mode, FileAccess access);
 
-	public FileStream Open(string path, FileMode mode, FileAccess access, FileShare share);
+    /// <summary>Opens an owned stream with the specified file mode and access options.</summary>
+    public FileSystemStream Open(string path, FileMode mode, FileAccess access, FileShare share);
 
-	public FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize);
+    /// <summary>Opens an owned stream with the specified file mode and access options.</summary>
+    public FileSystemStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize);
 
-	public FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options);
+    /// <summary>Opens an owned stream with the specified file mode and access options.</summary>
+    public FileSystemStream Open(
+        string path,
+        FileMode mode,
+        FileAccess access,
+        FileShare share,
+        int bufferSize,
+        FileOptions options);
 
-	public FileStream OpenRead(string path);
+    /// <inheritdoc cref="File.OpenRead(string)" />
+    public FileSystemStream OpenRead(string path);
 
-	public FileStream OpenWrite(string path);
-	
-	public StreamReader OpenText(string path);
+    /// <inheritdoc cref="File.OpenWrite(string)" />
+    public FileSystemStream OpenWrite(string path);
+
+    /// <inheritdoc cref="File.OpenText(string)" />
+    public TextReader OpenText(string path);
 }

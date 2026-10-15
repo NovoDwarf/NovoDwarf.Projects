@@ -1,24 +1,39 @@
 namespace NovoDwarf.FS.Files.Interfaces;
 
+/// <summary>Creates, copies, moves, replaces, and deletes files.</summary>
 public interface IFileOperator
 {
-	public void Copy(string sourceFileName, string destFileName);
+    /// <inheritdoc cref="File.Copy(string, string)" />
+    public void Copy(string sourceFileName, string destFileName);
 
-	public void Copy(string sourceFileName, string destFileName, bool overwrite);
+    /// <inheritdoc cref="File.Copy(string, string, bool)" />
+    public void Copy(string sourceFileName, string destFileName, bool overwrite);
 
-	public void Move(string sourceFileName, string destFileName);
+    /// <inheritdoc cref="File.Move(string, string)" />
+    public void Move(string sourceFileName, string destFileName);
 
-	public void Move(string sourceFileName, string destFileName, bool overwrite);
+    /// <inheritdoc cref="File.Move(string, string, bool)" />
+    public void Move(string sourceFileName, string destFileName, bool overwrite);
 
-	public void Delete(string path);
+    /// <inheritdoc cref="File.Delete(string)" />
+    public void Delete(string path);
 
-	public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName);
+    /// <inheritdoc cref="File.Replace(string, string, string)" />
+    public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName);
 
-	public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName, bool ignoreMetadataErrors);
+    /// <inheritdoc cref="File.Replace(string, string, string, bool)" />
+    public void Replace(
+        string sourceFileName,
+        string destinationFileName,
+        string? destinationBackupFileName,
+        bool ignoreMetadataErrors);
 
-	public FileStream Create(string path);
+    /// <inheritdoc cref="File.Create(string)" />
+    public FileSystemStream Create(string path);
 
-	public FileStream Create(string path, int bufferSize);
+    /// <inheritdoc cref="File.Create(string, int)" />
+    public FileSystemStream Create(string path, int bufferSize);
 
-	public FileStream Create(string path, int bufferSize, FileOptions options);
+    /// <inheritdoc cref="File.Create(string, int, FileOptions)" />
+    public FileSystemStream Create(string path, int bufferSize, FileOptions options);
 }

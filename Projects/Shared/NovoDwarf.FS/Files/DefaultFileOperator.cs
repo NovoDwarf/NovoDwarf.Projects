@@ -2,56 +2,40 @@ using NovoDwarf.FS.Files.Interfaces;
 
 namespace NovoDwarf.FS.Files;
 
-/// <inheritdoc/>
-public sealed class DefaultFileOperator : IFileOperator 
+/// <inheritdoc cref="IFileOperator" />
+public sealed class DefaultFileOperator : IFileOperator
 {
-	#region CRUD
+    /// <inheritdoc />
+    public void Copy(string sourceFileName, string destFileName) => File.Copy(sourceFileName, destFileName);
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Copy(string sourceFileName, string destFileName) => File.Copy(sourceFileName, destFileName);
+    /// <inheritdoc />
+    public void Copy(string sourceFileName, string destFileName, bool overwrite)
+        => File.Copy(sourceFileName, destFileName, overwrite);
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Copy(string sourceFileName, string destFileName, bool overwrite) => File.Copy(sourceFileName, destFileName, overwrite);
+    /// <inheritdoc />
+    public void Move(string sourceFileName, string destFileName) => File.Move(sourceFileName, destFileName);
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Move(string sourceFileName, string destFileName) => File.Move(sourceFileName, destFileName);
+    /// <inheritdoc />
+    public void Move(string sourceFileName, string destFileName, bool overwrite)
+        => File.Move(sourceFileName, destFileName, overwrite);
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Move(string sourceFileName, string destFileName, bool overwrite) => File.Move(sourceFileName, destFileName, overwrite);
+    /// <inheritdoc />
+    public void Delete(string path) => File.Delete(path);
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Delete(string path) => File.Delete(path);
-	
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName)
-		=> File.Replace(sourceFileName, destinationFileName, destinationBackupFileName);
+    /// <inheritdoc />
+    public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName)
+        => File.Replace(sourceFileName, destinationFileName, destinationBackupFileName);
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName, bool ignoreMetadataErrors)
-		=> File.Replace(sourceFileName, destinationFileName, destinationBackupFileName, ignoreMetadataErrors);
+    /// <inheritdoc />
+    public void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName, bool ignoreMetadataErrors)
+        => File.Replace(sourceFileName, destinationFileName, destinationBackupFileName, ignoreMetadataErrors);
 
-	#endregion
-	
-	#region File Creation
+    /// <inheritdoc />
+    public FileSystemStream Create(string path) => new(File.Create(path));
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public FileStream Create(string path) => File.Create(path);
+    /// <inheritdoc />
+    public FileSystemStream Create(string path, int bufferSize) => new(File.Create(path, bufferSize));
 
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public FileStream Create(string path, int bufferSize) => File.Create(path, bufferSize);
-
-	/// <inheritdoc/>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public FileStream Create(string path, int bufferSize, FileOptions options) => File.Create(path, bufferSize, options);
-
-	#endregion
+    /// <inheritdoc />
+    public FileSystemStream Create(string path, int bufferSize, FileOptions options) => new(File.Create(path, bufferSize, options));
 }

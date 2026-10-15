@@ -8,5 +8,7 @@
         <Project Path="Projects/Shared/NovoDwarf.FS/NovoDwarf.FS.csproj" />
         <Project Path="Projects/Shared/NovoDwarf.Utilities/NovoDwarf.Utilities.csproj" />
     </Folder>
-    <Folder Name="/Tests/" />
+    <Folder Name="/Tests/">
+        <Project Path="Tests/NovoDwarf.FS.Tests/NovoDwarf.FS.Tests.csproj" />
+    </Folder>
 </Solution>

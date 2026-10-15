@@ -1,42 +1,53 @@
 namespace NovoDwarf.FS.Files.Interfaces;
 
+/// <summary>Reads and changes file metadata.</summary>
 public interface IFileMetadata
 {
-	public void Encrypt(string path);
+    /// <summary>Returns a read-only metadata handle, including for a path that does not exist.</summary>
+    public IFileSystemEntry GetInfo(string path);
 
-	public void Decrypt(string path);
+    /// <inheritdoc cref="File.Exists(string)" />
+    public bool Exists(string path);
 
-	public void CreateSymbolicLink(string path, string pathToTarget);
+    /// <inheritdoc cref="File.GetAttributes(string)" />
+    public FileAttributes GetAttributes(string path);
 
-	public FileSystemInfo? ResolveLinkTarget(string linkPath, bool returnFinalTarget);
-	
-	public bool Exists(string path);
+    /// <inheritdoc cref="File.SetAttributes(string, FileAttributes)" />
+    public void SetAttributes(string path, FileAttributes fileAttributes);
 
-	public FileAttributes GetAttributes(string path);
+    /// <inheritdoc cref="File.GetCreationTime(string)" />
+    public DateTime GetCreationTime(string path);
 
-	public void SetAttributes(string path, FileAttributes fileAttributes);
+    /// <inheritdoc cref="File.GetCreationTimeUtc(string)" />
+    public DateTime GetCreationTimeUtc(string path);
 
-	public DateTime GetCreationTime(string path);
+    /// <inheritdoc cref="File.SetCreationTime(string, DateTime)" />
+    public void SetCreationTime(string path, DateTime creationTime);
 
-	public DateTime GetCreationTimeUtc(string path);
+    /// <inheritdoc cref="File.SetCreationTimeUtc(string, DateTime)" />
+    public void SetCreationTimeUtc(string path, DateTime creationTimeUtc);
 
-	public void SetCreationTime(string path, DateTime creationTime);
+    /// <inheritdoc cref="File.GetLastAccessTime(string)" />
+    public DateTime GetLastAccessTime(string path);
 
-	public void SetCreationTimeUtc(string path, DateTime creationTimeUtc);
+    /// <inheritdoc cref="File.GetLastAccessTimeUtc(string)" />
+    public DateTime GetLastAccessTimeUtc(string path);
 
-	public DateTime GetLastAccessTime(string path);
+    /// <inheritdoc cref="File.SetLastAccessTime(string, DateTime)" />
+    public void SetLastAccessTime(string path, DateTime lastAccessTime);
 
-	public DateTime GetLastAccessTimeUtc(string path);
+    /// <inheritdoc cref="File.SetLastAccessTimeUtc(string, DateTime)" />
+    public void SetLastAccessTimeUtc(string path, DateTime lastAccessTimeUtc);
 
-	public void SetLastAccessTime(string path, DateTime lastAccessTime);
+    /// <inheritdoc cref="File.GetLastWriteTime(string)" />
+    public DateTime GetLastWriteTime(string path);
 
-	public void SetLastAccessTimeUtc(string path, DateTime lastAccessTimeUtc);
+    /// <inheritdoc cref="File.GetLastWriteTimeUtc(string)" />
+    public DateTime GetLastWriteTimeUtc(string path);
 
-	public DateTime GetLastWriteTime(string path);
+    /// <inheritdoc cref="File.SetLastWriteTime(string, DateTime)" />
+    public void SetLastWriteTime(string path, DateTime lastWriteTime);
 
-	public DateTime GetLastWriteTimeUtc(string path);
-
-	public void SetLastWriteTime(string path, DateTime lastWriteTime);
-
-	public void SetLastWriteTimeUtc(string path, DateTime lastWriteTimeUtc);
+    /// <inheritdoc cref="File.SetLastWriteTimeUtc(string, DateTime)" />
+    public void SetLastWriteTimeUtc(string path, DateTime lastWriteTimeUtc);
 }
