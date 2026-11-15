@@ -1,14 +1,20 @@
 ﻿<Solution>
     <Folder Name="/Examples/" />
     <Folder Name="/Sources/" />
-    <Folder Name="/Sources/Godot/">
-        <Project Path="Projects/Godot/NovoDwarf.Godot.Slang/NovoDwarf.Godot.Slang.csproj" />
+    <Folder Name="/Sources/Integrations/">
+        <Project Path="Projects/NovoDwarf.Brutal.Rml/NovoDwarf.Brutal.Rml.csproj" />
+        <Project Path="Projects/NovoDwarf.Godot.Slang/NovoDwarf.Godot.Slang.csproj" />
+        <Project Path="Projects/NovoDwarf.Rml/NovoDwarf.Rml.csproj" />
+    </Folder>
+    <Folder Name="/Sources/Others/">
+        <Project Path="Projects/NovoDwarf.LeetCode.Problems/NovoDwarf.LeetCode.Problems.csproj" />
     </Folder>
     <Folder Name="/Sources/Shared/">
-        <Project Path="Projects/Shared/NovoDwarf.FS/NovoDwarf.FS.csproj" />
-        <Project Path="Projects/Shared/NovoDwarf.Utilities/NovoDwarf.Utilities.csproj" />
+        <Project Path="Projects/NovoDwarf.FS/NovoDwarf.FS.csproj" />
+        <Project Path="Projects/NovoDwarf.Utilities/NovoDwarf.Utilities.csproj" />
     </Folder>
     <Folder Name="/Tests/">
         <Project Path="Tests/NovoDwarf.FS.Tests/NovoDwarf.FS.Tests.csproj" />
+        <Project Path="Tests/NovoDwarf.LeetCode.Tests/NovoDwarf.LeetCode.Tests.csproj" />
     </Folder>
 </Solution>

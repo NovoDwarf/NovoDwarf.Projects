@@ -3,8 +3,24 @@
 > [!WARNING]
 > This project was created for educational purposes and is still under development. It may contain bugs, incomplete features, and architectural flaws. The code is not production-ready and should be used with caution.
 
-
 NovoDwarf.Projects is a monorepo for experimental and applied projects
+
+## Projects
+
+### Shared Projects
+
+- NovoDwarf.FS
+- NovoDwarf.Utilities
+
+### Integrations
+
+- NovoDwarf.Brutal.Rml
+- NovoDwarf.Godot.Slang
+- NovoDwarf.Rml
+
+### Others
+
+- NovoDwarf.LeetCode.Problems
 
 ## License
 
