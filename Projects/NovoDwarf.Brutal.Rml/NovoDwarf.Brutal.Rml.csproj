@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="../NovoDwarf.Rml/NovoDwarf.Rml.csproj" />
+      <PackageReference Include="Ahwoo.BRUTAL.Numerics" Version="2026.10.2" />
+      <PackageReference Include="Ahwoo.Brutal.Glfw" Version="2026.10.5" />
+      <PackageReference Include="Ahwoo.Brutal.Vulkan.Abstractions" Version="2026.10.3" />
+    </ItemGroup>
+</Project>
