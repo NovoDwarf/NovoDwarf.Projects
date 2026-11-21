@@ -1,3 +1,14 @@
 namespace NovoDwarf.LeetCode.Problems.Models;
 
-public record ListNode(int Value = 0, ListNode? Next = null);
+public class ListNode
+{
+	public ListNode(int value = 0, ListNode? next = null)
+	{
+		Value = value;
+		Next = next;
+	}
+
+	public int Value { get; set; }
+	public ListNode? Next { get; set; }
+	
+}
