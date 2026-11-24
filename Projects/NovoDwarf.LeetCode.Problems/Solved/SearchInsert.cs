@@ -1,8 +1,8 @@
 namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class SearchInsert
+public static class SearchInsert
 {
-	public int Solve(int[] nums, int target)
+	public static int Solve(int[] nums, int target)
 	{
 		var left = 0;
 		var right = nums.Length - 1;

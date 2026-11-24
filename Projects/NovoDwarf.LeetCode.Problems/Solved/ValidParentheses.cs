@@ -2,9 +2,9 @@ using System.Collections;
 
 namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class ValidParentheses
+public static class ValidParentheses
 {
-	public bool Solve(string s)
+	public static bool Solve(string s)
 	{
 		var stack = new Stack<char>();
 

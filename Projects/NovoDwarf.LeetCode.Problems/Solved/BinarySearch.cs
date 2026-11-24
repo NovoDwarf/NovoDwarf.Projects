@@ -1,8 +1,8 @@
 namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class BinarySearch
+public static class BinarySearch
 {
-	public int Solve(int[] nums, int target)
+	public static int Solve(int[] nums, int target)
 	{
 		var left = 0;
 		var right = nums.Length - 1;

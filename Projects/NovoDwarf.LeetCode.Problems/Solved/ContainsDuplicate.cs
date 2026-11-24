@@ -1,8 +1,8 @@
 namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class ContainsDuplicate
+public static class ContainsDuplicate
 {
-	public bool Solve(int[] nums)
+	public static bool Solve(int[] nums)
 	{
 		var hashset = new HashSet<int>();
 		

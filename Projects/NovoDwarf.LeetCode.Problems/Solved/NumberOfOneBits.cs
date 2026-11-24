@@ -1,6 +1,6 @@
 ﻿namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class NumberOfOneBits
+public static class NumberOfOneBits
 {
 	public static int Solve(int n)
 	{

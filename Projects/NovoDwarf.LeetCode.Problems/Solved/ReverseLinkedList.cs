@@ -1,10 +1,10 @@
 using NovoDwarf.LeetCode.Problems.Models;
 
-namespace NovoDwarf.LeetCode.Problems;
+namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class ReverseLinkedList
+public static class ReverseLinkedList
 {
-	public ListNode Solve(ListNode head)
+	public static ListNode Solve(ListNode head)
 	{
 		ListNode? prev = null;
 		var curr = head;

@@ -1,6 +1,6 @@
 ﻿namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class TwoSum
+public static class TwoSum
 {
 	public static int[] Solve(int[] nums, int target)
 	{

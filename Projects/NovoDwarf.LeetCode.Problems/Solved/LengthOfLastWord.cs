@@ -1,6 +1,6 @@
 ﻿namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class LengthOfLastWord
+public static class LengthOfLastWord
 {
 	public static int Solve(string s)
 	{

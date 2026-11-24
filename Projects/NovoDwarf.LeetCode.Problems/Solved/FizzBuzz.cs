@@ -1,6 +1,6 @@
 ﻿namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class FizzBuzz
+public static class FizzBuzz
 {
 	public static IList<string> Solve(int n)
 	{

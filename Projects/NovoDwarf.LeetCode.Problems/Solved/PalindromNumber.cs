@@ -1,10 +1,10 @@
 ﻿namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class PalindromNumber
+public static class PalindromNumber
 {
 	// TODO: simple solve with strings... maybe try without it?
 	
-	public bool Solve(int x)
+	public static bool Solve(int x)
 	{
 		var s = x.ToString().ToCharArray();
 		var left = 0;

@@ -1,10 +1,10 @@
 using NovoDwarf.LeetCode.Problems.Models;
 
-namespace NovoDwarf.LeetCode.Problems;
+namespace NovoDwarf.LeetCode.Problems.Solved;
 
-public class LinkedListCycle
+public static class LinkedListCycle
 {
-	public bool Solve(ListNode head)
+	public static bool Solve(ListNode head)
 	{
 		var slow = head;
 		var fast = head;
